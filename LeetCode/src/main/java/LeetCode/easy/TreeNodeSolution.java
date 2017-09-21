@@ -1,3 +1,8 @@
+package LeetCode.easy;
+
+import LeetCode.Solution;
+import LeetCode.TreeNode;
+
 /**
  * @user: linhos
  * @Time: Create in 15:25 2017/9/19
@@ -24,7 +29,6 @@ public class TreeNodeSolution implements Solution {
     }
 
 
-
     public int diameterOfBinaryTree(TreeNode root) {
         deepthTree(root);
         return diameter <= 1 ? diameter : diameter - 1;
@@ -39,7 +43,6 @@ public class TreeNodeSolution implements Solution {
         diameter = diameter > tmp ? diameter : tmp;
         return left > right ? left + 1 : right + 1;
     }
-
 
 
     public int findTilt(TreeNode root) {

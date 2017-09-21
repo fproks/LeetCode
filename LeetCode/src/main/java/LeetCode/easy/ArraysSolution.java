@@ -1,4 +1,9 @@
+package LeetCode.easy;
+
 import java.util.Arrays;
+import java.util.HashSet;
+
+import LeetCode.Solution;
 
 /**
  * @user: linhos
@@ -28,4 +33,28 @@ public class ArraysSolution implements Solution {
         }
         return maximum;
     }
+
+    //575. Distribute Candies
+    public int distributeCandies(int[] candies) {
+        HashSet<Integer> set = new HashSet<>();
+        for (int c : candies) {
+            set.add(c);
+        }
+        if (set.size() > candies.length / 2) return candies.length / 2;
+        else return set.size();
+
+    }
+
+    // 581. Shortest Unsorted Continuous Subarray
+    public int findUnsortedSubarray(int[] nums) {
+        int[] tmp = Arrays.copyOf(nums, nums.length);
+        Arrays.sort(tmp);
+        int start = 0;
+        while (start < nums.length && nums[start] == tmp[start]) start++;
+        int end = nums.length - 1;
+        while (end > start && nums[end] == tmp[end]) end--;
+        return end - start + 1;
+    }
+
+
 }

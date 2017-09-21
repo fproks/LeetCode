@@ -1,4 +1,6 @@
-import java.util.Arrays;
+package LeetCode.easy;
+
+import LeetCode.Solution;
 
 /**
  * @user: linhos
