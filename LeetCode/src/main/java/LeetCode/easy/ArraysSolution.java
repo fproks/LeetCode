@@ -56,5 +56,22 @@ public class ArraysSolution implements Solution {
         return end - start + 1;
     }
 
+    //594. Longest Harmonious Subsequence
+    public int findLHS(int[] nums) {
+        Arrays.sort(nums);
+        int start = 0, end = 0;
+        int size = 0;
+        while (end < nums.length) {
+            if (nums[start] == nums[end]) end++;
+            else {
+                if (nums[end] - nums[start] == 1) {
+                    size = size > end - start + 1 ? size : end - start + 1;
+                    end++;
+                } else start++;
+            }
+        }
+        return size;
+    }
+
 
 }
