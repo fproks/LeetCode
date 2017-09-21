@@ -22,7 +22,7 @@ public class TreeNodeSolutionTest {
     @Test
     public void reverseStrTest() throws Exception {
         String s = "hyzqyljrnigxvdtneasepfahmtyhlohwxmkqcdfehybknvdmfrfvtbsovjbdhevlfxpdaovjgunjqlimjkfnqcqnajmebeddqsgl";
-        TreeNodeSolution treeNodeSolution = new TreeNodeSolution();
+        StringSolution treeNodeSolution = new StringSolution();
         System.out.println(s.length());
         System.out.println(treeNodeSolution.reverseStr(s, 39));
         // Assert.assertArrayEquals("bacdfeg".toCharArray(),treeNodeSolution.reverseStr(s,2).toCharArray());
@@ -42,13 +42,13 @@ public class TreeNodeSolutionTest {
 
     @Test
     public void reverseWordsTest() throws Exception {
-        TreeNodeSolution treeNodeSolution = new TreeNodeSolution();
+        StringSolution treeNodeSolution = new StringSolution();
         System.out.println(treeNodeSolution.reverseWords("Let's take LeetCode contest"));
     }
 
     @Test
     public void arrayPairSumTest() throws Exception {
-        TreeNodeSolution treeNodeSolution = new TreeNodeSolution();
+        ArraysSolution treeNodeSolution = new ArraysSolution();
         int[] nums = new int[]{1, 4, 3, 2};
         Assert.assertEquals(4, treeNodeSolution.arrayPairSum(nums));
     }
