@@ -4,7 +4,7 @@ import java.util.Arrays;
  * @user: linhos
  * @Time: Create in 15:25 2017/9/19
  */
-public class Solution {
+public class TreeNodeSolution {
     int result = 0;
     private int convertBSTsum = 0;
     //543. Diameter of Binary Tree
@@ -162,6 +162,24 @@ public class Solution {
             arra[i / c][i % c] = nums[i / sec][i % sec];
         }
         return arra;
+    }
+
+    //572. Subtree of Another Tree
+    public boolean isSubtree(TreeNode s, TreeNode t) {
+        if (s == null) return false;
+        if (isSameTree(s, t)) return true;
+        else return (isSubtree(s.left, t) || isSubtree(s.right, t));
+
+    }
+
+    private boolean isSameTree(TreeNode s, TreeNode t) {
+        if (s == null && t == null) return true;
+        if (s != null && t != null) {
+            if (s.val == t.val) {
+                return isSameTree(s.left, t.left) && isSameTree(s.right, t.right);
+            }
+        }
+        return false;
     }
 
 }
