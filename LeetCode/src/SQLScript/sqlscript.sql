@@ -12,3 +12,17 @@ SELECT t.class
 FROM courses t
 GROUP BY class
 HAVING count(DISTINCT t.student) > 4;
+
+#620. Not Boring Movies
+SELECT *
+FROM cinema
+WHERE id % 2 = 1 AND description != 'boring'
+ORDER BY rating DESC;
+
+#627. Swap Salary
+UPDATE salary
+SET sex =
+CASE sex
+WHEN 'f'
+  THEN 'm'
+ELSE 'f' END;
