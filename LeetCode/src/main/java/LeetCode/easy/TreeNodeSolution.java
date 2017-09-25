@@ -3,6 +3,11 @@ package LeetCode.easy;
 import LeetCode.Solution;
 import LeetCode.TreeNode;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
 /**
  * @user: linhos
  * @Time: Create in 15:25 2017/9/19
@@ -97,5 +102,72 @@ public class TreeNodeSolution implements Solution {
         }
         return false;
     }
+
+    //653. Two Sum IV - Input is a BST
+    private ArrayList<Integer> findTargetList;
+
+    public String tree2str(TreeNode t) {
+        StringBuilder s = new StringBuilder();
+        if (t != null) {
+            s.append(t.val);
+            if (t.left == null && t.right == null)
+                return s.toString();
+            s.append('(');
+            s.append(tree2str(t.left));
+            s.append(')');
+            if (t.right != null) {
+                s.append('(');
+                s.append(tree2str(t.right));
+                s.append(')');
+            }
+        }
+        return s.toString();
+    }
+
+    //637. Average of Levels in Binary Tree
+    public List<Double> averageOfLevels(TreeNode root) {
+        List<Double> list = new ArrayList<>();
+        if (root != null) {
+            Queue<TreeNode> queue = new LinkedList<>();
+            queue.add(root);
+            while (!queue.isEmpty()) {
+                int i = queue.size();
+                int tmp = i;
+                double count = 0.0;
+                while (i > 0) {
+                    TreeNode node = queue.poll();
+                    count += node.val;
+                    if (node.left != null) queue.add(node.left);
+                    if (node.right != null) queue.add(node.right);
+                    i--;
+                }
+                list.add(count / tmp);
+            }
+        }
+        return list;
+    }
+
+    public boolean findTarget(TreeNode root, int k) {
+        findTargetList = new ArrayList<Integer>();
+        midsearch(root);
+        int n = findTargetList.size();
+        for (int i = 0, j = n - 1; i < j; ) {
+            int tmp = findTargetList.get(i) + findTargetList.get(j);
+            if (tmp < k) i++;
+            else if (tmp > k) j--;
+            else return true;
+        }
+        return false;
+    }
+
+    private void midsearch(TreeNode root) {
+        if (root == null) return;
+        midsearch(root.left);
+        findTargetList.add(root.val);
+        midsearch(root.right);
+    }
+
+
+
 
 }

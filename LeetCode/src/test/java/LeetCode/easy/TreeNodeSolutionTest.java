@@ -7,6 +7,8 @@ import LeetCode.easy.TreeNodeSolution;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.List;
+
 /**
  * @user: linhos
  * @Time: Create in 15:45 2017/9/19
@@ -52,6 +54,31 @@ public class TreeNodeSolutionTest {
         System.out.println(treeNodeSolution.reverseWords("Let's take LeetCode contest"));
     }
 
+    @Test
+    public void tree2strTest() throws Exception {
+        TreeNodeSolution solution = new TreeNodeSolution();
+        TreeNode tree = new TreeNode(1);
+        tree.left = new TreeNode(2);
+        TreeNode p = tree.left;
+        p.right = new TreeNode(4);
+        tree.right = new TreeNode(3);
+        System.out.println(solution.tree2str(tree));
+    }
+
+    @Test
+    public void averageOfLevelsTest() throws Exception {
+        TreeNodeSolution solution = new TreeNodeSolution();
+        TreeNode root = new TreeNode(3);
+        root.left = new TreeNode(9);
+        root.right = new TreeNode(20);
+        TreeNode p = root.right;
+        p.left = new TreeNode(15);
+        p.right = new TreeNode(7);
+        List<Double> tmp = solution.averageOfLevels(root);
+        for (Double i : tmp) {
+            System.out.println(i);
+        }
+    }
     @Test
     public void arrayPairSumTest() throws Exception {
         ArraysSolution treeNodeSolution = new ArraysSolution();

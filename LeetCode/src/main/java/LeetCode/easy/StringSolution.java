@@ -73,5 +73,27 @@ public class StringSolution implements Solution {
         }
     }
 
+    //657. Judge Route Circle
+    public boolean judgeCircle(String moves) {
+        int ud = 0, lr = 0;
+        int s = moves.length();
+        for (int i = 0; i < s; i++) {
+            switch (moves.charAt(i)) {
+                case 'U':
+                    ud++;
+                    break;
+                case 'D':
+                    ud--;
+                    break;
+                case 'L':
+                    lr++;
+                    break;
+                default:
+                    lr--;
+            }
+        }
+        return ud == 0 && lr == 0;
+    }
+
 
 }
