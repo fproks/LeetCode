@@ -194,6 +194,7 @@ public class ArraysSolution implements Solution {
                 sum += M[i][j];
                 cnt++;
             }
+        System.out.println("test");
         return sum / cnt;
 
     }
