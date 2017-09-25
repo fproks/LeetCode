@@ -233,6 +233,22 @@ public class TreeNodeSolution implements Solution {
         help(root.right, data);
     }
 
+    //674. Longest Continuous Increasing Subsequence 严格自增
+    public int findLengthOfLCIS(int[] nums) {
+        if (nums.length <= 0) return 0;
+        int count = 0;
+        int first = 0, sen = 0;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] <= nums[i-1]) {
+                count = count < sen-first+1 ? sen-first+1 : count;
+                first = i;
+            }
+            sen = i;
+        }
+        count = count < sen-first+1 ? sen-first+1 : count;
+        return count;
+    }
+
 
 
 }
