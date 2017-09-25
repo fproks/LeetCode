@@ -2,6 +2,10 @@ package LeetCode.easy;
 
 import LeetCode.Solution;
 
+import java.util.Objects;
+import java.util.Stack;
+import java.util.regex.Pattern;
+
 /**
  * @user: linhos
  * @Time: Create in 10:34 2017/9/21
@@ -14,9 +18,9 @@ public class StringSolution implements Solution {
         int count = s.length();
         int i = 0;
         while (i < count) {
-            int j = Math.min(i + k - 1, count - 1);
+            int j = Math.min(i+k-1, count-1);
             reverse(sBuilder, i, j);
-            i += 2 * k;
+            i += 2*k;
         }
         return sBuilder.toString();
     }
@@ -57,8 +61,8 @@ public class StringSolution implements Solution {
         int first = 0, second = 0;
         for (; second < array.length; second++) {
             if (array[second] == ' ') {
-                reverseArray(array, first, second - 1);
-                first = second + 1;
+                reverseArray(array, first, second-1);
+                first = second+1;
             }
         }
         if (array[--second] != ' ') reverseArray(array, first, second);
@@ -93,6 +97,63 @@ public class StringSolution implements Solution {
             }
         }
         return ud == 0 && lr == 0;
+    }
+
+    //680. Valid Palindrome II
+    public boolean validPalindrome(String s) {
+        int fir = 0, sec = s.length()-1;
+        boolean ispalind;
+        while (fir <= sec) {
+            if (s.charAt(fir) == s.charAt(sec)) {
+                fir++;
+                sec--;
+            } else {
+                ispalind = Partpalind(s, fir+1, sec);
+                return ispalind || Partpalind(s, fir, sec-1);
+            }
+        }
+        return true;
+    }
+
+    private boolean Partpalind(String s, int first, int sec) {
+        while (first < sec) {
+            if (s.charAt(first) != s.charAt(sec)) return false;
+            first++;
+            sec--;
+        }
+        return true;
+    }
+
+    //682. Baseball Game
+    public int calPoints(String[] ops) {
+        Stack<Integer> stack = new Stack<>();
+        int first, sec, tmp = 0;
+        int sum = 0;
+        for (String o : ops) {
+            if (Pattern.matches("^-?\\d+$", o)) {
+                tmp = Integer.parseInt(o);
+                sum += tmp;
+                stack.push(tmp);
+            } else {
+                if (stack.size() <= 0) continue;
+                if (Objects.equals(o, "+")) {
+                    first = stack.pop();
+                    sec = stack.peek();
+                    tmp = first+sec;
+                    sum += tmp;
+                    stack.push(first);
+                    stack.push(tmp);
+                } else if (Objects.equals(o, "D")) {
+                    tmp = stack.peek()*2;
+                    sum += tmp;
+                    stack.push(tmp);
+                } else {
+                    tmp = stack.pop();
+                    sum -= tmp;
+                }
+            }
+        }
+        return sum;
     }
 
 
