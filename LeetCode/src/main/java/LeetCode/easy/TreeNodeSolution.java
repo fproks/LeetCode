@@ -3,6 +3,7 @@ package LeetCode.easy;
 import LeetCode.Solution;
 import LeetCode.TreeNode;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -36,7 +37,7 @@ public class TreeNodeSolution implements Solution {
 
     public int diameterOfBinaryTree(TreeNode root) {
         deepthTree(root);
-        return diameter <= 1 ? diameter : diameter - 1;
+        return diameter <= 1 ? diameter : diameter-1;
     }
 
     private int deepthTree(TreeNode root) {
@@ -44,9 +45,9 @@ public class TreeNodeSolution implements Solution {
         if (root.left == null && root.right == null) return 1;
         int left = deepthTree(root.left);
         int right = deepthTree(root.right);
-        int tmp = left + right + 1;
+        int tmp = left+right+1;
         diameter = diameter > tmp ? diameter : tmp;
-        return left > right ? left + 1 : right + 1;
+        return left > right ? left+1 : right+1;
     }
 
 
@@ -58,14 +59,14 @@ public class TreeNodeSolution implements Solution {
         int ll = 0, rr = 0;
         if (root.left != null) ll = root.left.val;
         if (root.right != null) rr = root.right.val;
-        return left + right + Math.abs(ll - rr);
+        return left+right+Math.abs(ll-rr);
     }
 
     public int filt(TreeNode root) {
         if (root == null) return 0;
         int left = root.left == null ? 0 : root.left.val;
         int right = root.right == null ? 0 : root.right.val;
-        return Math.abs(left - right) + filt(root.left) + filt(root.right);
+        return Math.abs(left-right)+filt(root.left)+filt(root.right);
     }
 
     public int findTilts(TreeNode root) {
@@ -79,9 +80,9 @@ public class TreeNodeSolution implements Solution {
         int left = postOrder(root.left);
         int right = postOrder(root.right);
 
-        result += Math.abs(left - right);
+        result += Math.abs(left-right);
 
-        return left + right + root.val;
+        return left+right+root.val;
     }
 
 
@@ -141,7 +142,7 @@ public class TreeNodeSolution implements Solution {
                     if (node.right != null) queue.add(node.right);
                     i--;
                 }
-                list.add(count / tmp);
+                list.add(count/tmp);
             }
         }
         return list;
@@ -151,8 +152,8 @@ public class TreeNodeSolution implements Solution {
         findTargetList = new ArrayList<Integer>();
         midsearch(root);
         int n = findTargetList.size();
-        for (int i = 0, j = n - 1; i < j; ) {
-            int tmp = findTargetList.get(i) + findTargetList.get(j);
+        for (int i = 0, j = n-1; i < j; ) {
+            int tmp = findTargetList.get(i)+findTargetList.get(j);
             if (tmp < k) i++;
             else if (tmp > k) j--;
             else return true;
@@ -167,6 +168,70 @@ public class TreeNodeSolution implements Solution {
         midsearch(root.right);
     }
 
+
+    //669. Trim a Binary Search Tree
+    /*
+    * 二叉树剪枝
+    * */
+    public TreeNode trimBST(TreeNode root, int L, int R) {
+        if (root == null) return root;
+        if (root.val < L) {
+            root = root.right;
+            return trimBST(root, L, R);
+        } else if (root.val > R) {
+            root = root.left;
+            return trimBST(root, L, R);
+        } else {
+            root = trimTreeLeft(root, L);
+            root = trimTreeRight(root, R);
+            return root;
+        }
+    }
+
+
+    private TreeNode trimTreeLeft(TreeNode root, int L) {
+        if (root != null) {
+            if (root.val == L) {
+                root.left = null;
+            } else if (root.val > L) {
+                root.left = trimTreeLeft(root.left, L);
+            } else {
+                root = trimTreeLeft(root.right, L);
+            }
+        }
+        return root;
+
+    }
+
+    private TreeNode trimTreeRight(TreeNode root, int R) {
+        if (root != null) {
+            if (root.val == R) root.right = null;
+            else if (root.val < R) {
+                root.right = trimTreeRight(root.right, R);
+            } else root = trimTreeRight(root.left, R);
+        }
+        return root;
+    }
+
+
+    //671. Second Minimum Node In a Binary Tree
+    public int findSecondMinimumValue(TreeNode root) {
+        int[] data = new int[]{Integer.MAX_VALUE, Integer.MAX_VALUE};
+        help(root, data);
+        return data[1] != Integer.MAX_VALUE ? data[1] : -1;
+    }
+
+    public void help(TreeNode root, int[] data) {
+        if (root == null)
+            return;
+        if (root.val < data[0]) {
+            data[1] = data[0];
+            data[0] = root.val;
+        } else if (root.val < data[1] && root.val > data[0])
+            data[1] = root.val;
+        help(root.left, data);
+        help(root.right, data);
+    }
 
 
 
