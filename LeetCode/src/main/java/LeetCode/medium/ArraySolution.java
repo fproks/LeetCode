@@ -1,7 +1,5 @@
 package LeetCode.medium;
 
-import LeetCode.ListNode;
-
 import java.util.*;
 
 /**
@@ -224,8 +222,27 @@ public class ArraySolution {
         }
     }
 
-
-
+    //49. Group Anagrams
+    //
+    public List<List<String>> groupAnagrams(String[] strs) {
+        List<List<String>> res = new LinkedList<>();
+        Map<String, List<String>> hash = new HashMap<>();
+        for (String str : strs) {
+            char[] tmp = str.toCharArray();
+            Arrays.sort(tmp);
+            String s = new String(tmp);
+            if (hash.containsKey(s)) {
+                hash.get(s).add(str);
+            } else {
+                List<String> sTmp = new ArrayList<>();
+                sTmp.add(str);
+                hash.put(s, sTmp);
+            }
+        }
+        hash.forEach(
+                (id, list) -> res.add(list));
+        return res;
+    }
 
 
 

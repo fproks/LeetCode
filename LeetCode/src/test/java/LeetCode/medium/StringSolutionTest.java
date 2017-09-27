@@ -23,8 +23,9 @@ public class StringSolutionTest {
 
     @Test
     public void multiply() throws Exception {
-        String s1 = "123";
-        String s2 = "20";
-        Assert.assertEquals("2460", solution.multiply(s1, s2));
+        String s1 = "123456789123456789123456789";
+        String s2 = "987654321987654321987654321";
+        System.out.println(solution.multiply(s1, s2));
+        //Assert.assertEquals("2460", solution.multiply(s1, s2));
     }
 }
