@@ -19,7 +19,12 @@ public class StringSolutionTest {
         for (String s : letter) {
             System.out.println(s);
         }
+    }
 
-
+    @Test
+    public void multiply() throws Exception {
+        String s1 = "123";
+        String s2 = "20";
+        Assert.assertEquals("2460", solution.multiply(s1, s2));
     }
 }

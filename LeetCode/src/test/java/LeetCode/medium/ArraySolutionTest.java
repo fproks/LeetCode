@@ -18,4 +18,28 @@ public class ArraySolutionTest {
         Assert.assertEquals(4, solution.search(nums, 0));
     }
 
+    @Test
+    public void searchRange() throws Exception {
+        int[] nums = {5, 7, 7, 8, 8, 10};
+        Assert.assertArrayEquals(new int[]{3, 4}, solution.searchRange(nums, 8));
+    }
+
+    @Test
+    public void combinationSum() throws Exception {
+        int[] nums = {2, 3, 6, 7};
+        Assert.assertEquals(2, solution.combinationSum(nums, 7).size());
+    }
+
+    @Test
+    public void combinationSum2() throws Exception {
+        int[] nums = {10, 1, 2, 7, 6, 1, 5};
+        Assert.assertEquals(4, solution.combinationSum2(nums, 8).size());
+    }
+
+    @Test
+    public void permute() throws Exception {
+        int[] nums = {1, 2, 3, 4};
+        Assert.assertEquals(24, solution.permute(nums).size());
+    }
+
 }
