@@ -244,6 +244,31 @@ public class ArraySolution {
         return res;
     }
 
+    //54. Spiral Matrix
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> list = new LinkedList<>();
+        if (matrix.length == 0) return list;
+        int m = matrix.length-1;
+        int n = matrix[0].length-1;
+        for (int x = 0, y = 0; x <= m && y <= n; x++, y++) {
+            for (int j = y; j <= n; ++j)
+                list.add(matrix[x][j]);
+            for (int i = x+1; i <= m; ++i)
+                list.add(matrix[i][n]);
+            for (int j = n-1; j >= y && x != m; --j)
+                list.add(matrix[m][j]);
+            for (int i = m-1; i > x && y != n; --i)
+                list.add(matrix[i][y]);
+            m--;
+            n--;
+        }
+        return list;
+    }
+
+
+
+
+
 
 
 

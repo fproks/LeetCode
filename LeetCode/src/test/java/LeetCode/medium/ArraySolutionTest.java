@@ -3,6 +3,8 @@ package LeetCode.medium;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 /**
@@ -40,6 +42,13 @@ public class ArraySolutionTest {
     public void permute() throws Exception {
         int[] nums = {1, 2, 3, 4};
         Assert.assertEquals(24, solution.permute(nums).size());
+    }
+
+    @Test
+    public void spiralOrder() throws Exception {
+        int[][] nums = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}, {10, 11, 12}};
+        List<Integer> list = solution.spiralOrder(nums);
+        list.forEach(System.out::print);
     }
 
 }
