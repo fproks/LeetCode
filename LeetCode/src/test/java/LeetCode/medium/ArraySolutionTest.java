@@ -51,4 +51,15 @@ public class ArraySolutionTest {
         list.forEach(System.out::print);
     }
 
+    @Test
+    public void subsets() throws Exception {
+        int[] nums = {1, 2, 3, 4};
+        Assert.assertEquals(16, solution.subsets(nums).size());
+    }
+
+    @Test
+    public void combine() throws Exception {
+        Assert.assertEquals(6, solution.combine(4, 2).size());
+    }
+
 }

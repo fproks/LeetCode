@@ -1,5 +1,7 @@
 package LeetCode.medium;
 
+import LeetCode.ListNode;
+
 import java.util.*;
 
 /**
@@ -265,9 +267,67 @@ public class ArraySolution {
         return list;
     }
 
+    //78. Subsets
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> list = new ArrayList<>();
+        ArrayList<Integer> path = new ArrayList<>();
+        list.add(path);
+        inputList(nums, list, path, 0);
+        return list;
+    }
+
+    private void inputList(int[] nums, List<List<Integer>> list, List<Integer> path, int idx) {
+        ArrayList<Integer> tmp = new ArrayList<>(path);
+        if (idx < nums.length) {
+            tmp.add(nums[idx++]);
+            list.add(tmp);
+            inputList(nums, list, path, idx);
+            inputList(nums, list, tmp, idx);
+        }
+    }
 
 
+    //77. Combinations
 
+    public List<List<Integer>> combine(int n, int k) {
+        List<List<Integer>> list = new ArrayList<>();
+        InputCombine(list, new ArrayList<>(), n, k);
+        return list;
+    }
+
+    //这种方法比上一种方法效率更高
+    private void InputCombine(List<List<Integer>> list, List<Integer> path, int n, int k) {
+        if (n < k) return;
+        if (k == 0) {
+            list.add(new ArrayList<>(path));
+            return;
+        }
+        path.add(n);
+        InputCombine(list, path, n-1, k-1);
+        path.remove(path.size()-1);
+        InputCombine(list, path, n-1, k);
+    }
+
+    //59. Spiral Matrix II 产生一个螺旋数组
+    public int[][] generateMatrix(int n) {
+        int[][] matrix = new int[n][n];
+        int tmp = 1;
+        int left = 0, right = n-1, top = 0, down = n-1;
+        while (left < right) {
+            for (int j = left; j <= right; j++, tmp++)
+                matrix[top][j] = tmp;
+            for (int i = top+1; i <= down; i++, tmp++)
+                matrix[i][right] = tmp;
+            for (int j = right-1; j >= left; j--, tmp++)
+                matrix[down][j] = tmp;
+            for (int i = down-1; i > top; i--, tmp++)
+                matrix[i][left] = tmp;
+            left = (++top);
+            right = (--down);
+        }
+        if (left == right) matrix[n/2][n/2] = n*n;
+        return matrix;
+    }
 
 
 

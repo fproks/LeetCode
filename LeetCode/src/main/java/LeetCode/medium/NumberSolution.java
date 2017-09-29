@@ -1,5 +1,6 @@
 package LeetCode.medium;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -64,4 +65,31 @@ public class NumberSolution {
         int lastBit = b.remove(b.size()-1);
         return (powerInt(superPow1(a, b), 10)*powerInt(a, lastBit))%1337;
     }
+
+    //89. Gray Code
+    //求格雷码  G(N) = B(n) XOR (B(n)/2)
+    //http://blog.csdn.net/makuiyu/article/details/44926463
+    public List<Integer> grayCode(int n) {
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < 1 << n; ++i) {
+            list.add(i ^ i >> 1);
+        }
+        return list;
+    }
+
+    //62. Unique Paths 动态规划 (m,n)=(m-1,n)+(m,n-1);
+    public int uniquePaths(int m, int n) {
+        int[][] matrix = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                matrix[i][j] = 1;
+            }
+        }
+        for (int i = 1; i < m; i++)
+            for (int j = 1; j < n; j++)
+                matrix[i][j] = matrix[i][j-1]+matrix[i-1][j];
+        return matrix[m-1][n-1];
+    }
+
+
 }

@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -25,7 +26,6 @@ public class NumberSolutionTest {
 
     @Test
     public void superPow() throws Exception {
-
         /*
         * IntStream.of(nums).boxed().collect(Collectors.toList())
         * int[] to List
@@ -40,6 +40,12 @@ public class NumberSolutionTest {
                 8, 7, 6, 0, 6, 1, 8, 7, 2, 9, 8, 1, 0, 7, 9, 4, 7, 6};
         Assert.assertEquals(solution.superPow1(3777, IntStream.of(nums).boxed().collect(Collectors.toList())),
                 solution.superPow(3777, nums));
+    }
+
+    @Test
+    public void grayCode() throws Exception {
+        List<Integer> list = solution.grayCode(5);
+        Assert.assertEquals(32, list.size());
     }
 
 }
