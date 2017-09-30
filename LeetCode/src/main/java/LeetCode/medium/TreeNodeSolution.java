@@ -1,11 +1,8 @@
 package LeetCode.medium;
 
-import LeetCode.TreeNode;
+import LeetCode.struct.TreeNode;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * @user: linhos
@@ -52,5 +49,42 @@ public class TreeNodeSolution {
             stack.push(root);
             stack.push(left);
         }
+    }
+
+    //102 Binary Tree Level Order Traversal
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        LinkedList<List<Integer>> list = new LinkedList<>();
+        if (root == null) return list;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        getLevel(list, queue);
+        return list;
+    }
+
+    //广度遍历
+    private void getLevel(List<List<Integer>> list, Queue<TreeNode> queue) {
+        int tmp = queue.size();
+        if (tmp != 0) {
+            ArrayList<Integer> level = new ArrayList<>();
+            while (tmp != 0) {
+                TreeNode node = queue.remove();
+                level.add(node.val);
+                if (node.left != null) queue.add(node.left);
+                if (node.right != null) queue.add(node.right);
+                tmp--;
+            }
+            list.add(level);
+            getLevel(list, queue);
+        }
+    }
+
+    //通过深度遍历达到广度的目的
+    private void dfsLevel(List<List<Integer>> list, TreeNode node, int level) {
+        if (node == null) return;
+        if (level >= list.size())
+            list.add(new LinkedList<>());
+        list.get(level).add(node.val);
+        dfsLevel(list, node.left, level+1);
+        dfsLevel(list, node.right, level+1);
     }
 }

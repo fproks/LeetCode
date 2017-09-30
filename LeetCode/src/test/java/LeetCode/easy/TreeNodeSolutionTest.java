@@ -1,9 +1,6 @@
 package LeetCode.easy;
 
-import LeetCode.TreeNode;
-import LeetCode.easy.ArraysSolution;
-import LeetCode.easy.StringSolution;
-import LeetCode.easy.TreeNodeSolution;
+import LeetCode.struct.TreeNode;
 import org.junit.Assert;
 import org.junit.Test;
 

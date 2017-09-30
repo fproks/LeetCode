@@ -1,7 +1,5 @@
 package LeetCode.medium;
 
-import LeetCode.ListNode;
-
 import java.util.*;
 
 /**
@@ -328,8 +326,6 @@ public class ArraySolution {
         if (left == right) matrix[n/2][n/2] = n*n;
         return matrix;
     }
-
-
 
 
 }

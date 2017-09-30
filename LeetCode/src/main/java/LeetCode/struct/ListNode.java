@@ -1,4 +1,4 @@
-package LeetCode;
+package LeetCode.struct;
 
 /**
  * @user: linhos

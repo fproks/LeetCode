@@ -1,10 +1,8 @@
 package LeetCode.easy;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
-import LeetCode.Solution;
-import javafx.util.Pair;
+import LeetCode.struct.Solution;
 
 /**
  * @user: linhos

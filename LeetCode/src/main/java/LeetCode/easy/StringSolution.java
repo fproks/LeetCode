@@ -1,6 +1,6 @@
 package LeetCode.easy;
 
-import LeetCode.Solution;
+import LeetCode.struct.Solution;
 
 import java.util.Objects;
 import java.util.Stack;

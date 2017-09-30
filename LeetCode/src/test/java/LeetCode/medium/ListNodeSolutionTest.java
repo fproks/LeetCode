@@ -1,9 +1,7 @@
 package LeetCode.medium;
 
-import LeetCode.ListNode;
+import LeetCode.struct.ListNode;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * @user: linhos

@@ -1,6 +1,6 @@
 package LeetCode.medium;
 
-import LeetCode.ListNode;
+import LeetCode.struct.ListNode;
 
 /**
  * @user: linhos

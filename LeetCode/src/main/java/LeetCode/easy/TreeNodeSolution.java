@@ -1,9 +1,8 @@
 package LeetCode.easy;
 
-import LeetCode.Solution;
-import LeetCode.TreeNode;
+import LeetCode.struct.Solution;
+import LeetCode.struct.TreeNode;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
