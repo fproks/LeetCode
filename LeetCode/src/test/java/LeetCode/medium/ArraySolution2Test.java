@@ -18,4 +18,10 @@ public class ArraySolution2Test {
         Assert.assertEquals(7, solution.minPathSum(nums));
     }
 
+    @Test
+    public void minMoves2() throws Exception {
+        int[] nums = new int[]{1, 2, 3};
+        Assert.assertEquals(2, solution.minMoves2(nums));
+    }
+
 }

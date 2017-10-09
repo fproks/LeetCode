@@ -162,4 +162,28 @@ public class ArraySolution2 {
         return m << bit;
     }
 
+    //462. Minimum Moves to Equal Array Elements II
+    public int minMoves2(int[] nums) {
+        int idx = nums.length/2;
+        int k = findindex(nums, idx+1);
+        final int[] sum = {0};
+        Arrays.stream(nums).forEach(i -> {
+            sum[0] += Math.abs(i-k);
+        });
+        return sum[0];
+    }
+
+    private int findindex(int[] nums, int idx) {
+        PriorityQueue<Integer> queue = new PriorityQueue<>();
+        for (int i : nums) {
+            if (queue.size() < idx) queue.add(i);
+            else if (queue.peek() < i) {
+                queue.poll();
+                queue.add(i);
+            }
+        }
+        return queue.peek();
+    }
+
+
 }

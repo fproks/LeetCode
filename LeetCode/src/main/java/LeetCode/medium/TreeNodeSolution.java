@@ -3,6 +3,7 @@ package LeetCode.medium;
 import LeetCode.struct.TreeNode;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * @user: linhos
@@ -106,6 +107,31 @@ public class TreeNodeSolution {
             }
         }
         return -1;
+    }
+
+    //Most Frequent Subtree Sum
+    public int[] findFrequentTreeSum(TreeNode root) {
+        HashMap<Integer, Integer> maop = new HashMap<>();
+        frequentTreeSumHashMap(maop, root);
+        final int[] i = {0};
+        ArrayList<Integer> list = new ArrayList<>();
+        maop.forEach((k, v) -> {
+            if (v > i[0]) i[0] = v;
+        });
+        maop.forEach((k, v) -> {
+            if (v == i[0])
+                list.add(k);
+        });
+        //将list 转换成int[]
+        return list.stream().mapToInt(j -> j).toArray();
+    }
+
+    private int frequentTreeSumHashMap(HashMap<Integer, Integer> map, TreeNode root) {
+        if (root != null) {
+            int i = root.val+frequentTreeSumHashMap(map, root.left)+frequentTreeSumHashMap(map, root.right);
+            map.merge(i, 1, (a, b) -> a+b);
+            return i;
+        } else return 0;
     }
 
 
