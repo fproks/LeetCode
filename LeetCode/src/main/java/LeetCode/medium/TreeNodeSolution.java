@@ -87,4 +87,27 @@ public class TreeNodeSolution {
         dfsLevel(list, node.left, level+1);
         dfsLevel(list, node.right, level+1);
     }
+
+    //230. Kth Smallest Element in a BST
+    public int kthSmallest(TreeNode root, int k) {
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode n = root;
+        while (n != null) {
+            stack.push(n);
+            n = n.left;
+        }
+        while (k > 0 && !stack.isEmpty()) {
+            n = stack.pop();
+            if (--k == 0) return n.val;
+            n = n.right;
+            while (n != null) {
+                stack.push(n);
+                n = n.left;
+            }
+        }
+        return -1;
+    }
+
+
 }
+

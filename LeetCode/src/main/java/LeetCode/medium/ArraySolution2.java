@@ -2,10 +2,7 @@ package LeetCode.medium;
 
 import LeetCode.struct.Interval;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  * @user: linhos
@@ -120,6 +117,49 @@ public class ArraySolution2 {
                 nums[i] = 1;
                 w--;
             } else nums[i] = 2;
+    }
+
+    //215 Kth Largest Element in an Array
+    public int findKthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> queue = new PriorityQueue<>();
+        for (int i : nums) {
+            if (queue.size() < k) queue.add(i);
+            else {
+                if (i > queue.peek()) {
+                    queue.poll();
+                    queue.add(i);
+                }
+            }
+        }
+        return queue.peek();
+    }
+
+    //240. Search a 2D Matrix II
+    public boolean searchMatrix(int[][] matrix, int target) {
+        if (matrix.length == 0) return false;
+        int n = matrix.length;
+        int m = matrix[0].length;
+        int i = 0, j = m-1;
+        while (i < n && j >= 0) {
+            if (matrix[i][j] < target)
+                i++;
+            else if (matrix[i][j] > target)
+                j--;
+            else return true;
+        }
+        return false;
+    }
+
+    //201. Bitwise AND of Numbers Range
+    //http://blog.csdn.net/xudli/article/details/45912649
+    public int rangeBitwiseAnd(int m, int n) {
+        int bit = 0;
+        while (m != n) {
+            m >>= 1;
+            n >>= 1;
+            bit++;
+        }
+        return m << bit;
     }
 
 }
