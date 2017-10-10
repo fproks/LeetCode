@@ -1,6 +1,7 @@
 package LeetCode.medium;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * @user: linhos
@@ -68,6 +69,31 @@ public class StringSolution {
         if (res.size() == 0) res.add(Integer.valueOf(input));
         hm.put(input, res);
         return res;
+    }
+
+    //592. Fraction Addition and Subtraction
+    //分子式加减
+    //先对分子式进行切个
+    //再对分子式进行运算
+    //除以公约数
+    public String fractionAddition(String expression) {
+        String[] fs = expression.split("(?=[-,+])");
+        int f = 0, m = 1;
+        for (String s : fs) {
+            int[] tmp = Stream.of(s.split("/")).mapToInt(Integer::parseInt).toArray();
+            f = f*tmp[1];
+            f += tmp[0]*m;
+            m *= tmp[1];
+        }
+        String res = "";
+        int gdc = Math.abs(gcd(f, m));
+        res += f/gdc+"/"+m/gdc;
+        return res;
+    }
+
+    //求任意两数的最大公约数
+    private int gcd(int x, int y) {
+        return x == 0 || y == 0 ? x+y : gcd(y, x%y);
     }
 
 

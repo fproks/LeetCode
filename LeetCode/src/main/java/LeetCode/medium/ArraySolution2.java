@@ -186,4 +186,20 @@ public class ArraySolution2 {
     }
 
 
+    //413. Arithmetic Slices
+    //http://blog.csdn.net/camellhf/article/details/52824234
+    //需要注意的一个问题是：这个数组本身可能不是一个等差数列
+    public int numberOfArithmeticSlices(int[] A) {
+        int cur = 0, sum = 0;
+        for (int i = 2; i < A.length; i++) {
+            if (A[i]-A[i-1] == A[i-1]-A[i-2]) {
+                cur++;
+                sum += cur;
+            } else cur = 0;
+        }
+        return sum;
+
+    }
+
+
 }

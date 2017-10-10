@@ -3,6 +3,7 @@ package LeetCode.medium;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -27,5 +28,19 @@ public class StringSolutionTest {
         String s2 = "987654321987654321987654321";
         System.out.println(solution.multiply(s1, s2));
         //Assert.assertEquals("2460", solution.multiply(s1, s2));
+    }
+
+    @Test
+    public void SplitTest() throws Exception {
+        String a = "-1/2+1/2+1/3";
+        String[] tar = a.split("(?=[-,+])");
+        Assert.assertEquals(3, tar.length);
+        for (String s : tar) System.out.println(s);
+    }
+
+    @Test
+    public void fractionAddition() throws Exception {
+        String a = "1/3-1/2";
+        System.out.println(solution.fractionAddition(a));
     }
 }
