@@ -4,8 +4,6 @@ import LeetCode.struct.TreeNode;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * @user: linhos
  * @Time: Create in 14:20 2017/10/9
