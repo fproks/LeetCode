@@ -85,8 +85,8 @@ public class TreeNodeSolution {
         if (level >= list.size())
             list.add(new LinkedList<>());
         list.get(level).add(node.val);
-        dfsLevel(list, node.left, level+1);
-        dfsLevel(list, node.right, level+1);
+        dfsLevel(list, node.left, level + 1);
+        dfsLevel(list, node.right, level + 1);
     }
 
     //230. Kth Smallest Element in a BST
@@ -128,11 +128,48 @@ public class TreeNodeSolution {
 
     private int frequentTreeSumHashMap(HashMap<Integer, Integer> map, TreeNode root) {
         if (root != null) {
-            int i = root.val+frequentTreeSumHashMap(map, root.left)+frequentTreeSumHashMap(map, root.right);
-            map.merge(i, 1, (a, b) -> a+b);
+            int i = root.val + frequentTreeSumHashMap(map, root.left) + frequentTreeSumHashMap(map, root.right);
+            map.merge(i, 1, (a, b) -> a + b);
             return i;
         } else return 0;
     }
+
+
+    //654. Maximum Binary Tree
+    public TreeNode constructMaximumBinaryTree(int[] nums) {
+        if (nums.length == 0) return null;
+        return subConstructMaximumBinaryTree(nums, 0, nums.length);
+    }
+
+    private TreeNode subConstructMaximumBinaryTree(int[] nums, int start, int end) {
+        if (start >= end) return null;
+        int max = Integer.MIN_VALUE;
+        int index = 0;
+        for (int i = start; i < end; i++) {
+            if (max < nums[i]) {
+                max = nums[i];
+                index = i;
+            }
+        }
+        TreeNode node = new TreeNode(max);
+        node.left = subConstructMaximumBinaryTree(nums, start, index);
+        node.right = subConstructMaximumBinaryTree(nums, index + 1, end);
+        return node;
+    }
+
+    //617. Merge Two Binary Trees
+    //两个树合并
+    public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
+        if (t1 == null && t2 == null) return null;
+        else if (t1 == null) return t2;
+        else if (t2 == null) return t1;
+        TreeNode node = new TreeNode(t1.val + t2.val);
+        node.left = mergeTrees(t1.left, t2.left);
+        node.right = mergeTrees(t1.right, t2.right);
+        return node;
+    }
+
+
 
 
 }

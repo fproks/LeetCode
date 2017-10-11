@@ -43,4 +43,20 @@ public class StringSolutionTest {
         String a = "1/3-1/2";
         System.out.println(solution.fractionAddition(a));
     }
+
+    @Test
+    public void splitTest()throws Exception{
+        String a ="1+-1i";
+        String[] b=a.split("\\+");
+        for (String s : b) {
+            System.out.println(s);
+        }
+    }
+
+    @Test
+   public void complexNumberMultiply()throws Exception{
+        String a="1+-1i";
+        String b="1+-1i";
+        System.out.println(solution.complexNumberMultiply(a,b));
+   }
 }
