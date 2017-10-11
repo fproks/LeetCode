@@ -169,6 +169,26 @@ public class TreeNodeSolution {
         return node;
     }
 
+    //513. Find Bottom Left Tree Value
+    //求最后一层的最左边节点的值
+    public int findBottomLeftValue(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        int tmp = 0;
+        int size = queue.size();
+        while (!queue.isEmpty()) {
+            tmp = queue.peek().val;
+            while (size > 0) {
+                TreeNode node = queue.poll();
+                size--;
+                if (node.left != null) queue.add(node.left);
+                if (node.right != null) queue.add(node.right);
+            }
+            size = queue.size();
+        }
+        return tmp;
+    }
+
 
 
 

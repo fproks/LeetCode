@@ -99,13 +99,13 @@ public class StringSolution {
     //537. Complex Number Multiplication
     //复数的求积
     public String complexNumberMultiply(String a, String b) {
-        String[] f =a.split("\\+");
-        String[] s=b.split("\\+");
-        int m =Integer.valueOf(f[0])*Integer.valueOf(s[0]);
-        int fi=Integer.valueOf(f[1].substring(0,f[1].length()-1));
-        int si=Integer.valueOf(s[1].substring(0,s[1].length()-1));
-        m=m-fi*si;
-        int mi =Integer.valueOf(f[0])*si +Integer.valueOf(s[0])*fi;
+        String[] f = a.split("\\+");
+        String[] s = b.split("\\+");
+        int m = Integer.valueOf(f[0])*Integer.valueOf(s[0]);
+        int fi = Integer.valueOf(f[1].substring(0, f[1].length()-1));
+        int si = Integer.valueOf(s[1].substring(0, s[1].length()-1));
+        m = m-fi*si;
+        int mi = Integer.valueOf(f[0])*si+Integer.valueOf(s[0])*fi;
         return ""+m+"+"+mi+"i";
     }
 
