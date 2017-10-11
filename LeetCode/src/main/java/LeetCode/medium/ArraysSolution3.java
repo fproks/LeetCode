@@ -1,6 +1,7 @@
 package LeetCode.medium;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @Author : linhos
@@ -39,6 +40,15 @@ public class ArraysSolution3 {
         return res;
     }
 
+    //406. Queue Reconstruction by Height
+    public int[][] reconstructQueue(int[][] people) {
+        Arrays.sort(people, (o1, o2) -> o1[0] != o2[0] ? -o1[0]+o2[0] : o1[1]-o2[1]);
+        List<int[]> res = new LinkedList<>();
+        for (int[] person : people) {
+            res.add(person[1], person);
+        }
+        return res.toArray(new int[people.length][]);
+    }
     //690. Employee Importance
     public int getImportance(List<Employee> employees, int id) {
         int imp = 0;
@@ -69,9 +79,25 @@ public class ArraysSolution3 {
         return list;
     }
 
+    public int singleNonDuplicate(int[] nums) {
+        int f = 0, s = nums.length-1;
+        int idx = 0;
+        while (f < s) {
+            idx = (s+f)/2;
+            if (nums[idx] != nums[idx+1] && nums[idx] != nums[idx-1])
+                return nums[idx];
+            else if ((nums[idx] == nums[idx+1] && idx%2 == 0) || (nums[idx] == nums[idx-1] && idx%2 == 1))
+                f = idx+1;
+            else s = idx-1;
+        }
+        return nums[f];
+    }
+
     private class Employee {
         int id;
         int importance;
         List<Integer> subordinates;
     }
+
+
 }
