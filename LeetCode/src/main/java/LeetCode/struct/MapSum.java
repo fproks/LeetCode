@@ -11,6 +11,7 @@ import java.util.Map;
  * @File : MapSum.java
  */
 //677. Map Sum Pairs
+//这个类似于字典树
 class MapSum {
     int val;
     private Map<Character, MapSum> dictionary;
