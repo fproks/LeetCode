@@ -189,6 +189,48 @@ public class TreeNodeSolution {
         return tmp;
     }
 
+    //515. Find Largest Value in Each Tree Row
+    public List<Integer> largestValues(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        LinkedList<Integer> list = new LinkedList<>();
+        if(root==null) return list;
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            int tmp = queue.peek().val;
+            int size = queue.size();
+            while (size > 0) {
+                TreeNode node = queue.poll();
+                tmp = tmp > node.val ? tmp : node.val;
+                size--;
+                if (node.left != null) queue.add(node.left);
+                if (node.right != null) queue.add(node.right);
+            }
+            list.add(tmp);
+        }
+        return list;
+    }
+
+    //526. Beautiful Arrangement
+    public int countArrangment(int n){
+        int[] nums =new int[n];
+        int res =findWay(nums,1);
+        return res;
+    }
+    private int findWay(int[] num,int index){
+        if (index == num.length+1) return 1;
+        int total = 0;
+        for (int i = 0; i < num.length; i++) {
+            if (num[i] != 1) {
+                if ((i+1) % index == 0 || index % (i+1) == 0) {
+                    int[] newNum = num.clone();
+                    newNum[i] = 1;
+                    total += findWay(newNum, index+1);
+                }
+            }
+        }
+        return total;
+    }
+
 
 
 
