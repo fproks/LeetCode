@@ -93,6 +93,19 @@ public class StringSolutionTest {
         System.out.println(sloutionKotlin.customSortString(s,t));
     }
 
+    @Test
+    public void countSubstrings(){
+        String s ="aaa";
+        Assert.assertEquals(6,sloutionKotlin.countSubstrings(s));
+    }
+
+    @Test
+    public  void shortestCompletingWord(){
+        String licence ="1s3 PSt";
+        String[] words= {"step", "steps", "stripe", "stepple"};
+        Assert.assertEquals("steps",sloutionKotlin.shortestCompletingWord(licence,words));
+    }
+
 
 
 
