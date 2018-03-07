@@ -1,8 +1,10 @@
 package LeetCode.medium;
 
+import LeetCode.medium.Kotlin.StringSloutionKotlin;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,6 +14,7 @@ import java.util.List;
  */
 public class StringSolutionTest {
     StringSolution solution = new StringSolution();
+    StringSloutionKotlin sloutionKotlin =new StringSloutionKotlin();
 
     @Test
     public void letterCombinations() throws Exception {
@@ -45,18 +48,52 @@ public class StringSolutionTest {
     }
 
     @Test
-    public void splitTest()throws Exception{
-        String a ="1+-1i";
-        String[] b=a.split("\\+");
+    public void splitTest() throws Exception {
+        String a = "1+-1i";
+        String[] b = a.split("\\+");
         for (String s : b) {
             System.out.println(s);
         }
     }
 
     @Test
-   public void complexNumberMultiply()throws Exception{
-        String a="1+-1i";
-        String b="1+-1i";
-        System.out.println(solution.complexNumberMultiply(a,b));
-   }
+    public void complexNumberMultiply() throws Exception {
+        String a = "1+-1i";
+        String b = "1+-1i";
+        System.out.println(solution.complexNumberMultiply(a, b));
+    }
+
+    @Test
+    public void partitionLabels() {
+        String s = "ababcbacadefegdehijhklij";
+        ArrayList<Integer> e = new ArrayList<Integer>();
+        e.add(9);
+        e.add(7);
+        e.add(8);
+        List<Integer> res = solution.partitionLabels(s);
+        Assert.assertArrayEquals(e.toArray(), res.toArray());
+    }
+
+    @Test
+    public void partitionLabelsKotlin(){
+        String s = "ababcbacadefegdehijhklij";
+        ArrayList<Integer> e = new ArrayList<Integer>();
+        e.add(9);
+        e.add(7);
+        e.add(8);
+        List<Integer> res =sloutionKotlin.partitionLabels(s);
+        Assert.assertArrayEquals(e.toArray(),res.toArray());
+    }
+
+
+    @Test
+    public  void customSortStringKotlin(){
+        String s ="cba";
+        String t ="abcd";
+        System.out.println(sloutionKotlin.customSortString(s,t));
+    }
+
+
+
+
 }

@@ -19,7 +19,7 @@ public class StringSolution {
             while (letter.peek().length() == i) {
                 String tmp = letter.pop();
                 for (char s : mapper[x].toCharArray()) {
-                    letter.add(tmp+s);
+                    letter.add(tmp + s);
                 }
             }
         }
@@ -34,14 +34,14 @@ public class StringSolution {
         if (num1.isEmpty() || num2.isEmpty()) return new String();
         if (Objects.equals(num1, "0") || Objects.equals(num2, "0")) return "0";
         int m = num1.length(), n = num2.length();
-        int[] pos = new int[m+n];
-        for (int i = m-1; i >= 0; i--) {
-            for (int j = n-1; j >= 0; j--) {
-                int mul = (num1.charAt(i)-'0')*(num2.charAt(j)-'0');
-                int p1 = i+j, p2 = i+j+1;
-                int sum = mul+pos[p2];
-                pos[p1] += sum/10;
-                pos[p2] = sum%10;
+        int[] pos = new int[m + n];
+        for (int i = m - 1; i >= 0; i--) {
+            for (int j = n - 1; j >= 0; j--) {
+                int mul = (num1.charAt(i) - '0') * (num2.charAt(j) - '0');
+                int p1 = i + j, p2 = i + j + 1;
+                int sum = mul + pos[p2];
+                pos[p1] += sum / 10;
+                pos[p2] = sum % 10;
             }
         }
         StringBuilder builder = new StringBuilder();
@@ -61,10 +61,10 @@ public class StringSolution {
             char ch = input.charAt(i);
             if (ch == '+' || ch == '-' || ch == '*')
                 for (Integer l : diffWaysToCompute(input.substring(0, i)))
-                    for (Integer r : diffWaysToCompute(input.substring(i+1, input.length())))
-                        if (ch == '+') res.add(l+r);
-                        else if (ch == '-') res.add(l-r);
-                        else res.add(l*r);
+                    for (Integer r : diffWaysToCompute(input.substring(i + 1, input.length())))
+                        if (ch == '+') res.add(l + r);
+                        else if (ch == '-') res.add(l - r);
+                        else res.add(l * r);
         }
         if (res.size() == 0) res.add(Integer.valueOf(input));
         hm.put(input, res);
@@ -81,19 +81,19 @@ public class StringSolution {
         int f = 0, m = 1;
         for (String s : fs) {
             int[] tmp = Stream.of(s.split("/")).mapToInt(Integer::parseInt).toArray();
-            f = f*tmp[1];
-            f += tmp[0]*m;
+            f = f * tmp[1];
+            f += tmp[0] * m;
             m *= tmp[1];
         }
         String res = "";
         int gdc = Math.abs(gcd(f, m));
-        res += f/gdc+"/"+m/gdc;
+        res += f / gdc + "/" + m / gdc;
         return res;
     }
 
     //求任意两数的最大公约数
     private int gcd(int x, int y) {
-        return x == 0 || y == 0 ? x+y : gcd(y, x%y);
+        return x == 0 || y == 0 ? x + y : gcd(y, x % y);
     }
 
     //537. Complex Number Multiplication
@@ -101,12 +101,32 @@ public class StringSolution {
     public String complexNumberMultiply(String a, String b) {
         String[] f = a.split("\\+");
         String[] s = b.split("\\+");
-        int m = Integer.valueOf(f[0])*Integer.valueOf(s[0]);
-        int fi = Integer.valueOf(f[1].substring(0, f[1].length()-1));
-        int si = Integer.valueOf(s[1].substring(0, s[1].length()-1));
-        m = m-fi*si;
-        int mi = Integer.valueOf(f[0])*si+Integer.valueOf(s[0])*fi;
-        return ""+m+"+"+mi+"i";
+        int m = Integer.valueOf(f[0]) * Integer.valueOf(s[0]);
+        int fi = Integer.valueOf(f[1].substring(0, f[1].length() - 1));
+        int si = Integer.valueOf(s[1].substring(0, s[1].length() - 1));
+        m = m - fi * si;
+        int mi = Integer.valueOf(f[0]) * si + Integer.valueOf(s[0]) * fi;
+        return "" + m + "+" + mi + "i";
+    }
+
+
+    //763. Partition Labels
+    public List<Integer> partitionLabels(String S) {
+        ArrayList<Integer> list = new ArrayList<>();
+        int[] chars = new int[26];
+        for (int i = 0; i < S.length(); i++) {
+            chars[S.charAt(i) - 'a'] = i;
+        }
+        int first =-1;
+        int end=0;
+        for(int i=first+1;i<S.length();i++){
+           end =Math.max(end,chars[S.charAt(i)-'a']);
+           if(end==i) {
+               list.add(end - first);
+               first=end;
+           }
+        }
+        return list;
     }
 
 
