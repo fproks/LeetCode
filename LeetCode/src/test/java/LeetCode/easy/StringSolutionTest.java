@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 public class StringSolutionTest {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     private StringSolution solutions = new StringSolution();
+    private StringSolutionKotlin solutionKotlin =new StringSolutionKotlin();
 
     @Test
     public void validPalindrome() throws Exception {
@@ -26,6 +27,13 @@ public class StringSolutionTest {
     public void calPoints() throws Exception {
         String[] s = {"5", "-2", "4", "C", "D", "9", "+", "+"};
         Assert.assertEquals(27, solutions.calPoints(s));
+    }
+
+    @Test
+    public void numJewelsInStones(){
+        String J ="z";
+        String S ="ZZ";
+        Assert.assertEquals(solutionKotlin.numJewelsInStones(J,S),0);
     }
 
 }
