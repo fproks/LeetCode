@@ -74,12 +74,15 @@ class StringSloutionKotlin {
     }
 
     private fun compileNumWithChar(S: String): IntArray {
-        var wordArray = Array(26, { 0 })
+        val wordArray = Array(26, { 0 })
         S.toLowerCase().filter { it in 'a'..'z' }.forEach {
             wordArray[(it-'a')]++
         }
         return wordArray.toIntArray()
     }
+
+
+
 
 
 }
