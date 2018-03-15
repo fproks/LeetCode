@@ -39,8 +39,11 @@ public class ArraysSolution implements Solution {
         for (int c : candies) {
             set.add(c);
         }
-        if (set.size() > candies.length/2) return candies.length/2;
-        else return set.size();
+        if (set.size() > candies.length/2) {
+            return candies.length/2;
+        } else {
+            return set.size();
+        }
 
     }
 
@@ -49,9 +52,13 @@ public class ArraysSolution implements Solution {
         int[] tmp = Arrays.copyOf(nums, nums.length);
         Arrays.sort(tmp);
         int start = 0;
-        while (start < nums.length && nums[start] == tmp[start]) start++;
+        while (start < nums.length && nums[start] == tmp[start]) {
+            start++;
+        }
         int end = nums.length-1;
-        while (end > start && nums[end] == tmp[end]) end--;
+        while (end > start && nums[end] == tmp[end]) {
+            end--;
+        }
         return end-start+1;
     }
 
@@ -61,12 +68,15 @@ public class ArraysSolution implements Solution {
         int start = 0, end = 0;
         int size = 0;
         while (end < nums.length) {
-            if (nums[start] == nums[end]) end++;
-            else {
+            if (nums[start] == nums[end]) {
+                end++;
+            } else {
                 if (nums[end]-nums[start] == 1) {
                     size = size > end-start+1 ? size : end-start+1;
                     end++;
-                } else start++;
+                } else {
+                    start++;
+                }
             }
         }
         return size;
@@ -99,8 +109,9 @@ public class ArraysSolution implements Solution {
                     list.clear();
                     count = tmp;
                 }
-                if (count == tmp)
+                if (count == tmp) {
                     list.add(list2[i]);
+                }
             }
         }
         return list.toArray(new String[list.size()]);
@@ -196,7 +207,7 @@ public class ArraysSolution implements Solution {
     }
 
     //665. Non-decreasing Array
-    /*
+    /**
     * http://blog.csdn.net/u010455714/article/details/77621972
     * 对于给定的数组 a1,a2,a3,a4,a5,…
     * 假设a4 < a3. 为了实现数组的单调非减，我们必须改变a4和a3其中的一个值，

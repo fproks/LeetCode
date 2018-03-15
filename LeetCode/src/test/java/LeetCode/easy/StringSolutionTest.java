@@ -36,4 +36,8 @@ public class StringSolutionTest {
         Assert.assertEquals(solutionKotlin.numJewelsInStones(J,S),0);
     }
 
+    public static void main(String[] args) {
+        
+    }
+
 }
