@@ -53,4 +53,11 @@ public class ArraysSolutionTest {
         }
     }
 
+    @Test
+    public void maxAreaOfIsland() {
+        int[][] grid ={{1,1,0,0,0},{1,1,0,0,0},{0,0,0,1,1},{0,0,0,1,1}};
+        LeetCode.easy.Kotlin.ArraysSolution kotlinSolution =new LeetCode.easy.Kotlin.ArraysSolution();
+        Assert.assertEquals(4,kotlinSolution.maxAreaOfIsland(grid));
+    }
+
 }

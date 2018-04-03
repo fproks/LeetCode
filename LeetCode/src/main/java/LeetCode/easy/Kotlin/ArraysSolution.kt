@@ -1,5 +1,7 @@
 package LeetCode.easy.Kotlin
 
+import java.util.*
+
 class ArraysSolution {
 
 
@@ -60,6 +62,34 @@ class ArraysSolution {
             tmp=tmp.ushr(1)
         }
         return  res
+    }
+
+
+    //695. Max Area of Island
+    fun maxAreaOfIsland(grid: Array<IntArray>): Int {
+        var count=0
+        var queue = Stack<Pair<Int,Int>>()
+        for (i in 0 until grid.size){
+            for ( j in 0 until grid[i].size){
+                if(grid[i][j]==1){
+                    queue.push(Pair(i,j))
+                    var tmp=0;
+                    while (!queue.empty()){
+                        val tmpPair =queue.pop()
+                        if(grid[tmpPair.first][tmpPair.second]==1) {
+                            grid[tmpPair.first][tmpPair.second] = 0
+                            tmp++
+                            if(tmpPair.first>0) queue.push(Pair(tmpPair.first-1,tmpPair.second))
+                            if(tmpPair.first+1<grid.size) queue.push(Pair(tmpPair.first+1,tmpPair.second))
+                            if(tmpPair.second>0) queue.push(Pair(tmpPair.first,tmpPair.second-1))
+                            if(tmpPair.second+1<grid[i].size) queue.push(Pair(tmpPair.first,tmpPair.second+1))
+                        }
+                    }
+                    if (tmp>count)count=tmp
+                }
+            }
+        }
+        return count
     }
 
 }
