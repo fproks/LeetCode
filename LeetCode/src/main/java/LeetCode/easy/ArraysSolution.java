@@ -230,5 +230,25 @@ public class ArraysSolution implements Solution {
         return true;
     }
 
+    //696. Count Binary Substrings
+    public int countBinarySubstrings(String s) {
+        int len=s.length();
+        if(len<=1) return 0;
+        char[] sc= s.toCharArray();
+        int i=0,prev=-1,res=0;
+        while(i<len){
+            int j=i;
+            char c=sc[i];
+            //统计相同元素的个数
+            while(i<len && sc[i]==c) i++;
+            int cur=i-j;
+            //对相邻连续子串的较小值进行求和。这里使用两个变量来代替之前的一个数组，而且再一次遍历中执行计数和求和两部分功能
+            if(prev!=-1) res+=Math.min(prev,cur);
+            prev=cur;
+        }
+        return res;
+    }
+
+
 
 }

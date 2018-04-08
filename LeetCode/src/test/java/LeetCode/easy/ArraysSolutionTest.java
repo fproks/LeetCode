@@ -60,4 +60,11 @@ public class ArraysSolutionTest {
         Assert.assertEquals(4,kotlinSolution.maxAreaOfIsland(grid));
     }
 
+    @Test
+    public  void  countBinarySubstrings(){
+        ArraysSolution solution =new ArraysSolution();
+        Assert.assertEquals(6,solution.countBinarySubstrings("00110011"));
+        Assert.assertEquals(4,solution.countBinarySubstrings("10101"));
+    }
+
 }
