@@ -2,6 +2,8 @@ package LeetCode.easy;
 
 import LeetCode.struct.Solution;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Stack;
 import java.util.regex.Pattern;
@@ -18,9 +20,9 @@ public class StringSolution implements Solution {
         int count = s.length();
         int i = 0;
         while (i < count) {
-            int j = Math.min(i+k-1, count-1);
+            int j = Math.min(i + k - 1, count - 1);
             reverse(sBuilder, i, j);
-            i += 2*k;
+            i += 2 * k;
         }
         return sBuilder.toString();
     }
@@ -62,8 +64,8 @@ public class StringSolution implements Solution {
         int first = 0, second = 0;
         for (; second < array.length; second++) {
             if (array[second] == ' ') {
-                reverseArray(array, first, second-1);
-                first = second+1;
+                reverseArray(array, first, second - 1);
+                first = second + 1;
             }
         }
         if (array[--second] != ' ') reverseArray(array, first, second);
@@ -103,15 +105,15 @@ public class StringSolution implements Solution {
 
     //680. Valid Palindrome II
     public boolean validPalindrome(String s) {
-        int fir = 0, sec = s.length()-1;
+        int fir = 0, sec = s.length() - 1;
         boolean ispalind;
         while (fir <= sec) {
             if (s.charAt(fir) == s.charAt(sec)) {
                 fir++;
                 sec--;
             } else {
-                ispalind = Partpalind(s, fir+1, sec);
-                return ispalind || Partpalind(s, fir, sec-1);
+                ispalind = Partpalind(s, fir + 1, sec);
+                return ispalind || Partpalind(s, fir, sec - 1);
             }
         }
         return true;
@@ -141,12 +143,12 @@ public class StringSolution implements Solution {
                 if (Objects.equals(o, "+")) {
                     first = stack.pop();
                     sec = stack.peek();
-                    tmp = first+sec;
+                    tmp = first + sec;
                     sum += tmp;
                     stack.push(first);
                     stack.push(tmp);
                 } else if (Objects.equals(o, "D")) {
-                    tmp = stack.peek()*2;
+                    tmp = stack.peek() * 2;
                     sum += tmp;
                     stack.push(tmp);
                 } else {
@@ -156,6 +158,32 @@ public class StringSolution implements Solution {
             }
         }
         return sum;
+    }
+
+    //784. Letter Case Permutation
+    public List<String> letterCasePermutation(String S) {
+        List<String> res = new ArrayList<>();
+        char[] c = S.toCharArray();
+        //res.add(S);
+        addLetterCase(res, c, 0);
+        return res;
+    }
+
+    private void addLetterCase(List<String> res, char[] S, int index) {
+      if(S.length ==index){
+          res.add(new String(S));
+          return;
+      }else if(index<S.length) {
+          if(Character.isAlphabetic(S[index])){
+              char i =S[index];
+              addLetterCase(res,S,index+1);
+              if(i>='a' && i<='z')S[index]=(char)(i-'a'+'A');
+              else  S[index]=(char)(i-'A'+'a');
+              addLetterCase(res,S,++index);
+          }else {
+              addLetterCase(res,S,++index);
+          }
+      }
     }
 
 

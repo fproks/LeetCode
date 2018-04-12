@@ -129,5 +129,27 @@ public class StringSolution {
         return list;
     }
 
+    //451. Sort Characters By Frequency
+    public String frequencySort(String s) {
+        int[] map =new int[256];
+        StringBuilder stringBuilder =new StringBuilder();
+        List<List<Integer>> list =new ArrayList<>();
+        for(int i=0;i<s.length();i++)map[s.charAt(i)]++;
+        for (int i=0;i<s.length()+1;i++)list.add(new ArrayList<>());
+        for(int i=0;i<map.length;i++)if(map[i]!=0)list.get(map[i]).add(i);
+        for (int i = list.size()-1; i >=0 ; i--) {
+            if(list.get(i)!=null){
+                List<Integer> tmp =list.get(i);
+                for (int k =0;k<tmp.size();k++){
+                    for (int m =0;m<i;m++){
+                        stringBuilder.append(Character.toChars(tmp.get(k)));
+                    }
+                }
 
-}
+            }
+        }
+        return  stringBuilder.toString();
+    }
+
+
+    }

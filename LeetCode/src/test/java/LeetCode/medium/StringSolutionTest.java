@@ -106,7 +106,11 @@ public class StringSolutionTest {
         Assert.assertEquals("steps",sloutionKotlin.shortestCompletingWord(licence,words));
     }
 
-
+    @Test
+    public void frequencySort(){
+        String s ="tree";
+        System.out.println(solution.frequencySort(s));
+    }
 
 
 

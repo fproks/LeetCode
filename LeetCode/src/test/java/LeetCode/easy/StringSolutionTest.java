@@ -5,6 +5,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 /**
  * @user: linhos
  * @Time: Create in 14:04 2017/9/25
@@ -13,7 +15,7 @@ import org.slf4j.LoggerFactory;
 public class StringSolutionTest {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     private StringSolution solutions = new StringSolution();
-    private StringSolutionKotlin solutionKotlin =new StringSolutionKotlin();
+    private StringSolutionKotlin solutionKotlin = new StringSolutionKotlin();
 
     @Test
     public void validPalindrome() throws Exception {
@@ -30,14 +32,18 @@ public class StringSolutionTest {
     }
 
     @Test
-    public void numJewelsInStones(){
-        String J ="z";
-        String S ="ZZ";
-        Assert.assertEquals(solutionKotlin.numJewelsInStones(J,S),0);
+    public void numJewelsInStones() {
+        String J = "z";
+        String S = "ZZ";
+        Assert.assertEquals(solutionKotlin.numJewelsInStones(J, S), 0);
     }
 
-    public static void main(String[] args) {
-        
-    }
+    @Test
+    public void letterCasePermutation() {
+        String a = "a1b2";
+        List<String> rmp =solutions.letterCasePermutation(a);
+        Assert.assertEquals(4, rmp.size());
+        rmp.forEach(it->{System.out.println(it);});
 
+    }
 }

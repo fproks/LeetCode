@@ -1,5 +1,7 @@
 package LeetCode.medium.Kotlin
 
+import java.util.*
+
 
 class StringSloutionKotlin {
     fun partitionLabels(S: String): List<Int> {
@@ -76,7 +78,7 @@ class StringSloutionKotlin {
     private fun compileNumWithChar(S: String): IntArray {
         val wordArray = Array(26, { 0 })
         S.toLowerCase().filter { it in 'a'..'z' }.forEach {
-            wordArray[(it-'a')]++
+            wordArray[(it - 'a')]++
         }
         return wordArray.toIntArray()
     }

@@ -23,4 +23,13 @@ class StringSoultionTest {
                 solution.rotateString("gcmbf", "fgcmb")
         )
     }
+
+  /*  @Test
+    fun  letterCasePermutation(){
+        var S ="a1b2"
+        val tmp = solution.letterCasePermutation(S)
+        Assert.assertEquals(4,tmp.size)
+        Assert.assertTrue(tmp.contains("a1b2"))
+        tmp.forEach(::println)
+    }*/
 }
