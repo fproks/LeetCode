@@ -2,6 +2,7 @@ package LeetCode.easy.Kotlin
 
 import java.util.*
 import kotlin.collections.HashSet
+import kotlin.math.abs
 
 class ArraysSolution {
 
@@ -106,6 +107,15 @@ class ArraysSolution {
         }
 
         return setTmp.size
+    }
+
+    fun largestTriangleArea(p: Array<Array<Int>>): Double {
+        var res = 0.0
+        for (i in p)
+            for (j in p)
+                for (k in p)
+                    res = maxOf(res,  0.5*abs(i[0] * j[1] + j[0] * k[1] + k[0] * i[1] - j[0] * i[1] - k[0] * j[1] - i[0] * k[1]))
+        return res
     }
 
 }

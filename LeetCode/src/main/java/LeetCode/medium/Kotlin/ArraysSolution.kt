@@ -1,6 +1,7 @@
 package LeetCode.medium.Kotlin
 
 import java.util.*
+import kotlin.collections.HashSet
 
 class ArraysSolution {
 
@@ -32,6 +33,35 @@ class ArraysSolution {
             stack[++top] =i
         }
         return  ret.toIntArray()
+    }
+
+
+    //667. Beautiful Arrangement II
+    fun constructArray(n: Int, k: Int): IntArray {
+        var arr =IntArray(n)
+        var  l =1
+        var r =n
+        var i=0
+        var tk =k
+       while (l <=r){
+           arr[i]=if(tk>1) if(tk-- %2 !=0)l++ else r-- else l++
+           i++
+       }
+        return arr
+    }
+
+    fun findPoisonedDuration(timeSeries: IntArray, duration: Int): Int {
+        var curr =0
+        var sum =0
+        for (time in timeSeries){
+            if (curr <=time){
+                sum+=duration
+            }else{
+                sum += (duration +(time-curr))
+            }
+            curr =time+duration
+        }
+        return  sum
     }
 
 
