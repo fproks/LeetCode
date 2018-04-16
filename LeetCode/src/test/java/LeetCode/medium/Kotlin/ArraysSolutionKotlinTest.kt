@@ -11,5 +11,6 @@ class ArraysSolutionKotlinTest{
     @Test
     fun findPoisonedDuration(){
         Assert.assertEquals(3, solution.findPoisonedDuration(intArrayOf(1,2),2))
+        Assert.assertEquals(4, solution.findPoisonedDuration(intArrayOf(1,4),2))
     }
 }
