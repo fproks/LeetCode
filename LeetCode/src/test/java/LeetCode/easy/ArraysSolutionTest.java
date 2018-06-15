@@ -67,4 +67,13 @@ public class ArraysSolutionTest {
         Assert.assertEquals(4,solution.countBinarySubstrings("10101"));
     }
 
+    @Test
+    public void nextGreatestLetter() {
+        char[] letter ={'c','f','j'};
+        char target ='j';
+        ArraysSolution solution =new ArraysSolution();
+        char c =solution.nextGreatestLetter(letter,target);
+        System.out.println(c);
+    }
+
 }

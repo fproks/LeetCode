@@ -18,4 +18,7 @@ public class ArraysSolution3Test {
         Assert.assertEquals(2, solution.singleNonDuplicate(a));
     }
 
+
+
+
 }
