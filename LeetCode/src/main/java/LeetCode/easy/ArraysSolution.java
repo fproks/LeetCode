@@ -295,4 +295,80 @@ public class ArraysSolution implements Solution {
     }
 
 
+    public String longestWord(String[] words) {
+        Arrays.sort(words);
+        Set<String> set =new HashSet<>();
+        String res="";
+        for (String s:words) {
+            if(s.length()==1 || set.contains(s.substring(0,s.length()-1))){
+                res=s.length()>res.length()? s:res;
+                set.add(s);
+            }
+        }
+        return  res;
+    }
+
+
+    public int dominantIndex(int[] nums) {
+        int max=Integer.MIN_VALUE;
+        int sMax =Integer.MIN_VALUE;
+        int idx =-1;
+        for (int i = 0; i < nums.length; i++) {
+            if(max<=nums[i]){
+                sMax =max;
+                idx =i;
+                max =nums[i];
+            }else if(sMax <nums[i]){
+                sMax=nums[i];
+            }
+        }
+        if(sMax*2 <=max)return  idx;
+        else  return  -1;
+    }
+
+
+    public int maxDistToClosest(int[] seats) {
+        int tmplength=0,reslength=0;
+        for (int i = 0; i <=seats.length-1; i++) {
+            if(seats[i]==0){
+                tmplength++;
+            }else{
+                if(tmplength>reslength)
+                    reslength=tmplength;
+                tmplength=0;
+            }
+        }
+        int  starti=0,endi=0;
+        if(seats[0]==0){
+            while (seats[starti]!=1){
+                starti++;
+            }
+        }
+        if(seats[seats.length-1]==0){
+            endi+=tmplength;
+        }
+        if(reslength%2==0) {
+            reslength = reslength / 2;
+        }else reslength =reslength/2+1;
+        return reslength> endi? Math.max(reslength,starti) :Math.max(endi,starti);
+    }
+
+
+    //832. Flipping an Image
+    public int[][] flipAndInvertImage(int[][] A) {
+        int rowLength =A[0].length;
+        for (int i=0;i<A.length;i++){
+            for (int j =0,z=rowLength-1;j<=z;j++,z--){
+                int first =A[i][j],second =A[i][z];
+                A[i][j] =second>0? 0:1;
+                A[i][z]=first >0?0:1;
+            }
+        }
+        return  A;
+    }
+
+
+
+
+
 }
