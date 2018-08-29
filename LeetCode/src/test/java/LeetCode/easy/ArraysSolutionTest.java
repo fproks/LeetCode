@@ -55,25 +55,34 @@ public class ArraysSolutionTest {
 
     @Test
     public void maxAreaOfIsland() {
-        int[][] grid ={{1,1,0,0,0},{1,1,0,0,0},{0,0,0,1,1},{0,0,0,1,1}};
-        LeetCode.easy.Kotlin.ArraysSolution kotlinSolution =new LeetCode.easy.Kotlin.ArraysSolution();
-        Assert.assertEquals(4,kotlinSolution.maxAreaOfIsland(grid));
+        int[][] grid = {{1, 1, 0, 0, 0}, {1, 1, 0, 0, 0}, {0, 0, 0, 1, 1}, {0, 0, 0, 1, 1}};
+        LeetCode.easy.Kotlin.ArraysSolution kotlinSolution = new LeetCode.easy.Kotlin.ArraysSolution();
+        Assert.assertEquals(4, kotlinSolution.maxAreaOfIsland(grid));
     }
 
     @Test
-    public  void  countBinarySubstrings(){
-        ArraysSolution solution =new ArraysSolution();
-        Assert.assertEquals(6,solution.countBinarySubstrings("00110011"));
-        Assert.assertEquals(4,solution.countBinarySubstrings("10101"));
+    public void countBinarySubstrings() {
+        ArraysSolution solution = new ArraysSolution();
+        Assert.assertEquals(6, solution.countBinarySubstrings("00110011"));
+        Assert.assertEquals(4, solution.countBinarySubstrings("10101"));
     }
 
     @Test
     public void nextGreatestLetter() {
-        char[] letter ={'c','f','j'};
-        char target ='j';
-        ArraysSolution solution =new ArraysSolution();
-        char c =solution.nextGreatestLetter(letter,target);
+        char[] letter = {'c', 'f', 'j'};
+        char target = 'j';
+        ArraysSolution solution = new ArraysSolution();
+        char c = solution.nextGreatestLetter(letter, target);
         System.out.println(c);
+    }
+
+    @Test
+    public void projectionArea() {
+        int[][] input ={{2,2,2},{2,1,2},{2,2,2}};
+         int[][] inut1={{1,1,1},{1,0,1},{1,1,1}};
+        ArraysSolution solution =new ArraysSolution();
+        Assert.assertEquals(21,solution.projectionArea(input));
+        Assert.assertEquals(14,solution.projectionArea(inut1));
     }
 
 }

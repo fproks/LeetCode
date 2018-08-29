@@ -368,6 +368,32 @@ public class ArraysSolution implements Solution {
     }
 
 
+    public int projectionArea(int[][] grid) {
+        int Xsum =0;
+        int Ysum=0;
+        int Zsum =0;
+        for(int i=0;i<grid.length;i++){
+            int jMax=0;
+            for(int j =0;j<grid[i].length;j++){
+                if(grid[i][j]!=0){
+                    Xsum++;
+                }
+                if(grid[i][j] >jMax) jMax =grid[i][j];
+            }
+            Ysum+=jMax;
+        }
+        for (int i = 0; i <grid[0].length ; i++) {
+            int zMax =0;
+            for (int j = 0; j <grid.length ; j++) {
+                if(grid[j][i]>zMax) zMax=grid[j][i];
+            }
+            Zsum+=zMax;
+        }
+        return  Xsum+Ysum+Zsum;
+    }
+
+
+
 
 
 

@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LeetCode/LeetCode.iml" filepath="$PROJECT_DIR$/LeetCode/LeetCode.iml" />
+      <module fileurl="file://$PROJECT_DIR$/NodejsCode/NodejsCode.iml" filepath="$PROJECT_DIR$/NodejsCode/NodejsCode.iml" />
       <module fileurl="file://$PROJECT_DIR$/pythonCode/pythonCode.iml" filepath="$PROJECT_DIR$/pythonCode/pythonCode.iml" />
       <module fileurl="file://$PROJECT_DIR$/settings/settings.iml" filepath="$PROJECT_DIR$/settings/settings.iml" />
     </modules>

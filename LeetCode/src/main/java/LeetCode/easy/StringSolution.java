@@ -187,4 +187,17 @@ public class StringSolution implements Solution {
     }
 
 
+    public int peakIndexInMountainArray(int[] A) {
+        int result=0;
+        for (int i = 1; i < A.length; i++) {
+            if (A[i] < A[i-1] ) {
+                result =i-1;
+                break;
+            }
+        }
+        return  result;
+    }
+
+
+
 }
