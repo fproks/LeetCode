@@ -2,11 +2,9 @@ package LeetCode.easy;
 
 import LeetCode.struct.Solution;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Stack;
+import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 /**
  * @user: linhos
@@ -170,64 +168,94 @@ public class StringSolution implements Solution {
     }
 
     private void addLetterCase(List<String> res, char[] S, int index) {
-      if(S.length ==index){
-          res.add(new String(S));
-          return;
-      }else if(index<S.length) {
-          if(Character.isAlphabetic(S[index])){
-              char i =S[index];
-              addLetterCase(res,S,index+1);
-              if(i>='a' && i<='z')S[index]=(char)(i-'a'+'A');
-              else  S[index]=(char)(i-'A'+'a');
-              addLetterCase(res,S,++index);
-          }else {
-              addLetterCase(res,S,++index);
-          }
-      }
+        if (S.length == index) {
+            res.add(new String(S));
+            return;
+        } else if (index < S.length) {
+            if (Character.isAlphabetic(S[index])) {
+                char i = S[index];
+                addLetterCase(res, S, index + 1);
+                if (i >= 'a' && i <= 'z') S[index] = (char) (i - 'a' + 'A');
+                else S[index] = (char) (i - 'A' + 'a');
+                addLetterCase(res, S, ++index);
+            } else {
+                addLetterCase(res, S, ++index);
+            }
+        }
     }
 
 
     public int peakIndexInMountainArray(int[] A) {
-        int result=0;
+        int result = 0;
         for (int i = 1; i < A.length; i++) {
-            if (A[i] < A[i-1] ) {
-                result =i-1;
+            if (A[i] < A[i - 1]) {
+                result = i - 1;
                 break;
             }
         }
-        return  result;
+        return result;
     }
 
 
     //TODO   rember
     //10. Regular Expression Matching
-    public boolean isMatch(String s,String p){
-        if(s ==null || p ==null) return  false;
-        boolean[][] dp =new boolean[s.length()+1][p.length()+1];
-        dp[0][0] =true;
-        for (int i =0;i<p.length(); i++){
-            if(p.charAt(i)=='*' && dp[0][i-1])dp[0][i+1]=true;
+    public boolean isMatch(String s, String p) {
+        if (s == null || p == null) return false;
+        boolean[][] dp = new boolean[s.length() + 1][p.length() + 1];
+        dp[0][0] = true;
+        for (int i = 0; i < p.length(); i++) {
+            if (p.charAt(i) == '*' && dp[0][i - 1]) dp[0][i + 1] = true;
         }
-        for (int i = 0; i <s.length() ; i++) {
+        for (int i = 0; i < s.length(); i++) {
             for (int j = 0; j < p.length(); j++) {
-                if(p.charAt(j)=='.'){
-                    dp[i+1][j+1]=dp[i][j];
+                if (p.charAt(j) == '.') {
+                    dp[i + 1][j + 1] = dp[i][j];
                 }
-                if(p.charAt(j) ==s.charAt(i)){
-                    dp[i+1][j+1] =dp[i][j];
+                if (p.charAt(j) == s.charAt(i)) {
+                    dp[i + 1][j + 1] = dp[i][j];
                 }
-                if(p.charAt(j)=='*'){
-                    if(p.charAt(j-1)!=s.charAt(i) && p.charAt(j-1)!='.'){
-                        dp[i+1][j+1] =dp[i+1][j-1];
-                    }else {
-                        dp[i+1][j+1] =(dp[i+1][j] || dp[i][j+1] || dp[i+1][j-1]);
+                if (p.charAt(j) == '*') {
+                    if (p.charAt(j - 1) != s.charAt(i) && p.charAt(j - 1) != '.') {
+                        dp[i + 1][j + 1] = dp[i + 1][j - 1];
+                    } else {
+                        dp[i + 1][j + 1] = (dp[i + 1][j] || dp[i][j + 1] || dp[i + 1][j - 1]);
                     }
                 }
             }
         }
-        return  dp[s.length()][p.length()];
+        return dp[s.length()][p.length()];
     }
 
+    public int NumUniqueEmails(String[] emails) {
+        Set<String> emailSet = new HashSet<>();
+        Stream.of(emails).forEach((email) -> {
+            String[] ls = email.split("@");
+            String name = ls[0];
+            String[] tmp = name.split("/+")[0].split(".");
+            name = String.join("", tmp);
+            emailSet.add(name + "@" + ls[1]);
+        });
+        return emailSet.size();
+    }
+
+
+    public int numSpecialEquivGroups(String[] A) {
+        HashSet<String> set =new HashSet<>();
+        for(var str :A){
+            if(!set.contains(str) && !set.contains(reverse(str))){
+                set.add(str);
+            }
+        }
+        return  set.size();
+    }
+
+    private String reverse(String str) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = str.length() - 1; i >= 0; i--) {
+            sb.append(str.charAt(i));
+        }
+        return sb.toString();
+    }
 
 
 }

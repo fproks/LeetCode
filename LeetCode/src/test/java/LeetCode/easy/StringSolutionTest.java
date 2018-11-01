@@ -46,4 +46,21 @@ public class StringSolutionTest {
         rmp.forEach(it->{System.out.println(it);});
 
     }
+
+    @Test
+    public  void NumUniqueEmails(){
+        String[] emails ={"test.email+alex@leetcode.com","test.e.mail+bob.cathy@leetcode.com","testemail+david@lee.tcode.com"};
+        Assert.assertEquals(2,solutions.NumUniqueEmails(emails));
+    }
+
+    @Test
+    public  void  numSpecialEquivGroups(){
+        String[] input3 ={"abc","acb","bac","bca","cab","cba"};
+        String[] input1={"a","b","c","a","c","c"};
+        String[] input2 ={"aa","bb","ab","ba"};
+        Assert.assertEquals(4,solutions.numSpecialEquivGroups(input2));
+        Assert.assertEquals(3,solutions.numSpecialEquivGroups(input1));
+        Assert.assertEquals(3,solutions.numSpecialEquivGroups(input3));
+    }
+
 }

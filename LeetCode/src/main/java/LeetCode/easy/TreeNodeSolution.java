@@ -1,7 +1,9 @@
 package LeetCode.easy;
 
+import LeetCode.struct.Node;
 import LeetCode.struct.Solution;
 import LeetCode.struct.TreeNode;
+import javafx.util.Pair;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -36,7 +38,7 @@ public class TreeNodeSolution implements Solution {
 
     public int diameterOfBinaryTree(TreeNode root) {
         deepthTree(root);
-        return diameter <= 1 ? diameter : diameter-1;
+        return diameter <= 1 ? diameter : diameter - 1;
     }
 
     private int deepthTree(TreeNode root) {
@@ -44,9 +46,9 @@ public class TreeNodeSolution implements Solution {
         if (root.left == null && root.right == null) return 1;
         int left = deepthTree(root.left);
         int right = deepthTree(root.right);
-        int tmp = left+right+1;
+        int tmp = left + right + 1;
         diameter = diameter > tmp ? diameter : tmp;
-        return left > right ? left+1 : right+1;
+        return left > right ? left + 1 : right + 1;
     }
 
 
@@ -58,14 +60,14 @@ public class TreeNodeSolution implements Solution {
         int ll = 0, rr = 0;
         if (root.left != null) ll = root.left.val;
         if (root.right != null) rr = root.right.val;
-        return left+right+Math.abs(ll-rr);
+        return left + right + Math.abs(ll - rr);
     }
 
     public int filt(TreeNode root) {
         if (root == null) return 0;
         int left = root.left == null ? 0 : root.left.val;
         int right = root.right == null ? 0 : root.right.val;
-        return Math.abs(left-right)+filt(root.left)+filt(root.right);
+        return Math.abs(left - right) + filt(root.left) + filt(root.right);
     }
 
     public int findTilts(TreeNode root) {
@@ -79,9 +81,9 @@ public class TreeNodeSolution implements Solution {
         int left = postOrder(root.left);
         int right = postOrder(root.right);
 
-        result += Math.abs(left-right);
+        result += Math.abs(left - right);
 
-        return left+right+root.val;
+        return left + right + root.val;
     }
 
 
@@ -141,7 +143,7 @@ public class TreeNodeSolution implements Solution {
                     if (node.right != null) queue.add(node.right);
                     i--;
                 }
-                list.add(count/tmp);
+                list.add(count / tmp);
             }
         }
         return list;
@@ -151,8 +153,8 @@ public class TreeNodeSolution implements Solution {
         findTargetList = new ArrayList<Integer>();
         midsearch(root);
         int n = findTargetList.size();
-        for (int i = 0, j = n-1; i < j; ) {
-            int tmp = findTargetList.get(i)+findTargetList.get(j);
+        for (int i = 0, j = n - 1; i < j; ) {
+            int tmp = findTargetList.get(i) + findTargetList.get(j);
             if (tmp < k) i++;
             else if (tmp > k) j--;
             else return true;
@@ -170,8 +172,8 @@ public class TreeNodeSolution implements Solution {
 
     //669. Trim a Binary Search Tree
     /*
-    * 二叉树剪枝
-    * */
+     * 二叉树剪枝
+     * */
     public TreeNode trimBST(TreeNode root, int L, int R) {
         if (root == null) return root;
         if (root.val < L) {
@@ -238,16 +240,39 @@ public class TreeNodeSolution implements Solution {
         int count = 0;
         int first = 0, sen = 0;
         for (int i = 1; i < nums.length; i++) {
-            if (nums[i] <= nums[i-1]) {
-                count = count < sen-first+1 ? sen-first+1 : count;
+            if (nums[i] <= nums[i - 1]) {
+                count = count < sen - first + 1 ? sen - first + 1 : count;
                 first = i;
             }
             sen = i;
         }
-        count = count < sen-first+1 ? sen-first+1 : count;
+        count = count < sen - first + 1 ? sen - first + 1 : count;
         return count;
     }
 
+    public List<List<Integer>> levelOrder(Node root) {
+        List<List<Integer>> ret = new LinkedList<>();
+
+        if (root == null) return ret;
+
+        Queue<Node> queue = new LinkedList<>();
+
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+            List<Integer> curLevel = new LinkedList<>();
+            int len = queue.size();
+            for (int i = 0; i < len; i++) {
+                Node curr = queue.poll();
+                curLevel.add(curr.val);
+                for (Node c : curr.children)
+                    queue.offer(c);
+            }
+            ret.add(curLevel);
+        }
+
+        return ret;
+    }
 
 
 }

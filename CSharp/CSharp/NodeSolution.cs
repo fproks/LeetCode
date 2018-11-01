@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -93,6 +94,56 @@ namespace CSharp
                 if (root.val == val) return root;
                 root = root.val > val ? root.left : root.right;
             }
+        }
+
+        public TreeNode IncreasingBST(TreeNode root)
+        {
+            TreeNode result = null;
+            if (root == null) return null;
+            if (root.left != null)
+            {
+                result = IncreasingBST(root.left);
+            }
+
+            if (result != null)
+            {
+                var tmp = result;
+                while (tmp.right != null)
+                {
+                    tmp = tmp.right;
+                }
+
+                tmp.right = new TreeNode(root.val) {right = IncreasingBST(root.right)};
+            }
+            else
+            {
+                result = new TreeNode(root.val) {right = IncreasingBST(root.right)};
+            }
+
+            return result;
+        }
+
+        public IList<IList<int>> LevelOrder(Node root)
+        {
+            IList<IList<int>> result = new List<IList<int>>();
+            var queue = new Queue<KeyValuePair<Node, int>>();
+            queue.Enqueue(new KeyValuePair<Node, int>(root, 0));
+            while (queue.Count > 0)
+            {
+                var tmp = queue.Dequeue();
+                if (result.Count <= tmp.Value) result.Add(new List<int>());
+                result[tmp.Value].Add(tmp.Key.val);
+                if (tmp.Key.children != null && tmp.Key.children.Count > 0)
+                {
+                    foreach (var node in tmp.Key.children)
+                    {
+                        queue.Enqueue(new KeyValuePair<Node, int>(node,tmp.Value+1));
+                    }
+                   
+                }
+            }
+
+            return result;
         }
     }
 }
