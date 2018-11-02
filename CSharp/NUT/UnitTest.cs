@@ -49,5 +49,13 @@ namespace Tests
             Assert.True(_arraySolution.IsMonotonic(new int[]{1,2,4,5}));
             Assert.True(_arraySolution.IsMonotonic(new int[]{1,1,1}));
         }
+
+        [Test]
+        public void BackspaceCompare()
+        {
+            Assert.True(_stringSolution.BackspaceCompare("ab##","c#d#"));
+            Assert.True(_stringSolution.BackspaceCompare("a##c","#a#c"));
+            Assert.False(_stringSolution.BackspaceCompare("a#c","b"));
+        }
     }
 }

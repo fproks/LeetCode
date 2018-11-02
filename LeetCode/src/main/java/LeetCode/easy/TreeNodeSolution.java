@@ -3,7 +3,6 @@ package LeetCode.easy;
 import LeetCode.struct.Node;
 import LeetCode.struct.Solution;
 import LeetCode.struct.TreeNode;
-import javafx.util.Pair;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

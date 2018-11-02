@@ -15,6 +15,7 @@
         <e p=".gitignore" t="Include" />
         <e p="ArraySolution.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
+        <e p="ClassSolution.cs" t="Include" />
         <e p="CSharp.csproj" t="IncludeRecursive" />
         <e p="IntSolution.cs" t="Include" />
         <e p="NodeSolution.cs" t="Include" />

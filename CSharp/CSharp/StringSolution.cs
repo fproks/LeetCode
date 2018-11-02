@@ -82,6 +82,27 @@ namespace CSharp
 
             return string.Join(" ", list).Trim();
         }
+        public bool BackspaceCompare(string S, string T)
+        {
+            return getBackString(S).Equals(getBackString(T));
+        }
+
+        private string getBackString(string S)
+        {
+            Stack<char> stack =new Stack<char>();
+            foreach (var c in S)
+            {
+                if (c != '#') stack.Push(c);
+                else  if(stack.Count>0)stack.Pop();
+            }
+
+            string sre = "";
+            foreach (var c in stack)
+            {
+                sre += c;
+            }
+            return sre;
+        }
         
         
     }
