@@ -7,6 +7,7 @@ namespace Tests
     {
         private readonly IntSolution _solution = new IntSolution();
         private readonly StringSolution _stringSolution = new StringSolution();
+        private readonly ArraySolution _arraySolution = new ArraySolution();
         [SetUp]
         public void Setup()
         {
@@ -31,6 +32,22 @@ namespace Tests
         public void ToGoatLatinTest()
         {
             Assert.AreEqual("Imaa peaksmaaa oatGmaaaa atinLmaaaaa",_stringSolution.ToGoatLatin("I speak Goat Latin"));
+        }
+
+        [Test]
+        public void RotatedDigitsTest()
+        {
+            Assert.AreEqual(247,_solution.RotatedDigits(857));
+        }
+
+        [Test]
+        public void IsMonotonicTest()
+        {
+            Assert.True(_arraySolution.IsMonotonic(new int[]{1,2,3,4}));
+            Assert.True(_arraySolution.IsMonotonic(new int[]{6,5,4,4}));
+            Assert.False(_arraySolution.IsMonotonic(new int[]{1,3,2}));
+            Assert.True(_arraySolution.IsMonotonic(new int[]{1,2,4,5}));
+            Assert.True(_arraySolution.IsMonotonic(new int[]{1,1,1}));
         }
     }
 }
