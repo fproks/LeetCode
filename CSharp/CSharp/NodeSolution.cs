@@ -145,5 +145,56 @@ namespace CSharp
 
             return result;
         }
+
+        public int LongestUnivaluePath(TreeNode root)
+        {
+            int longest = 0;
+            if (root != null)
+            {
+                longest = Math.Max(LongestGavenNode(root), longest);
+                longest = Math.Max(LongestUnivaluePath(root.left), longest);
+                longest = Math.Max(LongestUnivaluePath(root.right), longest);
+            }
+
+            return longest;
+        }
+
+        private int LongestGavenNode(TreeNode root)
+        {
+            int left = 0,right =0;
+            if (root != null)
+            {
+                if (root.left != null && root.left.val == root.val)
+                {
+                    left += DeepsWithGavenNode(root.left) + 1;
+                }
+
+                if (root.right != null && root.right.val == root.val)
+                {
+                    right += DeepsWithGavenNode(root.right) + 1;
+                }
+            }
+
+            return left + right;
+        }
+
+        private int DeepsWithGavenNode(TreeNode root)
+        {
+            int left = 0,right=0;
+            if (root != null)
+            {
+                if (root.left != null && root.left.val == root.val)
+                {
+                    left = left + 1 + DeepsWithGavenNode(root.left);
+                }
+
+                if (root.right != null && root.right.val == root.val)
+                {
+                    right = right + 1 + DeepsWithGavenNode(root.right);
+                }
+
+            }
+            return Math.Max(left, right);
+        }
     }
 }

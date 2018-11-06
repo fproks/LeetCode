@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
  * @Time: Create in 11:48 2017/9/21
  */
 public class ArraysSolutionTest {
+    private static final ArraysSolution arraysolutin = new ArraysSolution();
     @Test
     public void findLHS() throws Exception {
         int[] nums = {1, 3, 2, 2, 5, 2, 3, 7};
@@ -83,6 +84,17 @@ public class ArraysSolutionTest {
         ArraysSolution solution =new ArraysSolution();
         Assert.assertEquals(21,solution.projectionArea(input));
         Assert.assertEquals(14,solution.projectionArea(inut1));
+    }
+
+    @Test
+    public void Compress() {
+        char[] s = {'a', 'a', 'b', 'b', 'c', 'c', 'c'};
+        char[] a1 = {'a', 'a', 'a', 'b', 'b', 'a', 'a'};
+        char[] a2 = {'a', 'b', 'c'};
+        Assert.assertEquals(6, arraysolutin.Compress(s));
+        Assert.assertEquals(6, arraysolutin.Compress(a1));
+        Assert.assertEquals(3, arraysolutin.Compress(a2));
+
     }
 
 }

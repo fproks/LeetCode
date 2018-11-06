@@ -36,7 +36,7 @@ public class ArraysSolution implements Solution {
     //575. Distribute Candies
     public int distributeCandies(int[] candies) {
         HashSet<Integer> set = new HashSet<>();
-        for (int c: candies) {
+        for (int c : candies) {
             set.add(c);
         }
         if (set.size() > candies.length / 2) {
@@ -87,7 +87,7 @@ public class ArraysSolution implements Solution {
         if (ops.length <= 0) return m * n;
         int a = Integer.MAX_VALUE;
         int b = Integer.MAX_VALUE;
-        for (int[] tmp: ops) {
+        for (int[] tmp : ops) {
             a = a < tmp[0] ? a : tmp[0];
             b = b < tmp[1] ? b : tmp[1];
         }
@@ -168,7 +168,7 @@ public class ArraysSolution implements Solution {
     //645. Set Mismatch
     public int[] findErrorNums(int[] nums) {
         int[] buffer = new int[nums.length];
-        for (int c: nums)
+        for (int c : nums)
             buffer[c]++;
         int[] res = new int[2];
         for (int i = 0; i < buffer.length; i++) {
@@ -256,7 +256,7 @@ public class ArraysSolution implements Solution {
         int count_2 = 0;
         int total = 0;
         for (int i = 2; i <= cost.length; i++) {
-            total = Math.min(cost[i-1] + coast_1, cost[i - 2] + count_2);
+            total = Math.min(cost[i - 1] + coast_1, cost[i - 2] + count_2);
             count_2 = coast_1;
             coast_1 = total;
         }
@@ -264,21 +264,21 @@ public class ArraysSolution implements Solution {
     }
 
     public char nextGreatestLetter(char[] letters, char target) {
-        int min =Integer.MAX_VALUE;
-        char s=letters[0];
-        int size=0;
-        for (char c:letters) {
-            if(c<=target){
-                 size =('z'-target)+(c-'a')+1;
-            }else {
-                size =c-target;
+        int min = Integer.MAX_VALUE;
+        char s = letters[0];
+        int size = 0;
+        for (char c : letters) {
+            if (c <= target) {
+                size = ('z' - target) + (c - 'a') + 1;
+            } else {
+                size = c - target;
             }
-            if(size<min){
-                s =c;
-                min=size;
+            if (size < min) {
+                s = c;
+                min = size;
             }
         }
-        return  s;
+        return s;
     }
 
 
@@ -286,115 +286,147 @@ public class ArraysSolution implements Solution {
     // 0 ^ missing num = mission num
     public int missingNumber(int[] nums) {
 
-        int res=nums.length;
+        int res = nums.length;
         for (int i = nums.length - 1; i >= 0; i--) {
-            res =res^i;
-            res=res^nums[i];
+            res = res ^ i;
+            res = res ^ nums[i];
         }
-        return  res;
+        return res;
     }
 
 
     public String longestWord(String[] words) {
         Arrays.sort(words);
-        Set<String> set =new HashSet<>();
-        String res="";
-        for (String s:words) {
-            if(s.length()==1 || set.contains(s.substring(0,s.length()-1))){
-                res=s.length()>res.length()? s:res;
+        Set<String> set = new HashSet<>();
+        String res = "";
+        for (String s : words) {
+            if (s.length() == 1 || set.contains(s.substring(0, s.length() - 1))) {
+                res = s.length() > res.length() ? s : res;
                 set.add(s);
             }
         }
-        return  res;
+        return res;
     }
 
 
     public int dominantIndex(int[] nums) {
-        int max=Integer.MIN_VALUE;
-        int sMax =Integer.MIN_VALUE;
-        int idx =-1;
+        int max = Integer.MIN_VALUE;
+        int sMax = Integer.MIN_VALUE;
+        int idx = -1;
         for (int i = 0; i < nums.length; i++) {
-            if(max<=nums[i]){
-                sMax =max;
-                idx =i;
-                max =nums[i];
-            }else if(sMax <nums[i]){
-                sMax=nums[i];
+            if (max <= nums[i]) {
+                sMax = max;
+                idx = i;
+                max = nums[i];
+            } else if (sMax < nums[i]) {
+                sMax = nums[i];
             }
         }
-        if(sMax*2 <=max)return  idx;
-        else  return  -1;
+        if (sMax * 2 <= max) return idx;
+        else return -1;
     }
 
 
     public int maxDistToClosest(int[] seats) {
-        int tmplength=0,reslength=0;
-        for (int i = 0; i <=seats.length-1; i++) {
-            if(seats[i]==0){
+        int tmplength = 0, reslength = 0;
+        for (int i = 0; i <= seats.length - 1; i++) {
+            if (seats[i] == 0) {
                 tmplength++;
-            }else{
-                if(tmplength>reslength)
-                    reslength=tmplength;
-                tmplength=0;
+            } else {
+                if (tmplength > reslength)
+                    reslength = tmplength;
+                tmplength = 0;
             }
         }
-        int  starti=0,endi=0;
-        if(seats[0]==0){
-            while (seats[starti]!=1){
+        int starti = 0, endi = 0;
+        if (seats[0] == 0) {
+            while (seats[starti] != 1) {
                 starti++;
             }
         }
-        if(seats[seats.length-1]==0){
-            endi+=tmplength;
+        if (seats[seats.length - 1] == 0) {
+            endi += tmplength;
         }
-        if(reslength%2==0) {
+        if (reslength % 2 == 0) {
             reslength = reslength / 2;
-        }else reslength =reslength/2+1;
-        return reslength> endi? Math.max(reslength,starti) :Math.max(endi,starti);
+        } else reslength = reslength / 2 + 1;
+        return reslength > endi ? Math.max(reslength, starti) : Math.max(endi, starti);
     }
 
 
     //832. Flipping an Image
     public int[][] flipAndInvertImage(int[][] A) {
-        int rowLength =A[0].length;
-        for (int i=0;i<A.length;i++){
-            for (int j =0,z=rowLength-1;j<=z;j++,z--){
-                int first =A[i][j],second =A[i][z];
-                A[i][j] =second>0? 0:1;
-                A[i][z]=first >0?0:1;
+        int rowLength = A[0].length;
+        for (int i = 0; i < A.length; i++) {
+            for (int j = 0, z = rowLength - 1; j <= z; j++, z--) {
+                int first = A[i][j], second = A[i][z];
+                A[i][j] = second > 0 ? 0 : 1;
+                A[i][z] = first > 0 ? 0 : 1;
             }
         }
-        return  A;
+        return A;
     }
 
 
     public int projectionArea(int[][] grid) {
-        int Xsum =0;
-        int Ysum=0;
-        int Zsum =0;
-        for(int i=0;i<grid.length;i++){
-            int jMax=0;
-            for(int j =0;j<grid[i].length;j++){
-                if(grid[i][j]!=0){
+        int Xsum = 0;
+        int Ysum = 0;
+        int Zsum = 0;
+        for (int i = 0; i < grid.length; i++) {
+            int jMax = 0;
+            for (int j = 0; j < grid[i].length; j++) {
+                if (grid[i][j] != 0) {
                     Xsum++;
                 }
-                if(grid[i][j] >jMax) jMax =grid[i][j];
+                if (grid[i][j] > jMax) jMax = grid[i][j];
             }
-            Ysum+=jMax;
+            Ysum += jMax;
         }
-        for (int i = 0; i <grid[0].length ; i++) {
-            int zMax =0;
-            for (int j = 0; j <grid.length ; j++) {
-                if(grid[j][i]>zMax) zMax=grid[j][i];
+        for (int i = 0; i < grid[0].length; i++) {
+            int zMax = 0;
+            for (int j = 0; j < grid.length; j++) {
+                if (grid[j][i] > zMax) zMax = grid[j][i];
             }
-            Zsum+=zMax;
+            Zsum += zMax;
         }
-        return  Xsum+Ysum+Zsum;
+        return Xsum + Ysum + Zsum;
     }
 
+    public int Compress(char[] chars) {
+        int idx = 0;
+        int count = 0;
+        char c = chars[0];
+        for (int i = 0; i <= chars.length; i++) {
+            if (i == chars.length || c != chars[i]) {
+                chars[idx++] = c;
+                if (count != 1) {
+                    char[] num = String.valueOf(count).toCharArray();
+                    for (char tmp : num) {
+                        chars[idx++] = tmp;
+                    }
+                }
+                if (i < chars.length) {
+                    count = 1;
+                    c = chars[i];
+                }
+            } else {
+                count++;
+            }
+        }
+        return idx;
+    }
 
-
-
+    //754
+    public int reachNumber(int target) {
+        target = Math.abs(target);
+        int step = 0, sum = 0;
+        while (true) {
+            step++;
+            sum += step;
+            if (sum == target) return step;
+            if (sum > target && (sum - target) % 2 == 0) return step;
+        }
+    }
 
 
 }
