@@ -3,7 +3,9 @@ package LeetCode.easy;
 import LeetCode.struct.Solution;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -240,13 +242,13 @@ public class StringSolution implements Solution {
 
 
     public int numSpecialEquivGroups(String[] A) {
-        HashSet<String> set =new HashSet<>();
-        for(var str :A){
-            if(!set.contains(str) && !set.contains(reverse(str))){
+        HashSet<String> set = new HashSet<>();
+        for (var str : A) {
+            if (!set.contains(str) && !set.contains(reverse(str))) {
                 set.add(str);
             }
         }
-        return  set.size();
+        return set.size();
     }
 
     private String reverse(String str) {
@@ -255,6 +257,17 @@ public class StringSolution implements Solution {
             sb.append(str.charAt(i));
         }
         return sb.toString();
+    }
+
+    public String mostCommonWord(String paragraph, String[] banned) {
+
+        Set<String> bannedSet = Arrays.stream(banned).collect(Collectors.toSet());
+        String chars = paragraph.toLowerCase().replaceAll("\\pP", " ").replaceAll("  ", " ");
+
+        return Arrays.stream(chars.split(" ")).
+                filter(str -> !bannedSet.contains(str)).
+                collect(Collectors.groupingBy(Function.identity(), Collectors.counting())).  //统计
+                entrySet().stream().max(Map.Entry.comparingByValue()).get().getKey();  //获取最大
     }
 
 

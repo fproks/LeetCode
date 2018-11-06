@@ -63,4 +63,10 @@ public class StringSolutionTest {
         Assert.assertEquals(3,solutions.numSpecialEquivGroups(input3));
     }
 
+    @Test
+    public void mostCommonWord() {
+        String s = "Bob hit a ball, the hit BALL flew far after it was hit.";
+        Assert.assertEquals("ball", solutions.mostCommonWord(s, new String[]{"hit"}));
+    }
+
 }
