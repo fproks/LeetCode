@@ -428,5 +428,22 @@ public class ArraysSolution implements Solution {
         }
     }
 
+    public boolean hasGroupsSizeX(int[] deck) {
+        if (deck.length % 2 != 0) return false;
+        Arrays.sort(deck);
+        int num = deck[0];
+        int count = 1;
+        for (int i = 1; i < deck.length; i++) {
+            if (deck[i] == num) count++;
+            else {
+                if (count % 2 == 1) return false;
+                count = 1;
+                num = deck[i];
+            }
+        }
+        if (count % 2 == 1) return false;
+        return true;
+    }
+
 
 }
