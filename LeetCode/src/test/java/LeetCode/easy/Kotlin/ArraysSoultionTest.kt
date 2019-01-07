@@ -18,4 +18,10 @@ class  ArraysSoultionTest{
         val arrays = arrayOf<String>("gin","zen","gig","msg")
         Assert.assertEquals(2, solution.uniqueMorseRepresentations(arrays))
     }
+
+    @Test
+    fun repeatedNTimes() {
+        val array = intArrayOf(1, 2, 3, 3)
+        Assert.assertEquals(3, solution.repeatedNTimes(array))
+    }
 }

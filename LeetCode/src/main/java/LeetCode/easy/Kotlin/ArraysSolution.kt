@@ -118,4 +118,15 @@ class ArraysSolution {
         return res
     }
 
+    fun repeatedNTimes(A: IntArray): Int {
+        val n = A.size
+        val random = Random()
+        while (true) {
+            var a = random.nextInt(n)
+            var b = random.nextInt(n)
+            while (a == b) b = random.nextInt(n)
+            if (A[a] == A[b]) return A[a]
+        }
+    }
+
 }
