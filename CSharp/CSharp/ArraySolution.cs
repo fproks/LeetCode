@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Net.Sockets;
 
-namespace CSharp{
-    public class ArraySolution{
+namespace CSharp {
+    public class ArraySolution {
         public bool IsMonotonic(int[] A) {
             if (A.Length <= 1) return true;
             bool desc = false;
@@ -68,9 +70,9 @@ namespace CSharp{
                 for (int j = 0; j < N; j++)
                     costs[i, j] = Int32.MaxValue;
             }
-            
 
-            for (int i = 0; i < times.Length/3; i++) {
+
+            for (int i = 0; i < times.Length / 3; i++) {
                 int x = times[i, 0] - 1, y = times[i, 1] - 1, value = times[i, 2];
                 costs[x, y] = Math.Min(costs[x, y], value);
             }
@@ -85,7 +87,7 @@ namespace CSharp{
                             if (costs[y, i] != Int32.MaxValue) {
                                 int v = costs[k, i];
                                 costs[k, i] = Math.Min(v, costs[k, y] + costs[y, i]);
-                                if(costs[k,i]!=v)
+                                if (costs[k, i] != v)
                                     flag = true;
                             }
                         }
@@ -101,6 +103,24 @@ namespace CSharp{
             }
 
             return count;
+        }
+    }
+
+    //933. Number of Recent Calls
+    public class RecentCounter {
+        private LinkedList<int> _arrayList;
+
+        public RecentCounter() {
+            this._arrayList = new LinkedList<int>();
+        }
+
+        public int Ping(int t) {
+            _arrayList.AddLast(t);
+            while (_arrayList.First.Value < t - 3000) {
+                _arrayList.RemoveFirst();
+            }
+
+            return _arrayList.Count;
         }
     }
 }
