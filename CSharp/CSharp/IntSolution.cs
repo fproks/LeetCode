@@ -1,15 +1,11 @@
 using System;
 
-namespace CSharp
-{
-    public class IntSolution
-    {
-        public int BinaryGap(int N)
-        {
+namespace CSharp {
+    public class IntSolution {
+        public int BinaryGap(int N) {
             var res = 0;
             for (var d = -32; N != 0; N /= 2, d++)
-                if (N % 2 == 1)
-                {
+                if (N % 2 == 1) {
                     res = Math.Max(res, d);
                     d = 0;
                 }
@@ -17,24 +13,19 @@ namespace CSharp
             return res;
         }
 
-        public int RotatedDigits(int N)
-        {
+        public int RotatedDigits(int N) {
             var count = 0;
-            for (var i = 1; i <= N; i++)
-            {
+            for (var i = 1; i <= N; i++) {
                 if (isValid(i)) count++;
             }
 
             return count;
         }
 
-        private bool isValid(int N)
-        {
+        private bool isValid(int N) {
             bool validFound = false;
-            while (N > 0)
-            {
-                switch (N % 10)
-                {
+            while (N > 0) {
+                switch (N % 10) {
                     case 2:
                     case 5:
                     case 6:
@@ -51,6 +42,23 @@ namespace CSharp
             }
 
             return validFound;
+        }
+
+
+        //509. Fibonacci Number
+        private int[] fib = new int[33];
+
+        public int Fib(int N) {
+            if (N == 0) return 0;
+            fib[1] = 1;
+            fib[2] = 1;
+            if (fib[N] == 0) {
+                for (int i = 3; i <= N; i++) {
+                    fib[i] = fib[i - 2] + fib[i - 1];
+                }
+            }
+
+            return fib[N];
         }
     }
 }
