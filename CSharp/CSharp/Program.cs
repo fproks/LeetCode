@@ -5,8 +5,11 @@ using System.Linq;
 namespace CSharp {
     class Program {
         static void Main(string[] args) {
-            IntSolution solution = new IntSolution();
-            Console.Write(solution.Fib(30));
+            StringSolution solution = new StringSolution();
+            string[] fi = new[] {"hello", "leetcode"};
+            string order = "hlabcdefgijkmnopqrstuvwxyz";
+            Console.Write(solution.IsAlienSorted(fi, order));
+
             Console.ReadKey();
         }
     }

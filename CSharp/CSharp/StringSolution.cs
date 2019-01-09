@@ -111,5 +111,57 @@ namespace CSharp {
 
             return result;
         }
+
+        public string[] ReorderLogFiles(string[] logs) {
+            Array.Sort(logs, (log1, log2) => {
+                var split1 = log1.Split(" ", 2);
+                var split2 = log2.Split(" ", 2);
+                bool isDig1 = char.IsDigit(split1[1][0]);
+                bool isDig2 = char.IsDigit(split2[1][0]);
+                if (!isDig1 && !isDig2) {
+                    return string.Compare(split1[1], split2[1], StringComparison.Ordinal);
+                }
+
+                return isDig1 ? (isDig2 ? 0 : 1) : -1;
+            });
+            return logs;
+            /*var orderedEnumerable = logs.Where(s => {
+                var tmp = s.Substring(s.IndexOf(" ", StringComparison.Ordinal));
+                return Char.IsDigit(tmp[0]);
+            }).OrderBy((s1) => s1.Substring(s1.IndexOf(" ", StringComparison.Ordinal)));
+            var number = logs.Where(s => {
+                var tmp = s.Substring(s.IndexOf(" ", StringComparison.Ordinal));
+                return Char.IsDigit(tmp[0]);
+            });
+           var list = orderedEnumerable.ToList();
+           list.AddRange(number.ToList());
+           return list.ToArray();*/
+        }
+
+        //953. Verifying an Alien Dictionary
+        public bool IsAlienSorted(string[] words, string order) {
+            Dictionary<char, int> dict = new Dictionary<char, int>();
+            for (var i = 0; i < order.Length; i++) {
+                dict[order[i]] = i;
+            }
+
+            for (int i = 0; i < words.Length - 1; i++) {
+                string str1 = words[i];
+                string str2 = words[i + 1];
+                if (!isSort(str1, str2, dict)) return false;
+            }
+
+            return true;
+        }
+
+        private bool isSort(string str1, string str2, Dictionary<char, int> dict) {
+            int len = str1.Length > str2.Length ? str2.Length : str1.Length;
+            for (int j = 0; j < len; j++) {
+                if (str1[j] == str2[j]) continue;
+                return dict[str1[j]] <= dict[str2[j]];
+            }
+
+            return str1.Length <= str2.Length;
+        }
     }
 }
