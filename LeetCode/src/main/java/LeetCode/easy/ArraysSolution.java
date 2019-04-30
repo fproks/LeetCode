@@ -445,5 +445,30 @@ public class ArraysSolution implements Solution {
         return true;
     }
 
+    public int largestPerimeter(int[] A) {
+        Arrays.sort(A);
+        for (int i = A.length - 1; i >= 2; i--) {
+            if (A[i] < A[i - 1] + A[i - 2]) {
+                return A[i] + A[i - 1] + A[i - 2];
+            }
+        }
+        return 0;
+    }
+
+    public int[] fairCandySwap(int[] A, int[] B) {
+        int result_a = 0;
+        int result_b = 0;
+        for (int x : A) result_a += x;
+        for (int x : B) result_b += x;
+        int delta = (result_a - result_b) / 2;
+        Set<Integer> SetA = new HashSet<>();
+        for (int x : A) SetA.add(x);
+        for (int x : B)
+            if (SetA.contains(x + delta))
+                return new int[]{x + delta, x};
+        return null;
+
+    }
+
 
 }

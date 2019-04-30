@@ -16,6 +16,7 @@ public class IntSoultionTest {
         Assert.assertTrue(soultion.judgeSquareSum(5));
         Assert.assertFalse(soultion.judgeSquareSum(3));
         Assert.assertTrue(soultion.judgeSquareSum(2));
+        Assert.assertEquals(soultion.bitwiseComplement(5), 2);
     }
 
 }

@@ -32,4 +32,22 @@ class NumberSolution {
     fun hasAlternatingBits(n:Int):Boolean {
         return (n +(n.shr(1))+1) and (n +(n.shr(1))) ==0
     }
+
+    fun DivisorGame(N: Int): Boolean {
+        val tmp = Array(N + 1, { false })
+        tmp[1] = false
+        for (i in 2..N) {
+            for (j in 1 until i) {
+                if (i % j == 0 && !tmp[i - j]) {
+                    tmp[i] = true
+                    break
+                }
+            }
+        }
+        return tmp[N]
+    }
+
+    fun DivisorGame2(N: Int): Boolean {
+        return N % 2 == 0
+    }
 }

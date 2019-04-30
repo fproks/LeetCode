@@ -24,4 +24,14 @@ public class IntSoultion {
     public boolean isRectangleOverlap(int[] rec1, int[] rec2) {
         return Math.max(rec1[0],rec2[0])<Math.min(rec1[2],rec2[2]) && Math.max(rec1[1],rec2[1]) <Math.min(rec1[3],rec2[3]);
     }
+
+    public int bitwiseComplement(int N) {
+        if (N == 0) return 1;
+        int tmp = 0, n = N;
+        while (n > 0) {
+            tmp = (tmp << 1) + 1;
+            n = n >> 1;
+        }
+        return tmp ^ N;
+    }
 }

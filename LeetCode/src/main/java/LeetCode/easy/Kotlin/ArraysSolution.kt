@@ -129,4 +129,24 @@ class ArraysSolution {
         }
     }
 
+    fun canThreePartsEqualSum(A: IntArray): Boolean {
+        var sum = A.sum() / 3
+        val first = sumArr(A, 0, sum)
+        if (first == -1) return false
+        val j = sumArr(A, first + 1, sum)
+        if (j == -1) return false
+        if (sumArr(A, j + 1, sum) != -1) return true
+        return false
+    }
+
+    fun sumArr(A: IntArray, first: Int, result: Int): Int {
+        var sum = 0
+        if (first >= A.size) return -1;
+        for (idx in first until A.size) {
+            sum += A[idx]
+            if (sum == result) return idx
+        }
+        return -1
+    }
+
 }

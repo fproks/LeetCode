@@ -243,7 +243,7 @@ public class StringSolution implements Solution {
 
     public int numSpecialEquivGroups(String[] A) {
         HashSet<String> set = new HashSet<>();
-        for (var str : A) {
+        for (String str : A) {
             if (!set.contains(str) && !set.contains(reverse(str))) {
                 set.add(str);
             }

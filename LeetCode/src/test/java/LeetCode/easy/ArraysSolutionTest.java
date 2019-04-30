@@ -3,6 +3,13 @@ package LeetCode.easy;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import static org.junit.Assert.*;
 
 /**
@@ -94,7 +101,30 @@ public class ArraysSolutionTest {
         Assert.assertEquals(6, arraysolutin.Compress(s));
         Assert.assertEquals(6, arraysolutin.Compress(a1));
         Assert.assertEquals(3, arraysolutin.Compress(a2));
+    }
 
+    @Test
+    public void largestPerimeter() {
+        int[] a = {2, 1, 2};
+        Assert.assertEquals(5, arraysolutin.largestPerimeter(a));
+        Assert.assertEquals(0, arraysolutin.largestPerimeter(new int[]{1, 2, 1}));
+        Assert.assertEquals(10, arraysolutin.largestPerimeter(new int[]{3, 2, 3, 4}));
+    }
+
+    @Test
+    public void fairCandySwap() {
+        Assert.assertArrayEquals(new int[]{1, 2}, arraysolutin.fairCandySwap(new int[]{1, 1}, new int[]{2, 2}));
+        Assert.assertArrayEquals(new int[]{1, 2}, arraysolutin.fairCandySwap(new int[]{1, 2}, new int[]{2, 3}));
+        Assert.assertArrayEquals(new int[]{2, 3}, arraysolutin.fairCandySwap(new int[]{2}, new int[]{1, 3}));
+        Assert.assertArrayEquals(new int[]{5, 4}, arraysolutin.fairCandySwap(new int[]{1, 2, 5}, new int[]{2, 4}));
+    }
+
+    @Test
+    public void flatMap() {
+        String[] str1 = new String[]{"test1", "test2", "test3"};
+        String[] str2 = new String[]{"test3", "test4", "test5"};
+        Set<String> set = Stream.of(str1, str2).flatMap(u -> Arrays.stream(u)).collect(Collectors.toSet());
+        set.forEach(System.out::println);
     }
 
 }

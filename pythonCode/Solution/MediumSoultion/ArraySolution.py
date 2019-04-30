@@ -1,4 +1,15 @@
 # coding=utf-8
+from typing import List
+
+
+class Node:
+    def __init__(self, val, isLeaf, topLeft, topRight, bottomLeft, bottomRight):
+        self.val = val
+        self.isLeaf = isLeaf
+        self.topLeft = topLeft
+        self.topRight = topRight
+        self.bottomLeft = bottomLeft
+        self.bottomRight = bottomRight
 
 
 class ArraySolution(object):
@@ -104,3 +115,45 @@ class ArraySolution(object):
 
     def smallestRangeI(self, A, K):
         return max(0, max(A) - min(A) - K * 2)
+
+    def _allSame(self, grid: List[List[int]]) -> bool:
+        hasTrue = False
+        hasFalse = False
+        for i in range(len(grid)):
+            if 1 in grid[i]:
+                hasTrue = True
+            if 0 in grid[i]:
+                hasFalse = True
+            if hasTrue & hasFalse:
+                return False
+        return True
+
+    def construct(self, grid: List[List[int]]) -> Node:
+        if len(grid) == 1:
+            return Node(grid[0][0], True, None, None, None, None)
+        if self._allSame(grid):
+            return Node(grid[0][0], True, None, None, None, None)
+        else:
+            node = Node('*', False, None, None, None, None)
+            mid = len(grid) // 2
+            node.topLeft = self.construct([x[0:mid] for x in grid[0:mid]])
+            node.topRight = self.construct([x[mid:] for x in grid[0:mid]])
+            node.bottomLeft = self.construct([x[0:mid] for x in grid[mid:]])
+            node.bottomRight = self.construct([x[mid:] for x in grid[mid:]])
+            return node
+
+    def surfaceArea(self, grid: List[List[int]]) -> int:
+        result = 0
+        for i in range(len(grid)):
+            for j in range(len(grid)):
+                if grid[i][j] != 0:
+                    result += grid[i][j] * 4 + 2
+                    if i != 0:
+                        result -= min(grid[i - 1][j], grid[i][j])
+                    if i < len(grid) - 1:
+                        result -= min(grid[i][j], grid[i + 1][j])
+                    if j != 0:
+                        result -= min(grid[i][j - 1], grid[i][j])
+                    if j < len(grid) - 1:
+                        result -= min(grid[i][j], grid[i][j + 1])
+        return result

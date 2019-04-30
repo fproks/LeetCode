@@ -31,6 +31,14 @@ class ArraySolutionTest(TestCase):
         for i in p:
             print(i)
 
+    def test_surfaceArea(self):
+        sole = ArraySolution()
+        self.assertEqual(10, sole.surfaceArea([[2]]))
+        self.assertEqual(34, sole.surfaceArea([[1, 2], [3, 4]]))
+        self.assertEqual(16, sole.surfaceArea([[1, 0], [0, 2]]))
+        self.assertEqual(32, sole.surfaceArea([[1, 1, 1], [1, 0, 1], [1, 1, 1]]))
+        self.assertEqual(46, sole.surfaceArea([[2, 2, 2], [2, 1, 2], [2, 2, 2]]))
+
 
 if __name__ == '__main__':
     ArraySolutionTest.main()
