@@ -1,6 +1,7 @@
 package LeetCode.easy;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 import LeetCode.struct.Solution;
 
@@ -470,5 +471,174 @@ public class ArraysSolution implements Solution {
 
     }
 
+    public int[] sumEvenAfterQueries(int[] A, int[][] queries) {
+        int[] result = new int[queries.length];
+        int sumD = 0;
+        for (int a : A) {
+            if (a % 2 == 0) sumD += a;
+        }
+        for (int i = 0; i < queries.length; i++) {
+            int[] q = queries[i];
+            int tmp = A[q[1]];
+            A[q[1]] += q[0];
+            if (tmp % 2 == 0) {
+                if (A[q[1]] % 2 != 0) sumD -= tmp;
+                else sumD += q[0];
+            } else {
+                if (A[q[1]] % 2 == 0) sumD += A[q[1]];
+            }
+            result[i] = sumD;
+        }
+        return result;
+    }
+
+    public int[] sortedSquares(int[] A) {
+        for (int i = 0; i < A.length; ++i) {
+            A[i] = A[i] * A[i];
+        }
+        Arrays.sort(A);
+        return A;
+    }
+
+    public int numRookCaptures(char[][] board) {
+        int i = 0, j = 0;
+        for (int k = 0; k < 8; k++) {
+            for (int l = 0; l < 8; l++) {
+                if (board[k][l] == 'R') {
+                    i = k;
+                    j = l;
+                }
+            }
+        }
+        int t = i;
+        int count = 0;
+        while (t >= 0) {
+            if (board[t][j] == 'p') {
+                count++;
+                break;
+            }
+            if (board[t][j] == 'B') {
+                break;
+            }
+            t--;
+        }
+        t = i;
+        while (t < 8) {
+            if (board[t][j] == 'p') {
+                count++;
+                break;
+            }
+            if (board[t][j] == 'B') {
+                break;
+            }
+            t++;
+        }
+        t = j;
+        while (t < 8) {
+            if (board[i][t] == 'p') {
+                count++;
+                break;
+            }
+            if (board[i][t] == 'B') {
+                break;
+            }
+            t++;
+        }
+        t = j;
+        while (t >= 0) {
+            if (board[i][t] == 'p') {
+                count++;
+                break;
+            }
+            if (board[i][t] == 'B') {
+                break;
+            }
+            t--;
+        }
+        return count;
+
+    }
+
+    //1030. Matrix Cells in Distance Order
+    //给定数组的大小和起始位置，根据数组中各个位置的曼哈顿距离对位置进行排序
+    public int[][] allCellsDistOrder(int R, int C, int r0, int c0) {
+        boolean[][] cell = new boolean[R][C];
+        int[][] result = new int[R * C][2];
+        Queue<int[]> queue = new LinkedList<>();
+        queue.add(new int[]{r0, c0});
+        int idx = 0;
+        while (!queue.isEmpty()) {
+            int[] tmp = queue.poll();
+            if (cell[tmp[0]][tmp[1]]) continue;
+            result[idx++] = tmp;
+            cell[tmp[0]][tmp[1]] = true;
+            if (tmp[0] + 1 < R && !cell[tmp[0] + 1][tmp[1]]) queue.offer(new int[]{tmp[0] + 1, tmp[1]});
+            if (tmp[0] - 1 >= 0 && !cell[tmp[0] - 1][tmp[1]]) queue.offer(new int[]{tmp[0] - 1, tmp[1]});
+            if (tmp[1] + 1 < C && !cell[tmp[0]][tmp[1] + 1]) queue.offer(new int[]{tmp[0], tmp[1] + 1});
+            if (tmp[1] - 1 >= 0 && !cell[tmp[0]][tmp[1] - 1]) queue.offer(new int[]{tmp[0], tmp[1] - 1});
+
+        }
+        return result;
+    }
+
+    public List<String> commonChars(String[] A) {
+        int[] value = new int[26];
+        for (char c : A[0].toCharArray()) {
+            value[c - 'a']++;
+        }
+        int[] tmp = new int[26];
+        for (int i = 1; i < A.length; i++) {
+            Arrays.fill(tmp, 0);
+            for (char c : A[i].toCharArray()) {
+                tmp[c - 'a']++;
+            }
+            for (int j = 0; j < 26; j++) {
+                value[j] = value[j] <= tmp[j] ? value[j] : tmp[j];
+            }
+        }
+        ArrayList<String> list = new ArrayList<>();
+        for (int i = 0; i < 26; i++) {
+            while (value[i] != 0) {
+                list.add(Character.toString((char) ('a' + i)));
+                value[i]--;
+            }
+        }
+        return list;
+    }
+
+    public int findJudge(int N, int[][] trust) {
+        if (trust.length < N - 1) return -1;
+        HashSet<Integer> set = new HashSet<>();
+        int[] p = new int[N];
+        for (int[] c : trust) {
+            set.add(c[0]);
+            p[c[1] - 1]++;
+        }
+        for (int i = 0; i < N; i++) {
+            if (p[i] == N - 1 && !set.contains(i + 1)) return i + 1;
+        }
+        return -1;
+    }
+
+    //1029. Two City Scheduling
+    //动态规划， 假如取 5个a,那么它应该等于上一次取4个a 加本次取一个a 和 上次取5个a，本次取一个b的最小值
+    public int twoCitySchedCost(int[][] costs) {
+        int N = costs.length + 1;
+        int[][] dp = new int[costs.length + 1][costs.length + 1];
+        dp[0][0] = 0;
+        dp[1][0] = costs[0][0];
+        dp[1][1] = costs[0][1];
+
+        for (int i = 2; i < N; i++) {
+            for (int j = 0; j <= i; j++) {
+                if (j == 0) dp[i][j] = dp[i - 1][j] + costs[i - 1][0];
+                else if (j == i) dp[i][j] = dp[i - 1][j - 1] + costs[i - 1][1];
+                else
+                    dp[i][j] = Math.min(dp[i - 1][j - 1] + costs[i - 1][1], dp[i - 1][j] + costs[i - 1][0]);
+            }
+        }
+
+        return dp[N - 1][(N - 1) / 2];
+    }
 
 }

@@ -270,5 +270,25 @@ public class StringSolution implements Solution {
                 entrySet().stream().max(Map.Entry.comparingByValue()).get().getKey();  //获取最大
     }
 
+    public String removeOuterParentheses(String S) {
+        StringBuilder builder = new StringBuilder();
+        int idx = 0;
+        for (int i = 0; i < S.length(); i++) {
+            if (S.charAt(i) == '(') {
+                if (idx != 0) builder.append('(');
+                idx++;
+            }
+            if (S.charAt(i) == ')') {
+                idx--;
+                if (idx != 0) builder.append(')');
+            }
+        }
+        return builder.toString();
+
+
+    }
+
 
 }
+
+

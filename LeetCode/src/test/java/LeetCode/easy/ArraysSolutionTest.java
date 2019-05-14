@@ -3,10 +3,7 @@ package LeetCode.easy;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -18,6 +15,7 @@ import static org.junit.Assert.*;
  */
 public class ArraysSolutionTest {
     private static final ArraysSolution arraysolutin = new ArraysSolution();
+
     @Test
     public void findLHS() throws Exception {
         int[] nums = {1, 3, 2, 2, 5, 2, 3, 7};
@@ -86,11 +84,11 @@ public class ArraysSolutionTest {
 
     @Test
     public void projectionArea() {
-        int[][] input ={{2,2,2},{2,1,2},{2,2,2}};
-         int[][] inut1={{1,1,1},{1,0,1},{1,1,1}};
-        ArraysSolution solution =new ArraysSolution();
-        Assert.assertEquals(21,solution.projectionArea(input));
-        Assert.assertEquals(14,solution.projectionArea(inut1));
+        int[][] input = {{2, 2, 2}, {2, 1, 2}, {2, 2, 2}};
+        int[][] inut1 = {{1, 1, 1}, {1, 0, 1}, {1, 1, 1}};
+        ArraysSolution solution = new ArraysSolution();
+        Assert.assertEquals(21, solution.projectionArea(input));
+        Assert.assertEquals(14, solution.projectionArea(inut1));
     }
 
     @Test
@@ -125,6 +123,55 @@ public class ArraysSolutionTest {
         String[] str2 = new String[]{"test3", "test4", "test5"};
         Set<String> set = Stream.of(str1, str2).flatMap(u -> Arrays.stream(u)).collect(Collectors.toSet());
         set.forEach(System.out::println);
+    }
+
+    @Test
+    public void sumEvenAfterQueries() {
+        int[] a = {1, 2, 3, 4};
+        int[][] q = {{1, 0}, {-3, 1}, {-4, 0}, {2, 3}};
+        int[] res = arraysolutin.sumEvenAfterQueries(a, q);
+        System.out.println(Arrays.toString(res));
+        Assert.assertArrayEquals(new int[]{8, 6, 2, 4}, res);
+    }
+
+    @Test
+    public void sortedSquares() {
+        int[] a = {-4, -1, 0, 3, 10};
+        int[] res = {0, 1, 9, 16, 100};
+        Assert.assertArrayEquals(new int[]{0, 1, 9, 16, 100}, arraysolutin.sortedSquares(a));
+    }
+
+    @Test
+    public void allCellsDistOrder() {
+        Arrays.stream(arraysolutin.allCellsDistOrder(2, 3, 1, 2)).forEach(val -> {
+            System.out.println(Arrays.toString(val));
+        });
+    }
+
+    @Test
+    public void commonChars() {
+        String[] a = {"cool", "lock", "cook"};
+        List<String> b = arraysolutin.commonChars(a);
+        System.out.println(b.size());
+        for (String s : b) {
+            System.out.println(s);
+        }
+    }
+
+    @Test
+    public void findJudge() {
+        int[][] trust = {{1, 3}, {2, 3}};
+        Assert.assertEquals(3, arraysolutin.findJudge(3, trust));
+        Assert.assertEquals(-1, arraysolutin.findJudge(3, new int[][]{{1, 3}, {2, 3}, {3, 1}}));
+        Assert.assertEquals(-1, arraysolutin.findJudge(3, new int[][]{{1, 2}, {2, 3}}));
+        Assert.assertEquals(3, arraysolutin.findJudge(4, new int[][]{{1, 3}, {1, 4}, {2, 3}, {2, 4}, {4, 3}}));
+    }
+
+    @Test
+    public void twoCitySchedCost() {
+        int[][] a = {{10, 20}, {30, 200}, {400, 50}, {30, 20}};
+        int[][] b = {{259, 770}, {448, 54}, {926, 667}, {184, 139}, {840, 118}, {577, 469}};
+        Assert.assertEquals(110, arraysolutin.twoCitySchedCost(a));
     }
 
 }

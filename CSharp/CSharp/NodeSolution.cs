@@ -167,5 +167,28 @@ namespace CSharp {
                 return IsUnivalTree(root.left) && IsUnivalTree(root.right);
             }
         }
+
+        public int RangeSumBST(TreeNode root, int L, int R)
+        {
+            int sum = 0;
+            RangeSumBST(ref sum, root, L, R);
+            return sum;
+        }
+        
+        
+        private void RangeSumBST(ref int sum, TreeNode root, int L, int R)
+        {
+            if (root == null) return;
+            if (root.val <= R && root.val >= L)
+            {
+                sum += root.val;
+            }
+            if (root != null)
+            {
+                RangeSumBST(ref sum, root.left, L, R);
+                RangeSumBST(ref sum, root.right, L, R);
+            }
+           
+        }
     }
 }

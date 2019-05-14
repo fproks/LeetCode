@@ -69,4 +69,15 @@ public class StringSolutionTest {
         Assert.assertEquals("ball", solutions.mostCommonWord(s, new String[]{"hit"}));
     }
 
+    @Test
+    public void removeOuterParentheses() {
+        String input = "(()())(())";
+        String output = "()()()";
+        String input2 = "(()())(())(()(()))";
+        Assert.assertEquals(output, solutions.removeOuterParentheses(input));
+        Assert.assertEquals("()()()()(())", solutions.removeOuterParentheses(input2));
+        Assert.assertEquals("", solutions.removeOuterParentheses("()()"));
+
+    }
+
 }
