@@ -3,8 +3,9 @@
 #include "ArraySolutionTest.cpp"
 int main() {
     std::cout << "Hello, World!" << std::endl;
-    searchTest();
-    gardenNoAdjTest();
+    //searchTest();
+    // gardenNoAdjTest();
+    orangesRottingTest();
 
     return 0;
 }

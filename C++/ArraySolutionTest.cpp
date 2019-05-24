@@ -24,3 +24,16 @@ void gardenNoAdjTest(){
     }
     std::cout<<std::endl;
 }
+
+void orangesRottingTest() {
+    vector<vector<int>> a({{2, 1, 1},
+                           {1, 1, 0},
+                           {0, 1, 1}});
+    vector<vector<int>> b({{2, 1, 1},
+                           {0, 1, 1},
+                           {1, 0, 1}});
+    vector<vector<int>> c({{0, 2}});
+    assert(arraySolution->orangesRotting(a) == 4);
+    assert(arraySolution->orangesRotting(b) == -1);
+    assert(arraySolution->orangesRotting(c) == 0);
+}

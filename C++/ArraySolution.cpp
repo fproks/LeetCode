@@ -4,6 +4,7 @@
 
 #include "ArraySolution.h"
 #include <algorithm>
+#include <queue>
 
 
 int ArraySolution::largestSumAfterKNegations(vector<int> &A, int K) {
@@ -101,18 +102,18 @@ vector<int> ArraySolution::gardenNoAdj(int N, vector<vector<int>> &paths) {
     int i = 2;
     while (i <= N) {
         bool first = true, second = true, third = true, forth = true;
-        auto idx =array[i];
-        for(auto j : idx){
-            if(result.size()>=j){
-                switch (result[j-1]){
+        auto idx = array[i];
+        for (auto j : idx) {
+            if (result.size() >= j) {
+                switch (result[j - 1]) {
                     case 1:
-                        first= false;
+                        first = false;
                         break;
                     case 2:
-                        second= false;
+                        second = false;
                         break;
                     case 3:
-                        third= false;
+                        third = false;
                         break;
                     case 4:
                         forth = false;
@@ -121,26 +122,75 @@ vector<int> ArraySolution::gardenNoAdj(int N, vector<vector<int>> &paths) {
             }
         }
         i++;
-        if(first){
+        if (first) {
             result.push_back(1);
             continue;
         }
-        if(second){
+        if (second) {
             result.push_back(2);
             continue;
         }
-        if(third){
+        if (third) {
             result.push_back(3);
             continue;
         }
-        if(forth){
+        if (forth) {
             result.push_back(4);
         }
     }
-    return  result;
+    return result;
 }
 
 
 int ArraySolution::test(vector<int> &bit) {
     return bit[0];
+}
+
+int ArraySolution::orangesRotting(vector<vector<int>> &grid) {
+
+    int firstsum, lastsum = 0;
+    int idx = 0;
+    queue<vector<int>> tmp;
+    for (auto i = 0; i < grid.size(); i++) {
+        for (auto j = 0; j < grid[i].size(); j++) {
+            if (grid[i][j] == 1) firstsum++;
+            if (grid[i][j] == 2) tmp.push(vector<int>({i, j}));
+        }
+    }
+    if (firstsum == 0)return 0;
+    lastsum = firstsum;
+    do {
+        firstsum = lastsum;
+        idx++;
+        auto size = tmp.size();
+        while (size > 0) {
+            auto idx = tmp.front();
+            auto i = idx[0], j = idx[1];
+            if (i - 1 >= 0 && grid[i - 1][j] == 1) {
+                grid[i - 1][j] = 2;
+                tmp.push(vector<int>({i - 1, j}));
+                lastsum--;
+            }
+            if (i + 1 < grid.size() && grid[i + 1][j] == 1) {
+                grid[i + 1][j] = 2;
+                tmp.push(vector<int>({i + 1, j}));
+                lastsum--;
+            }
+            if (j - 1 >= 0 && grid[i][j - 1] == 1) {
+                grid[i][j - 1] = 2;
+                tmp.push(vector<int>({i, j - 1}));
+                lastsum--;
+            }
+            if (j + 1 < grid[i].size() && grid[i][j + 1] == 1) {
+                grid[i][j + 1] = 2;
+                tmp.push(vector<int>({i, j + 1}));
+                lastsum--;
+            }
+            size--;
+            tmp.pop();
+        }
+    } while (lastsum != 0 && lastsum != firstsum);
+    if (lastsum > 0)return -1;
+    return idx;
+
 }

@@ -17,6 +17,8 @@ public:
     vector<vector<int>> largeGroupPositions(string S);
     int search(vector<int>& nums, int target);
     vector<int> gardenNoAdj(int N, vector<vector<int>>& paths);
+
+    int orangesRotting(vector<vector<int>> &grid);
     int test(vector<int>& bit);
 
 };
