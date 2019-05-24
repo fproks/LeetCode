@@ -5,6 +5,10 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,26 +45,28 @@ public class StringSolutionTest {
     @Test
     public void letterCasePermutation() {
         String a = "a1b2";
-        List<String> rmp =solutions.letterCasePermutation(a);
+        List<String> rmp = solutions.letterCasePermutation(a);
         Assert.assertEquals(4, rmp.size());
-        rmp.forEach(it->{System.out.println(it);});
+        rmp.forEach(it -> {
+            System.out.println(it);
+        });
 
     }
 
     @Test
-    public  void NumUniqueEmails(){
-        String[] emails ={"test.email+alex@leetcode.com","test.e.mail+bob.cathy@leetcode.com","testemail+david@lee.tcode.com"};
-        Assert.assertEquals(2,solutions.NumUniqueEmails(emails));
+    public void NumUniqueEmails() {
+        String[] emails = {"test.email+alex@leetcode.com", "test.e.mail+bob.cathy@leetcode.com", "testemail+david@lee.tcode.com"};
+        Assert.assertEquals(2, solutions.NumUniqueEmails(emails));
     }
 
     @Test
-    public  void  numSpecialEquivGroups(){
-        String[] input3 ={"abc","acb","bac","bca","cab","cba"};
-        String[] input1={"a","b","c","a","c","c"};
-        String[] input2 ={"aa","bb","ab","ba"};
-        Assert.assertEquals(4,solutions.numSpecialEquivGroups(input2));
-        Assert.assertEquals(3,solutions.numSpecialEquivGroups(input1));
-        Assert.assertEquals(3,solutions.numSpecialEquivGroups(input3));
+    public void numSpecialEquivGroups() {
+        String[] input3 = {"abc", "acb", "bac", "bca", "cab", "cba"};
+        String[] input1 = {"a", "b", "c", "a", "c", "c"};
+        String[] input2 = {"aa", "bb", "ab", "ba"};
+        Assert.assertEquals(4, solutions.numSpecialEquivGroups(input2));
+        Assert.assertEquals(3, solutions.numSpecialEquivGroups(input1));
+        Assert.assertEquals(3, solutions.numSpecialEquivGroups(input3));
     }
 
     @Test

@@ -97,4 +97,30 @@ public class TreeNodeSolutionTest {
         // Assert.assertEquals(11,treeNodeSolution.filt(root));
     }
 
+
+
+    @Test
+    public void sumRootToLeaf(){
+        TreeNodeSolution treeNodeSolution = new TreeNodeSolution();
+        TreeNode root =new TreeNode(1);
+        root.left=new TreeNode(0);
+        root.right =new TreeNode(1);
+        root.left.left =new TreeNode(0);
+        root.left.right =new TreeNode(1);
+        root.right.left =new TreeNode(0);
+        root.right.right=new TreeNode(1);
+        Assert.assertEquals(treeNodeSolution.sumRootToLeaf(root),22);
+    }
+
+    @Test
+    public  void  minDiffInBST(){
+        TreeNodeSolution treeNodeSolution = new TreeNodeSolution();
+        TreeNode root =new TreeNode(4);
+        root.left =new TreeNode(2);
+        root.right =new TreeNode(6);
+        root.left.left =new TreeNode(1);
+        root.left.right =new TreeNode(3);
+        System.out.println(treeNodeSolution.minDiffInBST(root));
+    }
+
 }

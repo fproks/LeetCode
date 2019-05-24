@@ -1,0 +1,10 @@
+{
+  "name": "NodejsCode",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "cross-env NODE_ENV=LOCAL mocha test --exit --timeout=10000"
+  },
+  "dependencies": {
+    "mocha": "^6.1.4"
+  }
+}

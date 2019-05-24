@@ -104,6 +104,23 @@ namespace CSharp {
 
             return count;
         }
+        
+        
+        public bool IsOneBitCharacter(int[] bits) {
+            var flag = false;
+            var i = 0;
+            while (i<bits.Length) {
+                if (bits[i] == 1) {
+                    flag = false;
+                    i += 2;
+                }
+                else {
+                    flag = true;
+                    i++;
+                }
+            }
+            return flag;
+        }
     }
 
     //933. Number of Recent Calls
@@ -123,4 +140,5 @@ namespace CSharp {
             return _arrayList.Count;
         }
     }
+    
 }

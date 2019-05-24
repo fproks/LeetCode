@@ -641,4 +641,38 @@ public class ArraysSolution implements Solution {
         return dp[N - 1][(N - 1) / 2];
     }
 
+    public boolean lemonadeChange(int[] bills) {
+        int buil5 = 0;
+        int buil10 = 0;
+        for (int bill : bills) {
+            if (bill == 5) buil5++;
+            if (bill == 10)
+                if (buil5 > 0) {
+                    buil5--;
+                    buil10++;
+                } else return false;
+            if(bill==20){
+                if(buil10>0 ){
+                    if(buil5>0) {
+                        buil10--;
+                        buil5--;
+                    }else  return  false;
+                }else if((buil5-=3) <0) return  false;
+            }
+        }
+        return  true;
+    }
+    public int largestSumAfterKNegations(int[] A, int K) {
+        Arrays.sort(A);
+        int tracker =0; int sum =0;
+        for (int i = 0; i <K ; i++) {
+            A[tracker] =-A[tracker];
+            if(tracker<(A.length-1) && A[tracker]>A[tracker+1])
+                tracker++;
+        }
+        for (int a :A) sum+=a;
+        return  sum;
+    }
+
+
 }

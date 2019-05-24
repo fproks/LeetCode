@@ -19,5 +19,16 @@ namespace UT {
             Assert.Equal(3, counter.Ping(3001));
             Assert.Equal(3, counter.Ping(3002));
         }
+
+        [Fact]
+        public void IsCousinsTest()
+        {
+            TreeNode tree = new TreeNode(1);
+            tree.left = new TreeNode(2);
+            tree.left.right = new TreeNode(4);
+            tree.right = new TreeNode(3);
+            tree.right.right = new TreeNode(5);
+            Assert.True(new isCousinsSolution().IsCousins(tree, 4, 5));
+        }
     }
 }

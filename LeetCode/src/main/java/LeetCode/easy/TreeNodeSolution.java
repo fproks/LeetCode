@@ -4,10 +4,9 @@ import LeetCode.struct.Node;
 import LeetCode.struct.Solution;
 import LeetCode.struct.TreeNode;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.sql.SQLOutput;
+import java.util.*;
+import java.util.function.ToIntFunction;
 
 /**
  * @user: linhos
@@ -271,6 +270,45 @@ public class TreeNodeSolution implements Solution {
         }
 
         return ret;
+    }
+
+
+    public int sumRootToLeaf(TreeNode root) {
+        ArrayList<Integer> list = new ArrayList<>();
+        sumRootToLeaf(root, list, 0);
+        list.stream().forEach(System.out::print);
+        return list.stream().mapToInt(Integer::intValue).sum();
+    }
+
+    public void sumRootToLeaf(TreeNode treeNode, ArrayList<Integer> sum, int binary) {
+        if (treeNode == null) return;
+        if (treeNode.right == null && treeNode.left == null) {
+            binary = (binary << 1) + treeNode.val;
+            sum.add(binary);
+            return;
+        }
+        binary = (binary << 1) + treeNode.val;
+        sumRootToLeaf(treeNode.left, sum, binary);
+        sumRootToLeaf(treeNode.right, sum, binary);
+    }
+
+    public int minDiffInBST(TreeNode root) {
+        ArrayList<Integer> list =new ArrayList<>();
+        deepsearch(root,list);
+        int min =Integer.MAX_VALUE;
+        for (int i = 0; i <list.size()-1 ; i++) {
+            min =Math.min(min,list.get(i+1)-list.get(i));
+        }
+        list.stream().forEach(System.out::print);
+        return  min;
+    }
+
+
+    public void deepsearch(TreeNode root, List<Integer> list) {
+      if(root.left!=null)deepsearch(root.left,list);
+      list.add(root.val);
+      if(root.right!=null) deepsearch(root.right,list);
+
     }
 
 

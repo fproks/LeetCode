@@ -174,4 +174,13 @@ public class ArraysSolutionTest {
         Assert.assertEquals(110, arraysolutin.twoCitySchedCost(a));
     }
 
+    @Test
+    public  void  lemonadeChange(){
+        Assert.assertTrue(arraysolutin.lemonadeChange(new int[]{5,5,5,10,20}));
+        Assert.assertTrue(arraysolutin.lemonadeChange(new int[]{5,5,10}));
+        Assert.assertFalse(arraysolutin.lemonadeChange(new int[]{10,10}));
+        Assert.assertFalse(arraysolutin.lemonadeChange(new int[]{5,5,10,10,20}));
+
+    }
+
 }
