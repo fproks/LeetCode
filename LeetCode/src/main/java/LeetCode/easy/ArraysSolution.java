@@ -651,27 +651,135 @@ public class ArraysSolution implements Solution {
                     buil5--;
                     buil10++;
                 } else return false;
-            if(bill==20){
-                if(buil10>0 ){
-                    if(buil5>0) {
+            if (bill == 20) {
+                if (buil10 > 0) {
+                    if (buil5 > 0) {
                         buil10--;
                         buil5--;
-                    }else  return  false;
-                }else if((buil5-=3) <0) return  false;
+                    } else return false;
+                } else if ((buil5 -= 3) < 0) return false;
             }
         }
-        return  true;
+        return true;
     }
+
     public int largestSumAfterKNegations(int[] A, int K) {
         Arrays.sort(A);
-        int tracker =0; int sum =0;
-        for (int i = 0; i <K ; i++) {
-            A[tracker] =-A[tracker];
-            if(tracker<(A.length-1) && A[tracker]>A[tracker+1])
+        int tracker = 0;
+        int sum = 0;
+        for (int i = 0; i < K; i++) {
+            A[tracker] = -A[tracker];
+            if (tracker < (A.length - 1) && A[tracker] > A[tracker + 1])
                 tracker++;
         }
-        for (int a :A) sum+=a;
-        return  sum;
+        for (int a : A) sum += a;
+        return sum;
+    }
+
+    public List<Integer> addToArrayForm(int[] A, int K) {
+        List<Integer> result = new LinkedList<>();
+        int jin = 0;
+        int idx = A.length - 1;
+        while (K > 0 || jin > 0 || idx >= 0) {
+            int sum = 0;
+            if (idx >= 0) sum += A[idx--];
+            if (K > 0) {
+                sum += K % 10;
+                K = K / 10;
+            }
+            sum += jin;
+            result.add(0, sum % 10);
+            jin = sum / 10;
+
+        }
+
+        return result;
+    }
+
+    public int heightChecker(int[] heights) {
+        int[] tmp = Arrays.copyOf(heights, heights.length);
+        Arrays.sort(tmp);
+        int count = 0;
+        for (int i = 0; i < heights.length; i++) {
+            if (heights[i] != tmp[i]) count++;
+        }
+        return count;
+    }
+
+    private int findNextNumber(int x, ArrayList<Integer> map, boolean dirs) {
+        if (dirs) {
+            for (int i : map) {
+                if (i > x) return i;
+            }
+            return Integer.MAX_VALUE;
+        } else {
+            int j = Integer.MIN_VALUE;
+            for (int i : map) {
+                if (i > j && i < x) j = i;
+                else break;
+            }
+            return j;
+        }
+    }
+
+    public int robotSim(int[] commands, int[][] obstacles) {
+        int x = 0, y = 0;
+        int[][] dirs = new int[][]{{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        int dir = 0;
+        int maxDistance = 0;
+        HashMap<Integer, ArrayList<Integer>> xmap = new HashMap<>();
+        HashMap<Integer, ArrayList<Integer>> ymap = new HashMap<>();
+        for (int[] pos : obstacles) {
+            if (!xmap.containsKey(pos[0])) {
+                ArrayList<Integer> arrayList = new ArrayList<>();
+                arrayList.add(pos[1]);
+                xmap.put(pos[0], arrayList);
+            } else {
+                xmap.get(pos[0]).add(pos[1]);
+            }
+            if (!ymap.containsKey(pos[1])) {
+                ArrayList<Integer> arrayList = new ArrayList<>();
+                arrayList.add(pos[0]);
+                ymap.put(pos[1], arrayList);
+            } else {
+                ymap.get(pos[1]).add(pos[0]);
+            }
+        }
+        xmap.values().forEach(list -> list.sort(Integer::compareTo));
+        ymap.values().forEach(list -> list.sort(Integer::compareTo));
+        for (int i : commands) {
+            if (i == -1) dir = (dir + 1) % 4;
+            else if (i == -2) dir = (dir + 4 - 1) % 4;
+            else {
+                int[] ops = dirs[dir];
+                if (ops[0] == -1) {
+                    if (ymap.containsKey(y)) {
+                        int next = findNextNumber(x, ymap.get(y), false);
+                        x = x - i > next + 1 ? x - i : next + 1;
+                    } else x = x - i;
+                }
+                if (ops[0] == 1) {
+                    if (ymap.containsKey(y)) {
+                        int next = findNextNumber(x, ymap.get(y), true);
+                        x = x + i > next - 1 ? next - 1 : x + i;
+                    } else x = x + i;
+                }
+                if (ops[1] == -1) {
+                    if (xmap.containsKey(x)) {
+                        int next = findNextNumber(y, xmap.get(x), false);
+                        y = y - i > next + 1 ? y - i : next + 1;
+                    } else y = y - i;
+                }
+                if (ops[1] == 1) {
+                    if (xmap.containsKey(x)) {
+                        int next = findNextNumber(y, xmap.get(x), true);
+                        y = y + i > next - 1 ? next - 1 : y + i;
+                    } else y = y + i;
+                }
+                maxDistance = Math.max(maxDistance, x * x + y * y);
+            }
+        }
+        return maxDistance;
     }
 
 

@@ -19,4 +19,12 @@ public class IntSoultionTest {
         Assert.assertEquals(soultion.bitwiseComplement(5), 2);
     }
 
+    @Test
+    public void largestTimeFromDigitsTest() {
+        IntSoultion soultion = new IntSoultion();
+        Assert.assertEquals(soultion.largestTimeFromDigits(new int[]{1, 2, 3, 4}), "23:41");
+        Assert.assertEquals(soultion.largestTimeFromDigits(new int[]{5, 5, 5, 5}), "");
+        Assert.assertEquals(soultion.largestTimeFromDigits(new int[]{0, 0, 0, 0}), "00:00");
+    }
+
 }

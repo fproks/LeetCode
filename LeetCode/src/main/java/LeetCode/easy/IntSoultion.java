@@ -1,5 +1,8 @@
 package LeetCode.easy;
 
+
+import java.util.*;
+
 /**
  * @user: linhos
  * @Time: Create in 10:38 2017/9/22
@@ -22,7 +25,7 @@ public class IntSoultion {
     //836. Rectangle Overlap
     //https://www.cnblogs.com/king-3/p/9063963.html
     public boolean isRectangleOverlap(int[] rec1, int[] rec2) {
-        return Math.max(rec1[0],rec2[0])<Math.min(rec1[2],rec2[2]) && Math.max(rec1[1],rec2[1]) <Math.min(rec1[3],rec2[3]);
+        return Math.max(rec1[0], rec2[0]) < Math.min(rec1[2], rec2[2]) && Math.max(rec1[1], rec2[1]) < Math.min(rec1[3], rec2[3]);
     }
 
     public int bitwiseComplement(int N) {
@@ -34,4 +37,43 @@ public class IntSoultion {
         }
         return tmp ^ N;
     }
+
+
+    //949. Largest Time for Given Digits
+    public String largestTimeFromDigits(int[] A) {
+        int H = 0, S = 0;
+        boolean flag = false;
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                if (j == i) continue;
+                for (int k = 0; k < 4; k++) {
+                    if (k == j || k == i) continue;
+                    for (int l = 0; l < 4; l++) {
+                        if (l == k || l == j || l == i) continue;
+                        int h = A[i] * 10 + A[j];
+                        int s = A[k] * 10 + A[l];
+                        if (h < 24 && s < 60) {
+                            flag = true;
+                            if (H < h) {
+                                H = h;
+                                S = s;
+                            }
+                            if (H == h) {
+                                S = S > s ? S : s;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        String str = "";
+        if (flag) {
+            str += (H < 10) ? ("0" + H) : H;
+            str += ":";
+            str += (S < 10) ? ("0" + S) : S;
+        }
+        return str;
+    }
+
+
 }

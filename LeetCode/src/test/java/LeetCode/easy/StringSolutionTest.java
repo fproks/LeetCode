@@ -86,4 +86,10 @@ public class StringSolutionTest {
 
     }
 
+    @Test
+    public void removeDuplicatesTest() {
+        Assert.assertEquals("ca", solutions.removeDuplicates("abbaca"));
+        Assert.assertEquals("a", solutions.removeDuplicates("aaaaaaaaa"));
+    }
+
 }

@@ -284,8 +284,48 @@ public class StringSolution implements Solution {
             }
         }
         return builder.toString();
+    }
 
+    public String removeDuplicates2(String S) {
+        StringBuilder builder = new StringBuilder();
+        Character deleteChar = null;
+        for (char c : S.toCharArray()) {
+            if (builder.length() == 0) {
+                if (deleteChar == null || deleteChar != c) {
+                    builder.append(c);
+                    deleteChar = null;
+                } else {
+                    continue;
+                }
+            } else {
+                if (deleteChar != null && deleteChar == c) {
+                    continue;
+                } else if (builder.charAt(builder.length() - 1) == c) {
+                    builder.deleteCharAt(builder.length() - 1);
+                    deleteChar = c;
+                } else {
+                    builder.append(c);
+                    deleteChar = null;
+                }
+            }
+        }
+        return builder.toString();
+    }
 
+    public String removeDuplicates(String S) {
+        StringBuilder builder = new StringBuilder();
+        for (char c : S.toCharArray()) {
+            if (builder.length() == 0 || builder.charAt(builder.length() - 1) != c)
+                builder.append(c);
+            else {
+                builder.deleteCharAt(builder.length() - 1);
+            }
+        }
+        return builder.toString();
+    }
+
+    public int repeatedStringMatch(String A, String B) {
+        
     }
 
 

@@ -2,6 +2,7 @@ package LeetCode.easy.Kotlin
 
 import org.junit.Assert
 import org.junit.Test
+import java.util.*
 
 class  ArraysSoultionTest{
     companion object {
@@ -34,5 +35,20 @@ class  ArraysSoultionTest{
         Assert.assertFalse(solution.canThreePartsEqualSum(array2))
         Assert.assertTrue(solution.canThreePartsEqualSum(array3))
 
+    }
+
+    @Test
+    fun powerfulIntegersTest() {
+        Assert.assertArrayEquals(solution.powerfulIntegers(2, 3, 10).toIntArray(), intArrayOf(2, 3, 4, 5, 7, 9, 10))
+        Assert.assertArrayEquals(solution.powerfulIntegers(3, 5, 15).toIntArray(), intArrayOf(2, 4, 6, 8, 10, 14))
+        Assert.assertArrayEquals(solution.powerfulIntegers(2, 1, 10).toIntArray(), intArrayOf(2, 3, 5, 9))
+    }
+
+    @Test
+    fun validMountainArrayTest() {
+        Assert.assertFalse(solution.validMountainArray(intArrayOf(2, 1)))
+        Assert.assertFalse(solution.validMountainArray(intArrayOf(3, 5, 5)))
+        Assert.assertTrue(solution.validMountainArray(intArrayOf(0, 3, 2, 1)))
+        Assert.assertFalse(solution.validMountainArray(intArrayOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)))
     }
 }

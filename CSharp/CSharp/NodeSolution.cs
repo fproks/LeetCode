@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 
 namespace CSharp
 {
@@ -225,6 +226,23 @@ namespace CSharp
             RangeSumBST(ref sum, root.right, L, R);
 
         }
+        
+        //1038. Binary Search Tree to Greater Sum Tree
+        public TreeNode BstToGst(TreeNode root) {
+            int sum = 0;
+            addSumBst(root,ref sum);
+            return root;
+        }
+
+        private void addSumBst(TreeNode root, ref int sum) {
+            if (root.right != null) {
+                addSumBst(root.right,ref  sum);
+            }
+            root.val += sum;
+            sum = root.val;
+            if(root.left!=null) addSumBst(root.left,ref sum);
+        }
+        
     }
     public class isCousinsSolution
     {
@@ -259,4 +277,5 @@ namespace CSharp
 
         }
     }
+   
 }

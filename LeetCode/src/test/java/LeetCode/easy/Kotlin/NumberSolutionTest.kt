@@ -21,4 +21,6 @@ class NumberSolutionTest{
         Assert.assertFalse(solution.hasAlternatingBits(11))
         Assert.assertTrue(solution.hasAlternatingBits(10))
     }
+
+
 }

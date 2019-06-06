@@ -114,7 +114,7 @@ class ArraysSolution {
         for (i in p)
             for (j in p)
                 for (k in p)
-                    res = maxOf(res,  0.5*abs(i[0] * j[1] + j[0] * k[1] + k[0] * i[1] - j[0] * i[1] - k[0] * j[1] - i[0] * k[1]))
+                    res = maxOf(res, 0.5 * abs(i[0] * j[1] + j[0] * k[1] + k[0] * i[1] - j[0] * i[1] - k[0] * j[1] - i[0] * k[1]))
         return res
     }
 
@@ -148,5 +148,65 @@ class ArraysSolution {
         }
         return -1
     }
+
+    fun powerfulIntegers(x: Int, y: Int, bound: Int): List<Int> {
+        var result = HashSet<Int>()
+        var xset = HashSet<Double>()
+        val yset = HashSet<Double>()
+        var dx = x.toDouble()
+        var dy = y.toDouble()
+        xset.add(1.0)
+        xset.add(dx)
+        yset.add(1.0)
+        yset.add(dy)
+        while (dx != 1.0) {
+            dx = dx * x
+            if (dx <= bound) xset.add(dx)
+            else break
+        }
+        while (dy != 1.0) {
+            dy = dy * y
+            if (dy <= bound) yset.add(dy)
+            else break
+        }
+        for (xs in xset) {
+            for (ys in yset) {
+                if (xs + ys <= bound) result.add((xs + ys).toInt())
+            }
+        }
+        return result.toList().sorted()
+    }
+
+    fun validMountainArray(A: IntArray): Boolean {
+        if (A.size < 3) return false
+        if (A[1] < A[0]) return false
+        var max = Int.MIN_VALUE
+        var hasMax = false
+        for (a in A) {
+            if (!hasMax) {
+                if (max < a) {
+                    max = a
+                    continue
+                }
+                if (max == a) return false
+                if (max > a) {
+                    hasMax = true
+                    max = a
+                }
+            } else {
+                if (max == a) return false
+                if (max > a) {
+                    max = a
+                } else {
+                    return false
+                }
+            }
+        }
+        return hasMax
+    }
+
+
+
+
 
 }

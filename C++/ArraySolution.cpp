@@ -5,6 +5,7 @@
 #include "ArraySolution.h"
 #include <algorithm>
 #include <queue>
+#include <iostream>
 
 
 int ArraySolution::largestSumAfterKNegations(vector<int> &A, int K) {
@@ -88,7 +89,6 @@ int ArraySolution::search(vector<int> &nums, int target) {
     return -1;
 }
 
-
 vector<int> ArraySolution::gardenNoAdj(int N, vector<vector<int>> &paths) {
     vector<int> array[N + 1];
     vector<int> result;
@@ -141,9 +141,26 @@ vector<int> ArraySolution::gardenNoAdj(int N, vector<vector<int>> &paths) {
     return result;
 }
 
-
-int ArraySolution::test(vector<int> &bit) {
-    return bit[0];
+int ArraySolution::maxIncreaseKeepingSkyline(vector<vector<int>> &grid) {
+    int *heng=new int[grid.size()];
+    int  *zong =new int[grid[0].size()];
+    fill_n(heng,grid.size(),0);
+    fill_n(zong,grid[0].size(),0);
+    int first=0,last=0;
+    for (int i = 0; i < grid.size(); ++i) {
+        for (int j = 0; j < grid[i].size(); ++j) {
+            first+=grid[i][j];
+            heng[i] =max(heng[i],grid[i][j]);
+            zong[j] =max(zong[j],grid[i][j]);
+        }
+    }
+    for (int i = 0; i < grid.size(); ++i) {
+        for (int j = 0; j <grid[0].size() ; ++j) {
+            grid[i][j] =min(heng[i],zong[j]);
+            last+=grid[i][j];
+        }
+    }
+    return  last-first;
 }
 
 int ArraySolution::orangesRotting(vector<vector<int>> &grid) {
@@ -194,3 +211,47 @@ int ArraySolution::orangesRotting(vector<vector<int>> &grid) {
     return idx;
 
 }
+
+//https://blog.csdn.net/qq_43274298/article/details/88927741
+vector<bool> ArraySolution::prefixesDivBy5(vector<int>& A){
+    vector<bool> result;
+    int status[5][2]={{0,1},{2,3},{4,0},{1,2},{3,4}};
+    int i =0;
+    for (auto j : A){
+        i=status[i][j];
+        result.push_back(i == 0);
+    }
+    return  result;
+}
+
+int ArraySolution::numPairsDivisibleBy60(vector<int>& time){
+    int sec[60];
+    fill_n(sec,60,0);
+    for (auto i : time){
+        auto j=i%60;
+        sec[j]++;
+    }
+    int result=0;
+    result +=sec[0]*(sec[0]-1)/2;
+    for(int i =1;i<=29;i++){
+        if(sec[i]!=0 && sec[60-i]!=0)result += sec[i]*sec[60-i];
+    }
+    result+=sec[30]*(sec[30]-1)/2;
+    return  result;
+}
+
+int ArraySolution::pivotIndex(vector<int> &nums) {
+    if(nums.size()<3)return  -1;
+    int sum =0;
+    for(auto i : nums)sum+=i;
+    int midsum=0;
+    for(auto i =0;i<nums.size();i++){
+        if(midsum*2+nums[i]==sum)return  i;
+        else {
+            midsum+=nums[i];
+        }
+    }
+    return  -1;
+}
+
+

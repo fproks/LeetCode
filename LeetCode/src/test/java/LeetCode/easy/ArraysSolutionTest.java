@@ -175,12 +175,43 @@ public class ArraysSolutionTest {
     }
 
     @Test
-    public  void  lemonadeChange(){
-        Assert.assertTrue(arraysolutin.lemonadeChange(new int[]{5,5,5,10,20}));
-        Assert.assertTrue(arraysolutin.lemonadeChange(new int[]{5,5,10}));
-        Assert.assertFalse(arraysolutin.lemonadeChange(new int[]{10,10}));
-        Assert.assertFalse(arraysolutin.lemonadeChange(new int[]{5,5,10,10,20}));
+    public void lemonadeChange() {
+        Assert.assertTrue(arraysolutin.lemonadeChange(new int[]{5, 5, 5, 10, 20}));
+        Assert.assertTrue(arraysolutin.lemonadeChange(new int[]{5, 5, 10}));
+        Assert.assertFalse(arraysolutin.lemonadeChange(new int[]{10, 10}));
+        Assert.assertFalse(arraysolutin.lemonadeChange(new int[]{5, 5, 10, 10, 20}));
 
+    }
+
+    @Test
+    public void addToArrayForm() {
+        int[] tmp = new int[0];
+        Assert.assertArrayEquals(
+                arraysolutin.addToArrayForm(new int[]{1, 2, 0, 0}, 34).stream().mapToInt(Integer::intValue).toArray(),
+                new int[]{1, 2, 3, 4});
+        Assert.assertArrayEquals(
+                arraysolutin.addToArrayForm(new int[]{2, 7, 4}, 181).stream().mapToInt(Integer::intValue).toArray(),
+                new int[]{4, 5, 5});
+        Assert.assertArrayEquals(
+                arraysolutin.addToArrayForm(new int[]{2, 1, 5}, 806).stream().mapToInt(Integer::intValue).toArray(),
+                new int[]{1, 0, 2, 1});
+        Assert.assertArrayEquals(
+                arraysolutin.addToArrayForm(new int[]{9, 9, 9, 9, 9, 9, 9, 9, 9, 9}, 1).stream().mapToInt(Integer::intValue).toArray(),
+                new int[]{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
+        Assert.assertArrayEquals(
+                arraysolutin.addToArrayForm(new int[]{9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9}, 2).stream().mapToInt(Integer::intValue).toArray(),
+                new int[]{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1});
+    }
+
+    @Test
+    public void robotSim() {
+        int[][] obs = new int[][]{};
+        Assert.assertEquals(25, arraysolutin.robotSim(new int[]{4, -1, 3}, obs));
+        Assert.assertEquals(65, arraysolutin.robotSim(new int[]{4, -1, 4, -2, 4}, new int[][]{{2, 4}}));
+        obs = new int[][]{{-1, 3}, {0, 1}, {-1, 5}, {-2, -4}, {5, 4}, {-2, -3}, {5, -1}, {1, -1}, {5, 5}, {5, 2}};
+        Assert.assertEquals(0, arraysolutin.robotSim(new int[]{-2, -1, 8, 9, 6}, obs));
+        obs = new int[][]{{-4, -1}, {1, -1}, {1, 4}, {5, 0}, {4, 5}, {-2, -1}, {2, -5}, {5, 1}, {-3, -1}, {5, -3}};
+        Assert.assertEquals(324, arraysolutin.robotSim(new int[]{-2, 8, 3, 7, -1}, obs));
     }
 
 }

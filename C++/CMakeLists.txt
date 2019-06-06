@@ -3,4 +3,8 @@ project(C__)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(C__ main.cpp ArraySolution.cpp)
+add_executable(C__ main.cpp
+        ArraySolution.cpp
+        StringSolution.cpp
+        StringSolution.h
+        solution/NumberSolution.cpp solution/NumberSolution.h solution/MyLinkedList.h)

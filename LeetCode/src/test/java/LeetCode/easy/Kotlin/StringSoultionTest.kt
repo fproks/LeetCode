@@ -32,4 +32,10 @@ class StringSoultionTest {
         Assert.assertTrue(tmp.contains("a1b2"))
         tmp.forEach(::println)
     }*/
+
+    @Test
+    fun licenseKeyFormattingTest() {
+        assertEquals(solution.licenseKeyFormatting("5F3Z-2e-9-w", 4), "5F3Z-2E9W")
+        assertEquals(solution.licenseKeyFormatting("2-5g-3-J", 2), "2-5G-3J")
+    }
 }

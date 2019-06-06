@@ -50,4 +50,25 @@ class NumberSolution {
     fun DivisorGame2(N: Int): Boolean {
         return N % 2 == 0
     }
+
+
+    //1033. Moving Stones Until Consecutive
+    //https://blog.csdn.net/CSerwangjun/article/details/89643294
+    fun numMovesStones(a: Int, b: Int, c: Int): IntArray {
+        val max = Math.max(Math.max(a, b), c)
+        val arr = intArrayOf(a, b, c).sorted()
+        val a = arr[0]
+        val b = arr[1]
+        val c = arr[2]
+        val array = IntArray(2)
+        if (a + 1 == b && b + 1 == c) array[0] = 0
+        else {
+            if (a + 2 == b || b + 2 == c || a + 1 == b || b + 1 == c) array[0] = 1
+            else array[0] = 2
+        }
+        array[1] = c - a - 2
+        return array
+    }
+
+
 }
