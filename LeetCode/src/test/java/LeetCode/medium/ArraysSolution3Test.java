@@ -18,6 +18,12 @@ public class ArraysSolution3Test {
         Assert.assertEquals(2, solution.singleNonDuplicate(a));
     }
 
+    @Test
+    public  void  deckRevealedIncreasing(){
+        int [] a = {17,13,11,2,3,5,7};
+        Assert.assertArrayEquals(new int[]{2,13,3,11,5,17,7},solution.deckRevealedIncreasing(a));
+    }
+
 
 
 

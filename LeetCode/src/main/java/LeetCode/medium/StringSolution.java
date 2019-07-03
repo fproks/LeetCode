@@ -117,39 +117,66 @@ public class StringSolution {
         for (int i = 0; i < S.length(); i++) {
             chars[S.charAt(i) - 'a'] = i;
         }
-        int first =-1;
-        int end=0;
-        for(int i=first+1;i<S.length();i++){
-           end =Math.max(end,chars[S.charAt(i)-'a']);
-           if(end==i) {
-               list.add(end - first);
-               first=end;
-           }
+        int first = -1;
+        int end = 0;
+        for (int i = first + 1; i < S.length(); i++) {
+            end = Math.max(end, chars[S.charAt(i) - 'a']);
+            if (end == i) {
+                list.add(end - first);
+                first = end;
+            }
         }
         return list;
     }
 
     //451. Sort Characters By Frequency
     public String frequencySort(String s) {
-        int[] map =new int[256];
-        StringBuilder stringBuilder =new StringBuilder();
-        List<List<Integer>> list =new ArrayList<>();
-        for(int i=0;i<s.length();i++)map[s.charAt(i)]++;
-        for (int i=0;i<s.length()+1;i++)list.add(new ArrayList<>());
-        for(int i=0;i<map.length;i++)if(map[i]!=0)list.get(map[i]).add(i);
-        for (int i = list.size()-1; i >=0 ; i--) {
-            if(list.get(i)!=null){
-                List<Integer> tmp =list.get(i);
-                for (int k =0;k<tmp.size();k++){
-                    for (int m =0;m<i;m++){
+        int[] map = new int[256];
+        StringBuilder stringBuilder = new StringBuilder();
+        List<List<Integer>> list = new ArrayList<>();
+        for (int i = 0; i < s.length(); i++) map[s.charAt(i)]++;
+        for (int i = 0; i < s.length() + 1; i++) list.add(new ArrayList<>());
+        for (int i = 0; i < map.length; i++) if (map[i] != 0) list.get(map[i]).add(i);
+        for (int i = list.size() - 1; i >= 0; i--) {
+            if (list.get(i) != null) {
+                List<Integer> tmp = list.get(i);
+                for (int k = 0; k < tmp.size(); k++) {
+                    for (int m = 0; m < i; m++) {
                         stringBuilder.append(Character.toChars(tmp.get(k)));
                     }
                 }
 
             }
         }
-        return  stringBuilder.toString();
+        return stringBuilder.toString();
+    }
+
+    //https://leetcode.com/problems/letter-tile-possibilities/
+    /*
+    *AAB 的次数等于 AB 的次数+1 + AA 的次数+1 (每一个字母减1个)
+    * AB 的次数等于(A 的次数+1) +(B 的次数+1) (每一个字母减1个)
+    * AA 的次数等于(A 的次数+1)(每一个字母减1个)
+    *
+    *  */
+    public int numTilePossibilities(String tiles) {
+        int[] chars = new int[26];
+        for (int i = 0; i < tiles.length(); i++) {
+            chars[tiles.charAt(i) - 'A'] += 1;
+        }
+        return dfs(chars);
+    }
+
+    private int dfs(int[] chars) {
+        int sum = 0;
+        for (int i = 0; i < 26; i++) {
+            if (chars[i] == 0) continue;
+            sum++;
+            chars[i]--;
+            sum += dfs(chars);
+            chars[i]++;
+        }
+        return sum;
     }
 
 
-    }
+}

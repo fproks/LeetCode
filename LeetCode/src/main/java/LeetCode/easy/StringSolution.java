@@ -324,11 +324,42 @@ public class StringSolution implements Solution {
         return builder.toString();
     }
 
-    public int repeatedStringMatch(String A, String B) {
-        
+    public String[] findOcurrences(String text, String first, String second) {
+        String[] strings = text.split(" ");
+        if (strings.length <= 2) return new String[0];
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (int i = 0; i <= strings.length - 3; i++) {
+            if (strings[i].equals(first) && strings[i + 1].equals(second)) arrayList.add(strings[i + 2]);
+        }
+        return arrayList.toArray(new String[0]);
     }
 
+    public String gcdOfStrings(String str1, String str2) {
+        int minLength = str1.length() < str2.length() ? str1.length() : str2.length();
+        int commonDivisor = minLength;
+        StringBuilder builder1 =new StringBuilder();
+        while (commonDivisor > 0) {
+            if (str1.length() % commonDivisor == 0 && str2.length() % commonDivisor == 0){
+                builder1.delete(0,builder1.length());
+                String result =str1.substring(0,commonDivisor);
+                int div =str1.length()/commonDivisor;
+                while ((div--)>0){
+                    builder1.append(result);
+                }
+                if(builder1.toString().equals(str1)){
+                    div =str2.length()/commonDivisor;
+                    builder1.delete(0,builder1.length());
+                    while ((div--)>0){
+                        builder1.append(result);
+                    }
+                    if(builder1.toString().equals(str2))return  result;
+                }
+            }
+            commonDivisor--;
+        }
+        return  "";
 
+    }
 }
 
 

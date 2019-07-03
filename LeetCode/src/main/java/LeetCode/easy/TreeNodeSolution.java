@@ -293,21 +293,21 @@ public class TreeNodeSolution implements Solution {
     }
 
     public int minDiffInBST(TreeNode root) {
-        ArrayList<Integer> list =new ArrayList<>();
-        deepsearch(root,list);
-        int min =Integer.MAX_VALUE;
-        for (int i = 0; i <list.size()-1 ; i++) {
-            min =Math.min(min,list.get(i+1)-list.get(i));
+        ArrayList<Integer> list = new ArrayList<>();
+        deepsearch(root, list);
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i < list.size() - 1; i++) {
+            min = Math.min(min, list.get(i + 1) - list.get(i));
         }
         list.stream().forEach(System.out::print);
-        return  min;
+        return min;
     }
 
 
     public void deepsearch(TreeNode root, List<Integer> list) {
-      if(root.left!=null)deepsearch(root.left,list);
-      list.add(root.val);
-      if(root.right!=null) deepsearch(root.right,list);
+        if (root.left != null) deepsearch(root.left, list);
+        list.add(root.val);
+        if (root.right != null) deepsearch(root.right, list);
 
     }
 

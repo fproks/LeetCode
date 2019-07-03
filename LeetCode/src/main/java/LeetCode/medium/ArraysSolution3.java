@@ -99,5 +99,15 @@ public class ArraysSolution3 {
         List<Integer> subordinates;
     }
 
+    public int[] deckRevealedIncreasing(int[] deck) {
+        Arrays.sort(deck);
+        LinkedList<Integer> result= new LinkedList<>();
+        for (int i = deck.length-1; i >=0 ; i--){
+            if(result.size()>=2) result.addFirst(result.pollLast());
+            result.addFirst(deck[i]);
+        }
+        return  result.stream().mapToInt(Integer::intValue).toArray();
+    }
+
 
 }

@@ -19,4 +19,9 @@ public class TreeNodeSolutionTest {
         Assert.assertArrayEquals(new int[]{2}, solution.findFrequentTreeSum(p));
     }
 
+    @Test
+    public  void  bstFromPreorder(){
+        solution.bstFromPreorder(new int[]{8,5,1,7,10,12});
+    }
+
 }

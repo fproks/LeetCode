@@ -231,6 +231,32 @@ public class TreeNodeSolution {
         return total;
     }
 
+    public TreeNode bstFromPreorder(int[] preorder) {
+        if (preorder.length == 0) return null;
+        if (preorder.length == 1) return new TreeNode(preorder[0]);
+        TreeNode root = new TreeNode(preorder[0]);
+        for (int i = 1; i < preorder.length; i++) {
+            int tmp = preorder[i];
+            TreeNode tmpNode = root;
+            while (true) {
+                if (tmpNode.val > tmp) {
+                    if (tmpNode.left != null) {
+                        tmpNode = tmpNode.left;
+                        continue;
+                    } else tmpNode.left = new TreeNode(tmp);
+                    break;
+                } else {
+                    if (tmpNode.right != null) {
+                        tmpNode = tmpNode.right;
+                        continue;
+                    } else tmpNode.right = new TreeNode(tmp);
+                    break;
+                }
+            }
+        }
+        return  root;
+    }
+
 
 
 }

@@ -112,6 +112,13 @@ public class StringSolutionTest {
         System.out.println(solution.frequencySort(s));
     }
 
+    @Test
+    public  void numTilePossibilities(){
+        Assert.assertEquals(8,solution.numTilePossibilities("AAB"));
+        Assert.assertEquals(188,solution.numTilePossibilities("AAABBC"));
+        System.out.println(solution.numTilePossibilities("ABCDEFGHIJK"));
+    }
+
 
 
 
