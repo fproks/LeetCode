@@ -1,5 +1,7 @@
 # coding=utf-8
 from typing import List
+import collections
+from copy import copy
 
 
 class Node:
@@ -157,3 +159,148 @@ class ArraySolution(object):
                     if j < len(grid) - 1:
                         result -= min(grid[i][j], grid[i][j + 1])
         return result
+
+    def deckRevealedIncreasing(self, deck):
+        res = []
+
+        for i in sorted(deck, reverse=True):
+            if res:
+                tmp = res.pop()
+                res.insert(0, tmp)
+            res.insert(0, i)
+        return res
+
+    @staticmethod
+    def findAndReplacePattern(words: List[str], pattern: str) -> List[str]:
+
+        res = []
+        p = ArraySolution.toDigits(pattern)
+        for word in words:
+            if len(word) != len(pattern): continue
+            if ArraySolution.toDigits(word) == p: res.append(word)
+            # dw = {}
+            # dp = {}
+            # for i in range(len(word)):
+            #     tmp = dw.get(word[i], None)
+            #     if tmp is None:
+            #         dw[word[i]] = pattern[i]
+            #     else:
+            #         if tmp is not pattern[i]:
+            #             break
+            #     tmp = dp.get(pattern[i], None)
+            #     if tmp is None:
+            #         dp[pattern[i]] = word[i]
+            #     else:
+            #         if tmp is not word[i]:
+            #             break
+            #     if i is len(word) - 1:
+            #         res.append(word)
+
+        return res
+
+    @staticmethod
+    def toDigits(x):
+        '''
+        字典长度+1
+        p ={}
+        p[x] =len(p)+1
+        :param x:
+        :return:
+        '''
+        p = collections.defaultdict(lambda: len(p) + 1)
+        return ''.join(str(p[i]) for i in x)
+
+    def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
+        result = []
+
+        def DFS(graph: List[List[int]], idx: int, road: List[int], result: List[List[int]]):
+            if idx == len(graph) - 1:
+                result.append([] + road)
+                return
+
+            for i in graph[idx]:
+                road.append(i)
+                DFS(graph, i, road, result)
+                road.remove(i)
+
+        DFS(graph, 0, [0], result)
+        return result
+
+    def allPathsSourceTarget1(self, graph: List[List[int]], s=0) -> List[List[int]]:
+        return [[len(graph) - 1]] if s == len(graph) - 1 else [[s] + path for i in graph[s] for path in
+                                                               self.allPathsSourceTarget1(graph, s=i)]
+
+    # 861. Score After Flipping Matrix
+    # 这个题，主要是说，按行或者按列互换01，然后求和最大 数组位置不能移动，但是同一行或者同一列数字可以反转
+    def matrixScore(self, A: List[List[int]]) -> int:
+        res = 0
+        for x in range(len(A)):
+            if A[x][0] != 1:
+                for y in range(len(A[x])):
+                    A[x][y] = A[x][y] ^ 1
+        A = list(map(list, zip(*A)))  # 矩阵转置
+
+        for x in range(len(A)):
+            if A[x].count(1) < A[x].count(0):
+                for y in range(len(A[x])):
+                    A[x][y] = A[x][y] ^ 1
+
+        A = list(map(list, zip(*A)))
+        for i in A:
+            res += int(''.join(map(str, i)), 2)
+        return res
+
+    def spiralMatrixIII(self, R: int, C: int, r0: int, c0: int) -> List[List[int]]:
+        def appendStep(R, C, x, y, dir, step, result):
+            while len(result) < R * C:
+                for dict in range(dir, dir + 2):
+                    if dict % 4 == 1:
+                        if x >= 0:
+                            for y1 in range(y + 1, y + step + 1):
+                                if 0 <= y1 < C: result.append([x, y1])
+                        y = y + step
+                    if dict % 4 == 2:
+                        if y < C:
+                            for x1 in range(x + 1, x + step + 1):
+                                if 0 <= x1 < R: result.append([x1, y])
+                        x = x + step
+                    if dict % 4 == 3:
+                        if x < R:
+                            for y1 in range(y - 1, y - step - 1, -1):
+                                if 0 <= y1 < C: result.append([x, y1])
+                        y = y - step
+                    if dict % 4 == 0:
+                        if y >= 0:
+                            for x1 in range(x - 1, x - step - 1, -1):
+                                if 0 <= x1 < R: result.append([x1, y])
+                        x = x - step
+                dir += 2
+                step += 1
+
+        result = [[r0, c0]]
+        appendStep(R, C, r0, c0, 1, 1, result)
+        return result
+
+    # 1104. Path In Zigzag Labelled Binary Tree
+    # https://leetcode.com/problems/path-in-zigzag-labelled-binary-tree/
+    def pathInZigZagTree(self, label: int):
+        def findlast(label):  # 先找到父节点
+            c = 0
+            while 2 ** c < label: c += 1
+            if 2 ** c == label: return label - 1
+            return int(2 ** (c - 1) - (label - (2 ** (c - 1)) + 1) / 2)
+
+        result = []
+        last =label
+        while True:
+            result.insert(0, last)
+            if last > 1:
+                last = findlast(last)
+            else:
+                break
+        return result
+
+
+if __name__ == '__main__':
+    print(ArraySolution.findAndReplacePattern(["abc", "deq", "mee", "aqq", "dkd", "ccc"], "abb"))
+    print(ArraySolution.toDigits("abcddddddddd"))

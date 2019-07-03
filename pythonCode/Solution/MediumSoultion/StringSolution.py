@@ -10,3 +10,16 @@ class StringSolution:
                 else:
                     start = tmp.index(B[0], start)
         return -1
+
+    def minAddToMakeValid(self, S: str) -> int:
+        f = 0
+        res = 0
+        for c in S:
+            if c == '(':
+                f += 1
+            else:
+                if f == 0:
+                    res += 1
+                else:
+                    f -= 1
+        return res + f

@@ -39,6 +39,24 @@ class ArraySolutionTest(TestCase):
         self.assertEqual(32, sole.surfaceArea([[1, 1, 1], [1, 0, 1], [1, 1, 1]]))
         self.assertEqual(46, sole.surfaceArea([[2, 2, 2], [2, 1, 2], [2, 2, 2]]))
 
+    def test_matrixScore(self):
+        sole = ArraySolution()
+        self.assertEqual(39, sole.matrixScore([[0, 0, 1, 1], [1, 0, 1, 0], [1, 1, 0, 0]]))
+
+    def test_spiralMatrixIII(self):
+        sole = ArraySolution()
+
+        self.assertEqual([[0, 0], [0, 1], [0, 2], [0, 3]], sole.spiralMatrixIII(1, 4, 0, 0))
+        self.assertEqual(
+            [[1, 4], [1, 5], [2, 5], [2, 4], [2, 3], [1, 3], [0, 3], [0, 4], [0, 5], [3, 5], [3, 4], [3, 3], [3, 2],
+             [2, 2], [1, 2], [0, 2], [4, 5], [4, 4], [4, 3], [4, 2], [4, 1], [3, 1], [2, 1], [1, 1], [0, 1], [4, 0],
+             [3, 0], [2, 0], [1, 0], [0, 0]], sole.spiralMatrixIII(5, 6, 1, 4))
+
+    def test_pathInZigZagTree(self):
+        sole = ArraySolution()
+        self.assertEqual([1,3,4,14],sole.pathInZigZagTree(14))
+        self.assertEqual([1,2,6,10,26], sole.pathInZigZagTree(26))
+
 
 if __name__ == '__main__':
     ArraySolutionTest.main()
