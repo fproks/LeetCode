@@ -57,6 +57,11 @@ class ArraySolutionTest(TestCase):
         self.assertEqual([1,3,4,14],sole.pathInZigZagTree(14))
         self.assertEqual([1,2,6,10,26], sole.pathInZigZagTree(26))
 
+    def test_sortArray(self):
+        sole =ArraySolution()
+        self.assertEqual([1,2,3,5],sole.sortArray([5,2,3,1]))
+        self.assertEqual([0,0,1,1,2,5],sole.sortArray([5,1,1,2,0,0]))
+
 
 if __name__ == '__main__':
     ArraySolutionTest.main()

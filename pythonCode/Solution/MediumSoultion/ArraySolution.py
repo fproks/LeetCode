@@ -291,7 +291,7 @@ class ArraySolution(object):
             return int(2 ** (c - 1) - (label - (2 ** (c - 1)) + 1) / 2)
 
         result = []
-        last =label
+        last = label
         while True:
             result.insert(0, last)
             if last > 1:
@@ -299,6 +299,28 @@ class ArraySolution(object):
             else:
                 break
         return result
+
+    # 912. Sort an Array
+    # qiuck sort
+    def sortArray(self, nums: List[int]) -> List[int]:
+        def quickSort(nums: List[int], start, end):
+            if start >= end: return
+            i = start
+            j = end
+            key = nums[i]
+            while i < j:
+                while i < j and nums[j] > key:
+                    j -= 1
+                nums[i] = nums[j]
+                while i < j and nums[i] <= key:
+                    i += 1
+                nums[j] = nums[i]
+            nums[j] = key
+            quickSort(nums, start, i - 1)
+            quickSort(nums, j + 1, end)
+
+        quickSort(nums, 0, len(nums) - 1)
+        return nums
 
 
 if __name__ == '__main__':
