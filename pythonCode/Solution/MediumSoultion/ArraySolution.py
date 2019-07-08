@@ -322,6 +322,40 @@ class ArraySolution(object):
         quickSort(nums, 0, len(nums) - 1)
         return nums
 
+    def intervalIntersection(self, A: List[List[int]], B: List[List[int]]) -> List[List[int]]:
+        i = 0
+        result = []
+
+        for a in A:
+            while i < len(B):
+                if B[i][1] >= a[0] and B[i][0] <= a[1]:
+                    result.append([max(a[0], B[i][0]), min(a[1], B[i][1])])
+                    if B[i][1] >= a[1]:
+                        break
+                    else:
+                        i += 1
+                elif B[i][0] > a[1]:
+                    break
+                elif B[i][1] < a[1]:
+                    i += 1
+        return result
+
+
+
+    # 1043. Partition Array for Maximum Sum  动态规划
+    # https://www.acwing.com/solution/leetcode/content/2000/
+    def maxSumAfterPartitioning(self, A: List[int], K: int) -> int:
+        dp = [0] * (len(A) + 1)
+        for i in range(1, len(A) + 1):
+            currMax = A[i-1]
+            for k in range(1, K+1):
+                if k <= i:
+                    currMax = max(currMax, A[i - k])
+                    dp[i] = max(dp[i], dp[i - k] + currMax * k)
+                else:
+                    break
+        return dp[-1]
+
 
 if __name__ == '__main__':
     print(ArraySolution.findAndReplacePattern(["abc", "deq", "mee", "aqq", "dkd", "ccc"], "abb"))

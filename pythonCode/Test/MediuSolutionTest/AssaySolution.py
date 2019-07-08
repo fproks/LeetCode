@@ -54,13 +54,23 @@ class ArraySolutionTest(TestCase):
 
     def test_pathInZigZagTree(self):
         sole = ArraySolution()
-        self.assertEqual([1,3,4,14],sole.pathInZigZagTree(14))
-        self.assertEqual([1,2,6,10,26], sole.pathInZigZagTree(26))
+        self.assertEqual([1, 3, 4, 14], sole.pathInZigZagTree(14))
+        self.assertEqual([1, 2, 6, 10, 26], sole.pathInZigZagTree(26))
 
     def test_sortArray(self):
-        sole =ArraySolution()
-        self.assertEqual([1,2,3,5],sole.sortArray([5,2,3,1]))
-        self.assertEqual([0,0,1,1,2,5],sole.sortArray([5,1,1,2,0,0]))
+        sole = ArraySolution()
+        self.assertEqual([1, 2, 3, 5], sole.sortArray([5, 2, 3, 1]))
+        self.assertEqual([0, 0, 1, 1, 2, 5], sole.sortArray([5, 1, 1, 2, 0, 0],3))
+
+    def test_intervalIntersection(self):
+        sole = ArraySolution()
+        self.assertEqual([[1, 2], [5, 5], [8, 10], [15, 23], [24, 24], [25, 25]],
+                         sole.intervalIntersection(A=[[0, 2], [5, 10], [13, 23], [24, 25]],
+                                                   B=[[1, 5], [8, 12], [15, 24], [25, 26]]))
+
+    def test_maxSumAfterPartitioning(self):
+        sole = ArraySolution()
+        self.assertEqual(84, sole.maxSumAfterPartitioning([1, 15, 7, 9, 2, 5, 10],3))
 
 
 if __name__ == '__main__':
