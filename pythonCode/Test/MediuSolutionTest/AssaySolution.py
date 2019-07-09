@@ -72,6 +72,10 @@ class ArraySolutionTest(TestCase):
         sole = ArraySolution()
         self.assertEqual(84, sole.maxSumAfterPartitioning([1, 15, 7, 9, 2, 5, 10],3))
 
+    def test_pancakeSort(self):
+        sole =ArraySolution()
+        print(sole.pancakeSort([3,2,4,1]))
+
 
 if __name__ == '__main__':
     ArraySolutionTest.main()

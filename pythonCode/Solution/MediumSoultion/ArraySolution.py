@@ -340,21 +340,41 @@ class ArraySolution(object):
                     i += 1
         return result
 
-
-
     # 1043. Partition Array for Maximum Sum  动态规划
     # https://www.acwing.com/solution/leetcode/content/2000/
     def maxSumAfterPartitioning(self, A: List[int], K: int) -> int:
         dp = [0] * (len(A) + 1)
         for i in range(1, len(A) + 1):
-            currMax = A[i-1]
-            for k in range(1, K+1):
+            currMax = A[i - 1]
+            for k in range(1, K + 1):
                 if k <= i:
                     currMax = max(currMax, A[i - k])
                     dp[i] = max(dp[i], dp[i - k] + currMax * k)
                 else:
                     break
         return dp[-1]
+
+    # 969. Pancake Sorting
+    # https://leetcode.com/problems/pancake-sorting/
+    # 先将最大位置的反转到最开始，然后再反转到最末尾。
+    # 删除最末尾的
+
+    def pancakeSort(self, A: List[int]) -> List[int]:
+        tmp = A
+        result = []
+        while len(tmp) > 0:
+            tmpMax = max(tmp)
+            if tmp[-1] != tmpMax:
+                idx = tmp.index(tmpMax) + 1
+                if idx > 1:
+                    result.append(idx)
+                result.append(len(tmp))
+                B = tmp[idx:]
+                B.reverse()
+                tmp = B + tmp[0:idx - 1]
+            else:
+                tmp = tmp[:-1]
+        return result
 
 
 if __name__ == '__main__':
