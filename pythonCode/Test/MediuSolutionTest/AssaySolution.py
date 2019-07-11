@@ -77,5 +77,10 @@ class ArraySolutionTest(TestCase):
         print(sole.pancakeSort([3,2,4,1]))
 
 
+    def test_kClosest(self):
+        sole= ArraySolution()
+        print(sole.kClosest([[3,3],[5,-1],[-2,4]],2))
+
+
 if __name__ == '__main__':
     ArraySolutionTest.main()

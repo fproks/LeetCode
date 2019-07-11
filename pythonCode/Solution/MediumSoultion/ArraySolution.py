@@ -2,6 +2,7 @@
 from typing import List
 import collections
 from copy import copy
+import heapq
 
 
 class Node:
@@ -375,6 +376,30 @@ class ArraySolution(object):
             else:
                 tmp = tmp[:-1]
         return result
+
+    #973. K Closest Points to Origin
+    # 寻找最小的k个元素，或者寻找最大K个元素，一般用大顶堆或者小顶堆
+    def kClosest(self, points: List[List[int]], K: int):
+        class littleHype:
+            def __init__(self, k):
+                self.k = k
+                self.data = []
+
+            def push(self, elem):
+                idx = (elem[0] * elem[0] + elem[1] * elem[1])*-1
+                if len(self.data) < self.k:
+                    heapq.heappush(self.data, (idx, elem))
+                else:
+                    if self.data[0][0] < idx:
+                        heapq.heapreplace(self.data, (idx, elem))
+
+            def topk(self):
+                return list(map(lambda x:x[1],self.data))
+
+        hype = littleHype(K)
+        for point in points:
+            hype.push(point)
+        return hype.topk()
 
 
 if __name__ == '__main__':
