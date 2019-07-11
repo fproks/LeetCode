@@ -92,3 +92,24 @@ class ListSolution:
                 return False
 
         return fanz(root1, root2)
+
+    # 998. Maximum Binary Tree II
+    # 这个题只能插右边，后插的插右边，原来的右边变成左边
+    def insertIntoMaxTree(self, root: TreeNode, val: int) -> TreeNode:
+        p = TreeNode(val)
+        if root is None: return p
+        if val > root.val:
+            p.left = root
+            return p
+        rol1 = root
+        ro2 = root.right
+        while ro2 is not None:
+            if val > ro2.val:
+                p.left = ro2
+                rol1.right = p
+                return root
+            else:
+                rol1 = ro2
+                ro2 = rol1.right
+        rol1.right = p
+        return root
