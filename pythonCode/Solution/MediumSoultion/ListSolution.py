@@ -113,3 +113,34 @@ class ListSolution:
                 ro2 = rol1.right
         rol1.right = p
         return root
+
+    # 1110. Delete Nodes And Return Forest
+    def delNodes(self, root: TreeNode, to_delete: List[int]) -> List[TreeNode]:
+        d = set(to_delete)
+        res = []
+
+        # 节点要么为空，要么节点为它自己
+        # 子节点为helper(子节点)
+        # 当前节点符合，添加子节点
+        def helper(node):
+            if not node: return None
+            l, r = helper(node.left), helper(node.right)
+            if node.val in d:
+                if l: res.append(node.left)
+                if r: res.append(node.right)
+                return None
+            node.left, node.right = l, r
+            return node
+
+        cur = helper(root)
+        return res + [cur] if cur else res
+
+    # 889. Construct Binary Tree from Preorder and Postorder Traversal
+    def constructFromPrePost(self, pre: List[int], post: List[int]) -> TreeNode:
+        if not pre or not post: return None
+        root = TreeNode(pre[0])
+        if len(pre) == 1: return root
+        idx = pre.index(post[-2])
+        root.left = self.constructFromPrePost(pre[1:idx], post[:idx - 1])
+        root.right = self.constructFromPrePost(pre[idx:], post[idx - 1:-1])
+        return root

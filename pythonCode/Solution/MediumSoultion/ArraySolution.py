@@ -377,7 +377,7 @@ class ArraySolution(object):
                 tmp = tmp[:-1]
         return result
 
-    #973. K Closest Points to Origin
+    # 973. K Closest Points to Origin
     # 寻找最小的k个元素，或者寻找最大K个元素，一般用大顶堆或者小顶堆
     def kClosest(self, points: List[List[int]], K: int):
         class littleHype:
@@ -386,7 +386,7 @@ class ArraySolution(object):
                 self.data = []
 
             def push(self, elem):
-                idx = (elem[0] * elem[0] + elem[1] * elem[1])*-1
+                idx = (elem[0] * elem[0] + elem[1] * elem[1]) * -1
                 if len(self.data) < self.k:
                     heapq.heappush(self.data, (idx, elem))
                 else:
@@ -394,12 +394,39 @@ class ArraySolution(object):
                         heapq.heapreplace(self.data, (idx, elem))
 
             def topk(self):
-                return list(map(lambda x:x[1],self.data))
+                return list(map(lambda x: x[1], self.data))
 
         hype = littleHype(K)
         for point in points:
             hype.push(point)
         return hype.topk()
+
+    def stoneGame(self, piles: List[int]) -> bool:
+        def f(x):
+            if x % 2 == 1:
+                return piles[x]
+            else:
+                return 0
+
+        summms = sum(piles)
+        piles = sorted(piles)
+        tmp = sum(list(map(f, range(len(piles)))))
+        return tmp + tmp > summms
+
+    def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
+        countx = 1
+        opened = [False] * len(rooms)
+        opened[0] = True
+        waitForSet = {x for x in rooms[0]}
+        while len(waitForSet) > 0:
+            key = waitForSet.pop()
+            if not opened[key]:
+                opened[key] = True
+                countx += 1
+                for i in rooms[key]:
+                    if not opened[i]:
+                        waitForSet.add(i)
+        return countx == len(rooms)
 
 
 if __name__ == '__main__':

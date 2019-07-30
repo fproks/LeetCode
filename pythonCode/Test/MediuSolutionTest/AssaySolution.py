@@ -81,6 +81,14 @@ class ArraySolutionTest(TestCase):
         sole= ArraySolution()
         print(sole.kClosest([[3,3],[5,-1],[-2,4]],2))
 
+    def test_stoneGame(self):
+        sole =ArraySolution()
+        self.assertTrue(sole.stoneGame([5,3,4,5]))
+
+    def test_canVisitAllRooms(self):
+        sole=ArraySolution()
+        self.assertTrue(sole.canVisitAllRooms([[1],[2],[3],[]]))
+
 
 if __name__ == '__main__':
     ArraySolutionTest.main()
