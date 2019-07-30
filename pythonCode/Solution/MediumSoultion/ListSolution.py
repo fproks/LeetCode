@@ -144,3 +144,19 @@ class ListSolution:
         root.left = self.constructFromPrePost(pre[1:idx], post[:idx - 1])
         root.right = self.constructFromPrePost(pre[idx:], post[idx - 1:-1])
         return root
+
+    # 1026. Maximum Difference Between Node and Ancestor
+    def maxAncestorDiff(self, root: TreeNode) -> int:
+        self.max_diff = float('-inf')
+        if not root:
+            return
+
+        def dfs(node, cur_min, cur_max):
+            if not node:
+                return
+            self.max_diff = max(abs(cur_min - node.val), abs(cur_max - node.val), self.max_diff)
+            dfs(node.left, min(cur_min, node.val), max(cur_max, node.val))
+            dfs(node.right, min(cur_min, node.val), max(cur_max, node.val))
+
+        dfs(root, root.val, root.val)
+        return self.max_diff
