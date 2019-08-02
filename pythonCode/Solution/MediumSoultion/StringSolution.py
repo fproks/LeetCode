@@ -23,3 +23,11 @@ class StringSolution:
                 else:
                     f -= 1
         return res + f
+
+    # 1016. Binary String With Substrings Representing 1 To N
+    def queryString(self, S: str, N: int) -> bool:
+        for x in range(1, N + 1):
+            x_str = bin(x).replace('0b', '')
+            if S.find(x_str) == -1:
+                return False
+        return True

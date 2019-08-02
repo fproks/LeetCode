@@ -11,3 +11,7 @@ class StringSolutionTest(TestCase):
         self.assertEqual(3, solution.minAddToMakeValid("((("))
         self.assertEqual(0, solution.minAddToMakeValid("()"))
         self.assertEqual(4, solution.minAddToMakeValid("()))(("))
+
+    def test_queryString(self):
+        solution =StringSolution()
+        self.assertFalse(solution.queryString("0110",4))
