@@ -121,10 +121,10 @@ public class ArraysSolution3 {
             int ni = i % 2;
             int fi = (i + 1) % 2;
             for (int j = 0; j < N; j++) {
-                if (j == 0) dt[j][ni] = Math.min(dt[j][fi] + A[i][j], dt[j + 1][fi] + A[i][j]);
-                else if (j == N - 1) dt[j][ni] = Math.min(dt[j - 1][fi] + A[i][j], dt[j][fi] + A[i][j]);
+                if (j == 0) dt[j][ni] = Math.min(dt[j][fi], dt[j + 1][fi]) + A[i][j];
+                else if (j == N - 1) dt[j][ni] = Math.min(dt[j - 1][fi], dt[j][fi]) + A[i][j];
                 else
-                    dt[j][ni] = Math.min(Math.min(dt[j - 1][fi] + A[i][j], dt[j][fi] + A[i][j]), dt[j + 1][fi] + A[i][j]);
+                    dt[j][ni] = Math.min(Math.min(dt[j - 1][fi], dt[j][fi]), dt[j + 1][fi]) + A[i][j];
             }
         }
         int ri = (N + 1) % 2;
