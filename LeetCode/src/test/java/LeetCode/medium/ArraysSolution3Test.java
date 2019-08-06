@@ -24,6 +24,16 @@ public class ArraysSolution3Test {
         Assert.assertArrayEquals(new int[]{2,13,3,11,5,17,7},solution.deckRevealedIncreasing(a));
     }
 
+    @Test
+    public void minFallingPathSum() {
+        int[][] a = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        int[][] b = {{-19, 57}, {-40, -5}};
+        Assert.assertEquals(12, solution.minFallingPathSum(a));
+        System.out.println(solution.minFallingPathSum(b));
+        Assert.assertEquals(-59, solution.minFallingPathSum(b));
+
+    }
+
 
 
 
