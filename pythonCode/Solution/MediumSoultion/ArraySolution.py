@@ -428,6 +428,24 @@ class ArraySolution(object):
                         waitForSet.add(i)
         return countx == len(rooms)
 
+    # 1140. Stone Game II
+    # a 获取的最大的等于总和减去 b 在所有情况中获取的最大的最小的 minmax。
+    # https://blog.csdn.net/zjucor/article/details/97612737
+    def stoneGameII(self, piles: List[int]) -> int:
+        memo = {}
+
+        def helper(a, m):
+            if len(a) == 0: return 0
+            if (len(a), m) in memo: return memo[(len(a), m)]
+            res = 0
+            for i in range(1, min(2 * m, len(a)) + 1):
+                tmp = sum(a) - helper(a[i:], max(m, i))
+                res = max(res, tmp)
+            memo[(len(a), m)] = res
+            return res
+
+        return helper(piles, 1)
+
 
 if __name__ == '__main__':
     print(ArraySolution.findAndReplacePattern(["abc", "deq", "mee", "aqq", "dkd", "ccc"], "abb"))
