@@ -31,3 +31,22 @@ class StringSolution:
             if S.find(x_str) == -1:
                 return False
         return True
+
+    # https://www.cnblogs.com/wkfvawl/p/9362287.html
+    def longestCommonSubsequence(self, text1: str, text2: str) -> int:
+        if len(text1) == 0 or len(text2) == 0: return 0
+        if len(text1) == 1 and text2.find(text1): return 1
+        if len(text2) == 1 and text1.find(text2): return 1
+        if text1[-1] == text2[-1]: return self.longestCommonSubsequence(text1[:-1], text2[:-1]) + 1
+        return max(self.longestCommonSubsequence(text1, text2[:-1]), self.longestCommonSubsequence(text1[:-1], text2))
+
+    def longestCommonSubsequenceDP(self, text1: str, text2: str) -> int:
+        if len(text1) == 0 or len(text2) == 0: return 0
+        dp = [[0] * (len(text2) + 1) for i in range(len(text1) + 1)]
+        for i in range(1, len(text1) + 1):
+            for j in range(1, len(text2) + 1):
+                if text1[i - 1] == text2[j - 1]:
+                    dp[i][j] = dp[i - 1][j - 1] + 1  # 相等时，当前结果等于text1[:-1] 与text2[:-1]的结果+1
+                else:
+                    dp[i][j] = max(dp[i][j - 1], dp[i - 1][j]) # 不等时，等于(text1[:-1],text2) 和(text1,text2[:-1])最大的那个
+        return dp[-1][-1]

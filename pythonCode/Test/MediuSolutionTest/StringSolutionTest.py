@@ -15,3 +15,15 @@ class StringSolutionTest(TestCase):
     def test_queryString(self):
         solution =StringSolution()
         self.assertFalse(solution.queryString("0110",4))
+
+    def test_longestCommonSubsequence(self):
+        solution =StringSolution()
+        self.assertEqual(2,solution.longestCommonSubsequence("abc","adc"))
+        self.assertEqual(3, solution.longestCommonSubsequence("abgfc", "adbbc"))
+        self.assertEqual(4, solution.longestCommonSubsequence("bdcaba", "abcbdab"))
+
+    def test_longestCommonSubsequenceDP(self):
+        solution =StringSolution()
+        self.assertEqual(2,solution.longestCommonSubsequenceDP("abc","adc"))
+        self.assertEqual(3, solution.longestCommonSubsequenceDP("abgfc", "adbbc"))
+        self.assertEqual(4,solution.longestCommonSubsequenceDP("bdcaba","abcbdab"))

@@ -89,6 +89,11 @@ class ArraySolutionTest(TestCase):
         sole=ArraySolution()
         self.assertTrue(sole.canVisitAllRooms([[1],[2],[3],[]]))
 
+    def test_mctFromLeafValues(self):
+        sole=ArraySolution()
+        #self.assertEqual(32,sole.mctFromLeafValues([6,2,4]))
+        self.assertEqual(644,sole.mctFromLeafValues([9,14,6,4,13,12,1,6]))
+
 
 if __name__ == '__main__':
     ArraySolutionTest.main()
