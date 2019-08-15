@@ -447,6 +447,23 @@ class ArraySolution(object):
 
         return helper(piles, 1)
 
+    # 946. Validate Stack Sequences
+    def validateStackSequences(self, pushed: List[int], popped: List[int]) -> bool:
+        stack=[]
+        while pushed or popped:
+            if not stack:
+                stack.append(pushed.pop(0))
+            elif stack and stack[-1]==popped[0]:
+                stack.pop()
+                popped.pop(0)
+            elif stack and pushed and stack[-1] !=popped[0]:
+                stack.append(pushed.pop(0))
+            else:
+                break
+        if not stack and not pushed and not  popped:
+            return True
+        return  False
+
 
 if __name__ == '__main__':
     print(ArraySolution.findAndReplacePattern(["abc", "deq", "mee", "aqq", "dkd", "ccc"], "abb"))
