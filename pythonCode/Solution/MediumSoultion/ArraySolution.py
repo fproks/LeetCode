@@ -464,6 +464,18 @@ class ArraySolution(object):
             return True
         return  False
 
+    #1072. Flip Columns For Maximum Number of Equal Rows
+    def maxEqualRowsAfterFlips(self, matrix: List[List[int]]) -> int:
+        hashMap =collections.defaultdict(int)
+        for row in matrix:
+            hashMap["".join(str(i) for i in row)]+=1
+            hashMap["".join(str(i^1) for i in row)]+=1
+
+        res=0
+        for k,v in hashMap.items():
+            res=max(res,v)
+        return  res
+
 
 if __name__ == '__main__':
     print(ArraySolution.findAndReplacePattern(["abc", "deq", "mee", "aqq", "dkd", "ccc"], "abb"))

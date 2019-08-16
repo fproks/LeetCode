@@ -99,6 +99,11 @@ class ArraySolutionTest(TestCase):
         #self.assertTrue(sole.validateStackSequences([1,2,3,4,5],[4,5,3,2,1]))
         self.assertFalse(sole.validateStackSequences([1, 2, 3, 4, 5], [4,3,5,1,2]))
 
+    def test_maxEqualRowsAfterFlips(self):
+        sole =ArraySolution()
+        self.assertEqual(1,sole.maxEqualRowsAfterFlips([[0,1],[1,1]]))
+        self.assertEqual(2,sole.maxEqualRowsAfterFlips( [[0,0,0],[0,0,1],[1,1,0]]))
+
 
 if __name__ == '__main__':
     ArraySolutionTest.main()
