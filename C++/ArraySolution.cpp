@@ -253,5 +253,16 @@ int ArraySolution::pivotIndex(vector<int> &nums) {
     }
     return  -1;
 }
+bool ArraySolution::carPooling(vector<vector<int>> &trips, int capacity) {
+    int res[10001];
+    fill_n(res,1001,0);
 
+    for (auto trip : trips){
+        for (int i = trip[1]; i <trip[2] ; ++i) {
+            res[i]+=trip[0];
+            if(res[i]>capacity) return false;
+        }
+    }
+    return true;
+}
 

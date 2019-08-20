@@ -31,6 +31,7 @@ public:
     int numPairsDivisibleBy60(vector<int>& time);
     int pivotIndex(vector<int>& nums);
     int maxIncreaseKeepingSkyline(vector<vector<int>>& grid);
+    bool carPooling(vector<vector<int>>& trips, int capacity);
 
 
 };
