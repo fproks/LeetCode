@@ -15,7 +15,12 @@ int main() {
     //isRobotBounded();
     //pivotIndexTest();
     //repeatedStringMatch();
-    buddyStrings();
+    //buddyStrings();
+    //largestValsFromLabelsTest();
+    vector<int> *a =new vector<int>();
+    a->push_back(1);
+    a->push_back(5);
+    std::cout<< a->at(1)<<std::endl;
     std::cout<<"-------------"<<std::endl;
     return 0;
 }

@@ -32,6 +32,8 @@ public:
     int pivotIndex(vector<int>& nums);
     int maxIncreaseKeepingSkyline(vector<vector<int>>& grid);
     bool carPooling(vector<vector<int>>& trips, int capacity);
+    int mincostTickets(vector<int>& days, vector<int>& costs);
+    int largestValsFromLabels(vector<int>& values, vector<int>& labels, int num_wanted, int use_limit);
 
 
 };

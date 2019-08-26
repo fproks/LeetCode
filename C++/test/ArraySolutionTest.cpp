@@ -97,3 +97,9 @@ void pivotIndexTest() {
     assert(arraySolution->pivotIndex(c)==2);
     assert(arraySolution->pivotIndex(d)==0);
 }
+
+void largestValsFromLabelsTest(){
+    vector<int> a ={5,4,3,2,1};
+    vector<int> ab={1,1,2,2,3};
+    assert(arraySolution->largestValsFromLabels(a,ab,3,1)==9);
+}

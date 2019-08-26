@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <queue>
 #include <iostream>
+#include <map>
 
 
 int ArraySolution::largestSumAfterKNegations(vector<int> &A, int K) {
@@ -264,5 +265,48 @@ bool ArraySolution::carPooling(vector<vector<int>> &trips, int capacity) {
         }
     }
     return true;
+}
+
+int ArraySolution::mincostTickets(vector<int> &days, vector<int> &costs) {
+    vector<int> dp(366,INT_MAX);
+    for(auto day :days)
+        dp[day]=0;
+    dp[0]=0;
+
+    for(int i=1;i<366;i++){
+        if(dp[i]==INT_MAX)dp[i]=dp[i-1];
+        else{
+            int cur =dp[i-1]+costs[0];
+            cur=min(cur,costs[1]+dp[max(0,i-1)]);
+            cur=min(cur,costs[2]+dp[max(0,i-30)]);
+            dp[i]=cur;
+        }
+    }
+    return  dp[days[days.size()-1]];
+}
+
+
+int ArraySolution::largestValsFromLabels(vector<int>& values, vector<int>& labels, int num_wanted, int use_limit) {
+    vector<pair<int,int>> vi;
+    for (int i = 0; i <values.size() ; ++i) {
+        vi.push_back(pair<int,int>(values[i],labels[i]));
+    }
+    sort(vi.begin(),vi.end(), [](const pair<int,int> &pair1, const pair<int,int> &pari2){
+        if(pair1.first!= pari2.first) return pair1.first >pari2.first;
+    });
+    int wanted=0;
+    map<int,int> limit;
+    int result=0;
+    for (int j = 0; j <values.size() ; ++j) {
+        if(wanted<num_wanted) {
+            if (limit[vi[j].second] < use_limit) {
+                result += vi[j].first;
+                wanted++;
+                limit[vi[j].second] += 1;
+            }
+        } else{
+            return  result;
+        }
+    }
 }
 
