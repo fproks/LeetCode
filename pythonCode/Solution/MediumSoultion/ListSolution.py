@@ -160,3 +160,22 @@ class ListSolution:
 
         dfs(root, root.val, root.val)
         return self.max_diff
+
+
+    '''
+    865. Smallest Subtree with all the Deepest Nodes
+    https://blog.csdn.net/dai_qingyun/article/details/86167018
+    首先找最深节点的问题可以转化为求解二叉树高度的问题，有了高度信息之后，就会产生以下两种情况：
+    当前根节点的左右子树一样高，那么就返回当前根节点。
+    当前根节点的左右子树不一样高，那么返回相对较高的子树的根节点。
+    经过递归处理之后，得到最终的答案。
+    '''
+    def subtreeWithAllDeepest(self, root: TreeNode) -> TreeNode:
+        def deep(root: TreeNode) -> int:
+            if root is None:return 0
+            return max(deep(root.left)+1,deep(root.right)+1)
+        ldp = deep(root.left)
+        rdp = deep(root.right)
+        if ldp < rdp: return self.subtreeWithAllDeepest(root.right)
+        if ldp > rdp: return self.subtreeWithAllDeepest(root.left)
+        return root
