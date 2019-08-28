@@ -27,3 +27,9 @@ class StringSolutionTest(TestCase):
         self.assertEqual(2,solution.longestCommonSubsequenceDP("abc","adc"))
         self.assertEqual(3, solution.longestCommonSubsequenceDP("abgfc", "adbbc"))
         self.assertEqual(4,solution.longestCommonSubsequenceDP("bdcaba","abcbdab"))
+
+
+    def test_minimumDeleteSum(self):
+        solution=StringSolution()
+        self.assertEqual(231,solution.minimumDeleteSum("sea","eat"))
+        self.assertEqual(403, solution.minimumDeleteSum("delete", "leet"))
