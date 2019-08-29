@@ -477,6 +477,29 @@ class ArraySolution(object):
         return  res
 
 
+    #1017. Convert to Base -2
+    def baseNeg2(self, N: int) -> str:
+        bs = bin(N)[2:][::-1]
+        res =  [int(i) for i in list(bs)]
+
+        def carrier(res,i):
+            if i == len(res) - 1:
+                res += [1]
+                if len(res) % 2 == 0:
+                    res += [1]
+            else:
+                res[i + 1] += 1
+        for i in range(1,len(res)):
+            if res[i] == 0:
+                continue
+            elif res[i] == 1 and i % 2 == 1:
+                carrier(res,i)
+            elif res[i] == 2:
+                res[i] = 0
+                carrier(res, i)
+        return ''.join([str(i) for i in res[::-1]])
+
+
 if __name__ == '__main__':
     print(ArraySolution.findAndReplacePattern(["abc", "deq", "mee", "aqq", "dkd", "ccc"], "abb"))
     print(ArraySolution.toDigits("abcddddddddd"))

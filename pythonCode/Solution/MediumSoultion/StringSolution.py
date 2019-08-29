@@ -58,6 +58,7 @@ class StringSolution:
     求两个字符串不相同部分的最小和，就等于求两个子串的和减去两个子串的最大公共序列的和
     因此过程中不再记录序列长度，记录相同序列和的最大值
     '''
+
     def minimumDeleteSum(self, s1: str, s2: str) -> int:
         def maxCommonSubsequenceDP(text1: str, text2: str) -> int:
             if len(text1) == 0 or len(text2) == 0: return 0
