@@ -33,3 +33,13 @@ class StringSolutionTest(TestCase):
         solution=StringSolution()
         self.assertEqual(231,solution.minimumDeleteSum("sea","eat"))
         self.assertEqual(403, solution.minimumDeleteSum("delete", "leet"))
+
+    def test_camelMatch(self):
+        solution=StringSolution()
+        self.assertEqual([True,False,True,False,False],solution.camelMatch(["FooBar","FooBarTest","FootBall","FrameBuffer","ForceFeedBack"],"FoBa"))
+        self.assertEqual([True, False, True, True, False],
+                         solution.camelMatch(["FooBar","FooBarTest","FootBall","FrameBuffer","ForceFeedBack"],
+                                             "FB"))
+        self.assertEqual([False, True, False, False, False],
+                         solution.camelMatch(["FooBar","FooBarTest","FootBall","FrameBuffer","ForceFeedBack"],
+                                             "FoBaT"))

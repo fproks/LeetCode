@@ -1,3 +1,6 @@
+from typing import List
+
+
 class StringSolution:
 
     def repeatedStringMatch(self, A: str, B: str) -> int:
@@ -78,3 +81,22 @@ class StringSolution:
             return su
 
         return sumOrd(s1) + sumOrd(s2) - maxCommonSubsequenceDP(s1, s2)
+
+
+    # 1023. Camelcase Matching
+    def camelMatch(self, queries: List[str], pattern: str) -> List[bool]:
+        def matchs(querie: str, pattern: str) -> bool:
+            if len(querie) < len(pattern): return False
+            querUpper = "".join(filter(str.isupper, querie))
+            pattUpper = "".join(filter(str.isupper, pattern))
+            if querUpper != pattUpper: return False
+            l = 0
+            for i in querie:
+                if l == len(pattern): return True
+                if i == pattern[l]: l += 1
+            return l == len(pattern)
+
+        result = []
+        for quer in queries:
+            result.append(matchs(quer, pattern))
+        return result
