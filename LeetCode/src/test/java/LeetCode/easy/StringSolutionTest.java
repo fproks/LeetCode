@@ -92,4 +92,9 @@ public class StringSolutionTest {
         Assert.assertEquals("a", solutions.removeDuplicates("aaaaaaaaa"));
     }
 
+    @Test
+    public  void  defangIPaddrTest(){
+        Assert.assertEquals("1[.]1[.]1[.]1",solutions.defangIPaddr("1.1.1.1"));
+    }
+
 }

@@ -337,28 +337,40 @@ public class StringSolution implements Solution {
     public String gcdOfStrings(String str1, String str2) {
         int minLength = str1.length() < str2.length() ? str1.length() : str2.length();
         int commonDivisor = minLength;
-        StringBuilder builder1 =new StringBuilder();
+        StringBuilder builder1 = new StringBuilder();
         while (commonDivisor > 0) {
-            if (str1.length() % commonDivisor == 0 && str2.length() % commonDivisor == 0){
-                builder1.delete(0,builder1.length());
-                String result =str1.substring(0,commonDivisor);
-                int div =str1.length()/commonDivisor;
-                while ((div--)>0){
+            if (str1.length() % commonDivisor == 0 && str2.length() % commonDivisor == 0) {
+                builder1.delete(0, builder1.length());
+                String result = str1.substring(0, commonDivisor);
+                int div = str1.length() / commonDivisor;
+                while ((div--) > 0) {
                     builder1.append(result);
                 }
-                if(builder1.toString().equals(str1)){
-                    div =str2.length()/commonDivisor;
-                    builder1.delete(0,builder1.length());
-                    while ((div--)>0){
+                if (builder1.toString().equals(str1)) {
+                    div = str2.length() / commonDivisor;
+                    builder1.delete(0, builder1.length());
+                    while ((div--) > 0) {
                         builder1.append(result);
                     }
-                    if(builder1.toString().equals(str2))return  result;
+                    if (builder1.toString().equals(str2)) return result;
                 }
             }
             commonDivisor--;
         }
-        return  "";
+        return "";
 
+    }
+
+    // 1108. Defanging an IP Address
+    public String defangIPaddr(String address) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < address.length(); i++) {
+            if (address.charAt(i) != '.') {
+                builder.append(address.charAt(i));
+            } else
+                builder.append("[.]");
+        }
+        return builder.toString();
     }
 }
 

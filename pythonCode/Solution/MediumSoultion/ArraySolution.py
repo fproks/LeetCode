@@ -499,6 +499,14 @@ class ArraySolution(object):
                 carrier(res, i)
         return ''.join([str(i) for i in res[::-1]])
 
+    def escapeGhosts(self, ghosts: List[List[int]], target: List[int]) -> bool:
+        dist_my=abs(target[0])+abs(target[1])
+        for g in ghosts:
+            if abs(g[0]-target[0])+abs(g[1]-target[1]) <=dist_my:
+                return False
+        return True
+
+
 
 if __name__ == '__main__':
     print(ArraySolution.findAndReplacePattern(["abc", "deq", "mee", "aqq", "dkd", "ccc"], "abb"))

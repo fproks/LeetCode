@@ -105,5 +105,9 @@ class ArraySolutionTest(TestCase):
         self.assertEqual(2,sole.maxEqualRowsAfterFlips( [[0,0,0],[0,0,1],[1,1,0]]))
 
 
+    def test_escapeGhosts(self):
+        sole =ArraySolution()
+        self.assertFalse(sole.escapeGhosts([[1,8],[-9,0],[-7,-6],[4,3],[1,3]],[6,-9]))
+
 if __name__ == '__main__':
     ArraySolutionTest.main()
