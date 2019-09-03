@@ -372,6 +372,33 @@ public class StringSolution implements Solution {
         }
         return builder.toString();
     }
+
+    //1160. Find Words That Can Be Formed by Characters
+    public int countCharacters(String[] words, String chars) {
+        int[] charsNumber = new int[26];
+        for (char c : chars.toCharArray()) {
+            charsNumber[c - 'a']++;
+        }
+
+        int result=0;
+        for (String str : words) {
+            boolean flag = true;
+            int[] strNumber = new int[26];
+            for (char c : str.toCharArray()) {
+                strNumber[c - 'a']++;
+            }
+            for (int i = 0; i < 26; i++) {
+                if (strNumber[i] > charsNumber[i]) {
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag){
+                result+=str.length();
+            }
+        }
+        return  result;
+    }
 }
 
 

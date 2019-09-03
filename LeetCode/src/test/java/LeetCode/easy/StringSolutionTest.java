@@ -97,4 +97,9 @@ public class StringSolutionTest {
         Assert.assertEquals("1[.]1[.]1[.]1",solutions.defangIPaddr("1.1.1.1"));
     }
 
+    @Test
+    public  void countCharactersTest(){
+        Assert.assertEquals(10,solutions.countCharacters( new String[]{"hello","world","leetcode"},"welldonehoneyr"));
+    }
+
 }
