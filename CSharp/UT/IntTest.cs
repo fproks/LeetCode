@@ -21,14 +21,20 @@ namespace UT {
         }
 
         [Fact]
-        public void IsCousinsTest()
-        {
+        public void IsCousinsTest() {
             TreeNode tree = new TreeNode(1);
             tree.left = new TreeNode(2);
             tree.left.right = new TreeNode(4);
             tree.right = new TreeNode(3);
             tree.right.right = new TreeNode(5);
             Assert.True(new isCousinsSolution().IsCousins(tree, 4, 5));
+        }
+
+        [Fact]
+        public void TribonacciTest() {
+            var tribon = new TribonacciSolution();
+            Assert.Equal(4, tribon.Tribonacci(4));
+            Assert.Equal(1389537, tribon.Tribonacci(25));
         }
     }
 }

@@ -61,4 +61,29 @@ namespace CSharp {
             return fib[N];
         }
     }
+
+    // 1137. N-th Tribonacci Number
+    public class TribonacciSolution {
+        private int[] tribon;
+
+        public TribonacciSolution() {
+            tribon = new int[38];
+            for (int i = 0; i < 38; i++) {
+                tribon[i] = -1;
+            }
+
+            tribon[0] = 0;
+            tribon[1] = 1;
+            tribon[2] = 1;
+        }
+
+        public int Tribonacci(int n) {
+            if (tribon[n] != -1) return tribon[n];
+            else {
+                tribon[n] = Tribonacci(n - 1) + Tribonacci(n - 2) + Tribonacci(n - 3);
+            }
+
+            return tribon[n];
+        }
+    }
 }
