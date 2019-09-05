@@ -102,4 +102,12 @@ public class StringSolutionTest {
         Assert.assertEquals(10,solutions.countCharacters( new String[]{"hello","world","leetcode"},"welldonehoneyr"));
     }
 
+    @Test
+    public  void numSmallerByFrequencyTest(){
+       // Assert.assertArrayEquals(new int[]{1},solutions.numSmallerByFrequency(new String[] {"cbd"},   new String[]{"zaaaz"}));
+       // Assert.assertArrayEquals(new int[]{1,2},solutions.numSmallerByFrequency(new String[] {"bbb","cc"},   new String[]{"a","aa","aaa","aaaa"}));
+        Assert.assertArrayEquals(new int[]{6,1,1,2,3,3,3,1,3,2},solutions.numSmallerByFrequency(new String[] {"bba","abaaaaaa","aaaaaa","bbabbabaab","aba","aa","baab","bbbbbb","aab","bbabbaabb"},
+                new String[]{"aaabbb","aab","babbab","babbbb","b","bbbbbbbbab","a","bbbbbbbbbb","baaabbaab","aa"}));
+    }
+
 }

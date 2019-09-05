@@ -380,7 +380,7 @@ public class StringSolution implements Solution {
             charsNumber[c - 'a']++;
         }
 
-        int result=0;
+        int result = 0;
         for (String str : words) {
             boolean flag = true;
             int[] strNumber = new int[26];
@@ -393,11 +393,46 @@ public class StringSolution implements Solution {
                     break;
                 }
             }
-            if(flag){
-                result+=str.length();
+            if (flag) {
+                result += str.length();
             }
         }
-        return  result;
+        return result;
+    }
+
+    // 1170. Compare Strings by Frequency of the Smallest Character
+    public int[] numSmallerByFrequency(String[] queries, String[] words) {
+        int[] queriesInt = this.stringFrequency(queries);
+        int[] wordsInt = this.stringFrequency(words);
+        Arrays.sort(wordsInt);
+        int[] result = new int[queries.length];
+        for (int i = 0; i < queriesInt.length; i++) {
+            int tmp = 0;
+            for (; tmp < wordsInt.length; tmp++) {
+                if (wordsInt[tmp] > queriesInt[i]) break;
+            }
+            result[i] = wordsInt.length - tmp;
+        }
+        return result;
+    }
+
+    private int[] stringFrequency(String[] words) {
+        int[] wordsInt = new int[words.length];
+        for (int j = 0; j < words.length; j++) {
+            String q = words[j];
+           int max=0;
+           char tmpc='z';
+           for (int i =0;i<q.length();i++){
+               char c =q.charAt(i);
+               if(tmpc==c)max++;
+               else if(tmpc >c){
+                   tmpc=c;
+                   max=1;
+               }
+           }
+            wordsInt[j] = max;
+        }
+        return wordsInt;
     }
 }
 
