@@ -449,63 +449,69 @@ class ArraySolution(object):
 
     # 946. Validate Stack Sequences
     def validateStackSequences(self, pushed: List[int], popped: List[int]) -> bool:
-        stack=[]
+        stack = []
         while pushed or popped:
             if not stack:
                 stack.append(pushed.pop(0))
-            elif stack and stack[-1]==popped[0]:
+            elif stack and stack[-1] == popped[0]:
                 stack.pop()
                 popped.pop(0)
-            elif stack and pushed and stack[-1] !=popped[0]:
+            elif stack and pushed and stack[-1] != popped[0]:
                 stack.append(pushed.pop(0))
             else:
                 break
-        if not stack and not pushed and not  popped:
+        if not stack and not pushed and not popped:
             return True
-        return  False
+        return False
 
-    #1072. Flip Columns For Maximum Number of Equal Rows
+    # 1072. Flip Columns For Maximum Number of Equal Rows
     def maxEqualRowsAfterFlips(self, matrix: List[List[int]]) -> int:
-        hashMap =collections.defaultdict(int)
+        hashMap = collections.defaultdict(int)
         for row in matrix:
-            hashMap["".join(str(i) for i in row)]+=1
-            hashMap["".join(str(i^1) for i in row)]+=1
+            hashMap["".join(str(i) for i in row)] += 1
+            hashMap["".join(str(i ^ 1) for i in row)] += 1
 
-        res=0
-        for k,v in hashMap.items():
-            res=max(res,v)
-        return  res
+        res = 0
+        for k, v in hashMap.items():
+            res = max(res, v)
+        return res
 
-
-    #1017. Convert to Base -2
+    # 1017. Convert to Base -2
     def baseNeg2(self, N: int) -> str:
         bs = bin(N)[2:][::-1]
-        res =  [int(i) for i in list(bs)]
+        res = [int(i) for i in list(bs)]
 
-        def carrier(res,i):
+        def carrier(res, i):
             if i == len(res) - 1:
                 res += [1]
                 if len(res) % 2 == 0:
                     res += [1]
             else:
                 res[i + 1] += 1
-        for i in range(1,len(res)):
+
+        for i in range(1, len(res)):
             if res[i] == 0:
                 continue
             elif res[i] == 1 and i % 2 == 1:
-                carrier(res,i)
+                carrier(res, i)
             elif res[i] == 2:
                 res[i] = 0
                 carrier(res, i)
         return ''.join([str(i) for i in res[::-1]])
 
     def escapeGhosts(self, ghosts: List[List[int]], target: List[int]) -> bool:
-        dist_my=abs(target[0])+abs(target[1])
+        dist_my = abs(target[0]) + abs(target[1])
         for g in ghosts:
-            if abs(g[0]-target[0])+abs(g[1]-target[1]) <=dist_my:
+            if abs(g[0] - target[0]) + abs(g[1] - target[1]) <= dist_my:
                 return False
         return True
 
+    # 1122. Relative Sort Array
+    def relativeSortArray(self, arr1: List[int], arr2: List[int]) -> List[int]:
+        res = []
+        for i in arr2:
+            res = res + [i] * arr1.count(i)
+        return res + sorted(filter(lambda x: arr2.count(x) == 0, arr1))
 
 
 if __name__ == '__main__':

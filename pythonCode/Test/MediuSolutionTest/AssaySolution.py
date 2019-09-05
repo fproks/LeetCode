@@ -109,5 +109,9 @@ class ArraySolutionTest(TestCase):
         sole =ArraySolution()
         self.assertFalse(sole.escapeGhosts([[1,8],[-9,0],[-7,-6],[4,3],[1,3]],[6,-9]))
 
+    def test_relativeSortArray(self):
+        sole =ArraySolution()
+        self.assertEqual([2,2,2,1,4,3,3,9,6,7,19],sole.relativeSortArray([2,3,1,3,2,4,6,7,9,2,19], [2,1,4,3,9,6]))
+
 if __name__ == '__main__':
     ArraySolutionTest.main()
