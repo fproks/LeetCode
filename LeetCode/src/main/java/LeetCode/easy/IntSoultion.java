@@ -75,5 +75,21 @@ public class IntSoultion {
         return str;
     }
 
+    //1103. Distribute Candies to People
+    public int[] distributeCandies(int candies, int num_people) {
+        int remain =candies;
+        int[] result=new int[num_people];
+        int idx=0,current=0;
+        while (remain>0){
+            if(idx>=num_people){idx=0;continue;}
+            else {
+                current =++current >remain? remain :current;
+                result[idx++]+=current;
+                remain-=current;
+            }
+        }
+        return  result;
+    }
+
 
 }

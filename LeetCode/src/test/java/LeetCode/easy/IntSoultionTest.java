@@ -27,4 +27,11 @@ public class IntSoultionTest {
         Assert.assertEquals(soultion.largestTimeFromDigits(new int[]{0, 0, 0, 0}), "00:00");
     }
 
+    @Test
+    public void distributeCandiesTest(){
+        IntSoultion soultion =new IntSoultion();
+        Assert.assertArrayEquals(new int[]{5,2,3},soultion.distributeCandies(10,3));
+        Assert.assertArrayEquals(new int[]{1,2,3,1},soultion.distributeCandies(7,4));
+    }
+
 }
