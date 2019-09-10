@@ -179,3 +179,15 @@ class ListSolution:
         if ldp < rdp: return self.subtreeWithAllDeepest(root.right)
         if ldp > rdp: return self.subtreeWithAllDeepest(root.left)
         return root
+
+    # 1123. Lowest Common Ancestor of Deepest Leaves
+    # 和上面的一模一样
+    def lcaDeepestLeaves(self, root: TreeNode) -> TreeNode:
+        def deep(root: TreeNode)-> int:
+            if root is None: return 0
+            return  max(deep(root.left)+1,deep(root.right)+1)
+        ldp =deep(root.left)
+        rdp =deep(root.right)
+        if ldp <rdp :return  self.lcaDeepestLeaves(root.right)
+        if ldp >rdp: return  self.lcaDeepestLeaves(root.left)
+        return  root

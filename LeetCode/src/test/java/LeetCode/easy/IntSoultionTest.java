@@ -34,4 +34,10 @@ public class IntSoultionTest {
         Assert.assertArrayEquals(new int[]{1,2,3,1},soultion.distributeCandies(7,4));
     }
 
+    @Test
+    public void dayOfTheWeekTest(){
+        IntSoultion soultion =new IntSoultion();
+        Assert.assertEquals("Saturday",soultion.dayOfTheWeek(31,8,2019));
+    }
+
 }
