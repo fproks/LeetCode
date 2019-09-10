@@ -257,6 +257,60 @@ public class TreeNodeSolution {
         return  root;
     }
 
+    public TreeNode recoverFromPreorder(String S) {
+        if(S.length()==0) return  null;
+        int val =0;
+        if(S.indexOf('-') <=0) {
+            val =Integer.parseInt(S);
+            return  new TreeNode(val);
+        } else {
+            val = Integer.parseInt(S.substring(0, S.indexOf('-')));
+            TreeNode tree = new TreeNode(val);
+            String[] list = this.remormatterPreorder(S.substring(S.indexOf("-")));
+            if (list.length > 0) tree.left = this.recoverFromPreorder(list[0]);
+            if (list.length == 2) tree.right = this.recoverFromPreorder(list[1]);
+            return tree;
+        }
+    }
+
+    public String[] remormatterPreorder(String s) {
+        List<String> result = new ArrayList<>();
+        int idxList = this.findOnlyOnePreorder(s);
+
+        if(idxList<=0) result.add(this.reduceByPreorder(s.substring(1)));
+        else {
+            result.add(this.reduceByPreorder(s.substring(1,idxList)));
+            result.add(this.reduceByPreorder(s.substring(idxList+1)));
+        }
+        return result.toArray(new String[0]);
+    }
+
+    private String reduceByPreorder(String s) {
+        StringBuilder builder = new StringBuilder();
+        StringBuilder dp = new StringBuilder();
+        for (char c : s.toCharArray()) {
+            if (c == '-') dp.append('-');
+            else {
+                if (dp.length() != 0) builder.append(dp.delete(0, 1));
+                builder.append(c);
+                dp.delete(0, dp.length());
+            }
+        }
+        return builder.toString();
+    }
+
+    private int findOnlyOnePreorder(String s) {
+        int dp = 0;
+        for (int i = 1; i < s.length(); i++) {
+            if (s.charAt(i) == '-') dp++;
+            else {
+                if (dp == 1) return  i-1;
+                else  dp=0;
+            }
+        }
+        return  0;
+    }
+
 
 
 }
