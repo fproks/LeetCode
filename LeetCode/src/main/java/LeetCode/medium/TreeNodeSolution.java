@@ -3,7 +3,7 @@ package LeetCode.medium;
 import LeetCode.struct.TreeNode;
 
 import java.util.*;
-import java.util.stream.Stream;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @user: linhos
@@ -193,7 +193,7 @@ public class TreeNodeSolution {
     public List<Integer> largestValues(TreeNode root) {
         Queue<TreeNode> queue = new LinkedList<>();
         LinkedList<Integer> list = new LinkedList<>();
-        if(root==null) return list;
+        if (root == null) return list;
         queue.add(root);
         while (!queue.isEmpty()) {
             int tmp = queue.peek().val;
@@ -211,20 +211,21 @@ public class TreeNodeSolution {
     }
 
     //526. Beautiful Arrangement
-    public int countArrangment(int n){
-        int[] nums =new int[n];
-        int res =findWay(nums,1);
+    public int countArrangment(int n) {
+        int[] nums = new int[n];
+        int res = findWay(nums, 1);
         return res;
     }
-    private int findWay(int[] num,int index){
-        if (index == num.length+1) return 1;
+
+    private int findWay(int[] num, int index) {
+        if (index == num.length + 1) return 1;
         int total = 0;
         for (int i = 0; i < num.length; i++) {
             if (num[i] != 1) {
-                if ((i+1) % index == 0 || index % (i+1) == 0) {
+                if ((i + 1) % index == 0 || index % (i + 1) == 0) {
                     int[] newNum = num.clone();
                     newNum[i] = 1;
-                    total += findWay(newNum, index+1);
+                    total += findWay(newNum, index + 1);
                 }
             }
         }
@@ -254,15 +255,15 @@ public class TreeNodeSolution {
                 }
             }
         }
-        return  root;
+        return root;
     }
 
     public TreeNode recoverFromPreorder(String S) {
-        if(S.length()==0) return  null;
-        int val =0;
-        if(S.indexOf('-') <=0) {
-            val =Integer.parseInt(S);
-            return  new TreeNode(val);
+        if (S.length() == 0) return null;
+        int val = 0;
+        if (S.indexOf('-') <= 0) {
+            val = Integer.parseInt(S);
+            return new TreeNode(val);
         } else {
             val = Integer.parseInt(S.substring(0, S.indexOf('-')));
             TreeNode tree = new TreeNode(val);
@@ -277,10 +278,10 @@ public class TreeNodeSolution {
         List<String> result = new ArrayList<>();
         int idxList = this.findOnlyOnePreorder(s);
 
-        if(idxList<=0) result.add(this.reduceByPreorder(s.substring(1)));
+        if (idxList <= 0) result.add(this.reduceByPreorder(s.substring(1)));
         else {
-            result.add(this.reduceByPreorder(s.substring(1,idxList)));
-            result.add(this.reduceByPreorder(s.substring(idxList+1)));
+            result.add(this.reduceByPreorder(s.substring(1, idxList)));
+            result.add(this.reduceByPreorder(s.substring(idxList + 1)));
         }
         return result.toArray(new String[0]);
     }
@@ -304,13 +305,36 @@ public class TreeNodeSolution {
         for (int i = 1; i < s.length(); i++) {
             if (s.charAt(i) == '-') dp++;
             else {
-                if (dp == 1) return  i-1;
-                else  dp=0;
+                if (dp == 1) return i - 1;
+                else dp = 0;
             }
         }
-        return  0;
+        return 0;
     }
 
+    // 1161. Maximum Level Sum of a Binary Tree
+    public int maxLevelSum(TreeNode root) {
+        List<TreeNode> list = new ArrayList<>();
+        int curridx = 1, idx = 0, maxValue = 0;
+        list.add(root);
+        while (!list.isEmpty()) {
+            List<TreeNode> tmp = new ArrayList<>();
+            int tmpMax = 0;
+            for (TreeNode node : list) {
+                if (node.left != null) tmp.add(node.left);
+                if (node.right != null) tmp.add(node.right);
+                tmpMax += node.val;
+
+            }
+            if (tmpMax > maxValue) {
+                maxValue = tmpMax;
+                idx = curridx;
+            }
+            curridx++;
+            list =tmp;
+        }
+        return idx;
+    }
 
 
 }
