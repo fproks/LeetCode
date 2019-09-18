@@ -434,6 +434,23 @@ public class StringSolution implements Solution {
         }
         return wordsInt;
     }
+    //1189. Maximum Number of Balloons
+    public int maxNumberOfBalloons(String text) {
+        int b =0,a=0,l=0,o=0,n=0;
+        for (char c : text.toCharArray()){
+            if(c=='b')b++;
+            if(c=='a')a++;
+            if(c=='l')l++;
+            if(c=='o')o++;
+            if(c=='n')n++;
+        }
+        o=o/2;
+        l=l/2;
+        int result=b;
+        result = Math.min(Math.min(Math.min(Math.min(result, a),l),o),n);
+        return  result;
+    }
+
 }
 
 

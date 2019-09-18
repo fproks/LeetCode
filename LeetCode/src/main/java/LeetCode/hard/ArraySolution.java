@@ -38,4 +38,5 @@ public class ArraySolution {
         }
         grid[x][y]=pre;
     }
+
 }

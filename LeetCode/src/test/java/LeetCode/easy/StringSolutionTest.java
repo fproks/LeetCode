@@ -110,4 +110,11 @@ public class StringSolutionTest {
                 new String[]{"aaabbb","aab","babbab","babbbb","b","bbbbbbbbab","a","bbbbbbbbbb","baaabbaab","aa"}));
     }
 
+    @Test
+    public  void  maxNumberOfBalloons(){
+        Assert.assertEquals(2,solutions.maxNumberOfBalloons("loonbalxballpoon"));
+        Assert.assertEquals(0,solutions.maxNumberOfBalloons("leetcode"));
+        Assert.assertEquals(1,solutions.maxNumberOfBalloons("nlaebolko"));
+    }
+
 }
