@@ -7,4 +7,4 @@ add_executable(C__ main.cpp
         ArraySolution.cpp
         StringSolution.cpp
         StringSolution.h
-        solution/NumberSolution.cpp solution/NumberSolution.h solution/MyLinkedList.h)
+        solution/NumberSolution.cpp solution/NumberSolution.h solution/MyLinkedList.h solution/MyTuple.h)

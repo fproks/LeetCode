@@ -513,6 +513,23 @@ class ArraySolution(object):
             res = res + [i] * arr1.count(i)
         return res + sorted(filter(lambda x: arr2.count(x) == 0, arr1))
 
+    # 1200. Minimum Absolute Difference
+    def minimumAbsDifference(self, arr: List[int]) -> List[List[int]]:
+        arr.sort()
+        result = []
+        remin = sys.maxsize
+        for i in range(len(arr) - 1):
+            a = min(arr[i], arr[i + 1])
+            b = max(arr[i], arr[i + 1])
+            if b - a < remin:
+                result = []
+                result.append([a, b])
+                remin = b - a
+                continue
+            if b - a == remin:
+                result.append([a, b])
+        return result
+
 
 if __name__ == '__main__':
     print(ArraySolution.findAndReplacePattern(["abc", "deq", "mee", "aqq", "dkd", "ccc"], "abb"))

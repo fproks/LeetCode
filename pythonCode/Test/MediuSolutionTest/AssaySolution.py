@@ -60,7 +60,7 @@ class ArraySolutionTest(TestCase):
     def test_sortArray(self):
         sole = ArraySolution()
         self.assertEqual([1, 2, 3, 5], sole.sortArray([5, 2, 3, 1]))
-        self.assertEqual([0, 0, 1, 1, 2, 5], sole.sortArray([5, 1, 1, 2, 0, 0],3))
+        self.assertEqual([0, 0, 1, 1, 2, 5], sole.sortArray([5, 1, 1, 2, 0, 0], 3))
 
     def test_intervalIntersection(self):
         sole = ArraySolution()
@@ -70,48 +70,54 @@ class ArraySolutionTest(TestCase):
 
     def test_maxSumAfterPartitioning(self):
         sole = ArraySolution()
-        self.assertEqual(84, sole.maxSumAfterPartitioning([1, 15, 7, 9, 2, 5, 10],3))
+        self.assertEqual(84, sole.maxSumAfterPartitioning([1, 15, 7, 9, 2, 5, 10], 3))
 
     def test_pancakeSort(self):
-        sole =ArraySolution()
-        print(sole.pancakeSort([3,2,4,1]))
-
+        sole = ArraySolution()
+        print(sole.pancakeSort([3, 2, 4, 1]))
 
     def test_kClosest(self):
-        sole= ArraySolution()
-        print(sole.kClosest([[3,3],[5,-1],[-2,4]],2))
+        sole = ArraySolution()
+        print(sole.kClosest([[3, 3], [5, -1], [-2, 4]], 2))
 
     def test_stoneGame(self):
-        sole =ArraySolution()
-        self.assertTrue(sole.stoneGame([5,3,4,5]))
+        sole = ArraySolution()
+        self.assertTrue(sole.stoneGame([5, 3, 4, 5]))
 
     def test_canVisitAllRooms(self):
-        sole=ArraySolution()
-        self.assertTrue(sole.canVisitAllRooms([[1],[2],[3],[]]))
+        sole = ArraySolution()
+        self.assertTrue(sole.canVisitAllRooms([[1], [2], [3], []]))
 
     def test_mctFromLeafValues(self):
-        sole=ArraySolution()
-        #self.assertEqual(32,sole.mctFromLeafValues([6,2,4]))
-        self.assertEqual(644,sole.mctFromLeafValues([9,14,6,4,13,12,1,6]))
+        sole = ArraySolution()
+        # self.assertEqual(32,sole.mctFromLeafValues([6,2,4]))
+        self.assertEqual(644, sole.mctFromLeafValues([9, 14, 6, 4, 13, 12, 1, 6]))
 
     def test_validateStackSequences(self):
-        sole=ArraySolution()
-        #self.assertTrue(sole.validateStackSequences([1,2,3,4,5],[4,5,3,2,1]))
-        self.assertFalse(sole.validateStackSequences([1, 2, 3, 4, 5], [4,3,5,1,2]))
+        sole = ArraySolution()
+        # self.assertTrue(sole.validateStackSequences([1,2,3,4,5],[4,5,3,2,1]))
+        self.assertFalse(sole.validateStackSequences([1, 2, 3, 4, 5], [4, 3, 5, 1, 2]))
 
     def test_maxEqualRowsAfterFlips(self):
-        sole =ArraySolution()
-        self.assertEqual(1,sole.maxEqualRowsAfterFlips([[0,1],[1,1]]))
-        self.assertEqual(2,sole.maxEqualRowsAfterFlips( [[0,0,0],[0,0,1],[1,1,0]]))
-
+        sole = ArraySolution()
+        self.assertEqual(1, sole.maxEqualRowsAfterFlips([[0, 1], [1, 1]]))
+        self.assertEqual(2, sole.maxEqualRowsAfterFlips([[0, 0, 0], [0, 0, 1], [1, 1, 0]]))
 
     def test_escapeGhosts(self):
-        sole =ArraySolution()
-        self.assertFalse(sole.escapeGhosts([[1,8],[-9,0],[-7,-6],[4,3],[1,3]],[6,-9]))
+        sole = ArraySolution()
+        self.assertFalse(sole.escapeGhosts([[1, 8], [-9, 0], [-7, -6], [4, 3], [1, 3]], [6, -9]))
 
     def test_relativeSortArray(self):
-        sole =ArraySolution()
-        self.assertEqual([2,2,2,1,4,3,3,9,6,7,19],sole.relativeSortArray([2,3,1,3,2,4,6,7,9,2,19], [2,1,4,3,9,6]))
+        sole = ArraySolution()
+        self.assertEqual([2, 2, 2, 1, 4, 3, 3, 9, 6, 7, 19],
+                         sole.relativeSortArray([2, 3, 1, 3, 2, 4, 6, 7, 9, 2, 19], [2, 1, 4, 3, 9, 6]))
+
+    def test_minimumAbsDifference(self):
+        sole = ArraySolution()
+        self.assertEqual([[1, 2], [2, 3], [3, 4]], sole.minimumAbsDifference([4, 2, 1, 3]))
+        self.assertEqual([[1, 3]], sole.minimumAbsDifference([1, 3, 6, 10, 15]))
+        self.assertEqual([[-14, -10], [19, 23], [23, 27]], sole.minimumAbsDifference([3, 8, -10, 23, 19, -4, -14, 27]))
+
 
 if __name__ == '__main__':
     ArraySolutionTest.main()
