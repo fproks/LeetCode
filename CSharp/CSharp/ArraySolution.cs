@@ -104,12 +104,12 @@ namespace CSharp {
 
             return count;
         }
-        
-        
+
+
         public bool IsOneBitCharacter(int[] bits) {
             var flag = false;
             var i = 0;
-            while (i<bits.Length) {
+            while (i < bits.Length) {
                 if (bits[i] == 1) {
                     flag = false;
                     i += 2;
@@ -119,7 +119,19 @@ namespace CSharp {
                     i++;
                 }
             }
+
             return flag;
+        }
+
+        //1207. Unique Number of Occurrences
+        public bool UniqueOccurrences(int[] arr) {
+            Dictionary<int, int> dict = new Dictionary<int, int>();
+            foreach (var item in arr) {
+                if (dict.ContainsKey(item)) dict[item]++;
+                else dict.Add(item, 1);
+            }
+
+            return dict.Values.Count == new HashSet<int>(dict.Values).Count;
         }
     }
 
@@ -140,5 +152,4 @@ namespace CSharp {
             return _arrayList.Count;
         }
     }
-    
 }
