@@ -119,5 +119,11 @@ class ArraySolutionTest(TestCase):
         self.assertEqual([[-14, -10], [19, 23], [23, 27]], sole.minimumAbsDifference([3, 8, -10, 23, 19, -4, -14, 27]))
 
 
+    def test_minCostToMoveChips(self):
+        sole =ArraySolution()
+        self.assertEqual(1,sole.minCostToMoveChips([1,2,3]))
+        self.assertEqual(2,sole.minCostToMoveChips([2,2,2,3,3]))
+
+
 if __name__ == '__main__':
     ArraySolutionTest.main()

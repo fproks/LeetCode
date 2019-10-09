@@ -530,6 +530,13 @@ class ArraySolution(object):
                 result.append([a, b])
         return result
 
+    def minCostToMoveChips(self, chips: List[int]) -> int:
+        even=0
+        for pos in chips:
+            if pos %2==0:
+                even+=1
+        return  min(len(chips)-even,even)
+
 
 if __name__ == '__main__':
     print(ArraySolution.findAndReplacePattern(["abc", "deq", "mee", "aqq", "dkd", "ccc"], "abb"))
