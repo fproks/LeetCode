@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using System.Threading;
 
 namespace CSharp {
@@ -79,6 +80,82 @@ namespace CSharp {
                 // printBar() outputs "bar". Do not change or remove this line.
                 printBar();
                 _fooResetEvent.Set();
+            }
+        }
+    }
+
+    //1195. Fizz Buzz Multithreaded
+    public class FizzBuzz {
+        private int n;
+        private int i;
+        bool d3;
+        bool d5;
+        private Dictionary<int, int> dict;
+
+        public FizzBuzz(int n) {
+            this.n = n;
+            i = 1;
+            dict = new Dictionary<int, int> {
+                {i, 0}
+            };
+        }
+
+        public void Fizz(Action printFizz) {
+            while (i <= n) {
+                if (dict[i] == 1) {
+                    if (d3 && !d5) {
+                        printFizz();
+                    }
+
+                    dict[i]++;
+                }
+
+                System.Threading.Thread.Sleep(1);
+            }
+        }
+
+        public void Buzz(Action printBuzz) {
+            while (i <= n) {
+                if (dict[i] == 2) {
+                    if (!d3 && d5) {
+                        printBuzz();
+                    }
+
+                    dict[i]++;
+                }
+
+                System.Threading.Thread.Sleep(1);
+            }
+        }
+
+        public void Fizzbuzz(Action printFizzBuzz) {
+            while (i <= n) {
+                if (dict[i] == 3) {
+                    if (d3 && d5) {
+                        printFizzBuzz();
+                    }
+
+                    dict.Add(i + 1, 0);
+                    i++;
+                }
+
+                System.Threading.Thread.Sleep(1);
+            }
+        }
+
+        public void Number(Action<int> printNumber) {
+            while (i <= n) {
+                if (dict[i] == 0) {
+                    d3 = (i % 3 == 0);
+                    d5 = (i % 5 == 0);
+                    if (!d3 && !d5) {
+                        printNumber(i);
+                    }
+
+                    dict[i]++;
+                }
+
+                System.Threading.Thread.Sleep(1);
             }
         }
     }
