@@ -16,5 +16,14 @@ namespace UT {
             Assert.False(arraySolution.UniqueOccurrences(new int[] {1, 2}));
             Assert.True(arraySolution.UniqueOccurrences(new int[] {1, 2, 2, 1, 1, 3}));
         }
+
+        [Fact]
+        public void GetMaximumGold() {
+            int[][] grid = new int[3][];
+            grid[0] = new[] {0, 6, 0};
+            grid[1] = new[] {5, 8, 7};
+            grid[2] = new[] {0, 9, 0};
+            Assert.Equal(24, arraySolution.GetMaximumGold(grid));
+        }
     }
 }

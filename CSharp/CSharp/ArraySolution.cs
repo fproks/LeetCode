@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 
 namespace CSharp {
     public class ArraySolution {
@@ -133,9 +134,47 @@ namespace CSharp {
 
             return dict.Values.Count == new HashSet<int>(dict.Values).Count;
         }
+
+        //1219. Path with Maximum Gold
+        public int GetMaximumGold(int[][] grid) {
+            bool[][] visited = new bool[grid.Length][];
+            for (int i = 0; i < grid.Length; i++) {
+                visited[i] = new bool[grid[i].Length];
+                for (int j = 0; j < grid[i].Length; j++) {
+                    visited[i][j] = false;
+                }
+            }
+
+            int max = 0;
+            for (int i = 0; i < grid.Length; i++) {
+                for (int j = 0; j < grid[i].Length; j++) {
+                    max = Math.Max(max, countGold(grid, i, j, visited));
+                }
+            }
+
+            return max;
+        }
+
+        private int countGold(int[][] grid, int startX, int startY, bool[][] visited) {
+            var n = grid.Length;
+            var m = grid[0].Length;
+            if (startX < 0 || startX >= n || startY < 0 || startY >= m || grid[startX][startY] == 0 ||
+                visited[startX][startY]) return 0;
+            var count = grid[startX][startY];
+            visited[startX][startY] = true;
+            var tmpCount = 0;
+            tmpCount = Math.Max(tmpCount, countGold(grid, startX - 1, startY, visited));
+            tmpCount = Math.Max(tmpCount, countGold(grid, startX + 1, startY, visited));
+            tmpCount = Math.Max(tmpCount, countGold(grid, startX, startY - 1, visited));
+            tmpCount = Math.Max(tmpCount, countGold(grid, startX, startY + 1, visited));
+            count += tmpCount;
+            visited[startX][startY] = false;
+            return count;
+        }
     }
 
-    //933. Number of Recent Calls
+
+//933. Number of Recent Calls
     public class RecentCounter {
         private LinkedList<int> _arrayList;
 
