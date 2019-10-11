@@ -159,4 +159,49 @@ namespace CSharp {
             }
         }
     }
+
+    //1114. Print in Order
+    public class Foo {
+        private int count = 1;
+        public Foo() { }
+
+        public void First(Action printFirst) {
+            while (true) {
+                if (count % 3 == 1) {
+                    // printFirst() outputs "first". Do not change or remove this line.
+                    printFirst();
+                    count++;
+                    break;
+                }
+
+                Thread.Sleep(1);
+            }
+        }
+
+        public void Second(Action printSecond) {
+            while (true) {
+                if (count % 3 == 2) {
+                    // printSecond() outputs "second". Do not change or remove this line.
+                    printSecond();
+                    count++;
+                    break;
+                }
+
+                Thread.Sleep(1);
+            }
+        }
+
+        public void Third(Action printThird) {
+            while (true) {
+                if (count % 3 == 0) {
+                    // printThird() outputs "third". Do not change or remove this line.
+                    printThird();
+                    count = 1;
+                    break;
+                }
+
+                Thread.Sleep(1);
+            }
+        }
+    }
 }
