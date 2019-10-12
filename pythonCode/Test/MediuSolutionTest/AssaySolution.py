@@ -125,5 +125,16 @@ class ArraySolutionTest(TestCase):
         self.assertEqual(2,sole.minCostToMoveChips([2,2,2,3,3]))
 
 
+    def test_mctFromLeafValues(self):
+        sole =ArraySolution()
+        self.assertEqual(32,sole.mctFromLeafValues([6,2,4]))
+
+    def test_duplicateZeros(self):
+        sole =ArraySolution()
+        arr=[1,0,2,3,0,4,5,0]
+        sole.duplicateZeros(arr)
+        self.assertEqual([1,0,0,2,3,0,0,4],arr)
+
+
 if __name__ == '__main__':
     ArraySolutionTest.main()

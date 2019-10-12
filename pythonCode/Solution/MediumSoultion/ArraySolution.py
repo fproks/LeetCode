@@ -531,11 +531,36 @@ class ArraySolution(object):
         return result
 
     def minCostToMoveChips(self, chips: List[int]) -> int:
-        even=0
+        even = 0
         for pos in chips:
-            if pos %2==0:
-                even+=1
-        return  min(len(chips)-even,even)
+            if pos % 2 == 0:
+                even += 1
+        return min(len(chips) - even, even)
+
+    def mctFromLeafValues(self, arr: List[int]) -> int:
+        res = 0
+        idx = 0
+        while len(arr) > 1:
+            currMin = sys.maxsize
+            for i in range(len(arr) - 1):
+                if currMin > arr[i] * arr[i + 1]:
+                    currMin = arr[i] * arr[i + 1]
+                    idx = arr[i] if arr[i] < arr[i + 1] else arr[i + 1]
+            res += currMin
+            arr.remove(idx)
+        return res
+
+    # 1089. Duplicate Zeros
+    def duplicateZeros(self, arr: List[int]) -> None:
+        n =len(arr)
+        i=0
+        while i<n-1:
+            if arr[i]==0:
+                arr.insert(i,0)
+                i+=2
+                arr.pop(len(arr)-1)
+            else: i+=1
+
 
 
 if __name__ == '__main__':
