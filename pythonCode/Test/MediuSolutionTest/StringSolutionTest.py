@@ -43,3 +43,8 @@ class StringSolutionTest(TestCase):
         self.assertEqual([False, True, False, False, False],
                          solution.camelMatch(["FooBar","FooBarTest","FootBall","FrameBuffer","ForceFeedBack"],
                                              "FoBaT"))
+
+    def test_balancedStringSplit(self):
+        solution=StringSolution()
+        self.assertEqual(4,solution.balancedStringSplit("RLRRLLRLRL"))
+

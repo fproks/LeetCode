@@ -82,7 +82,6 @@ class StringSolution:
 
         return sumOrd(s1) + sumOrd(s2) - maxCommonSubsequenceDP(s1, s2)
 
-
     # 1023. Camelcase Matching
     def camelMatch(self, queries: List[str], pattern: str) -> List[bool]:
         def matchs(querie: str, pattern: str) -> bool:
@@ -100,3 +99,18 @@ class StringSolution:
         for quer in queries:
             result.append(matchs(quer, pattern))
         return result
+
+    def balancedStringSplit(self, s: str) -> int:
+        cout = 0
+        l = 0
+        r = 0
+        for x in s:
+            if x == 'L':
+                l += 1
+            if x == 'R':
+                r += 1
+            if l == r and l != 0:
+                cout += 1
+                l = 0
+                r = 0
+        return cout
