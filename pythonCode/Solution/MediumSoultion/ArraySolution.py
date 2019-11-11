@@ -1,4 +1,5 @@
 # coding=utf-8
+import math
 from typing import List
 import collections
 from copy import copy
@@ -552,15 +553,69 @@ class ArraySolution(object):
 
     # 1089. Duplicate Zeros
     def duplicateZeros(self, arr: List[int]) -> None:
-        n =len(arr)
-        i=0
-        while i<n-1:
-            if arr[i]==0:
-                arr.insert(i,0)
-                i+=2
-                arr.pop(len(arr)-1)
-            else: i+=1
+        n = len(arr)
+        i = 0
+        while i < n - 1:
+            if arr[i] == 0:
+                arr.insert(i, 0)
+                i += 2
+                arr.pop(len(arr) - 1)
+            else:
+                i += 1
 
+    def queensAttacktheKing(self, queens: List[List[int]], king: List[int]) -> List[List[int]]:
+        d = dict(zip(['L', 'R', 'T', 'B', 'TL', 'TR', 'BL', 'BR'], [None] * 8))
+        for queen in queens:
+            if queen[0] == king[0] and queen[1] > king[1]:
+                if d['R'] == None or d['R'][1] > queen[1]:
+                    d['R'] = queen
+            elif queen[0] == king[0] and queen[1] < king[1]:
+                if d['L'] == None or d['L'][1] < queen[1]:
+                    d['L'] = queen
+            elif queen[1] == king[1] and queen[0] > king[0]:
+                if d['B'] == None or d['B'][0] > queen[0]:
+                    d['B'] = queen
+            elif queen[1] == king[1] and queen[0] < king[0]:
+                if d['T'] == None or d['T'][0] < queen[0]:
+                    d['T'] = queen
+            elif queen[0] - king[0] == queen[1] - king[1] and queen[0] > king[0]:
+                if d['BR'] is None or d['BR'][0] > queen[0]:
+                    d['BR'] = queen
+            elif queen[0] - king[0] == queen[1] - king[1] and queen[0] < king[0]:
+                if d['TL'] == None or d['TL'][0] < queen[0]:
+                    d['TL'] = queen
+            elif queen[0] - king[0] == -1 * (queen[1] - king[1]) and queen[0] > king[0]:
+                if d['BL'] == None or d['BL'][0] > queen[0]:
+                    d['BL'] = queen
+            elif queen[0] - king[0] == -1 * (queen[1] - king[1]) and queen[0] < king[0]:
+                if d['TR'] is None or d['TR'][0] < queen[0]:
+                    d['TR'] = queen
+            output = [x for x in d.values() if x is not None]
+        return output
+
+    def findSolution(self, customfunction: 'CustomFunction', z: int) -> List[List[int]]:
+        res = []
+        for x in range(1, z + 1):
+            y_low, y_high = 1, z
+            while (y_low <= y_high):
+                y_mid = math.floor((y_low + y_high) / 2)
+                curr = customfunction.f(x, y_mid)
+                if curr < z:
+                    y_low = y_mid + 1
+                if curr > z:
+                    y_high = y_mid - 1
+                if curr == z:
+                    res.append([x, int(y_mid)])
+                    break
+        return res
+
+    def oddCells(self, n: int, m: int, indices: List[List[int]]) -> int:
+        arr = [([0] * m) for i in range(n)]
+        for ri, ci in indices:
+            arr[ri] = [v + 1 for v in arr[ri]]
+            for i in range(n):
+                arr[i][ci] += 1
+        return len(arr[i][j] for i in range(n) for j in range(m) if arr[i][j] % 2 == 1)
 
 
 if __name__ == '__main__':
