@@ -617,6 +617,41 @@ class ArraySolution(object):
                 arr[i][ci] += 1
         return len(arr[i][j] for i in range(n) for j in range(m) if arr[i][j] % 2 == 1)
 
+    class sole:
+        def maxScoreWords(self, words, letters, score):
+            self.max_score = 0
+            words_score = [sum(score[ord(c) - ord('a')] for c in word) for word in words]
+            words_counter = [collections.Counter(word) for word in words]
+
+            def dfs(i, curr_score, counter):
+                if curr_score + sum(words_score[i:]) <= self.max_score:
+                    return
+                self.max_score = max(self.max_score, curr_score)
+                for j, wcnt in enumerate(words_counter[i:], i):
+                    if all(n <= counter.get(c, 0) for c, n in wcnt.items()):
+                        dfs(j + 1, curr_score + words_score[j], {c: n - wcnt.get(c, 0) for c, n in counter.items()})
+
+            dfs(0, 0, collections.Counter(letters))
+            return self.max_score
+
+    # [241] 为运算表达式设计优先级
+    def diffWaysToCompute(self, input: str) -> List[int]:
+        if input.isdigit():
+            return [int(input)]
+        res = []
+        for i, char in enumerate(input):
+            if char in ['-', '+', '*']:
+                left = self.diffWaysToCompute(input[:i])
+                right = self.diffWaysToCompute(input[i + 1:])
+                for l in left:
+                    for r in right:
+                        if char == '+':
+                            res.append(l + r)
+                        if char == '-':
+                            res.append(l - r)
+                        if char == '*':
+                            res.append(l * r)
+        return res
 
 if __name__ == '__main__':
     print(ArraySolution.findAndReplacePattern(["abc", "deq", "mee", "aqq", "dkd", "ccc"], "abb"))

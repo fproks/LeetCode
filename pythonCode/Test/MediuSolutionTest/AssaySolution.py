@@ -135,6 +135,10 @@ class ArraySolutionTest(TestCase):
         sole.duplicateZeros(arr)
         self.assertEqual([1,0,0,2,3,0,0,4],arr)
 
+    def test_totalNQueens(self):
+        sole=ArraySolution()
+        self.assertEqual(2,sole.totalNQueens(4))
+
 
 if __name__ == '__main__':
     ArraySolutionTest.main()

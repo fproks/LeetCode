@@ -119,6 +119,11 @@ public class NumberSolution {
         return obstacleGrid[m-1][n-1];
     }
 
+    public double nthPersonGetsNthSeat(int n) {
+        if(n==1) return  1.0;
+        else  return  0.5;
+    }
+
 
 
 

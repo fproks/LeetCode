@@ -214,4 +214,10 @@ public class ArraysSolutionTest {
         Assert.assertEquals(324, arraysolutin.robotSim(new int[]{-2, 8, 3, 7, -1}, obs));
     }
 
+    @Test
+    public void game(){
+        Assert.assertEquals(3,arraysolutin.game(new int[]{1,2,3},new int[]{1,2,3}));
+        Assert.assertEquals(1,arraysolutin.game(new int[]{2,2,3},new int[]{1,2,2}));
+    }
+
 }

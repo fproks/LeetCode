@@ -48,4 +48,12 @@ public class NumberSolutionTest {
         Assert.assertEquals(32, list.size());
     }
 
+
+    @Test
+    public  void  nthPersonGetsNthSeat(){
+        Assert.assertEquals(1,solution.nthPersonGetsNthSeat(1),1);
+        Assert.assertEquals(0.5,solution.nthPersonGetsNthSeat(2),0.5);
+        Assert.assertEquals(0.5,solution.nthPersonGetsNthSeat(100),0.5);
+    }
+
 }
