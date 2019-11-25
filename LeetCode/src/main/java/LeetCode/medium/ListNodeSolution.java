@@ -1,6 +1,9 @@
 package LeetCode.medium;
 
 import LeetCode.struct.ListNode;
+import LeetCode.struct.TreeNode;
+
+import java.util.ArrayList;
 
 /**
  * @user: linhos
@@ -22,5 +25,25 @@ public class ListNodeSolution {
             p = p.next.next;
         }
         return h.next;
+    }
+    public TreeNode sortedListToBST(ListNode head){
+        if(head==null)return null;
+        var list =new ArrayList<Integer>();
+        while (head!=null){
+            list.add(head.val);
+            head=head.next;
+        }
+        return  sortedArrayToBST(list,0,list.size()-1);
+    }
+
+    private  TreeNode sortedArrayToBST(ArrayList<Integer> list,int first,int last){
+         TreeNode result=null;
+        if(first >last)return result;
+        if(first ==last)return  new TreeNode(list.get(first).intValue());
+        int mid =(first+last)/2;
+        result =new TreeNode(list.get(first).intValue());
+        result.left =sortedArrayToBST(list,first,mid-1);
+        result.right=sortedArrayToBST(list,mid+1,last);
+        return  result;
     }
 }

@@ -1,6 +1,7 @@
 package LeetCode.medium;
 
 import LeetCode.struct.ListNode;
+import LeetCode.struct.TreeNode;
 import org.junit.Test;
 
 /**
@@ -25,6 +26,14 @@ public class ListNodeSolutionTest {
             head = head.next;
         }
 
+    }
+
+    @Test
+    public  void  sortedListToBST(){
+        ListNode p =new ListNode(1);
+        p.next=new ListNode(2);
+        TreeNode tree = solution.sortedListToBST(p);
+        System.out.println(tree.val);
     }
 
 }
