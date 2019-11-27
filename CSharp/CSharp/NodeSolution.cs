@@ -272,4 +272,39 @@ namespace CSharp {
             return _tree;
         }
     }
+    
+    public class FindElements
+    {
+        private List<int> list=new List<int>();
+        public FindElements(TreeNode root) {
+            if (root!=null)
+            {
+                root.val = 0;
+                list.Add(0);
+                revertElement(root);
+            }
+        }
+
+        private void revertElement(TreeNode root) {
+            if (root.left!=null)
+            {
+                root.left.val = root.val * 2 + 1;
+                list.Add(root.left.val);
+                revertElement(root.left);
+            }
+
+            if (root.right != null)
+            {
+                root.right.val = root.val * 2 + 2;
+                list.Add(root.right.val);
+                revertElement(root.right);
+            }
+        }
+
+        public bool Find(int target)
+        {
+            return list.Contains(target);
+        }
+
+    }
 }
