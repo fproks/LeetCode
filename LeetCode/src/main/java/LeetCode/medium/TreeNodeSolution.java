@@ -336,6 +336,21 @@ public class TreeNodeSolution {
         return idx;
     }
 
+    //145 二叉树后序遍历
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> result =new ArrayList<>();
+        postorderTraversal(result,root);
+        return  result;
+    }
+
+    private  void postorderTraversal(List<Integer> list,TreeNode root){
+        if(root!=null){
+            postorderTraversal(list,root.left);
+            postorderTraversal(list, root.right);
+            list.add(root.val);
+        }
+    }
+
 
 }
 
