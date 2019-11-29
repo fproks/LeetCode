@@ -34,6 +34,11 @@ public class ArraysSolution3Test {
 
     }
 
+    @Test
+    public  void  totalNQueens(){
+        Assert.assertEquals(2,solution.totalNQueens(4));
+    }
+
 
 
 

@@ -189,4 +189,34 @@ public class ArraysSolution3 {
     }
 
 
+    //[52] n 皇后
+    private  int count;
+    public int totalNQueens(int n) {
+        HashSet<Integer> row =new HashSet<>();
+        HashSet<Integer> left=new HashSet<>();
+        HashSet<Integer> right=new HashSet<>();
+        count=0;
+        backTrack(0,n,row,left,right);
+        return  count;
+    }
+
+    private void backTrack(int row,int n,
+                              HashSet<Integer> col,
+                              HashSet<Integer> left,
+                              HashSet<Integer> right){
+        if(row ==n)count++;
+        for (int i =0;i<n;i++){
+            if (!col.contains(i) && !left.contains(i+row) && !right.contains(i-row)){
+                col.add(i);
+                left.add(i+row);
+                right.add(i-row);
+               backTrack(row+1,n,col,left,right);
+                col.remove(i);
+                left.remove(i+row);
+                right.remove(i-row);
+            }
+        }
+    }
+
+
 }
