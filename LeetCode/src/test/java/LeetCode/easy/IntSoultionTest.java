@@ -40,4 +40,12 @@ public class IntSoultionTest {
         Assert.assertEquals("Saturday",soultion.dayOfTheWeek(31,8,2019));
     }
 
+    @Test
+    public  void  subtractProductAndSum(){
+        IntSoultion soultion =new IntSoultion();
+        Assert.assertEquals(15,soultion.subtractProductAndSum(234));
+        Assert.assertEquals(21,soultion.subtractProductAndSum(4421));
+        Assert.assertEquals(-10,soultion.subtractProductAndSum(10225));
+    }
+
 }

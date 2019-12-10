@@ -101,4 +101,20 @@ public class IntSoultion {
     }
 
 
+    //1281. Subtract the Product and Sum of Digits of an Integer
+    public int subtractProductAndSum(int n) {
+        int mut =1;
+        int sub=0;
+        while (n>=10){
+            int p =n %10;
+            mut*=p;
+            sub+=p;
+            n=n/10;
+        }
+        mut*=n;
+        sub+=n;
+        return  mut-sub;
+    }
+
+
 }
