@@ -140,82 +140,178 @@ public class ArraysSolution3 {
 
     // n 皇后 51
     public List<List<String>> solveNQueens(int n) {
-        List<List<String>> res=new ArrayList<>();
-        if (n==0)return  res;
-        Set<Integer> col=new HashSet<>();
-        Set<Integer> master=new HashSet<>();
-        Set<Integer> slave=new HashSet<>();
-        Stack<Integer> stack=new Stack<>();
-        backtrack(0,n,col,master,slave,stack,res);
-        return  res;
+        List<List<String>> res = new ArrayList<>();
+        if (n == 0) return res;
+        Set<Integer> col = new HashSet<>();
+        Set<Integer> master = new HashSet<>();
+        Set<Integer> slave = new HashSet<>();
+        Stack<Integer> stack = new Stack<>();
+        backtrack(0, n, col, master, slave, stack, res);
+        return res;
     }
 
-    private  void backtrack(int row, int n,
-                            Set<Integer> col,
-                            Set<Integer> master,
-                            Set<Integer>slave,
-                            Stack<Integer> stack,
-                            List<List<String>> res){
-        if(row==n){
-            List<String> board=cover2Board(stack,n);
+    private void backtrack(int row, int n,
+                           Set<Integer> col,
+                           Set<Integer> master,
+                           Set<Integer> slave,
+                           Stack<Integer> stack,
+                           List<List<String>> res) {
+        if (row == n) {
+            List<String> board = cover2Board(stack, n);
             res.add(board);
             return;
         }
 
-        for(int i =0;i<n;i++){
-            if(!col.contains(i) && !master.contains(row+i) && !slave.contains(row-i)){
+        for (int i = 0; i < n; i++) {
+            if (!col.contains(i) && !master.contains(row + i) && !slave.contains(row - i)) {
                 stack.add(i);
                 col.add(i);
-                master.add(row+i);
-                slave.add(row-i);
-                backtrack(row+1,n,col,master,slave,stack,res);
+                master.add(row + i);
+                slave.add(row - i);
+                backtrack(row + 1, n, col, master, slave, stack, res);
                 stack.pop();
                 col.remove(i);
-                master.remove(row+i);
-                slave.remove(row-i);
+                master.remove(row + i);
+                slave.remove(row - i);
             }
         }
     }
 
-    private List<String> cover2Board(Stack<Integer> stack,int n){
-        List<String> board =new ArrayList<>();
-        for (Integer num : stack){
-            StringBuilder builder =new StringBuilder();
-            IntStream.range(0,n).forEach(i->builder.append('.'));
-            builder.replace(num,num+1,"Q");
+    private List<String> cover2Board(Stack<Integer> stack, int n) {
+        List<String> board = new ArrayList<>();
+        for (Integer num : stack) {
+            StringBuilder builder = new StringBuilder();
+            IntStream.range(0, n).forEach(i -> builder.append('.'));
+            builder.replace(num, num + 1, "Q");
             board.add(builder.toString());
         }
-        return  board;
+        return board;
     }
 
 
     //[52] n 皇后
-    private  int count;
+    private int count;
+
     public int totalNQueens(int n) {
-        HashSet<Integer> row =new HashSet<>();
-        HashSet<Integer> left=new HashSet<>();
-        HashSet<Integer> right=new HashSet<>();
-        count=0;
-        backTrack(0,n,row,left,right);
-        return  count;
+        HashSet<Integer> row = new HashSet<>();
+        HashSet<Integer> left = new HashSet<>();
+        HashSet<Integer> right = new HashSet<>();
+        count = 0;
+        backTrack(0, n, row, left, right);
+        return count;
     }
 
-    private void backTrack(int row,int n,
-                              HashSet<Integer> col,
-                              HashSet<Integer> left,
-                              HashSet<Integer> right){
-        if(row ==n)count++;
-        for (int i =0;i<n;i++){
-            if (!col.contains(i) && !left.contains(i+row) && !right.contains(i-row)){
+    private void backTrack(int row, int n,
+                           HashSet<Integer> col,
+                           HashSet<Integer> left,
+                           HashSet<Integer> right) {
+        if (row == n) count++;
+        for (int i = 0; i < n; i++) {
+            if (!col.contains(i) && !left.contains(i + row) && !right.contains(i - row)) {
                 col.add(i);
-                left.add(i+row);
-                right.add(i-row);
-               backTrack(row+1,n,col,left,right);
+                left.add(i + row);
+                right.add(i - row);
+                backTrack(row + 1, n, col, left, right);
                 col.remove(i);
-                left.remove(i+row);
-                right.remove(i-row);
+                left.remove(i + row);
+                right.remove(i - row);
             }
         }
+    }
+
+    //1266. Minimum Time Visiting All Points
+    public int minTimeToVisitAllPoints(int[][] points) {
+        int result = 0;
+        int[] firstPoint = points[0];
+        for (int i = 1; i < points.length; i++) {
+            result += Math.max(Math.abs(points[i][0] - firstPoint[0]), Math.abs(points[i][1] - firstPoint[1]));
+            firstPoint = points[i];
+        }
+        return result;
+    }
+
+    //1282
+    public List<List<Integer>> groupThePeople(int[] groupSizes) {
+        HashMap<Integer, ArrayList<Integer>> map = new HashMap<>();
+        for (int i = 0; i < groupSizes.length; i++) {
+            if (map.containsKey(groupSizes[i])) map.get(groupSizes[i]).add(i);
+            else {
+                ArrayList<Integer> tmp = new ArrayList<>();
+                tmp.add(i);
+                map.put(groupSizes[i], tmp);
+            }
+        }
+        List<List<Integer>> resut = new ArrayList<>();
+        map.forEach((key, list) -> {
+            int mut = list.size() / key;
+            for (int i = 0; i < mut; i++) {
+                resut.add(list.subList(key * i, key * (i + 1)));
+            }
+        });
+
+        return resut;
+    }
+
+
+    //1284. Minimum Number of Flips to Convert Binary Matrix to Zero Matrix
+    public int minFlips(int[][] mat) {
+        int row = mat.length;
+        int col = mat[0].length;
+        int[][] zeroMat = new int[row][col];
+        String finalStr = matrixToString(zeroMat);
+        HashMap<String, Integer> fixIndex = new HashMap<>();
+        Set<String> visited = new HashSet<>();
+        Queue<int[][]> matQueue = new LinkedList<>();
+        matQueue.add(mat);
+        fixIndex.put(matrixToString(mat), 0);
+        while (!matQueue.isEmpty()) {
+            int[][] m = matQueue.poll();
+            String mstr = matrixToString(m);
+            int v = fixIndex.get(mstr);
+            visited.add(mstr);
+            if (mstr.equals(finalStr)) return v;
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < col; j++) {
+                    int[][] tmp = flip(m, i, j);
+                    String tmpStr = matrixToString(tmp);
+                    if (tmpStr.equals(finalStr)) return v + 1;
+                    if (!visited.contains(tmpStr)) {
+                        fixIndex.put(tmpStr, v + 1);
+                        matQueue.add(tmp);
+                    }
+                }
+            }
+        }
+        return -1;
+
+
+    }
+
+
+    private String matrixToString(int[][] mat) {
+        String tm = "";
+        for (int[] m : mat) {
+            tm += Arrays.toString(m);
+        }
+        return tm;
+    }
+
+
+    private int[][] flip(int[][] mat, int row, int col) {
+        int[][] flipMat = new int[mat.length][mat[0].length];
+        for (int i = 0; i < mat.length; i++) {
+            for (int j = 0; j < mat[i].length; j++) {
+                flipMat[i][j] = mat[i][j];
+            }
+        }
+        flipMat[row][col] = 1 - flipMat[row][col];
+        if (row > 0)
+            flipMat[row - 1][col] = 1 - flipMat[row - 1][col];
+        if (row < mat.length - 1) flipMat[row + 1][col] = 1 - flipMat[row + 1][col];
+        if (col > 0)
+            flipMat[row][col - 1] = 1 - flipMat[row][col - 1];
+        if (col < mat[row].length - 1) flipMat[row][col + 1] = 1 - flipMat[row][col + 1];
+        return flipMat;
     }
 
 

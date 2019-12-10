@@ -39,6 +39,11 @@ public class ArraysSolution3Test {
         Assert.assertEquals(2,solution.totalNQueens(4));
     }
 
+    @Test
+    public  void  minTimeToVisitAllPoints(){
+        Assert.assertEquals(7,solution.minTimeToVisitAllPoints(new int[][]{{1,1},{3,4},{-1,0}}));
+    }
+
 
 
 

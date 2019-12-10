@@ -653,6 +653,22 @@ class ArraySolution(object):
                             res.append(l * r)
         return res
 
+    def solveNQueens(self, n: int) -> List[List[str]]:
+        res=[]
+        if n ==0:
+            return  res
+        def dfs(row,col,master,salve,cur_res,n):
+            if row==n:
+                res.append(["-"* cur +"Q"+"-"*(n-cur-1) for cur in cur_res])
+                return
+            for i in range(n):
+                if(i not  in col) and (i+row not in salve) and (i-row not in cur_res):
+                    dfs(row+1,col|{i},master|{i-row},salve|{i+row},cur_res+[i],n)
+        dfs(0,set(),set(),set(),[],n)
+        return  res
+
+
+
 if __name__ == '__main__':
     print(ArraySolution.findAndReplacePattern(["abc", "deq", "mee", "aqq", "dkd", "ccc"], "abb"))
     print(ArraySolution.toDigits("abcddddddddd"))
