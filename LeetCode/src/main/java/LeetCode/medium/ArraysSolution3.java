@@ -314,5 +314,33 @@ public class ArraysSolution3 {
         return flipMat;
     }
 
+    //1277. Count Square Submatrices with All Ones
+    public int countSquares(int[][] matrix) {
+        int result=0;
+        for (int i=0;i<matrix.length;i++){
+            for (int j=0;j<matrix[i].length;j++)
+                result +=countSqueresWithIndex(matrix,i,j);
+        }
+        return  result;
+    }
+
+    public  int countSqueresWithIndex(int[][] matrix,int row,int col){
+        int result=0;
+        for(int i=0;i<Math.min(matrix.length-row,matrix[row].length-col);i++){
+            if(isSquare(matrix,row,col,i))result++;
+            else  return  result;
+        }
+        return  result;
+    }
+
+    private  boolean isSquare(int[][] matrix,int row,int col,int count){
+        for(int i=0;i<=count;i++) {
+            if (matrix[row + count][col + i] == 0) return false;
+            if (matrix[row + i][col + count] == 0) return false;
+        }
+        return  true;
+    }
+
+
 
 }

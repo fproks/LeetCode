@@ -44,6 +44,12 @@ public class ArraysSolution3Test {
         Assert.assertEquals(7,solution.minTimeToVisitAllPoints(new int[][]{{1,1},{3,4},{-1,0}}));
     }
 
+    @Test
+    public  void  countSquares(){
+        int[][] a= {{0, 1, 1, 1}, {1, 1, 1, 1}, {0, 1, 1, 1}};
+        Assert.assertEquals(15,solution.countSquares(a));
+    }
+
 
 
 
