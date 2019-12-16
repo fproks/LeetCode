@@ -1,10 +1,6 @@
 package LeetCode.medium;
 
-import com.xiaoleilu.hutool.json.JSONUtil;
-import org.w3c.dom.ls.LSOutput;
-
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
@@ -319,12 +315,12 @@ public class ArraysSolution3 {
         int result=0;
         for (int i=0;i<matrix.length;i++){
             for (int j=0;j<matrix[i].length;j++)
-                result +=countSqueresWithIndex(matrix,i,j);
+                result += countSquaresWithIndex(matrix,i,j);
         }
         return  result;
     }
 
-    public  int countSqueresWithIndex(int[][] matrix,int row,int col){
+    public  int countSquaresWithIndex(int[][] matrix, int row, int col){
         int result=0;
         for(int i=0;i<Math.min(matrix.length-row,matrix[row].length-col);i++){
             if(isSquare(matrix,row,col,i))result++;
