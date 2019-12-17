@@ -352,5 +352,27 @@ public class TreeNodeSolution {
     }
 
 
+
+    //106. Construct Binary Tree from Inorder and Postorder Traversal
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+       return  buildTree(inorder, postorder,0,inorder.length-1, 0,postorder.length-1);
+    }
+
+    public TreeNode buildTree(int[] inorder, int[] postorder,int inorderStart,int inorderEnd,int postStart,int postEnd){
+        if(inorderStart>inorderEnd || postStart >postEnd)return  null;
+        int tmp =postorder[postEnd];
+        TreeNode t =new TreeNode(tmp);
+        int idx=0;
+        while(inorder[inorderStart+idx]!=tmp){
+            idx++;
+        }
+        t.left =buildTree(inorder,postorder,inorderStart,inorderStart+idx-1,postStart,postStart+idx-1);
+        t.right=buildTree(inorder,postorder,inorderStart+idx+1,inorderEnd,postStart+idx,postEnd-1);
+        return  t;
+    }
+
+
+
+
 }
 
