@@ -337,6 +337,16 @@ public class ArraysSolution3 {
         return  true;
     }
 
+    //137. Single Number II
+    public int singleNumber(int[] nums) {
+        int a =0,b=0;
+        for(var i : nums){
+            a=(a^i)&~b;
+           b= (b ^ i) & ~a;
+        }
+        return  a;
+    }
+
 
 
 }

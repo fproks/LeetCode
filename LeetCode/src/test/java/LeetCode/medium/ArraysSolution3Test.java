@@ -50,6 +50,14 @@ public class ArraysSolution3Test {
         Assert.assertEquals(15,solution.countSquares(a));
     }
 
+    @Test
+    public void singleNumber(){
+        int[] a ={1,2,1,1};
+        Assert.assertEquals(2,solution.singleNumber(a));
+    }
+
+
+
 
 
 
