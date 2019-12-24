@@ -789,4 +789,20 @@ public class ArraysSolution implements Solution {
         return res;
     }
 
+    //1295. Find Numbers with Even Number of Digits
+    public int findNumbers(int[] nums) {
+        int result=0;
+        for (int n : nums){
+            if(isDigitsNumber(n))result++;
+        }
+        return  result;
+    }
+
+    private  boolean isDigitsNumber(int num){
+        while (num>99){
+            num=num/100;
+        }
+        return  num >=10;
+    }
+
 }
