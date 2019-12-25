@@ -372,6 +372,24 @@ public class TreeNodeSolution {
     }
 
 
+    //105. Construct Binary Tree from Preorder and Inorder Traversal  前序和中序
+    public TreeNode buildTreeWithPreAndInorder(int[] preorder, int[] inorder) {
+        return  buildTreeWithPreAndInorder(preorder,inorder,0,preorder.length-1,0,inorder.length-1);
+    }
+    private  TreeNode buildTreeWithPreAndInorder(int[] preorder, int[] inorder,int preStart,int preEnd,int inorStart,int inorEnd){
+        if(preEnd<preStart || inorEnd<inorStart)return  null;
+        int tmp =preorder[preStart];
+        TreeNode t =new TreeNode(tmp);
+        int idx=0;
+        while (inorder[inorStart+idx]!=tmp){
+            idx++;
+        }
+        t.left =buildTreeWithPreAndInorder(preorder, inorder,preStart+1,preStart+idx,inorStart,inorStart+idx-1);
+        t.right=buildTreeWithPreAndInorder(preorder, inorder,preStart+idx+1,preEnd,inorStart+idx+1,inorEnd);
+        return  t;
+    }
+
+
 
 
 }
