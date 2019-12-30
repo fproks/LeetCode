@@ -1,5 +1,6 @@
 package LeetCode.easy;
 
+import LeetCode.struct.ListNode;
 import LeetCode.struct.Node;
 import LeetCode.struct.Solution;
 import LeetCode.struct.TreeNode;
@@ -309,6 +310,44 @@ public class TreeNodeSolution implements Solution {
         list.add(root.val);
         if (root.right != null) deepsearch(root.right, list);
 
+    }
+
+
+    //148. Sort List
+    public ListNode sortList(ListNode head) {
+        if(head==null)return  head;
+        return  sortMerge(head);
+    }
+
+    private ListNode sortMerge(ListNode head){
+        if(head.next==null) return  head;
+        ListNode p =head, q=head,pre=null;
+        while (q!=null && q.next!=null){
+            pre=p;
+            p=p.next;
+            q=q.next.next;
+        }
+        pre.next =null;
+        ListNode l =sortMerge(head);
+        ListNode r =sortMerge(p);
+        return  merge(l,r);
+    }
+
+    private  ListNode merge(ListNode l, ListNode r){
+        ListNode head= new ListNode(0),last=head;
+        while (l !=null && r !=null){
+            if(l.val <=r.val){
+                last.next =l;
+                l =l.next;
+            }else {
+                last.next =r;
+                r= r.next;
+            }
+            last =last.next;
+        }
+        if(l==null) last.next =r;
+        else  last.next =l;
+        return  head.next;
     }
 
 
