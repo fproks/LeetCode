@@ -312,6 +312,28 @@ public class TreeNodeSolution implements Solution {
 
     }
 
+    //面试题 04.10. 检查子树
+    public boolean checkSubTree(TreeNode t1, TreeNode t2) {
+        if(checkTree(t1,t2))return  true;
+        else if(t1!=null){
+            if(checkSubTree(t1.left, t2))return  true ;
+            if(checkSubTree(t1.right, t2))return  true;
+            return  false;
+        }else return  false;
+    }
+
+    private  boolean checkTree(TreeNode t1,TreeNode t2){
+        if(t1==null && t2!=null )return  false;
+        if(t1!=null && t2==null)return  false;
+        if(t1 == null)return  true;
+        if(t1.val==t2.val){
+            if(!checkTree(t1.left,t2.left))return  false;
+            if(!checkTree(t1.right, t2.right))return  false;
+            return  true;
+        }
+        else return  false;
+    }
+
 
     //148. Sort List
     public ListNode sortList(ListNode head) {
