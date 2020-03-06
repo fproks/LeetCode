@@ -781,28 +781,59 @@ public class ArraysSolution implements Solution {
         }
         return maxDistance;
     }
+
     public int game(int[] guess, int[] answer) {
-        int res=0;
-        for(int i=0; i<guess.length;i++){
-            if(guess[i]==answer[i])res++;
+        int res = 0;
+        for (int i = 0; i < guess.length; i++) {
+            if (guess[i] == answer[i]) res++;
         }
         return res;
     }
 
     //1295. Find Numbers with Even Number of Digits
     public int findNumbers(int[] nums) {
-        int result=0;
-        for (int n : nums){
-            if(isDigitsNumber(n))result++;
+        int result = 0;
+        for (int n : nums) {
+            if (isDigitsNumber(n)) result++;
         }
-        return  result;
+        return result;
     }
 
-    private  boolean isDigitsNumber(int num){
-        while (num>99){
-            num=num/100;
+    private boolean isDigitsNumber(int num) {
+        while (num > 99) {
+            num = num / 100;
         }
-        return  num >=10;
+        return num >= 10;
+    }
+
+    public int maxSubArray(int[] nums) {
+        int sum = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i - 1] > 0) nums[i] += nums[i - 1];
+            sum = sum > nums[i] ? sum : nums[i];
+        }
+        return sum;
+    }
+
+    public int[] constructArr(int[] a) {
+        int[] left =new int[a.length];
+        int[] right=new int[a.length];
+        int[] fina =new int[a.length];
+        left[0]=a[0];
+        for (int i =1;i<a.length;i++){
+            left[i]=left[i-1]*a[i];
+        }
+        right[a.length-1]=a[a.length-1];
+        for(int i =a.length-2;i>=0;i--){
+            right[i]=right[i+1]*a[i];
+        }
+
+        for (int i =1;i<a.length-1;i++){
+            fina[i]=left[i-1]*right[i+1];
+        }
+        fina[0]=right[1];
+        fina[a.length-1]=left[a.length-2];
+        return  fina;
     }
 
 }

@@ -117,4 +117,9 @@ public class StringSolutionTest {
         Assert.assertEquals(1,solutions.maxNumberOfBalloons("nlaebolko"));
     }
 
+    @Test
+    public  void firstUniqChar(){
+        Assert.assertEquals('b',solutions.firstUniqChar("abaccdeff"));
+    }
+
 }

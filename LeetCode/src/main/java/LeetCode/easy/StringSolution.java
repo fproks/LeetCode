@@ -451,6 +451,20 @@ public class StringSolution implements Solution {
         return  result;
     }
 
+    public char firstUniqChar(String s) {
+        List<Character> list =new LinkedList<>();
+        Set<Character> set =new HashSet<>();
+        for (char c : s.toCharArray()){
+           if(set.contains(c))continue;
+           if(list.contains(c)){
+               set.add(c);
+              list.remove(Character.valueOf(c));
+           }else list.add(c);
+        }
+        if(list.size()>0)return  list.get(0);
+        else return  ' ';
+    }
+
 }
 
 
