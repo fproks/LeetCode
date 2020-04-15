@@ -312,41 +312,88 @@ public class ArraysSolution3 {
 
     //1277. Count Square Submatrices with All Ones
     public int countSquares(int[][] matrix) {
-        int result=0;
-        for (int i=0;i<matrix.length;i++){
-            for (int j=0;j<matrix[i].length;j++)
-                result += countSquaresWithIndex(matrix,i,j);
+        int result = 0;
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++)
+                result += countSquaresWithIndex(matrix, i, j);
         }
-        return  result;
+        return result;
     }
 
-    public  int countSquaresWithIndex(int[][] matrix, int row, int col){
-        int result=0;
-        for(int i=0;i<Math.min(matrix.length-row,matrix[row].length-col);i++){
-            if(isSquare(matrix,row,col,i))result++;
-            else  return  result;
+    public int countSquaresWithIndex(int[][] matrix, int row, int col) {
+        int result = 0;
+        for (int i = 0; i < Math.min(matrix.length - row, matrix[row].length - col); i++) {
+            if (isSquare(matrix, row, col, i)) result++;
+            else return result;
         }
-        return  result;
+        return result;
     }
 
-    private  boolean isSquare(int[][] matrix,int row,int col,int count){
-        for(int i=0;i<=count;i++) {
+    private boolean isSquare(int[][] matrix, int row, int col, int count) {
+        for (int i = 0; i <= count; i++) {
             if (matrix[row + count][col + i] == 0) return false;
             if (matrix[row + i][col + count] == 0) return false;
         }
-        return  true;
+        return true;
     }
 
     //137. Single Number II
     public int singleNumber(int[] nums) {
-        int a =0,b=0;
-        for(var i : nums){
-            a=(a^i)&~b;
-           b= (b ^ i) & ~a;
+        int a = 0, b = 0;
+        for (var i : nums) {
+            a = (a ^ i) & ~b;
+            b = (b ^ i) & ~a;
         }
-        return  a;
+        return a;
     }
 
+    //542
+    /*
+    * 相当于广搜的变种，不过只搜索紧邻的4个位置，如果改变就添加到队列，不改变就删除。
+    * */
+    public int[][] updateMatrix(int[][] matrix) {
+        int n = matrix.length;
+        int m = matrix[0].length;
+        int[][] result = new int[n][m];
+        Queue<int[]> list = new LinkedList<>();
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (matrix[i][j] == 0) {
+                    result[i][j] = 0;
+                    list.add(new int[]{i, j});
+                } else {
+                    result[i][j] = Integer.MAX_VALUE;
+                }
+            }
+        }
+        updateBFS(list, result);
+        return result;
+
+    }
+
+    private void updateBFS(Queue<int[]> queue, int[][] matrix) {
+        while (queue.size() > 0) {
+            int[] idx = queue.remove();
+            int i = idx[0];
+            int j = idx[1];
+            if (i > 0 && matrix[i - 1][j] > matrix[i][j] + 1) {
+                matrix[i - 1][j] = matrix[i][j] + 1;
+                queue.add(new int[]{i - 1, j});
+            }
+            if (i < matrix.length - 1 && matrix[i + 1][j] > matrix[i][j] + 1) {
+                matrix[i + 1][j] = matrix[i][j] + 1;
+                queue.add(new int[]{i + 1, j});
+            }
+            if (j > 0 && matrix[i][j - 1] > matrix[i][j] + 1) {
+                matrix[i][j - 1] = matrix[i][j] + 1;
+                queue.add(new int[]{i, j - 1});
+            }
+            if (j < matrix[0].length - 1 && matrix[i][j + 1] > matrix[i][j] + 1) {
+                matrix[i][j + 1] = matrix[i][j] + 1;
+                queue.add(new int[]{i, j + 1});
+            }
+        }
+    }
 
 
 }
