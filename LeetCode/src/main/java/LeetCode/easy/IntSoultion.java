@@ -116,5 +116,17 @@ public class IntSoultion {
         return  mut-sub;
     }
 
+    //1342. Number of Steps to Reduce a Number to Zero
+    public int numberOfSteps (int num) {
+        int n =num;
+        int cu=0;
+        while (n!=0){
+          if(n%2==1)n--;
+          else n=n/2;
+          cu++;
+        }
+        return  cu;
+    }
+
 
 }
