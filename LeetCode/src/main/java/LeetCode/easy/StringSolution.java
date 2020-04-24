@@ -465,6 +465,11 @@ public class StringSolution implements Solution {
         else return  ' ';
     }
 
+    //58 面试题58 - II. 左旋转字符串
+    public String reverseLeftWords(String s, int n) {
+        return s.substring(n)+s.substring(0,n);
+    }
+
 }
 
 

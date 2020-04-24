@@ -122,4 +122,9 @@ public class StringSolutionTest {
         Assert.assertEquals('b',solutions.firstUniqChar("abaccdeff"));
     }
 
+
+    @Test
+    public  void reverseLeftWords(){
+        Assert.assertEquals(solutions.reverseLeftWords("12345",2),"34512");
+    }
 }
