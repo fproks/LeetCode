@@ -80,52 +80,54 @@ public class IntSoultion {
 
     //1103. Distribute Candies to People
     public int[] distributeCandies(int candies, int num_people) {
-        int remain =candies;
-        int[] result=new int[num_people];
-        int idx=0,current=0;
-        while (remain>0){
-            if(idx>=num_people){idx=0;continue;}
-            else {
-                current =++current >remain? remain :current;
-                result[idx++]+=current;
-                remain-=current;
+        int remain = candies;
+        int[] result = new int[num_people];
+        int idx = 0, current = 0;
+        while (remain > 0) {
+            if (idx >= num_people) {
+                idx = 0;
+                continue;
+            } else {
+                current = ++current > remain ? remain : current;
+                result[idx++] += current;
+                remain -= current;
             }
         }
-        return  result;
+        return result;
     }
 
     public String dayOfTheWeek(int day, int month, int year) {
-        LocalDate date =LocalDate.of(year,month,day);
-        DayOfWeek dow =date.getDayOfWeek();
-        return  dow.getDisplayName(TextStyle.FULL,Locale.US);
+        LocalDate date = LocalDate.of(year, month, day);
+        DayOfWeek dow = date.getDayOfWeek();
+        return dow.getDisplayName(TextStyle.FULL, Locale.US);
     }
 
 
     //1281. Subtract the Product and Sum of Digits of an Integer
     public int subtractProductAndSum(int n) {
-        int mut =1;
-        int sub=0;
-        while (n>=10){
-            int p =n %10;
-            mut*=p;
-            sub+=p;
-            n=n/10;
+        int mut = 1;
+        int sub = 0;
+        while (n >= 10) {
+            int p = n % 10;
+            mut *= p;
+            sub += p;
+            n = n / 10;
         }
-        mut*=n;
-        sub+=n;
-        return  mut-sub;
+        mut *= n;
+        sub += n;
+        return mut - sub;
     }
 
     //1342. Number of Steps to Reduce a Number to Zero
-    public int numberOfSteps (int num) {
-        int n =num;
-        int cu=0;
-        while (n!=0){
-          if(n%2==1)n--;
-          else n=n/2;
-          cu++;
+    public int numberOfSteps(int num) {
+        int n = num;
+        int cu = 0;
+        while (n != 0) {
+            if (n % 2 == 1) n--;
+            else n = n / 2;
+            cu++;
         }
-        return  cu;
+        return cu;
     }
 
 
