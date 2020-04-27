@@ -349,8 +349,8 @@ public class ArraysSolution3 {
 
     //542
     /*
-    * 相当于广搜的变种，不过只搜索紧邻的4个位置，如果改变就添加到队列，不改变就删除。
-    * */
+     * 相当于广搜的变种，不过只搜索紧邻的4个位置，如果改变就添加到队列，不改变就删除。
+     * */
     public int[][] updateMatrix(int[][] matrix) {
         int n = matrix.length;
         int m = matrix[0].length;
@@ -393,6 +393,50 @@ public class ArraysSolution3 {
                 queue.add(new int[]{i, j + 1});
             }
         }
+    }
+
+    //33. Search in Rotated Sorted Array
+    public int search(int[] nums, int target) {
+        if(nums.length==0)return  -1;
+        if(nums.length==1){
+            if(nums[0]==target)return 0;
+            else  return  -1;
+        }
+        int rotate=getIdxOfRotatedArray(nums);
+        int f =findInMid(nums,0,rotate,target);
+        int g =findInMid(nums,rotate+1,nums.length-1,target);
+        if(f!=-1)return  f;
+        return  g;
+    }
+
+    private int findInMid(int[] nums,int start,int end,int target){
+        while (end>=start){
+            int mid =(end+start)/2;
+            if(nums[mid]==target) return  mid;
+            else {
+                if(nums[mid]>target)end=mid-1;
+                else  start=mid+1;
+            }
+        }
+        return  -1;
+    }
+
+    private int getIdxOfRotatedArray(int[] nums) {
+        int r = nums.length - 1;
+        if (nums[0] < nums[r]) return -1;
+        int l = 0;
+        while (l <= r) {
+            int mid = (l + r) / 2;
+            if (nums[mid] > nums[mid + 1]) return mid;
+            if (nums[mid] >= nums[l]) {
+                l = mid + 1;
+                continue;
+            } else {
+                r = mid - 1;
+                continue;
+            }
+        }
+        return  -1;
     }
 
 

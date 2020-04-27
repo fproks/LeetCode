@@ -56,6 +56,13 @@ public class ArraysSolution3Test {
         Assert.assertEquals(2,solution.singleNumber(a));
     }
 
+    @Test
+    public void search(){
+      // Assert.assertEquals(4,solution.search(new int[]{4,5,6,7,0,1,2},0));
+      //  Assert.assertEquals(-1,solution.search(new int[]{4,5,6,7,0,1,2},3));
+        Assert.assertEquals(1,solution.search(new int[]{8,9,2,3,4},9));
+    }
+
 
 
 
