@@ -439,5 +439,44 @@ public class ArraysSolution3 {
         return  -1;
     }
 
+    public int[] singleNumbers(int[] nums) {
+        int k =0;
+        for (var i :nums){
+            k=k ^i;
+        }
+        int mask=k&(-k);
+        int a =0;
+        int b=0;
+        for(var i :nums){
+            if((i &mask)==0){
+                a^=i;
+            }else b^=i;
+        }
+        return  new int[]{a,b};
+
+    }
+
+    //1395. Count Number of Teams
+    public int numTeams(int[] rating) {
+        int cou=0;
+        for (int i =0;i<rating.length-2;i++){
+            for (int j = i+1; j <rating.length-1 ; j++) {
+                if(rating[i]<rating[j]) {
+                    for (int k = j + 1; k < rating.length; k++)
+                        if (rating[j]<rating[k])cou++;
+                }
+            }
+        }
+        for (int i=0;i<rating.length-2;i++){
+            for (int j=i+1;j<rating.length-1;j++){
+                if(rating[i]>rating[j]){
+                    for (int k =j+1;k<rating.length;k++)
+                        if (rating[j]>rating[k])cou++;
+                }
+            }
+        }
+        return  cou;
+    }
+
 
 }
