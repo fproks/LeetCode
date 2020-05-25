@@ -679,13 +679,21 @@ class ArraySolution(object):
                 res.append(False)
         return res
 
-    #1450. Number of Students Doing Homework at a Given Time
+    # 1450. Number of Students Doing Homework at a Given Time
     def busyStudent(self, startTime: List[int], endTime: List[int], queryTime: int) -> int:
-        count=0
+        count = 0
         for i in range(len(startTime)):
             if startTime[i] <= queryTime <= endTime[i]:
-                count+=1
-        return  count
+                count += 1
+        return count
+
+    # 1313. Decompress Run-Length Encoded List
+    def decompressRLElist(self, nums: List[int]) -> List[int]:
+        res = list()
+        for i in range(0, len(nums), 2):
+            res.extend([nums[i + 1]] * nums[i])
+        return res
+
 
 if __name__ == '__main__':
     print(ArraySolution.findAndReplacePattern(["abc", "deq", "mee", "aqq", "dkd", "ccc"], "abb"))
