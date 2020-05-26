@@ -694,18 +694,33 @@ class ArraySolution(object):
             res.extend([nums[i + 1]] * nums[i])
         return res
 
-
     # 560. Subarray Sum Equals K
     def subarraySum(self, nums: List[int], k: int) -> int:
-        _map=collections.defaultdict(int)
-        _map[0]=1
+        _map = collections.defaultdict(int)
+        _map[0] = 1
         count = 0
         presum = 0
         for i in nums:
             presum += i
-            count += _map[presum-k]
+            count += _map[presum - k]
             _map[presum] = _map[presum] + 1
         return count
+
+    # 287. Find the Duplicate Number 二分法
+    def findDuplicate(self, nums: List[int]) -> int:
+        start = 1
+        end = len(nums) - 1
+        while start != end:
+            mid = (end + start) // 2
+            count = 0
+            for i in nums:
+                if start <= i <= mid:
+                    count += 1
+            if count > (mid - start + 1):
+                end = mid
+            else:
+                start = mid + 1
+        return start
 
 
 if __name__ == '__main__':

@@ -144,6 +144,12 @@ class ArraySolutionTest(TestCase):
         sole=ArraySolution()
         self.assertEqual(2,sole.subarraySum([1,1,1],2))
 
+    def test_findDuplicate(self):
+        sole=ArraySolution()
+        self.assertEqual(2,sole.findDuplicate([1,3,4,2,2]))
+        self.assertEqual(3,sole.findDuplicate([1,3,4,3,2]))
+        self.assertEqual(4,sole.findDuplicate([1,3,4,2,4]))
+
 
 if __name__ == '__main__':
     ArraySolutionTest.main()
