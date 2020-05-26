@@ -695,6 +695,19 @@ class ArraySolution(object):
         return res
 
 
+    # 560. Subarray Sum Equals K
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        _map=collections.defaultdict(int)
+        _map[0]=1
+        count = 0
+        presum = 0
+        for i in nums:
+            presum += i
+            count += _map[presum-k]
+            _map[presum] = _map[presum] + 1
+        return count
+
+
 if __name__ == '__main__':
     print(ArraySolution.findAndReplacePattern(["abc", "deq", "mee", "aqq", "dkd", "ccc"], "abb"))
     print(ArraySolution.toDigits("abcddddddddd"))

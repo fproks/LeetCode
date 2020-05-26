@@ -140,5 +140,10 @@ class ArraySolutionTest(TestCase):
         self.assertEqual(2,sole.totalNQueens(4))
 
 
+    def test_subarraySum(self):
+        sole=ArraySolution()
+        self.assertEqual(2,sole.subarraySum([1,1,1],2))
+
+
 if __name__ == '__main__':
     ArraySolutionTest.main()
