@@ -723,6 +723,19 @@ class ArraySolution(object):
         return start
 
 
+    # 974. Subarray Sums Divisible by K
+    def subarraysDivByK(self, A: List[int], K: int) -> int:
+        _map =collections.defaultdict(int)
+        _map[0]=1
+        count=0
+        preSum=0
+        for i in A:
+            preSum=(preSum+i)%K
+            count+=_map[preSum]
+            _map[preSum]=_map[preSum]+1
+        return  count
+
+
 if __name__ == '__main__':
     print(ArraySolution.findAndReplacePattern(["abc", "deq", "mee", "aqq", "dkd", "ccc"], "abb"))
     print(ArraySolution.toDigits("abcddddddddd"))
