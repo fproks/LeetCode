@@ -155,5 +155,10 @@ class ArraySolutionTest(TestCase):
         self.assertEqual(7,sole.subarraysDivByK([4,5,0,-2,-3,1],5))
 
 
+    def test_rob(self):
+        sole=ArraySolution()
+        self.assertEqual(4,sole.rob([1,2,3,1]))
+
+
 if __name__ == '__main__':
     ArraySolutionTest.main()

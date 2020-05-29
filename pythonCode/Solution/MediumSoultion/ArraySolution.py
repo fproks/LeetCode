@@ -735,6 +735,13 @@ class ArraySolution(object):
             _map[preSum]=_map[preSum]+1
         return  count
 
+    # 198. House Robber
+    def rob(self, nums: List[int]) -> int:
+        dp= [nums[0], max(nums[0], nums[1])]
+        for i in range(2,len(nums)):
+            dp.append(max(dp[i-1],dp[i-2]+nums[i]))
+        return  dp[-1]
+
 
 if __name__ == '__main__':
     print(ArraySolution.findAndReplacePattern(["abc", "deq", "mee", "aqq", "dkd", "ccc"], "abb"))
