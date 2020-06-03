@@ -722,25 +722,39 @@ class ArraySolution(object):
                 start = mid + 1
         return start
 
-
     # 974. Subarray Sums Divisible by K
     def subarraysDivByK(self, A: List[int], K: int) -> int:
-        _map =collections.defaultdict(int)
-        _map[0]=1
-        count=0
-        preSum=0
+        _map = collections.defaultdict(int)
+        _map[0] = 1
+        count = 0
+        preSum = 0
         for i in A:
-            preSum=(preSum+i)%K
-            count+=_map[preSum]
-            _map[preSum]=_map[preSum]+1
-        return  count
+            preSum = (preSum + i) % K
+            count += _map[preSum]
+            _map[preSum] = _map[preSum] + 1
+        return count
 
     # 198. House Robber
     def rob(self, nums: List[int]) -> int:
-        dp= [nums[0], max(nums[0], nums[1])]
-        for i in range(2,len(nums)):
-            dp.append(max(dp[i-1],dp[i-2]+nums[i]))
-        return  dp[-1]
+        dp = [nums[0], max(nums[0], nums[1])]
+        for i in range(2, len(nums)):
+            dp.append(max(dp[i - 1], dp[i - 2] + nums[i]))
+        return dp[-1]
+
+    # 837. New 21 Game
+    def new21Game(self, N: int, K: int, W: int) -> float:
+        dp = [None] * (K + W)
+        tmp = 0
+        for i in range(K, K + W):
+            if i <= N:
+                dp[i] = 1
+                tmp += 1
+            else:
+                dp[i] = 0
+        for i in range(K - 1, -1, -1):
+            dp[i] = tmp / W
+            tmp = tmp + dp[i] - dp[i + W]
+        return dp[0]
 
 
 if __name__ == '__main__':

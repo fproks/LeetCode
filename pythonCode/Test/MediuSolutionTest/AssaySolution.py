@@ -159,6 +159,11 @@ class ArraySolutionTest(TestCase):
         sole=ArraySolution()
         self.assertEqual(4,sole.rob([1,2,3,1]))
 
+    def test_new21Game(self):
+        sole=ArraySolution()
+        self.assertEqual(0.6,sole.new21Game(6,1,10))
+        self.assertEqual(0.73278,sole.new21Game(21,17,10))
+
 
 if __name__ == '__main__':
     ArraySolutionTest.main()
