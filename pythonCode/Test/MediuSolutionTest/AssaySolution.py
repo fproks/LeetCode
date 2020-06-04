@@ -164,6 +164,11 @@ class ArraySolutionTest(TestCase):
         self.assertEqual(0.6,sole.new21Game(6,1,10))
         self.assertEqual(0.73278,sole.new21Game(21,17,10))
 
+    def test_productExceptSelf(self):
+        sole=ArraySolution()
+        self.assertEqual([24,12,8,6],sole.productExceptSelf([1,2,3,4]))
+        self.assertEqual([0,-18,0],sole.productExceptSelf([9,0,-2]))
+
 
 if __name__ == '__main__':
     ArraySolutionTest.main()

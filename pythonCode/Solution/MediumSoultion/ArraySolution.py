@@ -756,6 +756,18 @@ class ArraySolution(object):
             tmp = tmp + dp[i] - dp[i + W]
         return dp[0]
 
+    # 238. Product of Array Except Self
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        length=len(nums)
+        result = [1] * length
+        for i in range(1, length):
+            result[i] = result[i - 1] * nums[i - 1]
+        tmp = 1
+        for i in range(length - 2, -1, -1):
+            tmp = tmp * nums[i + 1]
+            result[i] = result[i] * tmp
+        return result
+
 
 if __name__ == '__main__':
     print(ArraySolution.findAndReplacePattern(["abc", "deq", "mee", "aqq", "dkd", "ccc"], "abb"))
