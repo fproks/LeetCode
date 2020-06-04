@@ -836,4 +836,19 @@ public class ArraysSolution implements Solution {
         return  fina;
     }
 
+   // 1464. Maximum Product of Two Elements in an Array
+    public int maxProduct(int[] nums) {
+        int max=Integer.MIN_VALUE;
+        int maxB=Integer.MIN_VALUE;
+        for(int i : nums){
+           if (i >max){
+               maxB=max;
+               max=i;
+           }else if(i>maxB){
+               maxB=i;
+           }
+        }
+        return  (max-1)*(maxB-1);
+    }
+
 }
