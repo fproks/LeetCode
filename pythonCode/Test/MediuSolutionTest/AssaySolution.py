@@ -169,6 +169,12 @@ class ArraySolutionTest(TestCase):
         self.assertEqual([24,12,8,6],sole.productExceptSelf([1,2,3,4]))
         self.assertEqual([0,-18,0],sole.productExceptSelf([9,0,-2]))
 
+    def test_searchInsert(self):
+        sole=ArraySolution()
+        self.assertEqual(2,sole.searchInsert([1,3,5,6],5))
+        self.assertEqual(1,sole.searchInsert([1,3,5,6],2))
+        self.assertEqual(4,sole.searchInsert([1,3,5,6],7))
+
 
 if __name__ == '__main__':
     ArraySolutionTest.main()

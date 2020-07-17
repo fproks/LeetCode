@@ -758,7 +758,7 @@ class ArraySolution(object):
 
     # 238. Product of Array Except Self
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        length=len(nums)
+        length = len(nums)
         result = [1] * length
         for i in range(1, length):
             result[i] = result[i - 1] * nums[i - 1]
@@ -767,6 +767,22 @@ class ArraySolution(object):
             tmp = tmp * nums[i + 1]
             result[i] = result[i] * tmp
         return result
+
+    def searchInsert(self, nums: List[int], target: int) -> int:
+        n=len(nums)
+        if n ==0:
+            return 0
+        if nums[n-1]<target:
+            return n
+        left=0
+        end=n-1
+        while left<end:
+            mid=(left+end)//2
+            if nums[mid]<target:
+                left=mid+1
+            else:
+                end=mid
+        return left
 
 
 if __name__ == '__main__':
