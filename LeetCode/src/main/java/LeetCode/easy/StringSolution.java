@@ -420,54 +420,82 @@ public class StringSolution implements Solution {
         int[] wordsInt = new int[words.length];
         for (int j = 0; j < words.length; j++) {
             String q = words[j];
-           int max=0;
-           char tmpc='z';
-           for (int i =0;i<q.length();i++){
-               char c =q.charAt(i);
-               if(tmpc==c)max++;
-               else if(tmpc >c){
-                   tmpc=c;
-                   max=1;
-               }
-           }
+            int max = 0;
+            char tmpc = 'z';
+            for (int i = 0; i < q.length(); i++) {
+                char c = q.charAt(i);
+                if (tmpc == c) max++;
+                else if (tmpc > c) {
+                    tmpc = c;
+                    max = 1;
+                }
+            }
             wordsInt[j] = max;
         }
         return wordsInt;
     }
+
     //1189. Maximum Number of Balloons
     public int maxNumberOfBalloons(String text) {
-        int b =0,a=0,l=0,o=0,n=0;
-        for (char c : text.toCharArray()){
-            if(c=='b')b++;
-            if(c=='a')a++;
-            if(c=='l')l++;
-            if(c=='o')o++;
-            if(c=='n')n++;
+        int b = 0, a = 0, l = 0, o = 0, n = 0;
+        for (char c : text.toCharArray()) {
+            if (c == 'b') b++;
+            if (c == 'a') a++;
+            if (c == 'l') l++;
+            if (c == 'o') o++;
+            if (c == 'n') n++;
         }
-        o=o/2;
-        l=l/2;
-        int result=b;
-        result = Math.min(Math.min(Math.min(Math.min(result, a),l),o),n);
-        return  result;
+        o = o / 2;
+        l = l / 2;
+        int result = b;
+        result = Math.min(Math.min(Math.min(Math.min(result, a), l), o), n);
+        return result;
     }
 
     public char firstUniqChar(String s) {
-        List<Character> list =new LinkedList<>();
-        Set<Character> set =new HashSet<>();
-        for (char c : s.toCharArray()){
-           if(set.contains(c))continue;
-           if(list.contains(c)){
-               set.add(c);
-              list.remove(Character.valueOf(c));
-           }else list.add(c);
+        List<Character> list = new LinkedList<>();
+        Set<Character> set = new HashSet<>();
+        for (char c : s.toCharArray()) {
+            if (set.contains(c)) continue;
+            if (list.contains(c)) {
+                set.add(c);
+                list.remove(Character.valueOf(c));
+            } else list.add(c);
         }
-        if(list.size()>0)return  list.get(0);
-        else return  ' ';
+        if (list.size() > 0) return list.get(0);
+        else return ' ';
     }
 
     //58 面试题58 - II. 左旋转字符串
     public String reverseLeftWords(String s, int n) {
-        return s.substring(n)+s.substring(0,n);
+        return s.substring(n) + s.substring(0, n);
+    }
+
+    public String replaceSpaceBy20(String s) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (char c : s.toCharArray()) {
+            if (c != ' ') stringBuilder.append(c);
+            else stringBuilder.append("%20");
+        }
+        return stringBuilder.toString();
+    }
+
+    public int lengthOfLongestSubstring(String s) {
+        int result=0;
+        if(s.length()==0)return result;
+        HashMap<Character, Integer> map = new HashMap<>();
+        int start = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (!map.containsKey(s.charAt(i))) {
+                map.put(s.charAt(i), i);
+            }else {
+                String tmp=s.substring(start,i);
+                result = Math.max(tmp.length(), result);
+                start=i;
+                map.clear();
+            }
+        }
+        return  result;
     }
 
 }

@@ -769,20 +769,43 @@ class ArraySolution(object):
         return result
 
     def searchInsert(self, nums: List[int], target: int) -> int:
-        n=len(nums)
-        if n ==0:
+        n = len(nums)
+        if n == 0:
             return 0
-        if nums[n-1]<target:
+        if nums[n - 1] < target:
             return n
-        left=0
-        end=n-1
-        while left<end:
-            mid=(left+end)//2
-            if nums[mid]<target:
-                left=mid+1
+        left = 0
+        end = n - 1
+        while left < end:
+            mid = (left + end) // 2
+            if nums[mid] < target:
+                left = mid + 1
             else:
-                end=mid
+                end = mid
         return left
+
+    def findNumberIn2DArray(self, matrix: List[List[int]], target: int) -> bool:
+        row = len(matrix)
+        if row == 0:
+            return False
+        col = len(matrix[0])
+        if col == 0:
+            return False
+        r = row - 1
+        c = 0
+        while r >= 0 and c < col:
+            if matrix[r][c] > target:
+                r -= 1
+                continue
+            if matrix[r][c] == target:
+                return True
+            if matrix[r][c] < target:
+                c += 1
+                continue
+        return False
+
+    def printNumbers(self, n: int) -> List[int]:
+        return list(range(1, 10 ** n))
 
 
 if __name__ == '__main__':

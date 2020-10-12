@@ -194,7 +194,7 @@ class ListSolution:
         if ldp > rdp: return self.lcaDeepestLeaves(root.left)
         return root
 
-    #112. Path Sum
+    # 112. Path Sum
     def hasPathSum(self, root: TreeNode, sum: int) -> bool:
         if root is None:
             return sum == 0
@@ -202,3 +202,18 @@ class ListSolution:
             return root.val == sum
         else:
             return self.hasPathSum(root.left, sum - root.val) or self.hasPathSum(root.right, sum - root.val)
+
+    def getMinimumDifference(self, root: TreeNode) -> int:
+        diff = 999
+        pre = 999
+
+        def dif(root: TreeNode):
+            if root is None:
+                return
+            self.diff = min(self.diff, abs(root.val - self.pre))
+            self.pre = root.val
+            dif(root.left)
+            dif(root.right)
+
+        dif(root)
+        return diff
