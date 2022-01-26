@@ -114,3 +114,29 @@ class StringSolution:
                 l = 0
                 r = 0
         return cout
+
+    def inString(self, s: str, c: str, index: int) -> int:
+        return s.find(c, index)
+
+    def isSubsequence(self, s: str, t: str) -> bool:
+        startIndex = 0
+        for c in s:
+            tmp = self.inString(t, c, startIndex)
+            if tmp == -1:
+                return False
+            else:
+                startIndex = tmp + 1
+        return True
+
+    def dayOfYear(self, date: str) -> int:
+        num_count = [0, 31, 28 + 31, 28 + 31 + 31, 28 + 31 + 31 + 30, 28 + 31 + 31 + 30 + 31,
+                     31 + 28 + 31 + 30 + 31 + 30, 31 + 28 + 31 + 30 + 31 + 30 + 31,
+                     31 + 28 + 31 + 30 + 31 + 30 + 31 + 31, 31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30,
+                     31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30 + 31,
+                     31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30 + 31 + 30]
+        dalist = date.split("-")
+        days = 1 if int(dalist[0]) % 4 == 0 else 0
+        if int(dalist[0])%100==0 and int(dalist[0])%400!=0: days=0
+        num=int(dalist[1])
+        res = num_count[num-1] if num <= 2 else num_count[num-1] + days
+        return res + int(dalist[2])

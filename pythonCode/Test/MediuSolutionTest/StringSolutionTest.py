@@ -48,3 +48,7 @@ class StringSolutionTest(TestCase):
         solution=StringSolution()
         self.assertEqual(4,solution.balancedStringSplit("RLRRLLRLRL"))
 
+    def test_dayOfYear(self):
+        solution=StringSolution()
+        self.assertEqual(61,solution.dayOfYear("2004-03-01"))
+
