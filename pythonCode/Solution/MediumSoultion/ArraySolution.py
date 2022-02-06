@@ -807,6 +807,12 @@ class ArraySolution(object):
     def printNumbers(self, n: int) -> List[int]:
         return list(range(1, 10 ** n))
 
+    def sumOfUnique(self, nums: List[int]) -> int:
+        return sum(num for num, cnt in collections.Counter(nums).items() if cnt == 1)
+
+    def frequencySort(self, nums: List[int]) -> List[int]:
+        return sorted(nums,key=lambda x:(nums.count(x),-x))
+
 
 if __name__ == '__main__':
     print(ArraySolution.findAndReplacePattern(["abc", "deq", "mee", "aqq", "dkd", "ccc"], "abb"))
