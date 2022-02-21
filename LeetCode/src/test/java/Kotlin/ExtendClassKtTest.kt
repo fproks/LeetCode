@@ -17,18 +17,18 @@ class ExtendClassKtTest {
         val  lts = listOf(1,2,3,4,5).filter (::isodd)
         Assert.assertArrayEquals(lit.toIntArray(),lts.toIntArray())
 
-        Thread({
-            for (i in 1..10){
+        Thread {
+            for (i in 1..10) {
                 println("i = $i")
                 Thread.sleep(1000)
             }
-        }).start()
-        Thread({
-            for (j in 20..10){
+        }.start()
+        Thread {
+            for (j in 20..10) {
                 println("j =$j")
                 Thread.sleep(1000)
             }
-        }).start()
+        }.start()
 
         repeat(3){
             println("hello")
@@ -45,5 +45,11 @@ class ExtendClassKtTest {
 
 
 
+    }
+
+    @Test
+    fun testPushDominoes() {
+        assertEquals(pushDominoes(".L.R...LR..L.."),"LL.RR.LLRRLL..")
+        assertEquals(pushDominoes("RR.L"),"RR.L")
     }
 }
