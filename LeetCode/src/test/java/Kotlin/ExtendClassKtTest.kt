@@ -52,4 +52,15 @@ class ExtendClassKtTest {
         assertEquals(pushDominoes(".L.R...LR..L.."),"LL.RR.LLRRLL..")
         assertEquals(pushDominoes("RR.L"),"RR.L")
     }
+
+    @Test
+    fun testNumPrimeArrangements() {
+        assertEquals(12,numPrimeArrangements(5))
+        assertEquals(682289015, numPrimeArrangements(100))
+    }
+
+    @Test
+    fun testReverseOnlyLetters() {
+        assertEquals("dc-ba", reverseOnlyLetters("ab-cd"))
+    }
 }

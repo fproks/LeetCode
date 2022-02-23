@@ -1,8 +1,11 @@
 package Kotlin
 
+
+
 import java.io.File
-import java.lang.StringBuilder
-import java.util.Arrays
+import kotlin.math.pow
+import kotlin.math.sqrt
+import kotlin.text.StringBuilder
 
 fun String.swap(index1: Int, index2: Int): String {
     val charArray = this.toCharArray()
@@ -29,7 +32,7 @@ private fun traverseFileTree(fileName: String) {
 
 //838. 推多米诺
 fun pushDominoes(dominoes: String): String {
-    if(dominoes.length<=1)return dominoes
+    if (dominoes.length <= 1) return dominoes
     val res = StringBuilder(dominoes)
     for (i in res.indices) {
         if (res[i] == '.') {
@@ -44,6 +47,52 @@ fun pushDominoes(dominoes: String): String {
     }
     return if (res.toString() == dominoes) dominoes
     else pushDominoes(res.toString())
+}
+
+
+fun funJC(n: Int): Int {
+    val modNumber = (10.0.pow(9) + 7).toInt()
+    var res = 1
+    for (i in n downTo 1) {
+        res = (res * i).rem(modNumber)
+    }
+    return res
+}
+
+fun isPrimeNumber(n: Int): Boolean {
+    if (n == 2) return true
+    if (n % 2 == 0 || n == 1) return false
+    val p = sqrt(n.toDouble()).toInt()
+    for (j in 2..p) if (n % j == 0) return false
+    return true
+}
+
+fun numPrimeArrangements(n: Int): Int {
+    var primeNumber = 0
+    var noPrimeNumber = 0
+    for (i in 1..n) {
+        if (isPrimeNumber(i)) primeNumber++
+        else noPrimeNumber++
+    }
+    val t1 = funJC(noPrimeNumber)
+    val t2 = funJC(primeNumber)
+    return (t1 * t2).rem((10.0.pow(9) + 7).toInt())
+}
+
+fun reverseOnlyLetters(s: String): String {
+    val listr = ArrayList<Int>()
+    val charList=StringBuilder()
+    s.forEachIndexed{id,it->run{
+        if (it.isLetter()) {
+            charList.append(it)
+        }
+        else listr.add(id)
+    }}
+    charList.reverse()
+    listr.forEach{
+        charList.insert(it,s[it])
+    }
+    return  charList.toString()
 }
 
 
