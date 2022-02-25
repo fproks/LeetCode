@@ -95,6 +95,20 @@ fun reverseOnlyLetters(s: String): String {
     return  charList.toString()
 }
 
+//537. 复数乘法
+fun complexNumberMultiply(num1: String, num2: String): String {
+    val num1list=num1.split("+")
+    val num2list=num2.split("+")
+    val num11=num1list[0].toInt()
+    val num12=num1list[1].removeSuffix("i").toInt()
+    val num21=num2list[0].toInt()
+    val num22=num2list[1].removeSuffix("i").toInt()
+    val rest1=num11*num21-num12*num22
+    val rest2=num11*num22+num12*num21
+    return  rest1.toString()+"+"+rest2.toString()+"i"
+
+}
+
 
 fun main(args: Array<String>) {
     //代码重复执行3次
