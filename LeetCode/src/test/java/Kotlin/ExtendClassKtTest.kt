@@ -63,4 +63,10 @@ class ExtendClassKtTest {
     fun testReverseOnlyLetters() {
         assertEquals("dc-ba", reverseOnlyLetters("ab-cd"))
     }
+
+    @Test
+    fun testConvert() {
+        assertEquals(convert("PAYPALISHIRING",3),"PAHNAPLSIIGYIR")
+        assertEquals(convert("PAYPALISHIRING",4),"PINALSIGYAHRPI")
+    }
 }

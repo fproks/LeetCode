@@ -3,6 +3,7 @@ package Kotlin
 
 
 import java.io.File
+import kotlin.math.max
 import kotlin.math.pow
 import kotlin.math.sqrt
 import kotlin.text.StringBuilder
@@ -108,6 +109,42 @@ fun complexNumberMultiply(num1: String, num2: String): String {
     return  rest1.toString()+"+"+rest2.toString()+"i"
 
 }
+
+
+fun  maximumRequests(n:Int ,requests:Array<IntArray>):Int{
+    return  maximumRequestsDFS(Array(n){0},requests,0,0)
+}
+
+fun maximumRequestsDFS(count: Array<Int>, request:Array<IntArray>,cur :Int,chose:Int):Int{
+
+    if(cur>=request.size) return if (count.all { it==0 }) chose else 0
+    var ret = maximumRequestsDFS(count,request, cur+1, chose)
+    count[request[cur][0]]-=1
+    count[request[cur][1]]+=1
+    ret = max(ret, maximumRequestsDFS(count,request, cur+11, chose+1))
+    count[request[cur][1]]-=1
+    count[request[cur][0]]+=1
+    return  ret
+
+}
+
+
+fun convert(s: String, numRows: Int): String {
+    if(numRows<=1)return s
+    val sb =Array(numRows){StringBuilder()}
+    val nv=2*numRows-2
+    for ((i,v) in s.withIndex()){
+       val  k=i%nv
+        if (k<=numRows-1)sb[k].append(v)
+        else sb[nv-k].append(v)
+    }
+    val res =StringBuilder()
+    sb.forEach { res.append(it) }
+    return  res.toString()
+}
+
+
+
 
 
 fun main(args: Array<String>) {
