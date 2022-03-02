@@ -1,8 +1,10 @@
 package Kotlin
 
 
-
 import java.io.File
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.pow
 import kotlin.math.sqrt
@@ -82,69 +84,82 @@ fun numPrimeArrangements(n: Int): Int {
 
 fun reverseOnlyLetters(s: String): String {
     val listr = ArrayList<Int>()
-    val charList=StringBuilder()
-    s.forEachIndexed{id,it->run{
-        if (it.isLetter()) {
-            charList.append(it)
+    val charList = StringBuilder()
+    s.forEachIndexed { id, it ->
+        run {
+            if (it.isLetter()) {
+                charList.append(it)
+            } else listr.add(id)
         }
-        else listr.add(id)
-    }}
-    charList.reverse()
-    listr.forEach{
-        charList.insert(it,s[it])
     }
-    return  charList.toString()
+    charList.reverse()
+    listr.forEach {
+        charList.insert(it, s[it])
+    }
+    return charList.toString()
 }
 
 //537. 复数乘法
 fun complexNumberMultiply(num1: String, num2: String): String {
-    val num1list=num1.split("+")
-    val num2list=num2.split("+")
-    val num11=num1list[0].toInt()
-    val num12=num1list[1].removeSuffix("i").toInt()
-    val num21=num2list[0].toInt()
-    val num22=num2list[1].removeSuffix("i").toInt()
-    val rest1=num11*num21-num12*num22
-    val rest2=num11*num22+num12*num21
-    return  rest1.toString()+"+"+rest2.toString()+"i"
+    val num1list = num1.split("+")
+    val num2list = num2.split("+")
+    val num11 = num1list[0].toInt()
+    val num12 = num1list[1].removeSuffix("i").toInt()
+    val num21 = num2list[0].toInt()
+    val num22 = num2list[1].removeSuffix("i").toInt()
+    val rest1 = num11 * num21 - num12 * num22
+    val rest2 = num11 * num22 + num12 * num21
+    return rest1.toString() + "+" + rest2.toString() + "i"
 
 }
 
 
-fun  maximumRequests(n:Int ,requests:Array<IntArray>):Int{
-    return  maximumRequestsDFS(Array(n){0},requests,0,0)
+fun maximumRequests(n: Int, requests: Array<IntArray>): Int {
+    return maximumRequestsDFS(Array(n) { 0 }, requests, 0, 0)
 }
 
-fun maximumRequestsDFS(count: Array<Int>, request:Array<IntArray>,cur :Int,chose:Int):Int{
+fun maximumRequestsDFS(count: Array<Int>, request: Array<IntArray>, cur: Int, chose: Int): Int {
 
-    if(cur>=request.size) return if (count.all { it==0 }) chose else 0
-    var ret = maximumRequestsDFS(count,request, cur+1, chose)
-    count[request[cur][0]]-=1
-    count[request[cur][1]]+=1
-    ret = max(ret, maximumRequestsDFS(count,request, cur+11, chose+1))
-    count[request[cur][1]]-=1
-    count[request[cur][0]]+=1
-    return  ret
+    if (cur >= request.size) return if (count.all { it == 0 }) chose else 0
+    var ret = maximumRequestsDFS(count, request, cur + 1, chose)
+    count[request[cur][0]] -= 1
+    count[request[cur][1]] += 1
+    ret = max(ret, maximumRequestsDFS(count, request, cur + 11, chose + 1))
+    count[request[cur][1]] -= 1
+    count[request[cur][0]] += 1
+    return ret
 
 }
 
 
 fun convert(s: String, numRows: Int): String {
-    if(numRows<=1)return s
-    val sb =Array(numRows){StringBuilder()}
-    val nv=2*numRows-2
-    for ((i,v) in s.withIndex()){
-       val  k=i%nv
-        if (k<=numRows-1)sb[k].append(v)
-        else sb[nv-k].append(v)
+    if (numRows <= 1) return s
+    val sb = Array(numRows) { StringBuilder() }
+    val nv = 2 * numRows - 2
+    for ((i, v) in s.withIndex()) {
+        val k = i % nv
+        if (k <= numRows - 1) sb[k].append(v)
+        else sb[nv - k].append(v)
     }
-    val res =StringBuilder()
+    val res = StringBuilder()
     sb.forEach { res.append(it) }
-    return  res.toString()
+    return res.toString()
 }
 
 
+fun nearestPalindromic(n: String): String? {
+    val n_n = n.toInt()
+    if (n_n <= 10) return (n_n - 1).toString()
+    if (n.reversed().toInt() == 1) return (n_n - 1).toString()
+    if (n_n == 11) return "9"
+    if (n.all { it == '9' }) return (n_n + 2).toString()
 
+    val a = n.substring(0, (n.length + 1) / 2)
+    val b = n.substring((n.length + 1) / 2)
+    val list = mutableListOf((a.toInt() - 1).toString(), a, (a.toInt() + 1).toString())
+    val list1 = list.map { it + it.substring(0, b.length).reversed() }
+    return list1.minBy { abs( it.toInt()-n_n )}
+}
 
 
 fun main(args: Array<String>) {
