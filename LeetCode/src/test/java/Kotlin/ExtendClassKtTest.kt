@@ -69,4 +69,12 @@ class ExtendClassKtTest {
         assertEquals(convert("PAYPALISHIRING",3),"PAHNAPLSIIGYIR")
         assertEquals(convert("PAYPALISHIRING",4),"PINALSIGYAHRPI")
     }
+
+    @Test
+    fun testNearestPalindromic() {
+        assertEquals(nearestPalindromic("9"),"8")
+        assertEquals(nearestPalindromic("123"),"121")
+        assertEquals(nearestPalindromic("1"),"0")
+        assertEquals(nearestPalindromic("1444"),"1441")
+    }
 }
