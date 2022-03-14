@@ -4,6 +4,7 @@ package Kotlin
 import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.pow
@@ -159,6 +160,24 @@ fun nearestPalindromic(n: String): String? {
     val list = mutableListOf((a.toInt() - 1).toString(), a, (a.toInt() + 1).toString())
     val list1 = list.map { it + it.substring(0, b.length).reversed() }
     return list1.minBy { abs( it.toInt()-n_n )}
+}
+
+
+fun findRestaurant(list1: Array<String>, list2: Array<String>): Array<String> {
+    val res=HashMap<Int,ArrayList<String>>()
+    val map2=HashMap<String,Int>()
+    list2.withIndex().forEach{
+        (idx,str)->map2[str]=idx
+    }
+    for ((idx,str) in list1.withIndex()) {
+        if (map2.containsKey(str)) {
+            val key = idx + map2[str]!!
+            if (!res.containsKey(key)) res[key] = ArrayList()
+            res[key]?.add(str)
+        }
+    }
+    val arr= res.minBy { it.key }?.value
+    return  arr!!.toTypedArray()
 }
 
 
