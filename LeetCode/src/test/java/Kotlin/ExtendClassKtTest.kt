@@ -77,4 +77,14 @@ class ExtendClassKtTest {
         assertEquals(nearestPalindromic("1"),"0")
         assertEquals(nearestPalindromic("1444"),"1441")
     }
+
+    @Test
+    fun testFindRestaurant() {
+        assertArrayEquals(arrayOf("Shogun"), findRestaurant(arrayOf("Shogun", "Tapioca Express", "Burger King", "KFC"),
+            arrayOf("KFC", "Shogun", "Burger King")
+        ))
+        assertArrayEquals(arrayOf("Shogun"), findRestaurant(arrayOf("Shogun", "Tapioca Express", "Burger King", "KFC"),
+            arrayOf("Piatti", "The Grill at Torrey Pines", "Hungry Hunter Steakhouse", "Shogun")
+        ))
+    }
 }
