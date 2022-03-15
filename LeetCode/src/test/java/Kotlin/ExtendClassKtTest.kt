@@ -87,4 +87,10 @@ class ExtendClassKtTest {
             arrayOf("Piatti", "The Grill at Torrey Pines", "Hungry Hunter Steakhouse", "Shogun")
         ))
     }
+
+    @Test
+    fun testCountMaxOrSubsets() {
+        assertEquals(15,countMaxOrSubsets(intArrayOf(2,2,2,2)))
+        assertEquals(8,countMaxOrSubsets(intArrayOf(2,2,2,3)))
+    }
 }
