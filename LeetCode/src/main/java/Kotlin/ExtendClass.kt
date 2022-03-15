@@ -159,25 +159,37 @@ fun nearestPalindromic(n: String): String? {
     val b = n.substring((n.length + 1) / 2)
     val list = mutableListOf((a.toInt() - 1).toString(), a, (a.toInt() + 1).toString())
     val list1 = list.map { it + it.substring(0, b.length).reversed() }
-    return list1.minBy { abs( it.toInt()-n_n )}
+    return list1.minBy { abs(it.toInt() - n_n) }
 }
 
 
 fun findRestaurant(list1: Array<String>, list2: Array<String>): Array<String> {
-    val res=HashMap<Int,ArrayList<String>>()
-    val map2=HashMap<String,Int>()
-    list2.withIndex().forEach{
-        (idx,str)->map2[str]=idx
+    val res = HashMap<Int, ArrayList<String>>()
+    val map2 = HashMap<String, Int>()
+    list2.withIndex().forEach { (idx, str) ->
+        map2[str] = idx
     }
-    for ((idx,str) in list1.withIndex()) {
+    for ((idx, str) in list1.withIndex()) {
         if (map2.containsKey(str)) {
             val key = idx + map2[str]!!
             if (!res.containsKey(key)) res[key] = ArrayList()
             res[key]?.add(str)
         }
     }
-    val arr= res.minBy { it.key }?.value
-    return  arr!!.toTypedArray()
+    val arr = res.minBy { it.key }?.value
+    return arr!!.toTypedArray()
+}
+
+fun countMaxOrSubsets(nums: IntArray): Int {
+    var maxValue = 0
+    nums.forEach { maxValue = maxValue.or(it) }
+    return countMaxOrSubsetsdfs(0, nums, 0, maxValue)
+}
+
+fun countMaxOrSubsetsdfs(curIndex: Int, nums: IntArray, curValue: Int, maxValue: Int): Int {
+    if (curIndex == nums.size) return if (curValue == maxValue) 1 else 0
+    return countMaxOrSubsetsdfs(curIndex + 1, nums, curValue.or(nums[curIndex]), maxValue) +
+            countMaxOrSubsetsdfs(curIndex + 1, nums, curValue, maxValue)
 }
 
 
