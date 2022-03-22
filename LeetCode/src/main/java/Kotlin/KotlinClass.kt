@@ -42,3 +42,13 @@ class AllOne() {
     }
 
 }
+
+
+fun winnerOfGame(colors: String): Boolean {
+    var count=0
+    for (i in 0.. colors.length-3){
+        if (colors.subSequence(i,i+3) == "AAA")count++
+        if(colors.subSequence(i,i+3) == "BBB")count--
+    }
+    return  count>0
+}
