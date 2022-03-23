@@ -1,5 +1,7 @@
 package Kotlin
 
+import kotlin.math.min
+
 
 class AllOne() {
     private val strKey = HashMap<String, Int>()
@@ -51,4 +53,20 @@ fun winnerOfGame(colors: String): Boolean {
         if(colors.subSequence(i,i+3) == "BBB")count--
     }
     return  count>0
+}
+
+fun distanceBetweenBusStops(distance: IntArray, start: Int, destination: Int): Int {
+    var count=0
+    var midCount=0
+    var begin=start
+    var end=destination
+    if(start>destination)
+        begin=end.apply {
+            end=begin
+        }
+    for (i in distance.indices){
+        count+=distance[i]
+        if (i in begin until end){midCount+=distance[i]}
+    }
+    return  min(midCount,count-midCount)
 }
