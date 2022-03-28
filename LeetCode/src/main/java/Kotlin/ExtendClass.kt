@@ -192,6 +192,13 @@ fun countMaxOrSubsetsdfs(curIndex: Int, nums: IntArray, curValue: Int, maxValue:
             countMaxOrSubsetsdfs(curIndex + 1, nums, curValue, maxValue)
 }
 
+fun hasAlternatingBits(n: Int): Boolean {
+    val str =Integer.toBinaryString(n)
+    if ( str.contains("11") or str.contains("00")) return false
+    return true
+}
+
+
 
 fun main(args: Array<String>) {
     //代码重复执行3次
