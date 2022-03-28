@@ -200,6 +200,7 @@ fun hasAlternatingBits(n: Int): Boolean {
 
 
 
+
 fun main(args: Array<String>) {
     //代码重复执行3次
     repeat(3) { println("hello") }
