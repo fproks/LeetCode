@@ -70,3 +70,22 @@ fun distanceBetweenBusStops(distance: IntArray, start: Int, destination: Int): I
     }
     return  min(midCount,count-midCount)
 }
+
+fun maxConsecutiveAnswers(answerKey: String, k: Int): Int {
+    var left =0
+    var right=0
+    var t=0
+    var f=0
+    while (right<answerKey.length){
+        if (answerKey[right]=='T')t++
+        else f++
+        if (t.coerceAtMost(f) >k){
+            if (answerKey[left]=='T')t--
+            else f--
+            left++
+        }
+        right++
+    }
+    return  right-left
+
+}
