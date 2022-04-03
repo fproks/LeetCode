@@ -25,4 +25,12 @@ class KotlinClassKtTest : TestCase() {
     fun testNextGreatestLetter() {
         assertEquals('c', nextGreatestLetter(charArrayOf('c','f','j'),'a'))
     }
+
+    fun testCountPoints() {
+        Assert.assertArrayEquals(intArrayOf(2,3,2,4),
+            countPoints(
+                arrayOf(intArrayOf(1,1), intArrayOf(2,2), intArrayOf(3,3), intArrayOf(4,4), intArrayOf(5,5)),
+                arrayOf(intArrayOf(1,2,2), intArrayOf(2,2,2), intArrayOf(4,3,2), intArrayOf(4,3,3))
+        ))
+    }
 }
