@@ -29,7 +29,8 @@ public class ConvertTest {
         Assert.assertEquals("313233343536", hex);
 
         double a2 = 1234577.66;
-        String digiiUppercase = Convert.digitUppercase(a2);
+
+        String digiiUppercase = Convert.digitToChinese(a2);
         System.out.println(digiiUppercase);
     }
 

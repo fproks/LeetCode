@@ -159,7 +159,7 @@ fun nearestPalindromic(n: String): String? {
     val b = n.substring((n.length + 1) / 2)
     val list = mutableListOf((a.toInt() - 1).toString(), a, (a.toInt() + 1).toString())
     val list1 = list.map { it + it.substring(0, b.length).reversed() }
-    return list1.minBy { abs(it.toInt() - n_n) }
+    return list1.minByOrNull { abs(it.toInt() - n_n) }
 }
 
 
@@ -176,7 +176,8 @@ fun findRestaurant(list1: Array<String>, list2: Array<String>): Array<String> {
             res[key]?.add(str)
         }
     }
-    val arr = res.minBy { it.key }?.value
+
+    val arr = res.minByOrNull { it.key }?.value
     return arr!!.toTypedArray()
 }
 
