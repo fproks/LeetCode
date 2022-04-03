@@ -1,5 +1,7 @@
 package Kotlin
 
+import java.util.PriorityQueue
+import java.util.TreeSet
 import kotlin.math.min
 
 
@@ -88,4 +90,35 @@ fun maxConsecutiveAnswers(answerKey: String, k: Int): Int {
     }
     return  right-left
 
+}
+
+
+fun busiestServers(k: Int, arrival: IntArray, load: IntArray): List<Int> {
+    val N=100010
+    val cnts =IntArray(N) { 0 }
+    val n =arrival.size
+    var max =0
+    val busy =PriorityQueue { a:IntArray,b:IntArray->a[1]-b[1] }
+    val free =TreeSet<Int>()
+    for (i in 0 until k)free.add(i)
+    for (i in 0 until  n){
+        val start =arrival[i]
+         val end =start+load[i]
+        while (!busy.isEmpty() && busy.peek()[1]<=start)free.add(busy.poll()[0])
+        var u =free.ceiling(i%k)
+        if (u==null)u =free.ceiling(0)
+        if (u==null)continue
+        free.remove(u)
+        busy.add(intArrayOf(u,end))
+        max = max.coerceAtLeast(++cnts[u])
+    }
+    val ans =ArrayList<Int>()
+    for (i in 0 until k)if (cnts[i]==max)ans.add(i)
+    return  ans
+
+}
+
+//744. 寻找比目标字母大的最小字母
+fun nextGreatestLetter(letters: CharArray, target: Char): Char {
+    return letters.find { it > target } ?: return letters[0]
 }

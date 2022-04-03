@@ -2,9 +2,11 @@
   "name": "NodejsCode",
   "version": "1.0.0",
   "scripts": {
-    "test": "cross-env NODE_ENV=LOCAL mocha test --exit --timeout=10000"
+    "test": "cross-env NODE_ENV=LOCAL mocha test --exit --timeout=10000 --require ts-node/register test/"
   },
   "dependencies": {
-    "mocha": "^6.1.4"
+    "mocha": "^6.1.4",
+    "ts-node": "^10.7.0",
+    "jest": "^27.5.1"
   }
 }
