@@ -2,7 +2,10 @@ package Kotlin
 
 import java.util.PriorityQueue
 import java.util.TreeSet
+import kotlin.math.abs
 import kotlin.math.min
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 
 class AllOne() {
@@ -49,76 +52,90 @@ class AllOne() {
 
 
 fun winnerOfGame(colors: String): Boolean {
-    var count=0
-    for (i in 0.. colors.length-3){
-        if (colors.subSequence(i,i+3) == "AAA")count++
-        if(colors.subSequence(i,i+3) == "BBB")count--
+    var count = 0
+    for (i in 0..colors.length - 3) {
+        if (colors.subSequence(i, i + 3) == "AAA") count++
+        if (colors.subSequence(i, i + 3) == "BBB") count--
     }
-    return  count>0
+    return count > 0
 }
 
 fun distanceBetweenBusStops(distance: IntArray, start: Int, destination: Int): Int {
-    var count=0
-    var midCount=0
-    var begin=start
-    var end=destination
-    if(start>destination)
-        begin=end.apply {
-            end=begin
+    var count = 0
+    var midCount = 0
+    var begin = start
+    var end = destination
+    if (start > destination)
+        begin = end.apply {
+            end = begin
         }
-    for (i in distance.indices){
-        count+=distance[i]
-        if (i in begin until end){midCount+=distance[i]}
+    for (i in distance.indices) {
+        count += distance[i]
+        if (i in begin until end) {
+            midCount += distance[i]
+        }
     }
-    return  min(midCount,count-midCount)
+    return min(midCount, count - midCount)
 }
 
 fun maxConsecutiveAnswers(answerKey: String, k: Int): Int {
-    var left =0
-    var right=0
-    var t=0
-    var f=0
-    while (right<answerKey.length){
-        if (answerKey[right]=='T')t++
+    var left = 0
+    var right = 0
+    var t = 0
+    var f = 0
+    while (right < answerKey.length) {
+        if (answerKey[right] == 'T') t++
         else f++
-        if (t.coerceAtMost(f) >k){
-            if (answerKey[left]=='T')t--
+        if (t.coerceAtMost(f) > k) {
+            if (answerKey[left] == 'T') t--
             else f--
             left++
         }
         right++
     }
-    return  right-left
+    return right - left
 
 }
 
 
 fun busiestServers(k: Int, arrival: IntArray, load: IntArray): List<Int> {
-    val N=100010
-    val cnts =IntArray(N) { 0 }
-    val n =arrival.size
-    var max =0
-    val busy =PriorityQueue { a:IntArray,b:IntArray->a[1]-b[1] }
-    val free =TreeSet<Int>()
-    for (i in 0 until k)free.add(i)
-    for (i in 0 until  n){
-        val start =arrival[i]
-         val end =start+load[i]
-        while (!busy.isEmpty() && busy.peek()[1]<=start)free.add(busy.poll()[0])
-        var u =free.ceiling(i%k)
-        if (u==null)u =free.ceiling(0)
-        if (u==null)continue
+    val N = 100010
+    val cnts = IntArray(N) { 0 }
+    val n = arrival.size
+    var max = 0
+    val busy = PriorityQueue { a: IntArray, b: IntArray -> a[1] - b[1] }
+    val free = TreeSet<Int>()
+    for (i in 0 until k) free.add(i)
+    for (i in 0 until n) {
+        val start = arrival[i]
+        val end = start + load[i]
+        while (!busy.isEmpty() && busy.peek()[1] <= start) free.add(busy.poll()[0])
+        var u = free.ceiling(i % k)
+        if (u == null) u = free.ceiling(0)
+        if (u == null) continue
         free.remove(u)
-        busy.add(intArrayOf(u,end))
+        busy.add(intArrayOf(u, end))
         max = max.coerceAtLeast(++cnts[u])
     }
-    val ans =ArrayList<Int>()
-    for (i in 0 until k)if (cnts[i]==max)ans.add(i)
-    return  ans
+    val ans = ArrayList<Int>()
+    for (i in 0 until k) if (cnts[i] == max) ans.add(i)
+    return ans
 
 }
 
 //744. 寻找比目标字母大的最小字母
 fun nextGreatestLetter(letters: CharArray, target: Char): Char {
     return letters.find { it > target } ?: return letters[0]
+}
+
+fun countPoints(points: Array<IntArray>, queries: Array<IntArray>): IntArray {
+    val array = ArrayList<Int>()
+    for (i in queries) {
+        val x = i[0]
+        val y = i[1]
+        val s = i[2]
+        val count = points.count { s> sqrt((it[0].toDouble() - x).pow(2.0) + (it[1].toDouble() - y).pow(2.0)) }
+        array.add(count)
+    }
+    return array.toIntArray()
 }
