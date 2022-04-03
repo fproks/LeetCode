@@ -134,7 +134,7 @@ fun countPoints(points: Array<IntArray>, queries: Array<IntArray>): IntArray {
         val x = i[0]
         val y = i[1]
         val s = i[2]
-        val count = points.count { s> sqrt((it[0].toDouble() - x).pow(2.0) + (it[1].toDouble() - y).pow(2.0)) }
+        val count = points.count { s>= sqrt((it[0].toDouble() - x).pow(2.0) + (it[1].toDouble() - y).pow(2.0)) }
         array.add(count)
     }
     return array.toIntArray()
