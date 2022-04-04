@@ -162,3 +162,11 @@ class NumArray(val nums: IntArray) {
     }
 
 }
+
+fun minPartitions(n: String): Int {
+    var max =0
+    for (c in n){
+        max = if (c-'0' >max) c-'0' else max
+    }
+    return max
+}
