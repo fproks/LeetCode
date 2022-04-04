@@ -44,4 +44,8 @@ class KotlinClassKtTest : TestCase() {
             )
         )
     }
+
+    fun testMinPartitions() {
+        assertEquals(3, minPartitions("32"))
+    }
 }
