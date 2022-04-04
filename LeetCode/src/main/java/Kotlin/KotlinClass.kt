@@ -139,3 +139,26 @@ fun countPoints(points: Array<IntArray>, queries: Array<IntArray>): IntArray {
     }
     return array.toIntArray()
 }
+
+//307. 区域和检索 - 数组可修改
+class NumArray(val nums: IntArray) {
+    val sumArray=IntArray(nums.size+1){0}
+    init {
+       for (i in nums.indices){
+           sumArray[i+1]=sumArray[i]+nums[i]
+       }
+    }
+
+    fun update(index: Int, `val`: Int) {
+        val offset =`val`-nums[index]
+        for (i in index until sumArray.size){
+            sumArray[i+1]+=offset
+        }
+        nums[index]=`val`
+    }
+
+    fun sumRange(left: Int, right: Int): Int {
+        return  sumArray[right+1]-sumArray[left]
+    }
+
+}
