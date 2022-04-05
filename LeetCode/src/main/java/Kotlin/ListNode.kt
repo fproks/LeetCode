@@ -57,3 +57,26 @@ fun  createListNode(arr: IntArray):ListNode?{
     }
     return p
 }
+
+
+
+fun mergeNodes(head: ListNode?): ListNode? {
+    var  res =ListNode(0)
+    var p =res
+    var h =head?.next
+    while (h!=null){
+        if (h.`val`==0) {
+            if (h.next!=null) {
+                p.next = ListNode(0)
+                p = p.next!!
+            }
+        }
+        else {
+            p.`val` += h.`val`
+        }
+        h=h.next
+
+    }
+    if (res.`val`==0)return  null
+    return res
+}
