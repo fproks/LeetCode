@@ -5,6 +5,7 @@ import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
+import kotlin.collections.HashSet
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.pow
@@ -212,5 +213,26 @@ fun main(args: Array<String>) {
     }.let { println(i) }
 
     traverseFileTree("C:\\Users\\ezlinho\\Desktop\\te")
+
+}
+
+
+fun findMinHeightTrees(n: Int, edges: Array<IntArray>): List<Int> {
+    val du=IntArray(n){it}.toHashSet()
+    val duArr =IntArray(n){0}
+    for (e in edges){
+        duArr[e[0]]++
+        duArr[e[1]]++
+    }
+    while (du.size>2){
+        val du1=duArr.filterIndexed{_,i->i==1}
+        for (i in du1){
+            du.remove(i)
+        }
+        for (i in du1){
+            duArr[i]--
+        }
+    }
+    return  du.toList()
 
 }
