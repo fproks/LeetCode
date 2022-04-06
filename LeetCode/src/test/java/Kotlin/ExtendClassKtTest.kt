@@ -93,4 +93,9 @@ class ExtendClassKtTest {
         assertEquals(15,countMaxOrSubsets(intArrayOf(2,2,2,2)))
         assertEquals(8,countMaxOrSubsets(intArrayOf(2,2,2,3)))
     }
+
+    @Test
+    fun testFindMinHeightTrees() {
+       assertEquals(1, findMinHeightTrees(4, arrayOf(intArrayOf(1,0), intArrayOf(1,2), intArrayOf(1,3))).size)
+    }
 }
