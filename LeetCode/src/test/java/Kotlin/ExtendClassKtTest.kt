@@ -98,4 +98,10 @@ class ExtendClassKtTest {
     fun testFindMinHeightTrees() {
        assertEquals(1, findMinHeightTrees(4, arrayOf(intArrayOf(1,0), intArrayOf(1,2), intArrayOf(1,3))).size)
     }
+
+    @Test
+    fun testRotateString() {
+        assertTrue(rotateString("abcde",   "cdeab"))
+        assertFalse(rotateString("abcde","abced"))
+    }
 }

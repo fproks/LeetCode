@@ -236,3 +236,8 @@ fun findMinHeightTrees(n: Int, edges: Array<IntArray>): List<Int> {
     return  du.toList()
 
 }
+
+
+fun rotateString(s: String, goal: String): Boolean {
+    return  (s+s).contains(goal)
+}
