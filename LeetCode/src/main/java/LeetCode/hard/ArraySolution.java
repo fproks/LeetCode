@@ -2,6 +2,8 @@ package LeetCode.hard;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static java.lang.Math.max;
+
 public class ArraySolution {
 
     //980. Unique Paths III
@@ -37,6 +39,18 @@ public class ArraySolution {
             dfs(grid,nx,ny,pathcount,zerocount,dir,res);
         }
         grid[x][y]=pre;
+    }
+
+
+    public boolean reachingPoints(int sx, int sy, int tx, int ty) {
+        while (tx>0 && ty>0){
+            if(sx==tx && sy==ty) return true;
+            if(tx>ty)
+                tx-=max((tx-sx)/ty,1)*ty;
+            else
+                ty-=max((ty-sy)/tx,1)*tx;
+        }
+        return false;
     }
 
 }
