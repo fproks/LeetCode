@@ -194,3 +194,30 @@ fun countPrimeSetBits(left: Int, right: Int): Int {
 
     return  count
 }
+
+
+class PermuteSolution {
+    lateinit var  visited: BooleanArray
+    val permuteList= ArrayList<List<Int>>()
+    fun permute(nums: IntArray): List<List<Int>> {
+        visited = BooleanArray(nums.size){false}
+        createArrays(ArrayList(),nums)
+        return  permuteList
+    }
+
+    fun  createArrays(path: List<Int>,nums: IntArray){
+        if (path.size==nums.size){
+            permuteList.add(path.toList())
+            return
+        }
+        for (i in nums.indices){
+            if(!visited[i]){
+                val p =ArrayList<Int>(path.toList())
+                p.add(nums[i])
+                visited[i]=true
+                createArrays(p,nums)
+                visited[i]=false
+            }
+        }
+    }
+}
