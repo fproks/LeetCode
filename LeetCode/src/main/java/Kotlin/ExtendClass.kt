@@ -195,12 +195,10 @@ fun countMaxOrSubsetsdfs(curIndex: Int, nums: IntArray, curValue: Int, maxValue:
 }
 
 fun hasAlternatingBits(n: Int): Boolean {
-    val str =Integer.toBinaryString(n)
-    if ( str.contains("11") or str.contains("00")) return false
+    val str = Integer.toBinaryString(n)
+    if (str.contains("11") or str.contains("00")) return false
     return true
 }
-
-
 
 
 fun main(args: Array<String>) {
@@ -218,27 +216,42 @@ fun main(args: Array<String>) {
 
 
 fun findMinHeightTrees(n: Int, edges: Array<IntArray>): List<Int> {
-    val du=IntArray(n){it}.toHashSet()
-    val duArr =IntArray(n){0}
-    for (e in edges){
+    val du = IntArray(n) { it }.toHashSet()
+    val duArr = IntArray(n) { 0 }
+    for (e in edges) {
         duArr[e[0]]++
         duArr[e[1]]++
     }
-    while (du.size>2){
-        val du1=duArr.filterIndexed{_,i->i==1}
-        for (i in du1){
+    while (du.size > 2) {
+        val du1 = duArr.filterIndexed { _, i -> i == 1 }
+        for (i in du1) {
             du.remove(i)
         }
-        for (i in du1){
+        for (i in du1) {
             duArr[i]--
         }
     }
-    return  du.toList()
+    return du.toList()
 
 }
 
 
 fun rotateString(s: String, goal: String): Boolean {
-    if(s.length!=goal.length)return false
-    return  (s+s).contains(goal)
+    if (s.length != goal.length) return false
+    return (s + s).contains(goal)
+}
+
+
+fun countNumbersWithUniqueDigits(n: Int): Int {
+    return when (n) {
+        0 -> 1
+        1 -> 10
+        2 -> 91
+        else -> {
+            var res = 9
+            for (i in 0 until n - 1)
+                res *= (9 - i)
+            countNumbersWithUniqueDigits(n - 1) + res
+        }
+    }
 }

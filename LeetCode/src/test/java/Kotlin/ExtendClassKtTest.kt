@@ -104,4 +104,13 @@ class ExtendClassKtTest {
         assertTrue(rotateString("abcde",   "cdeab"))
         assertFalse(rotateString("abcde","abced"))
     }
+
+    @Test
+    fun testCountNumbersWithUniqueDigits() {
+        assertEquals(1, countNumbersWithUniqueDigits(0))
+        assertEquals(10, countNumbersWithUniqueDigits(1))
+        assertEquals(91, countNumbersWithUniqueDigits(2))
+        assertEquals(739, countNumbersWithUniqueDigits(3))
+        assertEquals(5275, countNumbersWithUniqueDigits(4))
+    }
 }
