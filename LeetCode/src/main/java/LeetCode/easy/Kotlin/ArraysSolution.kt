@@ -69,12 +69,12 @@ class ArraysSolution {
     //695. Max Area of Island
     fun maxAreaOfIsland(grid: Array<IntArray>): Int {
         var count = 0
-        var queue = Stack<Pair<Int, Int>>()
-        for (i in 0 until grid.size) {
+        val queue = Stack<Pair<Int, Int>>()
+        for (i in grid.indices) {
             for (j in 0 until grid[i].size) {
                 if (grid[i][j] == 1) {
                     queue.push(Pair(i, j))
-                    var tmp = 0;
+                    var tmp = 0
                     while (!queue.empty()) {
                         val tmpPair = queue.pop()
                         if (grid[tmpPair.first][tmpPair.second] == 1) {
@@ -95,11 +95,13 @@ class ArraysSolution {
 
     //804. Unique Morse Code Words
     fun uniqueMorseRepresentations(words: Array<String>): Int {
-        val lettle = arrayListOf<String>(".-", "-...", "-.-.", "-..", ".", "..-.", "--.",
-                "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-",
-                ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--..")
-        var setTmp = HashSet<String>()
-        var tmp = StringBuilder()
+        val lettle = arrayListOf<String>(
+            ".-", "-...", "-.-.", "-..", ".", "..-.", "--.",
+            "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-",
+            ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."
+        )
+        val setTmp = HashSet<String>()
+        val tmp = StringBuilder()
         for (word in words) {
             word.forEach { tmp.append(lettle[it - 'a']) }
             setTmp.add(tmp.toString())
@@ -114,7 +116,10 @@ class ArraysSolution {
         for (i in p)
             for (j in p)
                 for (k in p)
-                    res = maxOf(res, 0.5 * abs(i[0] * j[1] + j[0] * k[1] + k[0] * i[1] - j[0] * i[1] - k[0] * j[1] - i[0] * k[1]))
+                    res = maxOf(
+                        res,
+                        0.5 * abs(i[0] * j[1] + j[0] * k[1] + k[0] * i[1] - j[0] * i[1] - k[0] * j[1] - i[0] * k[1])
+                    )
         return res
     }
 
@@ -122,7 +127,7 @@ class ArraysSolution {
         val n = A.size
         val random = Random()
         while (true) {
-            var a = random.nextInt(n)
+            val a = random.nextInt(n)
             var b = random.nextInt(n)
             while (a == b) b = random.nextInt(n)
             if (A[a] == A[b]) return A[a]
@@ -130,7 +135,7 @@ class ArraysSolution {
     }
 
     fun canThreePartsEqualSum(A: IntArray): Boolean {
-        var sum = A.sum() / 3
+        val sum = A.sum() / 3
         val first = sumArr(A, 0, sum)
         if (first == -1) return false
         val j = sumArr(A, first + 1, sum)
@@ -141,7 +146,7 @@ class ArraysSolution {
 
     fun sumArr(A: IntArray, first: Int, result: Int): Int {
         var sum = 0
-        if (first >= A.size) return -1;
+        if (first >= A.size) return -1
         for (idx in first until A.size) {
             sum += A[idx]
             if (sum == result) return idx
@@ -150,8 +155,8 @@ class ArraysSolution {
     }
 
     fun powerfulIntegers(x: Int, y: Int, bound: Int): List<Int> {
-        var result = HashSet<Int>()
-        var xset = HashSet<Double>()
+        val result = HashSet<Int>()
+        val xset = HashSet<Double>()
         val yset = HashSet<Double>()
         var dx = x.toDouble()
         var dy = y.toDouble()
@@ -160,7 +165,7 @@ class ArraysSolution {
         yset.add(1.0)
         yset.add(dy)
         while (dx != 1.0) {
-            dx = dx * x
+            dx *= x
             if (dx <= bound) xset.add(dx)
             else break
         }
@@ -206,7 +211,19 @@ class ArraysSolution {
     }
 
 
-
+    fun numberOfLines(widths: IntArray, s: String): IntArray {
+        var lin = 1
+        var res = 0
+        for (c in s) {
+            val tmp = widths[c - 'a']
+            res += tmp
+            if (res > 100) {
+                lin++
+                res = tmp
+            }
+        }
+        return intArrayOf(lin, res)
+    }
 
 
 }
