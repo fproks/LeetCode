@@ -1,6 +1,8 @@
 package LeetCode.easy.Kotlin
 
 import java.lang.StringBuilder
+import java.util.*
+import kotlin.collections.HashMap
 
 //796. Rotate String
 class StringSoultion {
@@ -34,5 +36,22 @@ class StringSoultion {
         return builder.toString()
     }
 
+    fun mostCommonWord(paragraph: String, banned: Array<String>): String {
+        val list = paragraph.toLowerCase().split("[!?',;. ]".toRegex())
+        val map = HashMap<String, Int>()
+        var maxNum = 0
+        var maxWord = ""
+        list.forEach {
+            if (!banned.contains(it)) {
+                if (map.containsKey(it)) map[it] = map[it]!! + 1
+                else map[it] = 1
+                if (maxNum < map[it]!!) {
+                    maxNum = map[it]!!
+                    maxWord = it
+                }
+            }
 
+        }
+        return maxWord
+    }
 }
