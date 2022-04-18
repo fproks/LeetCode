@@ -2,6 +2,7 @@ package LeetCode.medium.Kotlin
 
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 import kotlin.collections.HashSet
 
 class ArraysSolution {
@@ -63,5 +64,24 @@ class ArraysSolution {
             curr = time + duration
         }
         return sum
+    }
+}
+
+class  LexicalOrderSolution {
+    fun lexicalOrder(n: Int): List<Int> {
+        val list =kotlin.collections.ArrayList<Int>()
+        for ( i in 1 until 10){
+            dfs(n,i,list)
+        }
+        return  list
+    }
+
+    fun  dfs(n:Int,target:Int,list : ArrayList<Int>){
+        if (target>n)return
+        list.add(target)
+        val tmp=target*10
+        for (i in 0 until 10){
+            dfs(n,tmp+i,list)
+        }
     }
 }
