@@ -1,6 +1,8 @@
 package LeetCode.medium.Kotlin
 
 import java.util.*
+import kotlin.math.abs
+import kotlin.math.min
 
 
 class StringSloutionKotlin {
@@ -72,19 +74,30 @@ class StringSloutionKotlin {
     }
 
     private fun isCompleting(plateArray: IntArray, wordArray: IntArray): Boolean {
-        return (0 until plateArray.size).none { wordArray[it] < plateArray[it] }
+        return (plateArray.indices).none { wordArray[it] < plateArray[it] }
     }
 
     private fun compileNumWithChar(S: String): IntArray {
-        val wordArray = Array(26, { 0 })
+        val wordArray = Array(26) { 0 }
         S.toLowerCase().filter { it in 'a'..'z' }.forEach {
             wordArray[(it - 'a')]++
         }
         return wordArray.toIntArray()
     }
 
-
-
+    fun shortestToChar(s: String, c: Char): IntArray {
+        val indxArray = IntArray(s.length) { -1 }
+        var pos = -s.length
+        for (i in s.indices) {
+            if (s[i] == c) pos = i
+            indxArray[i] = i - pos
+        }
+        for (i in s.length-1 downTo 0) {
+            if (s[i] == c) pos = i
+            indxArray[i] = min(indxArray[i], abs(i - pos))
+        }
+        return  indxArray
+    }
 
 
 }
