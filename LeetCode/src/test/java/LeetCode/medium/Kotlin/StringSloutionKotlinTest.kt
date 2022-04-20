@@ -15,5 +15,9 @@ class StringSloutionKotlinTest {
         assertArrayEquals(intArrayOf(3,2,1,0,1,0,0,1,2,2,1,0), soultuion.shortestToChar("loveleetcode",'e'))
         assertArrayEquals(intArrayOf(3,2,1,0), soultuion.shortestToChar("aaab",'b'))
     }
+    @Test
+    fun lengthLongestPathTest(){
+        assertEquals(20, soultuion.lengthLongestPath("dir\n\tsubdir1\n\tsubdir2\n\t\tfile.ext"))
+    }
 
 }

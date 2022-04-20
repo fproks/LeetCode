@@ -98,6 +98,18 @@ class StringSloutionKotlin {
         }
         return  indxArray
     }
-
-
+    fun lengthLongestPath(input: String): Int {
+        if(input.isEmpty())return 0
+        val words =input.split("\n")
+        val pathLens=IntArray(words.size+1)
+        pathLens[0]=-1
+        var ans =0
+        for (word in words){
+            val leve=word.lastIndexOf('\t')+1+1
+            val nameLen=word.length-(leve-1)
+            pathLens[leve]=pathLens[leve-1]+1+nameLen
+            if(word.contains("."))ans =Math.max(ans,pathLens[leve])
+        }
+        return  ans
+    }
 }
