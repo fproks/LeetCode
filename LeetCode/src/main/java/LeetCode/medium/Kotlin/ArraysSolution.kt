@@ -65,6 +65,21 @@ class ArraysSolution {
         }
         return sum
     }
+
+    fun maxRotateFunction(nums: IntArray): Int {
+        val sum=nums.sum()
+        var f0=0
+        for ( i in nums.indices){
+            f0+=nums[i]*i
+        }
+        var res =f0
+
+        for (i in 1 until nums.size){
+            f0=f0+sum-nums.size*nums[nums.size-i]
+            if (f0>res)res=f0
+        }
+        return  res
+    }
 }
 
 class  LexicalOrderSolution {

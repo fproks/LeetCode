@@ -18,6 +18,12 @@ class ArraysSolutionTest {
         Assert.assertArrayEquals(result, solutionKotlin.dailyTemperatures(temperatures))
     }
 
+    @Test
+    fun maxRotateFunction() {
+        assertEquals(26,solutionKotlin.maxRotateFunction(intArrayOf(4,3,2,6)))
+        assertEquals(0,solutionKotlin.maxRotateFunction(intArrayOf(100)))
+    }
+
 
 }
 
