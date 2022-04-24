@@ -3,6 +3,7 @@ package LeetCode.easy.Kotlin
 import java.lang.StringBuilder
 import java.util.*
 import kotlin.collections.HashMap
+import kotlin.math.max
 
 //796. Rotate String
 class StringSoultion {
@@ -53,5 +54,20 @@ class StringSoultion {
 
         }
         return maxWord
+    }
+
+    fun binaryGap(n: Int): Int {
+        val sre=n.toString(2)
+        var res=0
+        var start=-1
+        for (i in sre.indices){
+            if (sre[i]=='1'){
+                if (start>=0){
+                    res = Math.max(res,i-start)
+                }
+                start=i
+            }
+        }
+        return  res
     }
 }

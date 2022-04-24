@@ -50,4 +50,10 @@ class StringSoultionTest {
                 , arrayOf(
                 "m","q","e","l","c","i","z","j","g","t","w","v","h","p","d","b","a","r","x","n")))
     }
+
+    @Test
+    fun binaryGap() {
+       assertEquals(2, solution.binaryGap(22))
+        assertEquals(0, solution.binaryGap(8))
+    }
 }
