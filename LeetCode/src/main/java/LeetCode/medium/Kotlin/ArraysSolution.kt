@@ -100,3 +100,19 @@ class  LexicalOrderSolution {
         }
     }
 }
+
+class PickSolution(val nums: IntArray) {
+    fun pick(target: Int): Int {
+        val count=nums.count { it==target }
+        val r =Random().nextInt(count)
+        var idx=0
+        for ( i in nums.indices){
+            if (nums[i]==target){
+                if(idx==r)return  i
+                else idx++
+            }
+        }
+        return  -1
+    }
+
+}
