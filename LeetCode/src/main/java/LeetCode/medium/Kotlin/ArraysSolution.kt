@@ -2,8 +2,6 @@ package LeetCode.medium.Kotlin
 
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
-import kotlin.collections.HashSet
 
 class ArraysSolution {
 
@@ -113,6 +111,41 @@ class PickSolution(val nums: IntArray) {
             }
         }
         return  -1
+    }
+
+
+    fun pacificAtlantic(heights: Array<IntArray>): List<List<Int>> {
+        val list =kotlin.collections.ArrayList<List<Int>>()
+        val m =heights.size
+        if(m<1)return list
+        val n =heights[0].size
+        val pacific = Array(m){BooleanArray(n){false} }
+        val atlantic =Array(m){BooleanArray(n){false} }
+        for ( i in heights.indices){
+            pacificAtlanticDfs(heights,i,0,pacific,heights[i][0])
+            pacificAtlanticDfs(heights,i,n-1,atlantic,heights[i][n-1])
+        }
+        for (i in 0 until n){
+            pacificAtlanticDfs(heights,0,i,pacific,heights[0][i])
+            pacificAtlanticDfs(heights,m-1,i,atlantic,heights[m-1][i])
+        }
+
+        for (i in 0 until m){
+            for (j in 0 until n){
+                if(pacific[i][j] && atlantic[i][j])list.add(listOf(i,j))
+            }
+        }
+        return  list
+
+    }
+    private fun pacificAtlanticDfs(heights: Array<IntArray>, x :Int, y:Int, visited:Array<BooleanArray>, pre: Int){
+        if (x<0 || y<0 || x>=heights.size || y>=heights[0].size || visited[x][y] || heights[x][y] <pre)
+            return
+        visited[x][y]=true
+        pacificAtlanticDfs(heights, x+1, y, visited, pre)
+        pacificAtlanticDfs(heights, x-1, y, visited, pre)
+        pacificAtlanticDfs(heights, x, y+1, visited, pre)
+        pacificAtlanticDfs(heights, x, y-1, visited, pre)
     }
 
 }
