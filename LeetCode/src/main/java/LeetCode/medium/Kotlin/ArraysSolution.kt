@@ -148,4 +148,19 @@ class PickSolution(val nums: IntArray) {
         pacificAtlanticDfs(heights, x, y-1, visited, pre)
     }
 
+    fun numSubarrayProductLessThanK(nums: IntArray, k: Int): Int {
+        if(k==0 || k==1)return  0
+        var l=0
+        var prod=1
+        var res =0
+        for (i in nums.indices){
+            prod*=nums[i]
+            while (prod>=k){
+                prod /=nums[l++]
+            }
+            res+=i-l+1
+        }
+        return  res
+    }
+
 }
