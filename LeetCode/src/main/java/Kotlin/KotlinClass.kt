@@ -221,3 +221,15 @@ class PermuteSolution {
         }
     }
 }
+
+
+class RecentCounter() {
+    val array =ArrayList<Int>()
+    var first=0
+    fun ping(t: Int): Int {
+        array.add(t)
+        if (array[first]<t-3000)first++
+        return array.size-first
+    }
+
+}
