@@ -229,5 +229,19 @@ class ArraysSolution {
         return accounts.maxOf { it.sum() }
     }
 
+    fun diStringMatch(s: String): IntArray {
+        val n =s.length
+        val first =s.count { it=='D' }
+        val array =kotlin.collections.ArrayList<Int>()
+        array.add(first)
+        var low=first
+        var high =first
+        for (i in 1..n){
+            if(s[i-1]=='I')array.add(low--)
+            else array.add(high++)
+        }
+        return  array.toIntArray()
+    }
+
 
 }
