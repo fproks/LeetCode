@@ -24,8 +24,21 @@ class ArraysSolutionTest {
         assertEquals(0,solutionKotlin.maxRotateFunction(intArrayOf(100)))
     }
 
+    @Test
+    fun findRightInterval(){
+       // assertArrayEquals(intArrayOf(-1),solutionKotlin.findRightInterval(arrayOf(intArrayOf(1,2))))
+        assertArrayEquals(intArrayOf(-1,2,-1),solutionKotlin.findRightInterval(arrayOf(intArrayOf(1,4),
+            intArrayOf(2,3),
+            intArrayOf(3,4))))
+        assertArrayEquals(intArrayOf(-1,0,1),solutionKotlin.findRightInterval(arrayOf(intArrayOf(3,4),
+            intArrayOf(2,3),
+            intArrayOf(1,2))))
+    }
 
 }
+
+
+
 
 class LexicalOrderSolutionTest {
 

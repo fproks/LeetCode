@@ -78,6 +78,18 @@ class ArraysSolution {
         }
         return  res
     }
+
+    //436. 寻找右区间
+    fun findRightInterval(intervals: Array<IntArray>): IntArray {
+        val startArr=intervals.mapIndexed { index, ints -> intArrayOf(ints[0],index)  }.sortedBy { it[0] }
+        val resutl=kotlin.collections.ArrayList<Int>()
+        for(i in intervals){
+            val arr=startArr.find { ints: IntArray ->ints[0]>=i[1]  }
+            if(arr!==null)resutl.add(arr[1])
+            else resutl.add(-1)
+        }
+        return  resutl.toIntArray()
+    }
 }
 
 class  LexicalOrderSolution {
