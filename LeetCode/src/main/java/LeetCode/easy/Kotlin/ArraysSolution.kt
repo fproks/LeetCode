@@ -243,5 +243,14 @@ class ArraysSolution {
         return  array.toIntArray()
     }
 
+    fun heightChecker(heights: IntArray): Int {
+        val sort=heights.clone().sorted()
+        var count=0
+        for (i in heights.indices){
+            if (sort[i]!=heights[i])count++
+        }
+        return  count
+    }
+
 
 }
