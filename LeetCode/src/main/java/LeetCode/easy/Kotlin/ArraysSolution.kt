@@ -230,26 +230,42 @@ class ArraysSolution {
     }
 
     fun diStringMatch(s: String): IntArray {
-        val n =s.length
-        val first =s.count { it=='D' }
-        val array =kotlin.collections.ArrayList<Int>()
+        val n = s.length
+        val first = s.count { it == 'D' }
+        val array = kotlin.collections.ArrayList<Int>()
         array.add(first)
-        var low=first
-        var high =first
-        for (i in 1..n){
-            if(s[i-1]=='I')array.add(low--)
+        var low = first
+        var high = first
+        for (i in 1..n) {
+            if (s[i - 1] == 'I') array.add(low--)
             else array.add(high++)
         }
-        return  array.toIntArray()
+        return array.toIntArray()
     }
 
     fun heightChecker(heights: IntArray): Int {
-        val sort=heights.clone().sorted()
-        var count=0
-        for (i in heights.indices){
-            if (sort[i]!=heights[i])count++
+        val sort = heights.clone().sorted()
+        var count = 0
+        for (i in heights.indices) {
+            if (sort[i] != heights[i]) count++
         }
-        return  count
+        return count
+    }
+
+    //1089. 复写零
+    fun duplicateZeros(arr: IntArray): Unit {
+        val tmp = arr.clone()
+        var i = 0
+        var j = 0
+        while (j < tmp.size) {
+            arr[j] = tmp[i]
+            if (tmp[i] == 0 && j + 1 < tmp.size) {
+                j++
+                arr[j] = 0
+            }
+            i++
+            j++
+        }
     }
 
 
