@@ -70,4 +70,8 @@ class StringSoultion {
         }
         return  res
     }
+
+    fun defangIPaddr(address: String): String {
+        return address.replace(".","[*]").replace("*",".")
+    }
 }
