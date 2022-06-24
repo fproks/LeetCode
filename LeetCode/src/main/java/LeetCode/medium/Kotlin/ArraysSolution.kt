@@ -1,6 +1,8 @@
 package LeetCode.medium.Kotlin
 
+import LeetCode.struct.TreeNode
 import java.util.*
+import kotlin.collections.ArrayDeque
 import kotlin.collections.ArrayList
 
 class ArraysSolution {
@@ -173,6 +175,25 @@ class PickSolution(val nums: IntArray) {
             res+=i-l+1
         }
         return  res
+    }
+
+    fun largestValues(root: TreeNode?): List<Int> {
+        val res =kotlin.collections.ArrayList<Int>()
+        if(root==null)return res
+        val queue = LinkedList<TreeNode>()
+        queue.add(root)
+        while (!queue.isEmpty()){
+            var max=queue.peek().`val`
+            val tmp=queue.toList()
+            queue.clear()
+            for (i in tmp){
+                if (i.`val`>max)max=i.`val`
+                if(i.left!=null)queue.add(i.left)
+                if(i.right!=null)queue.add(i.right)
+            }
+            res.add(max)
+        }
+        return res
     }
 
 }
