@@ -93,6 +93,16 @@ class ArraysSolution {
         }
         return resutl.toIntArray()
     }
+    fun wiggleSort(nums: IntArray): Unit {
+        nums.sortDescending()
+        val end=nums.copyOfRange(0,nums.size/2)
+        val start =nums.copyOfRange(nums.size/2,nums.size)
+        for (i in nums.indices step 2){
+            nums[i]=start[i/2]
+        }
+        for (i in 1 until  nums.size step 2)
+            nums[i]=end[(i-1)/2]
+    }
 }
 
 class LexicalOrderSolution {
@@ -208,5 +218,7 @@ class PickSolution(val nums: IntArray) {
         }
         return min( min(dp[costs.size-1][0],dp[costs.size-1][1]),dp[costs.size-1][2])
     }
+
+
 
 }

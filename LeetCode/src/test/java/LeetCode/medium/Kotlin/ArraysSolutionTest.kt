@@ -35,6 +35,11 @@ class ArraysSolutionTest {
             intArrayOf(1,2))))
     }
 
+    @Test
+    fun wiggleSort() {
+        print(solutionKotlin.wiggleSort(intArrayOf(1,3,2,2,3,1)))
+    }
+
 }
 
 
