@@ -20,9 +20,6 @@ class DataReader(object):
         self.XTrain = None
         self.train_file = train_file
         self.test_file = test_file
-        self.train_data = None
-        self.test_data = None
-        self.valid_data = None
         self.num_category = None
         self.num_train = None
 
@@ -30,7 +27,7 @@ class DataReader(object):
         if os.path.exists(self.train_file):
             data = np.load(self.train_file)
             self.XTrainRaw: np.ndarray = data['data']
-            self.YTrainRaw: np.ndarray = data['labels']
+            self.YTrainRaw: np.ndarray = data['label']
             assert (self.XTrainRaw.shape[0] == self.YTrainRaw.shape[0])
             self.num_train = self.XTrainRaw.shape[0]
             self.num_category = len(np.unique(self.YTrainRaw))
@@ -42,7 +39,7 @@ class DataReader(object):
         if os.path.exists(self.test_file):
             data = np.load(self.test_file)
             self.XTestRaw: np.ndarray = data['data']
-            self.YTestRaw: np.ndarray = data['labels']
+            self.YTestRaw: np.ndarray = data['label']
             assert (self.XTestRaw.shape[0] == self.YTestRaw.shape[0])
             self.num_test = self.XTestRaw.shape[0]
             self.XTest = self.XTestRaw
@@ -69,7 +66,7 @@ class DataReader(object):
         elif netType == NetType.BinaryClassifier:
             self.YTrain = self.oneZero(self.YTrainRaw)
             self.YTest = self.oneZero(self.YTestRaw)
-        elif netType == NetType.MultiClassification:
+        elif netType == NetType.MultipleClassifier:
             self.YTrain = LabelBinarizer().fit_transform(self.YTrainRaw)
             self.YTest = LabelBinarizer().fit_transform(self.YTestRaw)
 

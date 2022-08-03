@@ -4,7 +4,7 @@ from enum import Enum
 class NetType(Enum):
     Fitting = 1,
     BinaryClassifier = 2,
-    MultiClassification = 3
+    MultipleClassifier = 3
 
 
 class InitialMethod(Enum):
@@ -29,3 +29,15 @@ class OptimizerName(Enum):
     AdaDelta = 4,
     RMSProp = 5,
     Adam = 6
+
+
+class StopCondition(Enum):
+    Nothing = 0,    # reach the max_epoch then stop
+    StopLoss = 1,   # reach specified loss value then stop
+    StopDiff = 2,   # reach specified abs(curr_loss - prev_loss)
+
+
+class XCoordinate(Enum):
+    Nothing = 0,
+    Iteration = 1,
+    Epoch = 2

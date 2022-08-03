@@ -21,7 +21,7 @@ class FullLayer(CLayer):
     def initialize(self):
         pass
 
-    def forward(self, input: np.ndarray, train=True):
+    def forward(self, input, train=True):
         self.input_shape = input.shape
         if input.ndim == 4:
             self.x = input.reshape(self.input_shape[0], -1)

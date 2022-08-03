@@ -16,3 +16,10 @@ class HyperParameter(object):
         self.batch_size = batch_size
         self.max_epoch = max_epoch
         self.eta = eta
+
+    def toString(self):
+        title = str.format("bz:{0},eta:{1},init:{2},op:{3}", self.batch_size, self.eta, self.init_method.name,
+                           self.optimizer_name.name)
+        if self.regular_name != RegularMethod.Nothing:
+            title += str.format(",rgl:{0}:{1}", self.regular_name.name, self.regular_value)
+        return title

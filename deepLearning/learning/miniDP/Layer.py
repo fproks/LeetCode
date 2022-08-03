@@ -5,6 +5,12 @@ class CLayer(object):
     def initialize(self):
         pass
 
+    def forward(self, input, train=True):
+        pass
+
+    def backward(self,  delta_in, layer_idx):
+        pass
+
     def train(self, input, train=True):
         pass
 
