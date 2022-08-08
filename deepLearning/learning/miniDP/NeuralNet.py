@@ -83,11 +83,18 @@ class NeuralNet(object):
 
                 total_iterations = epoch * max_iteration + iteration
                 if (total_iterations + 1) % checkpoint_iteration == 0:
-                    need_stop = self.checkErrorAdnLoss(dataReader, batch_x, batch_y, epoch, total_iterations)
+
+                    need_stop = self.checkErrorAdnLoss(dataReader, dataReader.XDev, dataReader.YDev, epoch,
+                                                       total_iterations)
                     if need_stop:
                         break
+            dataReader.Shuffle()
             if need_stop:
                 break
+        t1 = time.time()
+        print(f"use time :{t1 - t0}")
+        if need_test:
+            print("testing...")
 
     def checkErrorAdnLoss(self, dataReader: DataReader, train_x, train_y, epoch, total_iterations):
         print(f"epoch:{epoch}, total_iterations:{total_iterations}")

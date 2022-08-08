@@ -1,6 +1,6 @@
 import numpy as np
 
-from Layer import CLayer
+from learning.miniDP.Layer import CLayer
 from learning.miniDP.HyperParameter import HyperParameter
 from learning.miniDP.WeightBias import WeightsBiases
 
@@ -17,6 +17,7 @@ class FullLayer(CLayer):
         self.param = param
         self.weight = WeightsBiases(self.input_size, self.output_size, param.init_method,
                                     param.optimizer_name, param.eta, param.regular_value, param.regular_name)
+        self.weight.initialize()
 
     def initialize(self):
         pass
@@ -28,6 +29,7 @@ class FullLayer(CLayer):
         else:
             self.x = input
         self.z = self.weight.forward(self.x)
+        return self.z
 
     def backward(self, delta_in, layer_idx):
         delta_out = self.weight.backward(self.x, delta_in)

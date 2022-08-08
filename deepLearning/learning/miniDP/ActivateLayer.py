@@ -29,6 +29,7 @@ class ActivationLayer(CLayer):
 
     def backward(self, delta_in, layer_idx=None):
         dz = self.activator.backward(self.z, self.a, delta_in)
+        return dz
 
 
 # 直传函数，相当于无激活

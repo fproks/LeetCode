@@ -32,9 +32,15 @@ class OptimizerName(Enum):
 
 
 class StopCondition(Enum):
-    Nothing = 0,    # reach the max_epoch then stop
-    StopLoss = 1,   # reach specified loss value then stop
-    StopDiff = 2,   # reach specified abs(curr_loss - prev_loss)
+    Nothing = 0,  # reach the max_epoch then stop
+    StopLoss = 1,  # reach specified loss value then stop
+    StopDiff = 2,  # reach specified abs(curr_loss - prev_loss)
+
+
+class Stopper(object):
+    def __init__(self, sc, sv):
+        self.stop_condition = sc
+        self.stop_value = sv
 
 
 class XCoordinate(Enum):
