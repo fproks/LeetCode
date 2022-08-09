@@ -83,8 +83,7 @@ class NeuralNet(object):
 
                 total_iterations = epoch * max_iteration + iteration
                 if (total_iterations + 1) % checkpoint_iteration == 0:
-
-                    need_stop = self.checkErrorAdnLoss(dataReader, dataReader.XDev, dataReader.YDev, epoch,
+                    need_stop = self.checkErrorAdnLoss(dataReader, batch_x, batch_y, epoch,
                                                        total_iterations)
                     if need_stop:
                         break
@@ -95,9 +94,10 @@ class NeuralNet(object):
         print(f"use time :{t1 - t0}")
         if need_test:
             print("testing...")
+            self.test(dataReader)
 
     def checkErrorAdnLoss(self, dataReader: DataReader, train_x, train_y, epoch, total_iterations):
-        print(f"epoch:{epoch}, total_iterations:{total_iterations}")
+        print(f"epoch:{epoch}, total_iterations:{total_iterations} ", end="")
 
         regular_cost = self.__get_regular_cost_from_fc_layer(self.hp.regular_name)
 
@@ -105,7 +105,7 @@ class NeuralNet(object):
         loss_train, acc_train = self.loss_func.CheckLoss(output, train_y)
         loss_train = loss_train + regular_cost / train_x.shape[0]
 
-        print(f"loss_train: {loss_train:.6f}, acc_train: {acc_train}")
+        print(f"loss_train: {loss_train:.6f}, acc_train: {acc_train} ", end="")
         val_x, val_y = dataReader.getValidationSet()
         output = self.forward(val_x, False)
         loss_val, acc_val = self.loss_func.CheckLoss(output, val_y)

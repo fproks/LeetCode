@@ -4,7 +4,7 @@ from learning.miniDP.EnumDef import NetType
 
 
 class LossFunction(object):
-    def __init__(self, net_type:NetType):
+    def __init__(self, net_type: NetType):
         self.net_type = net_type
 
     def CheckLoss(self, A, Y):
@@ -35,7 +35,7 @@ class LossFunction(object):
     @staticmethod
     def CE2(A, Y, count):
         p1 = 1 - Y
-        p2 = np.log(1 - A)
+        p2 = np.log(1 - A + 1e-5)
         p3 = np.log(A)
         p4 = np.multiply(p1, p2)
         p5 = np.multiply(Y, p3)

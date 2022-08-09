@@ -83,6 +83,7 @@ class DataReader(object):
             k = 1 / k
         self.XTrain, self.XDev, self.YTrain, self.YDev = train_test_split(self.XTrain, self.YTrain, test_size=k,
                                                                           shuffle=True)
+        self.num_train=self.XTrain.shape[0]
 
     def getValidationSet(self):
         return self.XDev, self.YDev
