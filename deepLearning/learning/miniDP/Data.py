@@ -22,6 +22,7 @@ class DataReader(object):
         self.test_file = test_file
         self.num_category = None
         self.num_train = None
+        self.ReadData()
 
     def ReadData(self):
         if os.path.exists(self.train_file):
@@ -50,7 +51,8 @@ class DataReader(object):
             raise Exception("read test file fail!!")
 
     def NormalizeX(self):
-        x_merge = np.vstack((self.XTrainRaw, self.XTestRaw))
+        x_merge = np.concatenate((self.XTrainRaw, self.XTestRaw),axis=0)
+        print(x_merge.shape)
         normalize = MinMaxScaler()
         normalize.fit(x_merge)
         self.XTrain = normalize.transform(self.XTrainRaw)
