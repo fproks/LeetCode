@@ -64,7 +64,8 @@ class PytorchExt(object):
         self.pltshow(f"LOSS: {title}", train_loss, test_loss)
         self.pltshow(f"ACC: {title}", train_acc, test_acc)
 
-    def pltshow(self, title, loss_train, loss_test):
+    @staticmethod
+    def pltshow( title, loss_train, loss_test):
         plt.plot([i for i in range(len(loss_train))], loss_train)
         plt.plot([i for i in range(len(loss_test))], loss_test)
         plt.title(title)
