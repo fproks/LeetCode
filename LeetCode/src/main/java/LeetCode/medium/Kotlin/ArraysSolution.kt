@@ -2,8 +2,7 @@ package LeetCode.medium.Kotlin
 
 import LeetCode.struct.TreeNode
 import java.util.*
-import kotlin.collections.ArrayDeque
-import kotlin.collections.ArrayList
+import kotlin.math.abs
 import kotlin.math.min
 
 class ArraysSolution {
@@ -93,15 +92,16 @@ class ArraysSolution {
         }
         return resutl.toIntArray()
     }
+
     fun wiggleSort(nums: IntArray): Unit {
         nums.sortDescending()
-        val end=nums.copyOfRange(0,nums.size/2)
-        val start =nums.copyOfRange(nums.size/2,nums.size)
-        for (i in nums.indices step 2){
-            nums[i]=start[i/2]
+        val end = nums.copyOfRange(0, nums.size / 2)
+        val start = nums.copyOfRange(nums.size / 2, nums.size)
+        for (i in nums.indices step 2) {
+            nums[i] = start[i / 2]
         }
-        for (i in 1 until  nums.size step 2)
-            nums[i]=end[(i-1)/2]
+        for (i in 1 until nums.size step 2)
+            nums[i] = end[(i - 1) / 2]
     }
 }
 
@@ -211,14 +211,31 @@ class PickSolution(val nums: IntArray) {
     fun minCost(costs: Array<IntArray>): Int {
         val dp = Array(size = 100) { IntArray(3) { 0 } }
         dp[0] = costs[0]
-        for (i in 1 until  costs.size){
-            dp[i][0]= min( dp[i-1][2],dp[i-1][1])+costs[i][0]
-            dp[i][1]= min( dp[i-1][0],dp[i-1][2])+costs[i][1]
-            dp[i][2]= min( dp[i-1][0],dp[i-1][1])+costs[i][2]
+        for (i in 1 until costs.size) {
+            dp[i][0] = min(dp[i - 1][2], dp[i - 1][1]) + costs[i][0]
+            dp[i][1] = min(dp[i - 1][0], dp[i - 1][2]) + costs[i][1]
+            dp[i][2] = min(dp[i - 1][0], dp[i - 1][1]) + costs[i][2]
         }
-        return min( min(dp[costs.size-1][0],dp[costs.size-1][1]),dp[costs.size-1][2])
+        return min(min(dp[costs.size - 1][0], dp[costs.size - 1][1]), dp[costs.size - 1][2])
     }
 
+
+    fun getSumAbsoluteDifferences(nums: IntArray): IntArray {
+        val n = nums.size
+        val sum = IntArray(n+1) { 0 }
+        for (i in 1 ..nums.size) {
+            sum[i] = sum[i-1] + nums[i-1]
+        }
+        val ans = IntArray(n) { 0 }
+        for (i in 1..n) {
+            val l = sum[i - 1]
+            val r = sum[n] - sum[i]
+            ans[i - 1] = Math.abs(l - (i - 1) * nums[i - 1]) + abs(r - (n - i) * nums[i - 1])
+
+        }
+
+        return ans
+    }
 
 
 }
