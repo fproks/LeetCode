@@ -92,24 +92,75 @@ class StringSloutionKotlin {
             if (s[i] == c) pos = i
             indxArray[i] = i - pos
         }
-        for (i in s.length-1 downTo 0) {
+        for (i in s.length - 1 downTo 0) {
             if (s[i] == c) pos = i
             indxArray[i] = min(indxArray[i], abs(i - pos))
         }
-        return  indxArray
+        return indxArray
     }
+
     fun lengthLongestPath(input: String): Int {
-        if(input.isEmpty())return 0
-        val words =input.split("\n")
-        val pathLens=IntArray(words.size+1)
-        pathLens[0]=-1
-        var ans =0
-        for (word in words){
-            val leve=word.lastIndexOf('\t')+1+1
-            val nameLen=word.length-(leve-1)
-            pathLens[leve]=pathLens[leve-1]+1+nameLen
-            if(word.contains("."))ans =Math.max(ans,pathLens[leve])
+        if (input.isEmpty()) return 0
+        val words = input.split("\n")
+        val pathLens = IntArray(words.size + 1)
+        pathLens[0] = -1
+        var ans = 0
+        for (word in words) {
+            val leve = word.lastIndexOf('\t') + 1 + 1
+            val nameLen = word.length - (leve - 1)
+            pathLens[leve] = pathLens[leve - 1] + 1 + nameLen
+            if (word.contains(".")) ans = Math.max(ans, pathLens[leve])
         }
-        return  ans
+        return ans
     }
+
+
+    fun ambiguousCoordinates(s: String): List<String> {
+        val res = ArrayList<String>()
+        val n = s.substring(1, s.length - 1)
+        for (i in 1 until n.length) {
+            val first = StringBuilder(n.substring(0, i)).toString()
+            val sec = StringBuilder(n.substring(i, n.length)).toString()
+            res.add("(${first},${sec})")
+            for (f in 0..first.length) {
+                val fp = StringBuilder(first).insert(f, ".").toString()
+                if (filterDouble(fp)) {
+                    for (s in 1 until sec.length) {
+                        val sp = StringBuilder(sec).insert(s, ".").toString()
+                        if (filterDouble(sp)) {
+                            res.add("(${fp},${sp})")
+                        }
+                    }
+                } else continue
+
+            }
+        }
+
+        return res
+    }
+
+    fun filterDouble(s: String): Boolean {
+        if (s.isEmpty()) return false
+        if (!s.contains(".")) {
+            if (s.length != 1) return !s.startsWith("0")
+        } else {
+            if (s.length < 3) return false
+            try {
+                if (s.toDouble() == 0.0) return false
+            } catch (e: NumberFormatException) {
+                return false
+            }
+            val idx = s.indexOf(".")
+            if (idx > 1 && s.startsWith("0")) return false
+            try {
+                if (s.substring(idx + 1).toInt() == 0) return false
+            } catch (e: NumberFormatException) {
+                return false
+            }
+            if (s.endsWith("0")) return false
+        }
+        return true
+    }
+
+
 }

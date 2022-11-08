@@ -20,4 +20,10 @@ class StringSloutionKotlinTest {
         assertEquals(20, soultuion.lengthLongestPath("dir\n\tsubdir1\n\tsubdir2\n\t\tfile.ext"))
     }
 
+    @Test
+    fun filterDouble() {
+        assertTrue(soultuion.filterDouble("2.3"))
+        assertEquals(soultuion.ambiguousCoordinates("(123)").size,4)
+    }
+
 }

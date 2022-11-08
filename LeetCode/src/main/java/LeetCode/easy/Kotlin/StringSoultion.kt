@@ -57,21 +57,34 @@ class StringSoultion {
     }
 
     fun binaryGap(n: Int): Int {
-        val sre=n.toString(2)
-        var res=0
-        var start=-1
-        for (i in sre.indices){
-            if (sre[i]=='1'){
-                if (start>=0){
-                    res = Math.max(res,i-start)
+        val sre = n.toString(2)
+        var res = 0
+        var start = -1
+        for (i in sre.indices) {
+            if (sre[i] == '1') {
+                if (start >= 0) {
+                    res = Math.max(res, i - start)
                 }
-                start=i
+                start = i
             }
         }
-        return  res
+        return res
     }
 
     fun defangIPaddr(address: String): String {
-        return address.replace(".","[*]").replace("*",".")
+        return address.replace(".", "[*]").replace("*", ".")
+    }
+
+    fun countConsistentStrings(allowed: String, words: Array<String>): Int {
+        val charList = BooleanArray(26) { false }
+        for (c in allowed) { charList[c - 'a'] = true }
+        return words.count {
+            var res = true
+            for (w in it) {
+                if (!charList[w - 'a']) res = false
+            }
+            res
+        }
+
     }
 }
