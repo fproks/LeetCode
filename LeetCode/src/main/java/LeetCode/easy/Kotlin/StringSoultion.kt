@@ -3,6 +3,7 @@ package LeetCode.easy.Kotlin
 import java.lang.StringBuilder
 import java.util.*
 import kotlin.collections.HashMap
+import kotlin.collections.HashSet
 import kotlin.math.max
 
 //796. Rotate String
@@ -77,7 +78,9 @@ class StringSoultion {
 
     fun countConsistentStrings(allowed: String, words: Array<String>): Int {
         val charList = BooleanArray(26) { false }
-        for (c in allowed) { charList[c - 'a'] = true }
+        for (c in allowed) {
+            charList[c - 'a'] = true
+        }
         return words.count {
             var res = true
             for (w in it) {
@@ -85,6 +88,14 @@ class StringSoultion {
             }
             res
         }
+
+    }
+
+    fun numDifferentIntegers(word: String): Int {
+        return "[0-9]+".toRegex()
+            .findAll(word)
+            .map { it.value.replace("^(0+)".toRegex(), "") }
+            .toSet().size
 
     }
 }

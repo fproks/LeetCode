@@ -56,4 +56,9 @@ class StringSoultionTest {
        assertEquals(2, solution.binaryGap(22))
         assertEquals(0, solution.binaryGap(8))
     }
+
+    @Test
+    fun numDifferentIntegers() {
+        assertEquals(1, solution.numDifferentIntegers("a1b01"))
+    }
 }
