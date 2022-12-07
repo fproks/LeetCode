@@ -103,6 +103,38 @@ class ArraysSolution {
         for (i in 1 until nums.size step 2)
             nums[i] = end[(i - 1) / 2]
     }
+
+    fun minOperations(nums1: IntArray, nums2: IntArray): Int {
+        val sum1 = nums1.sum()
+        val sum2 = nums2.sum()
+        if (sum1 == sum2) return 0
+        if (sum1 > sum2) return minOperations(nums2, nums1)
+        var options = 0
+        nums1.sort() //升序
+        nums2.sortDescending() //降序
+        val maxptr1 = nums1.size
+        val maxptr2 = nums2.size
+        var ptr1 = 0
+        var ptr2 = 0
+        var diff = sum2 - sum1
+        while (diff != 0) {
+            if (ptr1 == maxptr1 && ptr2 == maxptr2) return -1
+            val cha1 = if (ptr1 < maxptr1) 6 - nums1[ptr1] else 0
+            val cha2 = if (ptr2 < maxptr2) nums2[ptr2] - 1 else 0
+            if (cha1 == cha2 && cha1 == 0) return -1
+            if (cha1 > diff || cha2 > diff) return options + 1
+            if (cha1 > cha2) {
+                diff -= cha1
+                options += 1
+                ptr1++
+            } else {
+                diff -= cha2
+                options += 1
+                ptr2++
+            }
+        }
+        return options
+    }
 }
 
 class LexicalOrderSolution {
@@ -222,9 +254,9 @@ class PickSolution(val nums: IntArray) {
 
     fun getSumAbsoluteDifferences(nums: IntArray): IntArray {
         val n = nums.size
-        val sum = IntArray(n+1) { 0 }
-        for (i in 1 ..nums.size) {
-            sum[i] = sum[i-1] + nums[i-1]
+        val sum = IntArray(n + 1) { 0 }
+        for (i in 1..nums.size) {
+            sum[i] = sum[i - 1] + nums[i - 1]
         }
         val ans = IntArray(n) { 0 }
         for (i in 1..n) {

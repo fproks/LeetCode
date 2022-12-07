@@ -20,35 +20,53 @@ class ArraysSolutionTest {
 
     @Test
     fun maxRotateFunction() {
-        assertEquals(26,solutionKotlin.maxRotateFunction(intArrayOf(4,3,2,6)))
-        assertEquals(0,solutionKotlin.maxRotateFunction(intArrayOf(100)))
+        assertEquals(26, solutionKotlin.maxRotateFunction(intArrayOf(4, 3, 2, 6)))
+        assertEquals(0, solutionKotlin.maxRotateFunction(intArrayOf(100)))
     }
 
     @Test
-    fun findRightInterval(){
-       // assertArrayEquals(intArrayOf(-1),solutionKotlin.findRightInterval(arrayOf(intArrayOf(1,2))))
-        assertArrayEquals(intArrayOf(-1,2,-1),solutionKotlin.findRightInterval(arrayOf(intArrayOf(1,4),
-            intArrayOf(2,3),
-            intArrayOf(3,4))))
-        assertArrayEquals(intArrayOf(-1,0,1),solutionKotlin.findRightInterval(arrayOf(intArrayOf(3,4),
-            intArrayOf(2,3),
-            intArrayOf(1,2))))
+    fun findRightInterval() {
+        // assertArrayEquals(intArrayOf(-1),solutionKotlin.findRightInterval(arrayOf(intArrayOf(1,2))))
+        assertArrayEquals(
+            intArrayOf(-1, 2, -1), solutionKotlin.findRightInterval(
+                arrayOf(
+                    intArrayOf(1, 4),
+                    intArrayOf(2, 3),
+                    intArrayOf(3, 4)
+                )
+            )
+        )
+        assertArrayEquals(
+            intArrayOf(-1, 0, 1), solutionKotlin.findRightInterval(
+                arrayOf(
+                    intArrayOf(3, 4),
+                    intArrayOf(2, 3),
+                    intArrayOf(1, 2)
+                )
+            )
+        )
     }
 
     @Test
     fun wiggleSort() {
-        print(solutionKotlin.wiggleSort(intArrayOf(1,3,2,2,3,1)))
+        print(solutionKotlin.wiggleSort(intArrayOf(1, 3, 2, 2, 3, 1)))
+    }
+
+    @Test
+    fun minOperations() {
+        assertEquals(4, solutionKotlin.minOperations(intArrayOf(5,6,4,3,1,2), intArrayOf(6,3,3,1,4,5,3,4,1,3,4)))
     }
 
 }
-
-
 
 
 class LexicalOrderSolutionTest {
 
     @Test
     fun lexicalOrderTest() {
-        assertArrayEquals(intArrayOf(1,10,11,12,13,2,3,4,5,6,7,8,9),LexicalOrderSolution().lexicalOrder(13).toIntArray())
+        assertArrayEquals(
+            intArrayOf(1, 10, 11, 12, 13, 2, 3, 4, 5, 6, 7, 8, 9),
+            LexicalOrderSolution().lexicalOrder(13).toIntArray()
+        )
     }
 }
