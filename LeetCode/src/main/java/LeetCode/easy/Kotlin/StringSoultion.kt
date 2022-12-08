@@ -98,4 +98,11 @@ class StringSoultion {
             .toSet().size
 
     }
+
+    fun squareIsWhite(coordinates: String): Boolean {
+        coordinates[0].code
+        val a = coordinates[0] - 'a' + 1
+        val b = coordinates[1] - '0'
+        return a % 2 != b % 2
+    }
 }
