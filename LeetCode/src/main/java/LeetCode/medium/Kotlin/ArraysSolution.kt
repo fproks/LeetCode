@@ -135,6 +135,11 @@ class ArraysSolution {
         }
         return options
     }
+
+    fun minElements(nums: IntArray, limit: Int, goal: Int): Int {
+        val cha = abs(nums.sumOf { it.toLong()}- goal)
+        return if (cha == 0L) 0 else (cha / limit).toInt() + 1
+    }
 }
 
 class LexicalOrderSolution {

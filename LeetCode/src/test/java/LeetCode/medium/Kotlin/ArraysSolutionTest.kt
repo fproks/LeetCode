@@ -57,6 +57,11 @@ class ArraysSolutionTest {
         assertEquals(4, solutionKotlin.minOperations(intArrayOf(5,6,4,3,1,2), intArrayOf(6,3,3,1,4,5,3,4,1,3,4)))
     }
 
+    @Test
+    fun minElements() {
+        assertEquals(solutionKotlin.minElements(intArrayOf(1,-1,1),3,-4),2)
+    }
+
 }
 
 
