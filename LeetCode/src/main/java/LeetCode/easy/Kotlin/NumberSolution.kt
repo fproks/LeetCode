@@ -3,18 +3,18 @@ package LeetCode.easy.Kotlin
 class NumberSolution {
 
     fun selfDividingNumbers(left: Int, right: Int): List<Int> {
-      return left.rangeTo(right).filter { isSelfDividingNumber(it) }.toList()
+        return left.rangeTo(right).filter { isSelfDividingNumber(it) }.toList()
 
     }
 
 
     private fun isSelfDividingNumber(number: Int): Boolean {
-        if(number<=9)return true
-        if(number %10 ==0) return false
-        var numberTmp =number
-        while (numberTmp>0){
-            val div =numberTmp %10
-            if(div==0 || number %div !=0) return false
+        if (number <= 9) return true
+        if (number % 10 == 0) return false
+        var numberTmp = number
+        while (numberTmp > 0) {
+            val div = numberTmp % 10
+            if (div == 0 || number % div != 0) return false
             numberTmp /= 10
 
         }
@@ -29,8 +29,8 @@ class NumberSolution {
     * 跟原数相‘与’就会得0，所以我们可以这样判断。
     * 比如n是10101，那么n>>1就是1010，二者相加就是11111，再加1就是100000，二者相‘与’就是0，
     * */
-    fun hasAlternatingBits(n:Int):Boolean {
-        return (n +(n.shr(1))+1) and (n +(n.shr(1))) ==0
+    fun hasAlternatingBits(n: Int): Boolean {
+        return (n + (n.shr(1)) + 1) and (n + (n.shr(1))) == 0
     }
 
     fun DivisorGame(N: Int): Boolean {
@@ -71,4 +71,31 @@ class NumberSolution {
     }
 
 
+}
+
+class UnionSolution {
+    fun validPath(n: Int, edges: Array<IntArray>, source: Int, destination: Int): Boolean {
+        val union = UnionFind(n)
+        for (edge in edges) {
+            union.union(edge[0], edge[1])
+        }
+        return union.find(source) == union.find(destination)
+    }
+
+    class UnionFind(n: Int) {
+        private lateinit var parent: IntArray
+
+        init {
+            parent = IntArray(n) { 0 }.mapIndexed { index, _ -> index }.toIntArray()
+        }
+
+        fun find(x: Int): Int {
+            if (x != parent[x]) parent[x] = find(parent[x])
+            return parent[x]
+        }
+
+        fun union(x: Int, y: Int) {
+            parent[find(x)] = parent[find(y)]
+        }
+    }
 }
