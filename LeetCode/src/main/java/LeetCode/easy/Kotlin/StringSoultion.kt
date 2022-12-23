@@ -105,4 +105,9 @@ class StringSoultion {
         val b = coordinates[1] - '0'
         return a % 2 != b % 2
     }
+
+    fun finalValueAfterOperations(operations: Array<String>): Int {
+        return operations.size - 2 * operations.count { it[1] == '-' }
+
+    }
 }

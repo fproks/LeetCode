@@ -1,6 +1,7 @@
 package Kotlin.offer
 
 import java.util.*
+import kotlin.collections.HashSet
 
 class ListNode(var `val`: Int) {
     var next: ListNode? = null
@@ -73,6 +74,37 @@ class Solution {
             }
         }
         return right + 1
+    }
+
+
+    fun findNumberIn2DArray(matrix: Array<IntArray>, target: Int): Boolean {
+        val y = matrix.size
+        if (y == 0) return false
+        val x = matrix[0].size
+        if (x == 0) return false
+        var row = 0
+        var col = x - 1
+        while (row < y && col >= 0) {
+            when {
+                matrix[row][col] == target -> return true
+                matrix[row][col] < target -> row++
+                else -> col--
+            }
+        }
+        return false
+    }
+
+    fun minArray(numbers: IntArray): Int {
+        return numbers.sorted()[0]
+    }
+
+    fun firstUniqChar(s: String): Char {
+        val base = IntArray(26)
+        for (i in s) base[i - 'a']++
+        for (i in s)
+            if (base[i - 'a'] == 0) return i
+        return ' '
+
     }
 
 }
