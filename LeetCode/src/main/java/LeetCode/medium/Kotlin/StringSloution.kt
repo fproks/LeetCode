@@ -1,6 +1,7 @@
 package LeetCode.medium.Kotlin
 
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.math.abs
 import kotlin.math.min
 
@@ -162,5 +163,14 @@ class StringSloutionKotlin {
         return true
     }
 
+    fun removeSubfolders(folder: Array<String>): List<String> {
+        folder.sort()
+        val tmp = ArrayList<String>()
+        for (i in folder) {
+            if (tmp.any { i.startsWith(it + "/") }) continue
+            else tmp.add(i)
+        }
+        return  tmp
+    }
 
 }
