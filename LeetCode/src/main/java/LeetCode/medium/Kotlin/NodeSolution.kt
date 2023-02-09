@@ -20,4 +20,10 @@ class NodeSolution {
         }
         return root
     }
+    fun evaluateTree(root: TreeNode?): Boolean {
+        if (root == null) return false
+        if (root.left == null && root.right == null) return root.`val`==1
+        if (root.`val`==2) return evaluateTree(root.left)  or evaluateTree(root.right)
+        else return evaluateTree(root.left) and evaluateTree(root.right)
+    }
 }

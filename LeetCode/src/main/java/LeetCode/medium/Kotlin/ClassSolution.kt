@@ -1,6 +1,6 @@
 package LeetCode.medium.Kotlin
 
-import java.util.Queue
+import  java.util.Queue
 import kotlin.random.Random
 
 class Node(var `val`: Int) {
@@ -37,25 +37,25 @@ class LevelOrderSolution {
 class RandomizedSet() {
     val list = ArrayList<Int>()
     val map = HashMap<Int, Int>()
-    val random=java.util.Random()
+    val random = java.util.Random()
 
     fun insert(`val`: Int): Boolean {
         return if (map.containsKey(`val`)) false
-        else{
+        else {
             list.add(`val`)
-            map[`val`]=list.size-1
+            map[`val`] = list.size - 1
             true
         }
     }
 
     fun remove(`val`: Int): Boolean {
         return if (!map.containsKey(`val`)) false
-        else{
-            val idx=map[`val`]
-            val last=list[list.size-1]
+        else {
+            val idx = map[`val`]
+            val last = list[list.size - 1]
             list[idx!!] = last
-            list.removeAt(list.size-1)
-            map[last]=idx
+            list.removeAt(list.size - 1)
+            map[last] = idx
             map.remove(`val`)
             true
         }
@@ -63,6 +63,29 @@ class RandomizedSet() {
 
     fun getRandom(): Int {
         return list[random.nextInt(list.size)]
+    }
+
+}
+
+class AuthenticationManager(var timeToLive: Int) {
+
+    val tokenMap = HashMap<String, Int>()
+
+    fun generate(tokenId: String, currentTime: Int) {
+        tokenMap[tokenId] = currentTime
+    }
+
+    fun renew(tokenId: String, currentTime: Int) {
+        tokenMap[tokenId]?.let {
+            if (it + timeToLive <= currentTime)
+                tokenMap.remove(tokenId)
+            else
+                tokenMap[tokenId] = currentTime
+        }
+    }
+
+    fun countUnexpiredTokens(currentTime: Int): Int {
+        return tokenMap.count { it.value + timeToLive > currentTime }
     }
 
 }
