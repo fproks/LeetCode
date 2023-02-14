@@ -221,4 +221,23 @@ class FibSolution {
         }
         return dp[len - 1][1]
     }
+
+    fun maxSubArray(nums: IntArray): Int {
+        var res = nums[0]
+        for (i in 1 until nums.size) {
+            nums[i] += max(nums[i - 1], 0)
+            res = max(res, nums[i])
+        }
+        return res
+    }
+
+    fun maxValue(grid: Array<IntArray>): Int {
+        val dp = Array(grid.size + 1) { IntArray(grid[0].size + 1) { 0 } }
+        dp[1][1] = grid[0][0]
+        for (i in 1..grid.size)
+            for (j in 1..grid[0].size)
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]) + grid[i - 1][j - 1]
+        return dp[grid.size][grid[0].size]
+
+    }
 }
