@@ -240,4 +240,23 @@ class FibSolution {
         return dp[grid.size][grid[0].size]
 
     }
+
+    /*
+    * 动态规划 类似跳台阶的问题但是有额外的限制条件
+    * 当前一个数为1时可以组合，当前一个数为2 但是后一个数小于6也可以组合。
+    * */
+    fun translateNum(num: Int): Int {
+        if (num < 10) return 1
+        val str = num.toString()
+        val dp = IntArray(str.length + 1) { 0 }
+        dp[0] = 1
+        dp[1] = 1
+        for (i in 2..str.length) {
+            val tmp = str[i - 2] - '0'
+            dp[i] = if (tmp == 1 || (tmp == 2 && str[i - 1] - '0' < 6)) dp[i - 1] + dp[i - 2] else dp[i - 1]
+        }
+        return dp[str.length]
+    }
+
+
 }
