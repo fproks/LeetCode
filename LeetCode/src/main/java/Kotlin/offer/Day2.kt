@@ -3,6 +3,7 @@ package Kotlin.offer
 import LeetCode.struct.TreeNode
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 import kotlin.collections.HashSet
 import kotlin.math.max
 
@@ -256,6 +257,22 @@ class FibSolution {
             dp[i] = if (tmp == 1 || (tmp == 2 && str[i - 1] - '0' < 6)) dp[i - 1] + dp[i - 2] else dp[i - 1]
         }
         return dp[str.length]
+    }
+
+    //剑指 Offer 48. 最长不含重复字符的子字符串
+    //最长子串的长度不会大于相同字符的最大间隔
+    fun lengthOfLongestSubstring(s: String): Int {
+        if (s.length <= 1) return s.length
+        val dic = HashMap<Char, Int>()
+        var res = 0
+        var tmp = 0
+        for (j in 0 until s.length) {
+            val i = dic.getOrDefault(s[j], -1)
+            dic.put(s[j], j)
+            tmp = if (tmp < j - i) tmp + 1 else j - i
+            res = max(res, tmp)
+        }
+        return res
     }
 
 
