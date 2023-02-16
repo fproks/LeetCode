@@ -19,4 +19,9 @@ class ArraysSolutionTest : TestCase() {
         assertEquals(10,ArraysSolution().maximumWealth(arrayOf(intArrayOf(1,5), intArrayOf(3,7), intArrayOf(3,5))))
         assertEquals(17,ArraysSolution().maximumWealth(arrayOf(intArrayOf(2,8,7), intArrayOf(7,3,1), intArrayOf(1,9,5))))
     }
+
+
+    fun testnumberOfPairs() {
+        Assert.assertArrayEquals(ArraysSolution().numberOfPairs(intArrayOf(1,3,2,1,3,2,2)), intArrayOf(3,1))
+    }
 }

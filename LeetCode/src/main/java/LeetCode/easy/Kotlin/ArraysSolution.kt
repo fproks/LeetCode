@@ -1,6 +1,7 @@
 package LeetCode.easy.Kotlin
 
 import java.util.*
+import kotlin.collections.HashMap
 import kotlin.collections.HashSet
 import kotlin.math.abs
 
@@ -277,4 +278,15 @@ class ArraysSolution {
         }
         return if (odd < even) odd else even
     }
+
+    fun numberOfPairs(nums: IntArray): IntArray {
+        if (nums.size <= 1) return intArrayOf(0, nums.size)
+        val map = HashMap<Int, Int>()
+        for (i in nums) map[i] = map.getOrDefault(i, 0) + 1
+        var res = 0
+        for (i in map.values)
+            if (i % 2 == 1) res++
+        return intArrayOf((nums.size - res) / 2, res)
+    }
+
 }
