@@ -277,3 +277,29 @@ class FibSolution {
 
 
 }
+
+fun mergeTwoLists(l1: ListNode?, l2: ListNode?): ListNode? {
+    if (l1 == null) return l2
+    if (l2 == null) return l1
+    if (l1.`val` > l2.`val`) return mergeTwoLists(l2, l1)
+    var tmp1 = l1
+    var tmp2 = l2
+    while (tmp2 != null) {
+        if (tmp1!!.next == null) {
+            tmp1.next = tmp2
+            break
+        } else {
+            if (tmp2.`val` >= tmp1.next!!.`val`) {
+                tmp1 = tmp1.next
+                continue
+            } else {
+                val tmp = tmp1.next
+                tmp1.next = tmp2
+                tmp2 = tmp2.next
+                tmp1 = tmp1.next
+                tmp1!!.next = tmp
+            }
+        }
+    }
+    return l1
+}
