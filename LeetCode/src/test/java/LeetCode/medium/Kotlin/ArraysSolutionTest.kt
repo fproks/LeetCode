@@ -54,12 +54,48 @@ class ArraysSolutionTest {
 
     @Test
     fun minOperations() {
-        assertEquals(4, solutionKotlin.minOperations(intArrayOf(5,6,4,3,1,2), intArrayOf(6,3,3,1,4,5,3,4,1,3,4)))
+        assertEquals(
+            4,
+            solutionKotlin.minOperations(intArrayOf(5, 6, 4, 3, 1, 2), intArrayOf(6, 3, 3, 1, 4, 5, 3, 4, 1, 3, 4))
+        )
     }
 
     @Test
     fun minElements() {
-        assertEquals(solutionKotlin.minElements(intArrayOf(1,-1,1),3,-4),2)
+        assertEquals(solutionKotlin.minElements(intArrayOf(1, -1, 1), 3, -4), 2)
+    }
+
+    @Test
+    fun largest1BorderedSquare() {
+        assertEquals(
+            solutionKotlin.largest1BorderedSquare(
+                arrayOf(
+                    intArrayOf(1, 1, 1),
+                    intArrayOf(1, 0, 1),
+                    intArrayOf(1, 1, 1)
+                )
+            ), 9
+        )
+        assertEquals(
+            solutionKotlin.largest1BorderedSquare(
+                arrayOf(intArrayOf(1, 1, 0, 0))
+            ), 1
+        )
+        assertEquals(
+            solutionKotlin.largest1BorderedSquare(
+                arrayOf(
+                    intArrayOf(0, 1, 1, 1, 1, 0),
+                    intArrayOf(1, 1, 0, 1, 1, 0),
+                    intArrayOf(1, 1, 0, 1, 0, 1),
+                    intArrayOf(1, 1, 0, 1, 1, 1),
+                    intArrayOf(1, 1, 0, 1, 1, 1),
+                    intArrayOf(1, 1, 1, 1, 1, 1),
+                    intArrayOf(1, 0, 1, 1, 1, 1),
+                    intArrayOf(0, 0, 1, 1, 1, 1),
+                    intArrayOf(1, 1, 1, 1, 1, 1)
+                )
+            ), 16
+        )
     }
 
 }

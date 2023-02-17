@@ -137,8 +137,47 @@ class ArraysSolution {
     }
 
     fun minElements(nums: IntArray, limit: Int, goal: Int): Int {
-        val cha = abs(nums.sumOf { it.toLong()}- goal)
+        val cha = abs(nums.sumOf { it.toLong() } - goal)
         return if (cha == 0L) 0 else (cha / limit).toInt() + 1
+    }
+
+    //1139. 最大的以 1 为边界的正方形
+    fun largest1BorderedSquare(grid: Array<IntArray>): Int {
+        val m = grid.size
+        val n = grid[0].size
+        val down = Array(m) { IntArray(n) { 0 } }
+        val right = Array(m) { IntArray(n) { 0 } }
+        for (i in 0 until m) {
+            for (j in 0 until n) {
+                if (grid[i][j] == 1) {
+                    if (i == 0) down[i][j] = grid[0][j]
+                    else down[i][j] = down[i - 1][j] + 1
+                    if (j == 0) right[i][j] = grid[i][j]
+                    else right[i][j] = right[i][j - 1] + 1
+                } else {
+                    down[i][j] = 0
+                    right[i][j] = 0
+                }
+            }
+        }
+        var res = 0
+        for (i in m - 1 downTo 0) {
+            for (j in n - 1 downTo 0) {
+                for (k in min(down[i][j], right[i][j]) downTo 0) {
+                    if (k <= res) break
+                    if (down[i][j - k + 1] >= k && right[i - k + 1][j] >= k) {
+                        res = k
+                        break
+                    } else {
+                        continue
+                    }
+                }
+
+            }
+        }
+        return res * res
+
+
     }
 }
 
