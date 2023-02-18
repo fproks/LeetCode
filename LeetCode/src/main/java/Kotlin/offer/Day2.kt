@@ -275,6 +275,13 @@ class FibSolution {
         return res
     }
 
+    fun reverseWords(s: String): String {
+        val tmp = s.trim().split(" ").filter { it.isNotEmpty() }.reversed()
+        if (tmp.isEmpty()) return ""
+        return tmp.reduce { acc, s1 -> "$acc $s1" }.toString()
+
+
+    }
 
 }
 
@@ -303,3 +310,29 @@ fun mergeTwoLists(l1: ListNode?, l2: ListNode?): ListNode? {
     }
     return l1
 }
+
+fun exchange(nums: IntArray): IntArray {
+    var i = 0
+    var j = nums.size - 1
+    while (i < j) {
+        while (i < nums.size && nums[i] % 2 == 1) i++
+        while (j > 0 && nums[j] % 2 == 0) j--
+        if (i >= j) return nums
+        val tmp = nums[i]
+        nums[i] = nums[j]
+        nums[j] = tmp
+    }
+    return nums
+
+}
+
+fun twoSum(nums: IntArray, target: Int): IntArray {
+    var i = 0
+    var j = nums.size
+    while (i < j) {
+        if (nums[i] + nums[j] == target) return intArrayOf(nums[i], nums[j])
+    }
+
+    return intArrayOf(0, 0)
+}
+

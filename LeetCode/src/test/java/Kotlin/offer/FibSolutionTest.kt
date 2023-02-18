@@ -11,4 +11,10 @@ class FibSolutionTest {
     fun lengthOfLongestSubstring() {
         assertEquals(solution.lengthOfLongestSubstring("abcabcbb"), 3)
     }
+
+    @Test
+    fun reverseWords() {
+        println(solution.reverseWords("a good   example"))
+
+    }
 }
