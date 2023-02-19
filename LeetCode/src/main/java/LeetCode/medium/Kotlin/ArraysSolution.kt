@@ -176,9 +176,30 @@ class ArraysSolution {
             }
         }
         return res * res
-
-
     }
+
+    fun maxAverageRatio(classes: Array<IntArray>, extraStudents: Int): Double {
+        data class Ratio(var i: Double, var j: Double)
+
+        val queue =
+            PriorityQueue<Ratio> { r1, r2 ->
+                if (((r1.i + 1) / (r1.j + 1) - r1.i / r1.j) >= ((r2.i + 1) / (r2.j + 1) - r2.i / r2.j))
+                    -1 else 1
+            }
+        for (i in classes) {
+            queue.add(Ratio(i[0].toDouble(), i[1].toDouble()))
+        }
+        for (i in 1..extraStudents) {
+            val tmp = queue.poll()
+            tmp.i++
+            tmp.j++
+            queue.add(tmp)
+        }
+        var result = 0.0
+        for (i in queue) result += (i.i / i.j)
+        return result / classes.size
+    }
+
 }
 
 class LexicalOrderSolution {

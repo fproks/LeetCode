@@ -336,3 +336,50 @@ fun twoSum(nums: IntArray, target: Int): IntArray {
     return intArrayOf(0, 0)
 }
 
+fun exist(board: Array<CharArray>, word: String): Boolean {
+    fun dfs(board: Array<CharArray>, word: String, i: Int, j: Int, k: Int): Boolean {
+        if (k == word.length) return true
+        if (i < 0 || i >= board.size || j < 0 || j >= board[0].size) return false
+        if (board[i][j] != word[k]) return false
+        board[i][j] = '/'
+        val res = dfs(board, word, i + 1, j, k + 1) ||
+                dfs(board, word, i - 1, j, k) ||
+                dfs(board, word, i, j + 1, k) ||
+                dfs(board, word, i, j - 1, k)
+        board[i][j] = word[k]
+        return res
+    }
+    for (i in board.indices)
+        for (j in board[0].indices) {
+            if (board[i][j] == word[0]) {
+                val tmp = dfs(board, word, i, j, 0)
+                if (tmp) return true
+            }
+        }
+    return false
+}
+
+
+fun movingCount(m: Int, n: Int, k: Int): Int {
+    fun def(arr: Array<IntArray>, visited: Array<BooleanArray>, m: Int, n: Int, ): Int {
+        if (m < 0 || m >= arr.size || n < 0 || n >= arr[0].size ) return 0
+        if (arr[m][n] == 0 || visited[m][n]) return 0
+        visited[m][n] = true
+
+
+        return 1+def(arr, visited, m+1, n)+def(arr, visited, m, n+1)
+    }
+
+    val arr = Array(m) { IntArray(n) { 0 } }
+    val visited = Array(m) { BooleanArray(n) { false } }
+    for (i in 0 until m)
+        for (j in 0 until n) {
+            val tmp = (i / 100) + ((i % 100) / 10) + (i % 10) + (j / 100) + ((j % 100) / 10) + (j % 10)
+            if (tmp > k) arr[i][j] = 0
+            else arr[i][j] = 1
+        }
+    return def(arr, visited, 0, 0)
+
+
+}
+
