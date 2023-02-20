@@ -361,13 +361,13 @@ fun exist(board: Array<CharArray>, word: String): Boolean {
 
 
 fun movingCount(m: Int, n: Int, k: Int): Int {
-    fun def(arr: Array<IntArray>, visited: Array<BooleanArray>, m: Int, n: Int, ): Int {
-        if (m < 0 || m >= arr.size || n < 0 || n >= arr[0].size ) return 0
+    fun def(arr: Array<IntArray>, visited: Array<BooleanArray>, m: Int, n: Int): Int {
+        if (m < 0 || m >= arr.size || n < 0 || n >= arr[0].size) return 0
         if (arr[m][n] == 0 || visited[m][n]) return 0
         visited[m][n] = true
 
 
-        return 1+def(arr, visited, m+1, n)+def(arr, visited, m, n+1)
+        return 1 + def(arr, visited, m + 1, n) + def(arr, visited, m, n + 1)
     }
 
     val arr = Array(m) { IntArray(n) { 0 } }
@@ -382,4 +382,44 @@ fun movingCount(m: Int, n: Int, k: Int): Int {
 
 
 }
+
+fun pathSum(root: TreeNode?, target: Int): List<List<Int>> {
+
+    fun rec(root: TreeNode?, target: Int, ans: ArrayList<List<Int>>, path: ArrayList<Int>, curSum: Int) {
+        if (root == null) return
+        path.add(root.`val`)
+        val tmp = curSum + root.`val`
+        if (root.left == null && root.right == null && target == tmp) ans.add(ArrayList(path))
+        else {
+            rec(root.left, target, ans, path, tmp)
+            rec(root.right, target, ans, path, tmp)
+        }
+        path.removeAt(path.size - 1)
+    }
+
+    val ans = ArrayList<List<Int>>()
+    rec(root, target, ans, ArrayList(), 0)
+    return ans
+
+}
+
+
+fun kthLargest(root: TreeNode?, k: Int): Int {
+    var count = 0
+    var res = 0
+    fun helper(root: TreeNode?, target: Int) {
+        if (root == null) return
+        if (count < k) helper(root.right, k)
+        if (++count == k) {
+            res = root.`val`
+            return
+        }
+        if (count < k) helper(root.left, k)
+    }
+    helper(root, k)
+    return res
+
+}
+
+
 

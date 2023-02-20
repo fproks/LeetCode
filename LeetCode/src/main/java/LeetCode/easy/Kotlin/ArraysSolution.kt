@@ -4,6 +4,7 @@ import java.util.*
 import kotlin.collections.HashMap
 import kotlin.collections.HashSet
 import kotlin.math.abs
+import kotlin.math.max
 
 class ArraysSolution {
 
@@ -287,6 +288,19 @@ class ArraysSolution {
         for (i in map.values)
             if (i % 2 == 1) res++
         return intArrayOf((nums.size - res) / 2, res)
+    }
+
+
+    fun bestHand(ranks: IntArray, suits: CharArray): String {
+        if (suits[0] == suits[1] && suits[0] == suits[2] && suits[0] == suits[3] && suits[0] == suits[4]) return "Flush"
+        val ran = IntArray(14) { 0 }
+        for (i in ranks) ran[i]++
+        var maxby=0
+        for (i in ran)if (i >maxby)maxby =i
+
+        if (maxby==3) return "Three of a Kind"
+        if (maxby==2) return  "Pair"
+        return "High Card"
     }
 
 }
