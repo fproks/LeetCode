@@ -1,6 +1,7 @@
 package Kotlin.offer
 
 import LeetCode.struct.TreeNode
+import java.lang.Integer.compare
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
@@ -420,6 +421,19 @@ fun kthLargest(root: TreeNode?, k: Int): Int {
     return res
 
 }
+
+fun minNumber(nums: IntArray): String {
+    nums.sortedWith { o1, o2 ->
+        if ("$o1$o2".toInt() >"$o2$o1".toInt()) -1
+        if ("$o1$o2".toInt() =="$o2$o1".toInt()) 0
+        else 1
+    }
+    return nums.joinToString("")
+}
+
+
+
+
 
 
 
