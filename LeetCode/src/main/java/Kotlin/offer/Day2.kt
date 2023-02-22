@@ -424,15 +424,75 @@ fun kthLargest(root: TreeNode?, k: Int): Int {
 
 fun minNumber(nums: IntArray): String {
     nums.sortedWith { o1, o2 ->
-        if ("$o1$o2".toInt() >"$o2$o1".toInt()) -1
-        if ("$o1$o2".toInt() =="$o2$o1".toInt()) 0
+        if ("$o1$o2".toInt() > "$o2$o1".toInt()) -1
+        if ("$o1$o2".toInt() == "$o2$o1".toInt()) 0
         else 1
     }
     return nums.joinToString("")
 }
 
+fun isStraight(nums: IntArray): Boolean {
+    var zero = 0
+    val arr = IntArray(14) { 0 }
+    var min = 13
+    var max = 1
+    for (i in nums) {
+        if (i == 0) {
+            zero++
+            continue
+        }
+        arr[i]++
+        if (arr[i] > 1) return false
+        if (i > max) max = i
+        if (i < min) min = i
+    }
+    return max - min > 5
+}
+
+fun getLeastNumbers(arr: IntArray, k: Int): IntArray {
+    val result = IntArray(k) { 0 }
+    for (i in arr.indices) {
+        if (i < k) result[i] = arr[i]
+        else {
+            var maxresult = result[0]
+            var maxj = 0
+            for (j in result.indices) {
+                if (maxresult < result[j]) {
+                    maxj = j
+                    maxresult = result[j]
+                }
+
+            }
+            if (arr[i] < maxresult) {
+                result[maxj] = arr[i]
+                break
+            }
+        }
+    }
+    return result
+}
 
 
+class MedianFinder() {
+
+    /** initialize your data structure here. */
+    val left = PriorityQueue<Int>(Collections.reverseOrder())
+    val right = PriorityQueue<Int>()
+
+    fun addNum(num: Int) {
+        left.offer(num)
+        right.offer(left.poll())
+        while (right.size > left.size) {
+            left.offer(right.poll())
+        }
+    }
+
+    fun findMedian(): Double {
+        if (left.size == right.size) return (left.peek() + right.peek()) / 2.0
+        else return left.peek().toDouble()
+    }
+
+}
 
 
 
