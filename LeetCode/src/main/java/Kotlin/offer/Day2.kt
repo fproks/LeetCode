@@ -6,6 +6,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 import kotlin.collections.HashSet
+import kotlin.math.abs
 import kotlin.math.max
 
 class ListNode(var `val`: Int) {
@@ -492,6 +493,19 @@ class MedianFinder() {
         else return left.peek().toDouble()
     }
 
+}
+
+fun maxDepth(root: TreeNode?): Int {
+    if (root == null) return 0
+    else return 1 + max(maxDepth(root.left), maxDepth(root.right))
+}
+
+fun isBalanced(root: TreeNode?): Boolean {
+    if (root == null) return true
+    if (!isBalanced(root.left)) return false
+    if (!isBalanced(root.right)) return false
+    if (abs(maxDepth(root.left) - maxDepth(root.right)) > 1) return false
+    return true
 }
 
 
