@@ -508,6 +508,33 @@ fun isBalanced(root: TreeNode?): Boolean {
     return true
 }
 
+fun sumNums(n: Int): Int {
+    return n and (n + sumNums(n - 1))
+}
+
+fun buildTree(preorder: IntArray, inorder: IntArray): TreeNode? {
+    if (preorder.isEmpty()) return null
+    if (preorder.size == 1) return TreeNode(preorder[0])
+    val root = TreeNode(preorder[0])
+    val root_index = inorder.indexOf(preorder[0])
+    val left_inorder = inorder.copyOfRange(0, root_index)
+    val right_inorder = inorder.copyOfRange(root_index + 1, inorder.size)
+    val preorder_left = preorder.filter { left_inorder.contains(it) }.toIntArray()
+    val preorder_right = preorder.filter { right_inorder.contains(it) }.toIntArray()
+    root.left = buildTree(preorder_left, left_inorder)
+    root.right = buildTree(preorder_right, right_inorder)
+    return root
+}
 
 
+fun verifyPostorder(postorder: IntArray): Boolean {
+    val stack = LinkedList<Int>()
+    var parent = Int.MAX_VALUE
 
+    for (i in postorder.size - 1 downTo 0) {
+        if (parent < postorder[i]) return false
+        while (!stack.isEmpty() && stack.peek() > postorder[i]) parent = stack.pop()
+        stack.push(postorder[i])
+    }
+    return true
+}
