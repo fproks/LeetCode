@@ -1,7 +1,11 @@
 package Kotlin.offer
 
 import LeetCode.struct.TreeNode
+import java.lang.Integer.compare
 import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
+import kotlin.collections.HashSet
 import kotlin.math.abs
 import kotlin.math.max
 
@@ -504,27 +508,33 @@ fun isBalanced(root: TreeNode?): Boolean {
     return true
 }
 
-fun singleNumbers(nums: IntArray): IntArray {
-    var x = 0
-    for (i in nums) {
-        x = x xor i
-    }
-    val flag = x and (-x)
-    var res = 0
-    for (i in nums) {
-        if ((flag and i) != 0) res = res xor i
-    }
-    return intArrayOf(res, x xor res)
+fun sumNums(n: Int): Int {
+    return n and (n + sumNums(n - 1))
+}
+
+fun buildTree(preorder: IntArray, inorder: IntArray): TreeNode? {
+    if (preorder.isEmpty()) return null
+    if (preorder.size == 1) return TreeNode(preorder[0])
+    val root = TreeNode(preorder[0])
+    val root_index = inorder.indexOf(preorder[0])
+    val left_inorder = inorder.copyOfRange(0, root_index)
+    val right_inorder = inorder.copyOfRange(root_index + 1, inorder.size)
+    val preorder_left = preorder.filter { left_inorder.contains(it) }.toIntArray()
+    val preorder_right = preorder.filter { right_inorder.contains(it) }.toIntArray()
+    root.left = buildTree(preorder_left, left_inorder)
+    root.right = buildTree(preorder_right, right_inorder)
+    return root
 }
 
 
-fun singleNumber(nums: IntArray): Int {
-    var a =0
-    var b =0
-    for (i in nums) {
-        val tmp=a
-        a=(b and i) or (a and i.inv())
-        b=(b and i.inv()) or (tmp.inv() and b.inv() and i)
+fun verifyPostorder(postorder: IntArray): Boolean {
+    val stack = LinkedList<Int>()
+    var parent = Int.MAX_VALUE
+
+    for (i in postorder.size - 1 downTo 0) {
+        if (parent < postorder[i]) return false
+        while (!stack.isEmpty() && stack.peek() > postorder[i]) parent = stack.pop()
+        stack.push(postorder[i])
     }
-    return b
+    return true
 }
