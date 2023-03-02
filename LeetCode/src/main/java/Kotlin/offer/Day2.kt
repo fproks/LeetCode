@@ -538,3 +538,73 @@ fun verifyPostorder(postorder: IntArray): Boolean {
     }
     return true
 }
+
+
+fun constructArr(a: IntArray): IntArray {
+    val b = IntArray(a.size) { 1 }
+    for (i in 1 until a.size) {
+        b[i] = b[i - 1] * a[i - 1]
+    }
+    var porduct = 1
+    for (i in a.size - 2 downTo 0) {
+        porduct *= a[i + 1]
+        b[i] = b[i + 1] * porduct
+    }
+    return b
+}
+
+fun cuttingRope(n: Int): Int {
+    if (n <= 3) return 1
+    val mod = n % 3
+    val nc = n / 3
+    if (mod == 1) return Math.pow(3.0, (nc - 1).toDouble()).toInt() * 4
+    if (mod == 2) return (Math.pow(3.0, nc.toDouble()) * mod).toInt()
+    else return Math.pow(3.0, nc.toDouble()).toInt()
+}
+
+fun findContinuousSequence(target: Int): Array<IntArray> {
+    fun consum(start: Int, end: Int, target: Int): Boolean {
+        val sum = (start + end) / 2 * (end - start + 1)
+        return sum == target
+    }
+
+    fun createSXPArray(start: Int, end: Int): IntArray {
+        val arr = IntArray(end - start + 1) { 0 }
+        for (i in arr.indices) arr[i] = start + i
+        return arr
+    }
+
+    val result = ArrayList<IntArray>()
+    for (start in 0..target / 2)
+        for (end in start + 1..target) {
+            val sum = (start + end) / 2 * (end - start + 1)
+            if (sum == target) {
+                result.add(createSXPArray(start, end))
+                break
+            }
+            if (sum > target) break
+        }
+    return result.toTypedArray()
+}
+
+
+fun spiralOrder(matrix: Array<IntArray>): IntArray {
+    val res = ArrayList<Int>()
+    if (matrix.isEmpty()) return res.toIntArray()
+    var rl = 0
+    var rh = matrix.size - 1
+    var cl = 0
+    var ch = matrix[0].size - 1
+    while (true) {
+        for (i in cl..ch) res.add(matrix[rl][i])
+        if (++rl > rh) break
+        for (i in rl..rh) res.add(matrix[i][ch])
+        if (--ch < cl) break
+        for (i in ch downTo cl) res.add(matrix[rh][i])
+        if (--rh < rl) break
+        for (i in rh downTo  rl)res.add(matrix[i][cl])
+        if (++cl >ch)break
+    }
+    return res.toIntArray()
+
+}
