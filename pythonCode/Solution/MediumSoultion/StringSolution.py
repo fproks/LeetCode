@@ -136,7 +136,25 @@ class StringSolution:
                      31 + 28 + 31 + 30 + 31 + 30 + 31 + 31 + 30 + 31 + 30]
         dalist = date.split("-")
         days = 1 if int(dalist[0]) % 4 == 0 else 0
-        if int(dalist[0])%100==0 and int(dalist[0])%400!=0: days=0
-        num=int(dalist[1])
-        res = num_count[num-1] if num <= 2 else num_count[num-1] + days
+        if int(dalist[0]) % 100 == 0 and int(dalist[0]) % 400 != 0: days = 0
+        num = int(dalist[1])
+        res = num_count[num - 1] if num <= 2 else num_count[num - 1] + days
         return res + int(dalist[2])
+
+    def isNumber(self, s: str) -> bool:
+        s = s.strip()
+        if len(s) == 0: return False
+        numFlag = dotFlag = eFlag = False
+        for v, i in enumerate(s):
+            if '0' <= i <= '9':
+                numFlag = True
+            elif i == '.' and dotFlag == False and eFlag == False:
+                dotFlag = True
+            elif (i == 'e' or i == 'E') and eFlag == False and numFlag:
+                eFlag = True
+                numFlag = False
+            elif (i == '+' or i == '-') and (v == 0 or s[v - 1] == 'e' or s[v - 1] == 'E'):
+                pass
+            else:
+                return False
+        return numFlag

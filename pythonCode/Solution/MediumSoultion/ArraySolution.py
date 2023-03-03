@@ -811,7 +811,18 @@ class ArraySolution(object):
         return sum(num for num, cnt in collections.Counter(nums).items() if cnt == 1)
 
     def frequencySort(self, nums: List[int]) -> List[int]:
-        return sorted(nums,key=lambda x:(nums.count(x),-x))
+        return sorted(nums, key=lambda x: (nums.count(x), -x))
+
+    def getFolderNames(self, names: List[str]) -> List[str]:
+        result, map = [], {}
+        for name in names:
+            tmp = name
+            if tmp in map:
+                tmp = f"{name}({map[name]})"
+                map[name] += 1
+            map[name] = 1
+            result.append(tmp)
+        return result
 
 
 if __name__ == '__main__':
