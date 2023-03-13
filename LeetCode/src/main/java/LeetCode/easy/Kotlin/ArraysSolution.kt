@@ -295,12 +295,44 @@ class ArraysSolution {
         if (suits[0] == suits[1] && suits[0] == suits[2] && suits[0] == suits[3] && suits[0] == suits[4]) return "Flush"
         val ran = IntArray(14) { 0 }
         for (i in ranks) ran[i]++
-        var maxby=0
-        for (i in ran)if (i >maxby)maxby =i
+        var maxby = 0
+        for (i in ran) if (i > maxby) maxby = i
 
-        if (maxby==3) return "Three of a Kind"
-        if (maxby==2) return  "Pair"
+        if (maxby == 3) return "Three of a Kind"
+        if (maxby == 2) return "Pair"
         return "High Card"
+    }
+
+    fun largestLocal(grid: Array<IntArray>): Array<IntArray> {
+        val result = Array(grid.size - 2) { IntArray(grid.size - 2) { 0 } }
+        for (i in 1..grid.size - 2)
+            for (j in 1..grid.size - 2) {
+                var maxpro = 0
+                for (l in i - 1..i + 1)
+                    for (k in j - 1..j + 1) {
+                        if (maxpro < grid[l][k]) maxpro = grid[l][k]
+                    }
+                result[i - 1][j - 1] = maxpro
+            }
+        return result
+    }
+
+
+    fun minNumberOfHours(initialEnergy: Int, initialExperience: Int, energy: IntArray, experience: IntArray): Int {
+        var com = 0
+        val tmp = energy.sum() + 1
+        if (initialEnergy < tmp) com += (tmp - initialEnergy)
+        var startexp = initialExperience
+        for (i in experience) {
+            if (i >= startexp) {
+                val tmp = i + 1 - startexp
+                com += tmp
+                startexp+=tmp
+            }
+            startexp += i
+
+        }
+        return com
     }
 
 }

@@ -2,6 +2,7 @@ package LeetCode.easy.Kotlin
 
 import junit.framework.TestCase
 import org.junit.Assert
+import org.junit.Test
 
 class ArraysSolutionTest : TestCase() {
 
@@ -23,5 +24,10 @@ class ArraysSolutionTest : TestCase() {
 
     fun testnumberOfPairs() {
         Assert.assertArrayEquals(ArraysSolution().numberOfPairs(intArrayOf(1,3,2,1,3,2,2)), intArrayOf(3,1))
+    }
+
+
+    fun testminNumberOfHours() {
+        assertEquals(0,ArraysSolution().minNumberOfHours(2,4, intArrayOf(1), intArrayOf(3)))
     }
 }
