@@ -176,5 +176,14 @@ class ArraySolutionTest(TestCase):
         self.assertEqual(4,sole.searchInsert([1,3,5,6],7))
 
 
+    def test_findReplaceString(self):
+        sole=ArraySolution()
+        #self.assertEqual("eeebfff",sole.findReplaceString("abcd",[0,2],['a','cd'],['eee','fff']))
+        #self.assertEqual('eeecd',sole.findReplaceString("abcd", [0, 2], ['ab', 'ec'], ['eee', 'ffff']))
+        self.assertEqual('vbfrssozp',sole.findReplaceString('vmokgggqzp',[3,5,1],["kg","ggq","mo"],["s","so","bfr"]))
+
+
+
+
 if __name__ == '__main__':
     ArraySolutionTest.main()
