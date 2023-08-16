@@ -5,6 +5,7 @@ import kotlin.collections.HashMap
 import kotlin.collections.HashSet
 import kotlin.math.abs
 import kotlin.math.max
+import kotlin.math.min
 
 class ArraysSolution {
 
@@ -327,12 +328,55 @@ class ArraysSolution {
             if (i >= startexp) {
                 val tmp = i + 1 - startexp
                 com += tmp
-                startexp+=tmp
+                startexp += tmp
             }
             startexp += i
 
         }
         return com
+    }
+
+    fun diagonalSum(mat: Array<IntArray>): Int {
+        var result = 0
+        val maxIndex = mat.size - 1
+        for (i in 0..maxIndex) {
+            result += mat[i][i]
+            result += mat[maxIndex - i][i]
+        }
+        if (mat.size % 2 != 0)
+            result -= mat[maxIndex / 2][maxIndex / 2]
+        return result
+    }
+
+    fun circularGameLosers(n: Int, k: Int): IntArray {
+        val vis = BooleanArray(n) { false }
+        var i = 0
+        var p = 1
+        while (!vis[i]) {
+            vis[i] = true
+            i = (i + p * k) % n
+            p++
+        }
+        return vis.withIndex().filter { !it.value }.map { it.index+1 }.toIntArray()
+    }
+    fun findTheLongestBalancedSubstring(s: String): Int {
+        var zero=0
+        var one=0
+        var maxvalue=zero
+        for (c in s){
+            if (c=='0') {
+                if (one == 0) zero++
+                else{
+                    maxvalue = Math.max(maxvalue,Math.min(zero,one))
+                    one=0
+                    zero=1
+                }
+            }else{
+                one ++
+            }
+        }
+        maxvalue= Math.max(maxvalue,Math.min(zero,one))
+        return maxvalue*2
     }
 
 }
