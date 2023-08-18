@@ -824,23 +824,39 @@ class ArraySolution(object):
             result.append(tmp)
         return result
 
-    def findReplaceString(self,s: str, indices: List[int], sources: List[str], targets: List[str]) -> str:
+    def findReplaceString(self, s: str, indices: List[int], sources: List[str], targets: List[str]) -> str:
         indicesMap = []
         for i in range(len(indices)):
             indicesMap.append((indices[i], i))
-        indicesMap=sorted(indicesMap)
-        res =s
-        zlen=0
-        for k ,v in indicesMap:
-            slen=len(sources[v])
+        indicesMap = sorted(indicesMap)
+        res = s
+        zlen = 0
+        for k, v in indicesMap:
+            slen = len(sources[v])
             if s[k:].startswith(sources[v]):
-                res =res[0:k+zlen]+targets[v]+res[k+slen+zlen:]
-                zlen=zlen+len(targets[v])-len(sources[v])
+                res = res[0:k + zlen] + targets[v] + res[k + slen + zlen:]
+                zlen = zlen + len(targets[v]) - len(sources[v])
         return res
+
+    def maxSizeSlices(self, slices: List[int]) -> int:
+        n = len(slices)
+        k = n // 3
+
+        def maxSumSlices(slices: List[int]) -> int:
+            m = len(slices)
+            dp = [[0] * (k + 1) for _ in range(m + 1)]
+            for i in range(1, m + 1):
+                for j in range(1, k + 1):
+                    dp[i][j] = max(dp[i - 1][j], dp[i - 2][j - 1] + slices[i - 1])
+            return dp[m][k]
+
+        max1 = maxSumSlices(slices[:-1])
+        max2 = maxSumSlices(slices[1:])
+        return max(max1, max2)
 
 
 if __name__ == '__main__':
-    #print(ArraySolution.findAndReplacePattern(["abc", "deq", "mee", "aqq", "dkd", "ccc"], "abb"))
-    #print(ArraySolution.toDigits("abcddddddddd"))
-    print(ArraySolution.findReplaceString("abcd",[0,2],['a','cd'],['eee','fff']))
+    # print(ArraySolution.findAndReplacePattern(["abc", "deq", "mee", "aqq", "dkd", "ccc"], "abb"))
+    # print(ArraySolution.toDigits("abcddddddddd"))
+    print(ArraySolution.findReplaceString("abcd", [0, 2], ['a', 'cd'], ['eee', 'fff']))
     print(ArraySolution.findReplaceString("abcd", [0, 2], ['ab', 'ec'], ['eee', 'ffff']))

@@ -184,6 +184,13 @@ class ArraySolutionTest(TestCase):
 
 
 
+    def test_maxSizeSlice(self):
+        self.assertEqual(10,ArraySolution().maxSizeSlices([1,2,3,4,5,6]))
+        self.assertEqual(16,ArraySolution().maxSizeSlices([8,9,8,6,1,1]))
+
+
+
+
 
 if __name__ == '__main__':
     ArraySolutionTest.main()
