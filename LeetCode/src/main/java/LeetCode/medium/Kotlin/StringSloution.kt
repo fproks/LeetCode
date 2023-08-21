@@ -1,15 +1,13 @@
 package LeetCode.medium.Kotlin
 
-import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.math.abs
 import kotlin.math.min
 
 
 class StringSloutionKotlin {
-    fun partitionLabels(S: String): List<Int> {
-        val letters = S.toCharArray().toSet()
-        val ranges = letters.map { Pair(S.indexOf(it), S.lastIndexOf(it) + 1) }.sortedBy { it.first }
+    fun partitionLabels(s: String): List<Int> {
+        val letters = s.toCharArray().toSet()
+        val ranges = letters.map { Pair(s.indexOf(it), s.lastIndexOf(it) + 1) }.sortedBy { it.first }
         val reduceRanges = mutableListOf(ranges.first())
         ranges.forEach {
             if (it.first >= reduceRanges.last().second)
@@ -24,7 +22,7 @@ class StringSloutionKotlin {
     }
 
     fun customSortString(S: String, T: String): String {
-        var letterMap = mutableMapOf<Char, StringBuilder>()
+        val letterMap = mutableMapOf<Char, StringBuilder>()
         for (c in T) {
             if (letterMap.containsKey(c))
                 letterMap[c]?.append(c)
@@ -32,7 +30,7 @@ class StringSloutionKotlin {
                 letterMap[c] = StringBuilder().append(c)
         }
 
-        var result = StringBuilder()
+        val result = StringBuilder()
         for (c in S) {
             result.append(letterMap[c])
             letterMap.remove(c)
@@ -80,24 +78,24 @@ class StringSloutionKotlin {
 
     private fun compileNumWithChar(S: String): IntArray {
         val wordArray = Array(26) { 0 }
-        S.toLowerCase().filter { it in 'a'..'z' }.forEach {
+        S.lowercase().filter { it in 'a'..'z' }.forEach {
             wordArray[(it - 'a')]++
         }
         return wordArray.toIntArray()
     }
 
     fun shortestToChar(s: String, c: Char): IntArray {
-        val indxArray = IntArray(s.length) { -1 }
+        val indexArray = IntArray(s.length) { -1 }
         var pos = -s.length
         for (i in s.indices) {
             if (s[i] == c) pos = i
-            indxArray[i] = i - pos
+            indexArray[i] = i - pos
         }
         for (i in s.length - 1 downTo 0) {
             if (s[i] == c) pos = i
-            indxArray[i] = min(indxArray[i], abs(i - pos))
+            indexArray[i] = min(indexArray[i], abs(i - pos))
         }
-        return indxArray
+        return indexArray
     }
 
     fun lengthLongestPath(input: String): Int {
@@ -110,7 +108,7 @@ class StringSloutionKotlin {
             val leve = word.lastIndexOf('\t') + 1 + 1
             val nameLen = word.length - (leve - 1)
             pathLens[leve] = pathLens[leve - 1] + 1 + nameLen
-            if (word.contains(".")) ans = Math.max(ans, pathLens[leve])
+            if (word.contains(".")) ans = ans.coerceAtLeast(pathLens[leve])
         }
         return ans
     }
@@ -167,10 +165,33 @@ class StringSloutionKotlin {
         folder.sort()
         val tmp = ArrayList<String>()
         for (i in folder) {
-            if (tmp.any { i.startsWith(it + "/") }) continue
+            if (tmp.any { i.startsWith("$it/") }) continue
             else tmp.add(i)
         }
-        return  tmp
+        return tmp
+    }
+
+    fun canChange(start: String, target: String): Boolean {
+        val s = start.replace("_","")
+        val e = target.replace("_","")
+        if (e != s) return false
+        var i =0
+        var j =0
+        while (i<start.length){
+            if (start[i]=='_'){
+                i++
+                continue
+            }
+            while (target[j]=='_'){
+                j++
+            }
+            if (i!=j && (start[i]=='L')==(i<j))
+                return false
+            i++
+            j++
+        }
+        return true
+
     }
 
 }

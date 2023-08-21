@@ -35,4 +35,11 @@ class StringSloutionKotlinTest {
         )
     }
 
+    @Test
+    fun canChange() {
+        assertTrue(soultuion.canChange( "_L__R__R_", "L______RR"))
+        assertFalse(soultuion.canChange("_R","R_"))
+        assertFalse(soultuion.canChange("R_L_","__LR"))
+    }
+
 }
