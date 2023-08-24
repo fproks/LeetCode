@@ -854,6 +854,22 @@ class ArraySolution(object):
         max2 = maxSumSlices(slices[1:])
         return max(max1, max2)
 
+    def countServers(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0])
+        row, col = [0] * m, [0] * n
+        dic =[]
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j]==1:
+                    row[i]+=1
+                    col[j]+=1
+                    dic.append((i,j))
+        result=0
+        for i,j in dic:
+            if row[i]>1 or col[j]>1:
+                result+=1
+        return result
+
 
 if __name__ == '__main__':
     # print(ArraySolution.findAndReplacePattern(["abc", "deq", "mee", "aqq", "dkd", "ccc"], "abb"))

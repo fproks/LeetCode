@@ -189,6 +189,12 @@ class ArraySolutionTest(TestCase):
         self.assertEqual(16,ArraySolution().maxSizeSlices([8,9,8,6,1,1]))
 
 
+    def test_countServers(self):
+        #self.assertEqual(0,ArraySolution().countServers([[1,0],[0,1]]))
+        self.assertEqual(3,ArraySolution().countServers([[1,0],[1,1]]))
+        self.assertEqual(4,ArraySolution().countServers([[1,1,0,0],[0,0,1,0],[0,0,1,0],[0,0,0,1]]))
+
+
 
 
 
