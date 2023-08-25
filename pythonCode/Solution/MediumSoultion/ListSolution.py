@@ -217,3 +217,17 @@ class ListSolution:
 
         dif(root)
         return diff
+
+    def goodNodes(self, root: TreeNode) -> int:
+        maxval = -10001
+        count = 0
+
+        def dif(root: TreeNode, maxval: int, count: int)->int:
+            if root != None:
+                if root.val>=maxval:
+                    count += 1
+                count = dif(root.left, max(maxval, root.val), count)
+                count = dif(root.right, max(maxval, root.val), count)
+            return count
+
+        return dif(root,maxval,count)
