@@ -869,6 +869,25 @@ class ArraySolution(object):
             if row[i]>1 or col[j]>1:
                 result+=1
         return result
+    
+    def numFactoredBinaryTrees(self, arr: List[int]) -> int:
+        s=set(arr)
+        mod=10**9+7
+
+        def dfs(u):
+            res=1
+            for x in s:
+                r=u/x
+                if r in s:
+                    res +=dfs(r)*dfs(x)
+                    res %=mod
+            return res
+        ans =0
+        for x in arr:
+            ans+=dfs(x)
+            ans%=mod
+        return ans
+    
 
 
 if __name__ == '__main__':
