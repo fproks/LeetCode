@@ -179,8 +179,10 @@ class ArraySolution(object):
         res = []
         p = ArraySolution.toDigits(pattern)
         for word in words:
-            if len(word) != len(pattern): continue
-            if ArraySolution.toDigits(word) == p: res.append(word)
+            if len(word) != len(pattern):
+                continue
+            if ArraySolution.toDigits(word) == p:
+                res.append(word)
             # dw = {}
             # dp = {}
             # for i in range(len(word)):
@@ -260,22 +262,26 @@ class ArraySolution(object):
                     if dict % 4 == 1:
                         if x >= 0:
                             for y1 in range(y + 1, y + step + 1):
-                                if 0 <= y1 < C: result.append([x, y1])
+                                if 0 <= y1 < C:
+                                    result.append([x, y1])
                         y = y + step
                     if dict % 4 == 2:
                         if y < C:
                             for x1 in range(x + 1, x + step + 1):
-                                if 0 <= x1 < R: result.append([x1, y])
+                                if 0 <= x1 < R:
+                                    result.append([x1, y])
                         x = x + step
                     if dict % 4 == 3:
                         if x < R:
                             for y1 in range(y - 1, y - step - 1, -1):
-                                if 0 <= y1 < C: result.append([x, y1])
+                                if 0 <= y1 < C:
+                                    result.append([x, y1])
                         y = y - step
                     if dict % 4 == 0:
                         if y >= 0:
                             for x1 in range(x - 1, x - step - 1, -1):
-                                if 0 <= x1 < R: result.append([x1, y])
+                                if 0 <= x1 < R:
+                                    result.append([x1, y])
                         x = x - step
                 dir += 2
                 step += 1
@@ -289,8 +295,10 @@ class ArraySolution(object):
     def pathInZigZagTree(self, label: int):
         def findlast(label):  # 先找到父节点
             c = 0
-            while 2 ** c < label: c += 1
-            if 2 ** c == label: return label - 1
+            while 2 ** c < label:
+                c += 1
+            if 2 ** c == label:
+                return label - 1
             return int(2 ** (c - 1) - (label - (2 ** (c - 1)) + 1) / 2)
 
         result = []
@@ -307,7 +315,8 @@ class ArraySolution(object):
     # qiuck sort
     def sortArray(self, nums: List[int]) -> List[int]:
         def quickSort(nums: List[int], start, end):
-            if start >= end: return
+            if start >= end:
+                return
             i = start
             j = end
             key = nums[i]
@@ -437,8 +446,10 @@ class ArraySolution(object):
         memo = {}
 
         def helper(a, m):
-            if len(a) == 0: return 0
-            if (len(a), m) in memo: return memo[(len(a), m)]
+            if len(a) == 0:
+                return 0
+            if (len(a), m) in memo:
+                return memo[(len(a), m)]
             res = 0
             for i in range(1, min(2 * m, len(a)) + 1):
                 tmp = sum(a) - helper(a[i:], max(m, i))
@@ -620,7 +631,8 @@ class ArraySolution(object):
     class sole:
         def maxScoreWords(self, words, letters, score):
             self.max_score = 0
-            words_score = [sum(score[ord(c) - ord('a')] for c in word) for word in words]
+            words_score = [sum(score[ord(c) - ord('a')]
+                               for c in word) for word in words]
             words_counter = [collections.Counter(word) for word in words]
 
             def dfs(i, curr_score, counter):
@@ -629,7 +641,8 @@ class ArraySolution(object):
                 self.max_score = max(self.max_score, curr_score)
                 for j, wcnt in enumerate(words_counter[i:], i):
                     if all(n <= counter.get(c, 0) for c, n in wcnt.items()):
-                        dfs(j + 1, curr_score + words_score[j], {c: n - wcnt.get(c, 0) for c, n in counter.items()})
+                        dfs(j + 1, curr_score + words_score[j], {
+                            c: n - wcnt.get(c, 0) for c, n in counter.items()})
 
             dfs(0, 0, collections.Counter(letters))
             return self.max_score
@@ -660,11 +673,13 @@ class ArraySolution(object):
 
         def dfs(row, col, master, salve, cur_res, n):
             if row == n:
-                res.append(["-" * cur + "Q" + "-" * (n - cur - 1) for cur in cur_res])
+                res.append(["-" * cur + "Q" + "-" * (n - cur - 1)
+                           for cur in cur_res])
                 return
             for i in range(n):
                 if (i not in col) and (i + row not in salve) and (i - row not in cur_res):
-                    dfs(row + 1, col | {i}, master | {i - row}, salve | {i + row}, cur_res + [i], n)
+                    dfs(row + 1, col | {i}, master | {i - row},
+                        salve | {i + row}, cur_res + [i], n)
 
         dfs(0, set(), set(), set(), [], n)
         return res
@@ -847,7 +862,8 @@ class ArraySolution(object):
             dp = [[0] * (k + 1) for _ in range(m + 1)]
             for i in range(1, m + 1):
                 for j in range(1, k + 1):
-                    dp[i][j] = max(dp[i - 1][j], dp[i - 2][j - 1] + slices[i - 1])
+                    dp[i][j] = max(dp[i - 1][j], dp[i - 2]
+                                   [j - 1] + slices[i - 1])
             return dp[m][k]
 
         max1 = maxSumSlices(slices[:-1])
@@ -857,41 +873,60 @@ class ArraySolution(object):
     def countServers(self, grid: List[List[int]]) -> int:
         m, n = len(grid), len(grid[0])
         row, col = [0] * m, [0] * n
-        dic =[]
+        dic = []
         for i in range(m):
             for j in range(n):
-                if grid[i][j]==1:
-                    row[i]+=1
-                    col[j]+=1
-                    dic.append((i,j))
-        result=0
-        for i,j in dic:
-            if row[i]>1 or col[j]>1:
-                result+=1
+                if grid[i][j] == 1:
+                    row[i] += 1
+                    col[j] += 1
+                    dic.append((i, j))
+        result = 0
+        for i, j in dic:
+            if row[i] > 1 or col[j] > 1:
+                result += 1
         return result
-    
+
     def numFactoredBinaryTrees(self, arr: List[int]) -> int:
-        s=set(arr)
-        mod=10**9+7
+        s = set(arr)
+        mod = 10**9+7
 
         def dfs(u):
-            res=1
+            res = 1
             for x in s:
-                r=u/x
+                r = u/x
                 if r in s:
-                    res +=dfs(r)*dfs(x)
-                    res %=mod
+                    res += dfs(r)*dfs(x)
+                    res %= mod
             return res
-        ans =0
+        ans = 0
         for x in arr:
-            ans+=dfs(x)
-            ans%=mod
+            ans += dfs(x)
+            ans %= mod
         return ans
-    
+
+    def minTrioDegree(self, n: int, edges: List[List[int]]) -> int:
+        g = [[0]*(n+1) for _ in range(n+1)]
+        ans = 8000
+        deg = [0]*(n+1)
+        for u, v in edges:
+            g[u][v] = 1
+            g[v][u] = 1
+            deg[u] += 1
+            deg[v] += 1
+        for i in range(n+1):
+            for j in range(i+1, n+1):
+                for k in range(j+1, n+1):
+                    if g[i][j] == g[j][k] == g[i][k] == 1:
+                        ans = min(ans, deg[i]+deg[j]+deg[k]-6)
+        if ans == 800:
+            return -1
+        return ans
 
 
 if __name__ == '__main__':
     # print(ArraySolution.findAndReplacePattern(["abc", "deq", "mee", "aqq", "dkd", "ccc"], "abb"))
     # print(ArraySolution.toDigits("abcddddddddd"))
-    print(ArraySolution.findReplaceString("abcd", [0, 2], ['a', 'cd'], ['eee', 'fff']))
-    print(ArraySolution.findReplaceString("abcd", [0, 2], ['ab', 'ec'], ['eee', 'ffff']))
+    print(ArraySolution.findReplaceString(
+        "abcd", [0, 2], ['a', 'cd'], ['eee', 'fff']))
+    print(ArraySolution.findReplaceString(
+        "abcd", [0, 2], ['ab', 'ec'], ['eee', 'ffff']))

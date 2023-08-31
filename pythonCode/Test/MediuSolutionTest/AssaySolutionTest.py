@@ -194,6 +194,9 @@ class ArraySolutionTest(TestCase):
         self.assertEqual(3,ArraySolution().countServers([[1,0],[1,1]]))
         self.assertEqual(4,ArraySolution().countServers([[1,1,0,0],[0,0,1,0],[0,0,1,0],[0,0,0,1]]))
 
+    def test_minTrioDegree(self):
+        self.assertEqual(3,ArraySolution().minTrioDegree(6,[[1,2],[1,3],[3,2],[4,1],[5,2],[3,6]]))
+
 
 
 
