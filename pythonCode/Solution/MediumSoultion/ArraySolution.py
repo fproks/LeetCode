@@ -922,6 +922,28 @@ class ArraySolution(object):
             return -1
         return ans
 
+    def waysToBuyPensPencils(self, total: int, cost1: int, cost2: int) -> int:
+        result = 0
+        total1 = total//cost1
+        for i in range(total1+1):
+            r = total-i*cost1
+            result += r//cost2+1
+        return result
+
+    def repairCars(self, ranks: List[int], cars: int) -> int:
+        left = 0
+        right = ranks[0]*cars*cars
+        while left <= right:
+            mid = (left+right)//2
+            count = 0
+            for i in ranks:
+                count += int(sqrt(mid/i))
+            if count >= cars:
+                right = mid
+            else:
+                left = mid+1
+        return left
+
 
 if __name__ == '__main__':
     # print(ArraySolution.findAndReplacePattern(["abc", "deq", "mee", "aqq", "dkd", "ccc"], "abb"))
